@@ -1,0 +1,3186 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Findings, thoughts, tutorials, work. Pieces of my mind!">
+      
+      
+      
+        <link rel="canonical" href="https://pawamoy.github.io/posts/django-auth-server-for-shiny/">
+      
+      
+        <link rel="prev" href="../challenge-fill-space-one-line-90-degree-same-direction/">
+      
+      
+        <link rel="next" href="../dual-screens-setup-nvidia-bunsenlabs-debian-jessie/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.2+insiders-4.42.0">
+    
+    
+      
+        <title>Django application as an authentication / authorization server for Shiny - pawamoy's website</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.f2778614.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.46987102.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_markdown_exec_pyodide.css">
+    
+      <link rel="stylesheet" href="../../assets/_markdown_exec_ansi.css">
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../../css/custom.css">
+    
+      <link rel="stylesheet" href="../../css/insiders.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#overview" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="pawamoy&#39;s website" class="md-header__button md-logo" aria-label="pawamoy's website" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4.41 3 3 4.41 5.69 7.1A7.924 7.924 0 0 0 4 12c0 1.85.63 3.55 1.69 4.9L3 19.59 4.41 21l2.69-2.69A7.924 7.924 0 0 0 12 20c1.85 0 3.55-.63 4.9-1.69L19.59 21 21 19.59l-2.69-2.69A7.924 7.924 0 0 0 20 12c0-1.85-.63-3.55-1.69-4.9L21 4.41 19.59 3 16.9 5.69A7.924 7.924 0 0 0 12 4c-1.85 0-3.55.63-4.9 1.69L4.41 3M12 6c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6 2.69-6 6-6Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            pawamoy's website
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Django application as an authentication / authorization server for Shiny
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9h-1.9M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69m-9.15 3.96h2.3L12 9l-1.15 3.65Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="lime"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/pawamoy/website/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pawamoy/website
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../about/" class="md-tabs__link">
+        
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../credits/" class="md-tabs__link">
+        
+  
+    
+  
+  Credits
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../tingling-sensation-witnessing-existence/" class="md-tabs__link">
+          
+  
+    
+  
+  Posts
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../showcase/" class="md-tabs__link">
+          
+  
+    
+  
+  Showcase
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../insiders/" class="md-tabs__link">
+        
+  
+    
+  
+  Insiders
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="pawamoy&#39;s website" class="md-nav__button md-logo" aria-label="pawamoy's website" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4.41 3 3 4.41 5.69 7.1A7.924 7.924 0 0 0 4 12c0 1.85.63 3.55 1.69 4.9L3 19.59 4.41 21l2.69-2.69A7.924 7.924 0 0 0 12 20c1.85 0 3.55-.63 4.9-1.69L19.59 21 21 19.59l-2.69-2.69A7.924 7.924 0 0 0 20 12c0-1.85-.63-3.55-1.69-4.9L21 4.41 19.59 3 16.9 5.69A7.924 7.924 0 0 0 12 4c-1.85 0-3.55.63-4.9 1.69L4.41 3M12 6c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6 2.69-6 6-6Z"/></svg>
+
+    </a>
+    pawamoy's website
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/pawamoy/website/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pawamoy/website
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../credits/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Credits
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    
+  
+    Posts
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Posts
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    
+  
+    2024
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    2024
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tingling-sensation-witnessing-existence/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    The tingling sensation of witnessing your own existence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../steam-linux-alvr-quest2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Playing Steam VR games running on Linux in the Oculus Quest 2 through ALVR (wireless)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    
+  
+    2023
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    2023
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../the-insiders-journey/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    The Insiders journey
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../adding-links-to-formatted-and-syntax-highlighted-code/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Adding links to a Black formatted, Pygments syntax highlighted Python code block
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    
+  
+    2022
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    2022
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../somewhat-modern-python-development/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Somewhat-modern Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../testing-fastapi-ormar-alembic-apps/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing a FastAPI application using Ormar models and Alembic migrations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../add-alembic-migrations-to-existing-fastapi-ormar-project/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    How to add Alembic migrations to an existing FastAPI + Ormar project
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    
+  
+    2020
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    2020
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../local-http-server-fake-files-testing-purposes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Local HTTP server sending fake files for testing purposes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pass-makefile-args-as-typed-in-command-line/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Passing Makefile arguments to a command, as they are typed in the command line.
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugins-as-python-native-namespace-packages/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Python packages and plugins as namespace packages
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto-edit-git-commit-contents/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    How to edit the contents of a git commit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../migrate-disqus-comments-to-utterances-github/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Migrate Disqus comments to Utterances (in GitHub issues) with Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../how-to-deal-with-jinja2-spacing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    How to deal with spacing in Jinja2 templates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unify-logging-for-a-gunicorn-uvicorn-app/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Unify Python logging for a Gunicorn/Uvicorn/FastAPI application
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    
+  
+    2019
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    2019
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../save-pytest-logs-as-artifact-gitlab-ci/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Save the logs generated during a pytest run as a job artifact on GitLab/GitHub CI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../challenge-fill-space-one-line-90-degree-same-direction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Challenge: fill a 2D space with one continuous line doing 90° angle turns in the same direction (left/right)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    
+  
+    2018
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    2018
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    
+  
+    Django application as an authentication / authorization server for Shiny
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Django application as an authentication / authorization server for Shiny
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          Overview
+        </span>
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wrapping-a-shiny-app-into-a-django-powered-page" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          Wrapping a Shiny app into a Django-powered page
+        </span>
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Wrapping a Shiny app into a Django-powered page">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-shiny-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          The Shiny app
+        </span>
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-django-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          The Django app
+        </span>
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#injecting-the-html-contents-in-an-iframe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          Injecting the HTML contents in an Iframe
+        </span>
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Injecting the HTML contents in an Iframe">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-the-wrapping-view" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          Create the wrapping view
+        </span>
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-the-wrapping-html-page" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          Create the wrapping HTML page
+        </span>
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-the-json-view" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          Create the JSON view
+        </span>
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proxying-shiny-requests-to-the-shiny-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          Proxying Shiny requests to the Shiny app
+        </span>
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adding-an-authentication-step-for-every-shiny-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          Adding an authentication step for every Shiny request
+        </span>
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#try-it-with-a-dockerized-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          Try it with a Dockerized project
+        </span>
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dual-screens-setup-nvidia-bunsenlabs-debian-jessie/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    How to install NVidia drivers on BunsenLabs/Debian 8 to setup dual screens
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker-compose-django-postgres-nginx/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Compose with NginX, Django, Gunicorn and multiple Postgres databases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    
+  
+    2017
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    2017
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../python-static-code-analysis-tools/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Python static code analysis tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_8" id="__nav_4_8_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    
+  
+    2016
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    2016
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../write-and-use-a-tox-plugin-from-inside-your-package/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Write and use a tox plugin from inside your package
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../documentation-in-your-shell-scripts-using-shellman/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentation in your shell scripts using shellman
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../django-dashboard-with-suit-and-highcharts/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Django admin dashboard with Suit and Highcharts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    
+  
+    Showcase
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Showcase
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../showcase/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Showcase Grid
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../showcase/aria2p/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    <span class="md-typeset">
+      aria2p
+    </span>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../showcase/copier-pdm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    <span class="md-typeset">
+      copier-pdm
+    </span>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../showcase/dependenpy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    <span class="md-typeset">
+      dependenpy
+    </span>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../showcase/failprint/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    <span class="md-typeset">
+      failprint
+    </span>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../showcase/griffe/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    <span class="md-typeset">
+      griffe
+    </span>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../showcase/git-changelog/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    <span class="md-typeset">
+      git-changelog
+    </span>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../showcase/mkdocstrings/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    <span class="md-typeset">
+      mkdocstrings
+    </span>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../showcase/mvodb/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    <span class="md-typeset">
+      mvodb
+    </span>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../showcase/shell-history/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    <span class="md-typeset">
+      shell-history
+    </span>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../showcase/shelldemo/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    <span class="md-typeset">
+      shelldemo
+    </span>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../showcase/shellman/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    <span class="md-typeset">
+      shellman
+    </span>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../insiders/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Insiders
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          Overview
+        </span>
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wrapping-a-shiny-app-into-a-django-powered-page" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          Wrapping a Shiny app into a Django-powered page
+        </span>
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Wrapping a Shiny app into a Django-powered page">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-shiny-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          The Shiny app
+        </span>
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-django-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          The Django app
+        </span>
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#injecting-the-html-contents-in-an-iframe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          Injecting the HTML contents in an Iframe
+        </span>
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Injecting the HTML contents in an Iframe">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-the-wrapping-view" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          Create the wrapping view
+        </span>
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-the-wrapping-html-page" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          Create the wrapping HTML page
+        </span>
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-the-json-view" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          Create the JSON view
+        </span>
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proxying-shiny-requests-to-the-shiny-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          Proxying Shiny requests to the Shiny app
+        </span>
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adding-an-authentication-step-for-every-shiny-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          Adding an authentication step for every Shiny request
+        </span>
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#try-it-with-a-dockerized-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          Try it with a Dockerized project
+        </span>
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+  <h1>Django application as an authentication / authorization server for Shiny</h1>
+  <p class="post-meta">
+    Published Mar 15, 2018
+    by Timothée Mazzucotelli
+  </p>
+  
+  <p>As you may know, <a href="https://www.rstudio.com/products/shiny/shiny-server/">Shiny Server</a> comes in two versions: open-source and
+professional. The professional adds security and authentication features
+like <em>password protected applications</em>, and <em>controlled access via SSL and LDAP,
+Active Directory, Google OAuth, PAM, proxied authentication, or passwords</em>.
+If you need these authentication features but don't want or can't spend
+<a href="https://www.rstudio.com/pricing/#ShinyProPricing">$9,995 per year</a> for the professional edition, then I got a solution for you!</p>
+<!--more-->
+
+<p>In this post, I will show how to wrap one or several Shiny applications into
+a Django application to add authentication and access control to your Shiny
+apps. The shining star here will not be Django, as you could replace it by
+any other web application you want, but the famous NginX reverse proxy,
+accompanied by its devoted <a href="https://nginx.org/en/docs/http/ngx_http_auth_request_module.html">auth-request</a> module.</p>
+<p>The code used in this post is also available as a <a href="https://github.com/Pawamoy/docker-nginx-auth-request-django-shiny-example">repository on GitHub</a>.
+It contains a Docker configuration so you can try it easily.</p>
+<p><strong>On the menu</strong></p>
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#wrapping-a-shiny-app-into-a-django-powered-page">Wrapping a Shiny app into a Django-powered page</a></li>
+<li><a href="#proxying-shiny-requests-to-the-shiny-app">Proxying Shiny requests to the Shiny app</a></li>
+<li><a href="#adding-an-authentication-step-for-every-shiny-request">Adding an authentication step for every Shiny request</a></li>
+<li><a href="#try-it-with-a-dockerized-project">Try it with a Dockerized project</a></li>
+<li><a href="#__comments">Comments</a></li>
+</ul>
+<p>What most of you will be interested in is starting at section 2:
+<a href="#proxying-shiny-requests-to-the-shiny-app">Proxying</a>, though <a href="#wrapping-a-shiny-app-into-a-django-powered-page">Wrapping</a> is interesting as well if you
+want to create an interface to access multiple Shiny apps.</p>
+<hr />
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">¤</a></h2>
+<p>Let's look at some pictures to see what we want to accomplish. The first picture
+shows our client-server architecture. The client can communicate with the server
+on the port 80 or 443 (HTTP or HTTPs), but not on the ports 8000 or 8100, which
+are used internally by Django and Shiny. This can be configured through the
+firewall.</p>
+<p><img alt="client-server-architecture" src="../../assets/client-server-architecture.png" /></p>
+<p>The second picture shows what happens when the client requests the URL
+that the Shiny app is served on. As we wrap the Shiny app into a Django-powered
+page, the request is proxied directly to Django by NginX. Django then gets the
+initial Shiny page HTML contents with an internal HTTP Get request, and renders
+it in a <code>iframe</code> (we will see the details later). It then returns this rendered
+page to NginX, which returns it to the client.</p>
+<p><img alt="client-requests-shiny" src="../../assets/client-requests-shiny.png" /></p>
+<p>The third picture shows each subsequent requests from the client to the server
+through a WebSocket, and how NginX is asking authorization to Django. When NginX
+receives the request, it sends a sub-request to Django, asking for permission
+to proxy the request to Shiny and return the response to the client. If Django
+says yes (HTTP 200), NginX proxies the request to Shiny. If Django says no
+(HTTP 403 or any other error code), NginX rejects the request by returning
+HTTP 403 as a response to the client.</p>
+<p><img alt="client-shiny-subrequests" src="../../assets/client-shiny-subrequests.png" /></p>
+<p>OK, let's try it! To begin, create a directory that we will use for this
+tutorial:</p>
+<div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>django-shiny
+<span class="nb">cd</span><span class="w"> </span>django-shiny
+</code></pre></div>
+<hr />
+<h2 id="wrapping-a-shiny-app-into-a-django-powered-page">Wrapping a Shiny app into a Django-powered page<a class="headerlink" href="#wrapping-a-shiny-app-into-a-django-powered-page" title="Permanent link">¤</a></h2>
+<p>This first section will help you setup an example project to follow this
+tutorial, but the first two steps described are optional. You can immediately
+jump to the <a href="#proxying-shiny-requests-to-the-shiny-app">Proxying Shiny requests</a>
+section where we will a use pre-setup example project using Docker. You will
+need to install Docker if you don't already have it. See <a href="https://docs.docker.com/install/">Install Docker</a> for
+installation instructions.</p>
+<p>The third step however might be interesting to read if you need to wrap your
+Shiny app into a Django-powered page and website, instead of just using Django
+as an external authentication / authorization backend.</p>
+<ol>
+<li><a href="#the-shiny-app">The Shiny app</a></li>
+<li><a href="#the-django-app">The Django app</a></li>
+<li><a href="#injecting-the-html-contents-in-an-iframe">Injecting the HTML contents in an Iframe</a></li>
+</ol>
+<hr />
+<h3 id="the-shiny-app">The Shiny app<a class="headerlink" href="#the-shiny-app" title="Permanent link">¤</a></h3>
+<p>Let's get a Shiny app example from <a href="https://shiny.rstudio.com/gallery/">RStudio's gallery</a>.
+The code is available on GitHub in <a href="https://github.com/rstudio/shiny-examples/tree/master/001-hello">this repository</a>.</p>
+<p>Clone it in a sub-directory called <code>shinyapp</code>:</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>--depth<span class="o">=</span><span class="m">1</span><span class="w"> </span>https://github.com/rstudio/shiny-examples
+mv<span class="w"> </span>shiny-examples/001-hello<span class="w"> </span>shinyapp
+rm<span class="w"> </span>-rf<span class="w"> </span>shiny-examples
+</code></pre></div>
+<p>We also need to install the Shiny R package. If you don't already have R
+installed, you can install a recent version with the following commands:</p>
+<div class="highlight"><pre><span></span><code>sudo add-apt-repository &quot;deb http://cran.rstudio.com/bin/linux/ubuntu trusty/&quot;
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
+sudo add-apt-repository ppa:marutter/rdev
+sudo apt-get update
+sudo apt-get install -y r-base
+</code></pre></div>
+<p>Run this command to install Shiny:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>R<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;install.packages(&#39;shiny&#39;, repos=&#39;https://cran.rstudio.com/&#39;)&quot;</span>
+</code></pre></div>
+<p>To run the Shiny application on port 8100, use the following command:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>R<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;shiny::runApp(appDir=&#39;shinyapp&#39;, port=8100)&quot;</span>
+</code></pre></div>
+<p>Try to go to <code>http://localhost:8100</code>      to see if the app is running.</p>
+<hr />
+<h3 id="the-django-app">The Django app<a class="headerlink" href="#the-django-app" title="Permanent link">¤</a></h3>
+<p>We will create a new Django project called <code>djangoapp</code>. If you don't already
+have Django installed on your system, install it in a virtualenv with
+<code>pip install Django</code>, or system-wide with <code>sudo pip install Django</code>.</p>
+<p>To create the project, run the following command:</p>
+<div class="highlight"><pre><span></span><code>django-admin<span class="w"> </span>startproject<span class="w"> </span>djangoapp
+</code></pre></div>
+<p>We need to initialize the SQLite database first.</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>djangoapp/manage.py<span class="w"> </span>migrate
+</code></pre></div>
+<p>You can now run the Django application on port 8000 with the following command:</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>djangoapp/manage.py<span class="w"> </span>runserver<span class="w"> </span>localhost:8000
+</code></pre></div>
+<p>And try to go to <code>http://localhost:8000</code> to see if the app is running.</p>
+<hr />
+<h3 id="injecting-the-html-contents-in-an-iframe">Injecting the HTML contents in an Iframe<a class="headerlink" href="#injecting-the-html-contents-in-an-iframe" title="Permanent link">¤</a></h3>
+<p>At this point you should have the following tree:</p>
+<div class="highlight"><pre><span></span><code>📁<span class="w"> </span>./
+├──<span class="w"> </span>📁<span class="w"> </span>djangoapp/
+│<span class="w">   </span>├──<span class="w"> </span>📄<span class="w"> </span>db.sqlite3
+│<span class="w">   </span>├──<span class="w"> </span>📁<span class="w"> </span>djangoapp/
+│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>📄<span class="w"> </span>__init__.py
+│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>📄<span class="w"> </span>settings.py
+│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>📄<span class="w"> </span>urls.py
+│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>📄<span class="w"> </span>wsgi.py
+│<span class="w">   </span>└──<span class="w"> </span>📄<span class="w"> </span>manage.py
+└──<span class="w"> </span>📁<span class="w"> </span>shinyapp/
+<span class="w">    </span>├──<span class="w"> </span>📄<span class="w"> </span>app.R
+<span class="w">    </span>├──<span class="w"> </span>📄<span class="w"> </span>DESCRIPTION
+<span class="w">    </span>└──<span class="w"> </span>📄<span class="w"> </span>Readme.md
+</code></pre></div>
+<p>We will proceed in three main steps:</p>
+<ol>
+<li><a href="#create-the-wrapping-view">Create a simple view that renders our wrapping HTML page</a></li>
+<li><a href="#create-the-wrapping-html-page">Create this wrapping HTML page</a> that will:<ol>
+<li>Create an Iframe and add it to the DOM</li>
+<li>Get the Shiny HTML contents in JSON format, with an asynchronous call</li>
+<li>Inject these contents in the Iframe</li>
+</ol>
+</li>
+<li><a href="#create-the-json-view">Create the view to return Shiny HTML contents as JSON</a> by:<ol>
+<li>Getting the contents with a GET request</li>
+<li>Parsing it with <a href="https://www.crummy.com/software/BeautifulSoup/">BeautifulSoup</a>'s HTML parser</li>
+<li>Dumping and returning it as JSON</li>
+</ol>
+</li>
+</ol>
+<hr />
+<h4 id="create-the-wrapping-view">Create the wrapping view<a class="headerlink" href="#create-the-wrapping-view" title="Permanent link">¤</a></h4>
+<p>Let's create our wrapping view. First make sure you have listed <code>djangoapp</code>
+in the Django settings' <code>INSTALLED_APPS</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># settings.py</span>
+
+<span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;django.contrib.admin&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.auth&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.contenttypes&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.sessions&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.messages&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.staticfiles&#39;</span><span class="p">,</span>
+
+    <span class="s1">&#39;djangoapp&#39;</span>
+<span class="p">]</span>
+</code></pre></div>
+<p>Then we can add the URL in <code>urls.py</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
+<span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">path</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">views</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;admin/&#39;</span><span class="p">,</span> <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;shiny/&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">shiny</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;shiny&#39;</span><span class="p">),</span>
+<span class="p">]</span>
+</code></pre></div>
+<p>And now we create the view in a new <code>views.py</code> file:</p>
+<div class="highlight"><pre><span></span><code>touch<span class="w"> </span>djangoapp/djangoapp/views.py
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span><span class="p">,</span> <span class="n">redirect</span>
+
+<span class="k">def</span> <span class="nf">shiny</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;djangoapp/shiny.html&#39;</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h4 id="create-the-wrapping-html-page">Create the wrapping HTML page<a class="headerlink" href="#create-the-wrapping-html-page" title="Permanent link">¤</a></h4>
+<p>Since we tell the view to render the <code>djangoapp/shiny.html</code> template, we need
+to create it:</p>
+<div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>-p<span class="w"> </span>djangoapp/djangoapp/templates/djangoapp
+touch<span class="w"> </span>djangoapp/djangoapp/templates/djangoapp/shiny.html
+<span class="c1"># too much of djangoapp already, I know</span>
+</code></pre></div>
+<p>And write its contents. We simply add a title, to know we are in the wrapping
+view, and then we add a script to retrieve the Shiny app contents:</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>We are in the wrapping page!<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;contents&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://code.jquery.com/jquery-3.3.1.min.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="w">  </span><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nx">$</span><span class="p">.</span><span class="nx">getJSON</span><span class="p">(</span><span class="s1">&#39;{% url &quot;shiny_contents&quot; %}&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">      </span><span class="kd">var</span><span class="w"> </span><span class="nx">iframe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;iframe&quot;</span><span class="p">);</span>
+<span class="w">      </span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#contents&#39;</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="nx">iframe</span><span class="p">);</span>
+
+<span class="w">      </span><span class="nx">iframe</span><span class="p">.</span><span class="nx">contentWindow</span><span class="p">.</span><span class="nb">document</span><span class="p">.</span><span class="nx">open</span><span class="p">();</span>
+<span class="w">      </span><span class="nx">iframe</span><span class="p">.</span><span class="nx">contentWindow</span><span class="p">.</span><span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">html_contents</span><span class="p">);</span>
+<span class="w">      </span><span class="nx">iframe</span><span class="p">.</span><span class="nx">contentWindow</span><span class="p">.</span><span class="nb">document</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+
+<span class="w">      </span><span class="c1">// Attempt circumvention</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">iframe</span><span class="p">.</span><span class="nx">contentWindow</span><span class="p">.</span><span class="nx">WebSocket</span><span class="p">)</span>
+<span class="w">          </span><span class="nx">WebSocket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">iframe</span><span class="p">.</span><span class="nx">contentWindow</span><span class="p">.</span><span class="nx">WebSocket</span><span class="p">;</span>
+<span class="w">    </span><span class="p">});</span>
+
+<span class="w">  </span><span class="p">});</span>
+
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre></div>
+<p>Several things happen here:</p>
+<ul>
+<li>we declare a <code>div</code> of ID <code>contents</code> in which we will add an <code>iframe</code>,</li>
+<li>we make use of JQuery's <code>$(document).ready</code> and <code>$.getJSON</code> methods to
+  load HTML contents from an URL returning JSON,</li>
+<li>we create the <code>iframe</code>, add it in the document, then write the HTML contents
+  inside of it. We also reassign the <code>WebSocket</code> variable to the value of the
+  <code>iframe</code> one.</li>
+</ul>
+<hr />
+<h4 id="create-the-json-view">Create the JSON view<a class="headerlink" href="#create-the-json-view" title="Permanent link">¤</a></h4>
+<p>As you maybe guessed, work is not finished. We need to add the <code>shiny_contents</code>
+URL and view in the Django app. The view must return the contents of the Shiny
+app initial page as JSON.</p>
+<p>Add the URL in <code>urls.py</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
+<span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">path</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">views</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;admin/&#39;</span><span class="p">,</span> <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;shiny/&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">shiny</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;shiny&#39;</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;shiny_contents/&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">shiny_contents</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;shiny_contents&#39;</span><span class="p">),</span>
+<span class="p">]</span>
+</code></pre></div>
+<p>Add the view to <code>views.py</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">JsonResponse</span>
+<span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span>
+
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+
+
+<span class="k">def</span> <span class="nf">shiny</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;djangoapp/shiny.html&#39;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">shiny_contents</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://localhost:8100&#39;</span><span class="p">)</span>
+    <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span><span class="s1">&#39;html_contents&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">soup</span><span class="p">)})</span>
+</code></pre></div>
+<p>We are using requests and BeautifulSoup to get the HTML contents and return
+it as text, dumped as JSON. If you know a better way, let me know in the
+comments!</p>
+<p>To install requests and BeautifulSoup: <code>pip install requests beautifulsoup4</code>.</p>
+<p>OK, let's try! Run both the Shiny application and the Django application, then
+go to <a href="http://localhost:8000/shiny">http://localhost:8000/shiny</a> to see how it goes!</p>
+<p>You should see something like the following image:</p>
+<p><img alt="screenshot-django-shiny" src="../../assets/screenshot-django-shiny.png" /></p>
+<p>But since Shiny requests are not proxied, they are simply lost in-between, and
+your Shiny app will not respond, nor get a nice look because the static assets
+will not be loaded. We will fix this in the next section:
+<a href="#proxying-shiny-requests-to-the-shiny-app">Proxying Shiny requests</a>.</p>
+<p>This is it for the setup and the Django-wrapped Shiny page. For the rest of the
+tutorial, I will explain how to configure NginX and Django to act as proxy
+and authorization servers. The result is available for you to try in this
+repository: <a href="https://github.com/Pawamoy/docker-nginx-auth-request-django-shiny-example">https://github.com/Pawamoy/docker-nginx-auth-request-django-shiny-example</a>.
+See the <a href="#try-it-with-a-dockerized-project">Try it out</a> section.</p>
+<hr />
+<h2 id="proxying-shiny-requests-to-the-shiny-app">Proxying Shiny requests to the Shiny app<a class="headerlink" href="#proxying-shiny-requests-to-the-shiny-app" title="Permanent link">¤</a></h2>
+<p>This is time for NginX to come on stage. We need to create our new,
+project-specific configuration file in <code>/etc/nginx/sites-available/djangoshiny</code>.</p>
+<p>We will tell NginX to proxy every request with an URL like <code>shiny/*</code> to our
+Shiny app. All other requests will be proxied to the Django app.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># declare your Django app</span>
+<span class="k">upstream</span><span class="w"> </span><span class="s">djangoapp_server</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kn">server</span><span class="w"> </span><span class="n">localhost</span><span class="p">:</span><span class="mi">8000</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1"># declare your Shiny app</span>
+<span class="k">upstream</span><span class="w"> </span><span class="s">shinyapp_server</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kn">server</span><span class="w"> </span><span class="n">localhost</span><span class="p">:</span><span class="mi">8100</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1"># required for WebSockets</span>
+<span class="k">map</span><span class="w"> </span><span class="nv">$http_upgrade</span><span class="w"> </span><span class="nv">$connection_upgrade</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kn">default</span><span class="w"> </span><span class="s">upgrade</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">&#39;&#39;</span><span class="w"> </span><span class="s">close</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">server</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kn">listen</span><span class="w"> </span><span class="mi">80</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">server_name</span><span class="w"> </span><span class="s">localhost</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kn">client_max_body_size</span><span class="w"> </span><span class="s">100M</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1"># normal requests go to Django</span>
+<span class="w">    </span><span class="kn">location</span><span class="w"> </span><span class="s">/</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kn">proxy_pass</span><span class="w"> </span><span class="s">http://djangoapp_server</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">X-Forwarded-For</span><span class="w"> </span><span class="nv">$proxy_add_x_forwarded_for</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">Host</span><span class="w"> </span><span class="nv">$host</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_redirect</span><span class="w"> </span><span class="no">off</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">if</span><span class="w"> </span><span class="s">(!-f</span><span class="w"> </span><span class="nv">$request_filename</span><span class="s">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kn">proxy_pass</span><span class="w"> </span><span class="s">http://djangoapp_server</span><span class="p">;</span>
+<span class="w">            </span><span class="kn">break</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1"># &quot;shiny&quot; requests go to Shiny</span>
+<span class="w">    </span><span class="kn">location</span><span class="w"> </span><span class="p">~</span><span class="w"> </span><span class="sr">/shiny/.+</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="kn">rewrite</span><span class="w"> </span><span class="s">^/shiny/(.*)</span>$<span class="w"> </span><span class="s">/</span><span class="nv">$1</span><span class="w"> </span><span class="s">break</span><span class="p">;</span>
+
+<span class="w">        </span><span class="kn">proxy_pass</span><span class="w"> </span><span class="s">http://shinyapp_server</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_redirect</span><span class="w"> </span><span class="s">http://shinyapp_server/</span><span class="w"> </span><span class="nv">$scheme://$host/shiny/</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1"># required for WebSockets</span>
+<span class="w">        </span><span class="kn">proxy_http_version</span><span class="w"> </span><span class="mi">1</span><span class="s">.1</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">Upgrade</span><span class="w"> </span><span class="nv">$http_upgrade</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">Connection</span><span class="w"> </span><span class="nv">$connection_upgrade</span><span class="p">;</span>
+
+<span class="w">        </span><span class="kn">proxy_read_timeout</span><span class="w"> </span><span class="s">20d</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_buffering</span><span class="w"> </span><span class="no">off</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<p>Once you're ready, enable this configuration by linking it like this:</p>
+<div class="highlight"><pre><span></span><code>sudo ln -s /etc/nginx/sites-available/djangoshiny /etc/nginx/sites-enabled/djangoshiny
+</code></pre></div>
+<p>Now reload NginX, and that's it! If you launch both Django on port 8000, and
+Shiny on port 8100, you should be able to connect to <code>http://localhost/shiny</code>
+and enjoy your Django-wrapped Shiny application functioning properly!</p>
+<p>There is still one thing we need to add: authentication and authorization.
+I won't show how to create sign-in / sign-up / sign-out views: you can
+find all the documentation to enable Django authentication system online.
+What I will show you is how to make Django act as an authorization server
+for Shiny.</p>
+<hr />
+<h2 id="adding-an-authentication-step-for-every-shiny-request">Adding an authentication step for every Shiny request<a class="headerlink" href="#adding-an-authentication-step-for-every-shiny-request" title="Permanent link">¤</a></h2>
+<p>We want all requests proxied to Shiny to be authorized by Django. For this we
+are gonna use the <a href="https://nginx.org/en/docs/http/ngx_http_auth_request_module.html">auth-request</a> module. This module is not compiled in
+NginX by default on distributions like Ubuntu / Debian. If you want to recompile
+NginX with auth-request enabled, check how I do it in <a href="https://github.com/Pawamoy/docker-nginx-auth-request-django-shiny-example/blob/master/Dockerfile.nginx">this Dockerfile</a>.</p>
+<p>An easier solution is to use the Docker setup from the same repository, with
+the official NginX image which already supports auth-request.</p>
+<p>So, once your NginX is ready, add this authorization step in the configuration
+file:</p>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="k">location</span><span class="w"> </span><span class="p">~</span><span class="w"> </span><span class="sr">/shiny/.+</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="c1"># we tell nginx to call that location for each request</span>
+<span class="w">        </span><span class="kn">auth_request</span><span class="w"> </span><span class="s">/auth</span><span class="p">;</span>
+
+<span class="w">        </span><span class="kn">rewrite</span><span class="w"> </span><span class="s">^/shiny/(.*)</span>$<span class="w"> </span><span class="s">/</span><span class="nv">$1</span><span class="w"> </span><span class="s">break</span><span class="p">;</span>
+
+<span class="w">        </span><span class="kn">proxy_pass</span><span class="w"> </span><span class="s">http://shinyapp_server</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_redirect</span><span class="w"> </span><span class="s">http://shinyapp_server/</span><span class="w"> </span><span class="nv">$scheme://$host/shiny/</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1"># this part is needed for WebSockets to work</span>
+<span class="w">        </span><span class="kn">proxy_http_version</span><span class="w"> </span><span class="mi">1</span><span class="s">.1</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">Upgrade</span><span class="w"> </span><span class="nv">$http_upgrade</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">Connection</span><span class="w"> </span><span class="nv">$connection_upgrade</span><span class="p">;</span>
+
+<span class="w">        </span><span class="kn">proxy_read_timeout</span><span class="w"> </span><span class="s">20d</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_buffering</span><span class="w"> </span><span class="no">off</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1"># the /auth location will send a subrequest to django, URL shiny_auth/</span>
+<span class="w">    </span><span class="k">location</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">/auth</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kn">internal</span><span class="p">;</span>
+
+<span class="w">        </span><span class="kn">proxy_pass</span><span class="w"> </span><span class="s">http://localhost:8000/shiny_auth/</span><span class="p">;</span>
+
+<span class="w">        </span><span class="kn">proxy_pass_request_body</span><span class="w"> </span><span class="no">off</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">Content-Length</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">X-Original-URI</span><span class="w"> </span><span class="nv">$request_uri</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+<p>Of course, we also need to write the view called by the <code>shiny_auth/</code> URL.
+It's a very simple one. First add the URL in <code>urls.py</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
+<span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">path</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">views</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;admin/&#39;</span><span class="p">,</span> <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;shiny/&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">shiny</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;shiny&#39;</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;shiny_contents/&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">shiny_contents</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;shiny_contents&#39;</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;shiny_auth/&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">shiny_auth</span><span class="p">),</span>
+<span class="p">]</span>
+</code></pre></div>
+<p>And then the view in <code>views.py</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponse</span>
+
+<span class="k">def</span> <span class="nf">shiny_auth</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="mi">403</span><span class="p">)</span>
+</code></pre></div>
+<p>Et voilà! If the user is authenticated, Django will say "OK". If the user is
+not authenticated, Django will say "No". But you could implement any logic
+you need instead of just checking if the user is authenticated or not. You
+could have several Shiny apps served on different URLs, powered by Django
+(in wrapping pages, as we saw earlier), and grant access to users with a
+permission system, etc..</p>
+<h2 id="try-it-with-a-dockerized-project">Try it with a Dockerized project<a class="headerlink" href="#try-it-with-a-dockerized-project" title="Permanent link">¤</a></h2>
+<p>Clone the repository and build the images with the following commands:</p>
+<div class="highlight"><pre><span></span><code>git clone https://github.com/Pawamoy/docker-nginx-auth-request-django-shiny-example docker-django-shiny
+cd docker-django-shiny
+sudo make all
+</code></pre></div>
+<p>This first build should take quite some time. It will build Shiny and Django
+images, get static assets, create the database, create a super user, and then
+run the application. You will then be able to go to <code>http://localhost:8000</code>
+to see it in action.</p>
+<p>To print the available <code>make</code> commands, simply run <code>make</code>.</p>
+
+  <!-- Giscus -->
+  <!-- https://squidfunk.github.io/mkdocs-material/setup/adding-a-comment-system/#giscus-integration -->
+  <hr>
+  <h2 id="__comments">Comments</h2>
+  <script src="https://giscus.app/client.js"
+    data-repo="pawamoy/pawamoy.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnk1NTYxNzIxNA=="
+    data-category="General"
+    data-category-id="DIC_kwDOA1Cmvs4CPVxB"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="en"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async>
+  </script>
+
+  <!-- Reload on palette change -->
+  <script>
+    var palette = __md_get("__palette")
+    if (palette && typeof palette.color === "object")
+      if (palette.color.scheme === "slate") {
+        var giscus = document.querySelector("script[src*=giscus]")
+        giscus.setAttribute("data-theme", "dark")
+      }
+
+    /* Register event handlers after documented loaded */
+    document.addEventListener("DOMContentLoaded", function() {
+      var ref = document.querySelector("[data-md-component=palette]")
+      ref.addEventListener("change", function() {
+        var palette = __md_get("__palette")
+        if (palette && typeof palette.color === "object") {
+          var theme = palette.color.scheme === "slate" ? "dark" : "light"
+
+          /* Instruct Giscus to change theme */
+          var frame = document.querySelector(".giscus-frame")
+          frame.contentWindow.postMessage(
+            { giscus: { setConfig: { theme } } },
+            "https://giscus.app"
+          )
+        }
+      })
+    })
+  </script>
+
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../challenge-fill-space-one-line-90-degree-same-direction/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Challenge: fill a 2D space with one continuous line doing 90° angle turns in the same direction (left/right)">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Challenge: fill a 2D space with one continuous line doing 90° angle turns in the same direction (left/right)
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../dual-screens-setup-nvidia-bunsenlabs-debian-jessie/" class="md-footer__link md-footer__link--next" aria-label="Next: How to install NVidia drivers on BunsenLabs/Debian 8 to setup dual screens">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                How to install NVidia drivers on BunsenLabs/Debian 8 to setup dual screens
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs Insiders
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/pawamoy" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+      
+    
+    
+    
+      
+      
+    
+    <a href="https://fosstodon.org/@pawamoy" target="_blank" rel="noopener me" title="fosstodon.org" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M433 179.11c0-97.2-63.71-125.7-63.71-125.7-62.52-28.7-228.56-28.4-290.48 0 0 0-63.72 28.5-63.72 125.7 0 115.7-6.6 259.4 105.63 289.1 40.51 10.7 75.32 13 103.33 11.4 50.81-2.8 79.32-18.1 79.32-18.1l-1.7-36.9s-36.31 11.4-77.12 10.1c-40.41-1.4-83-4.4-89.63-54a102.54 102.54 0 0 1-.9-13.9c85.63 20.9 158.65 9.1 178.75 6.7 56.12-6.7 105-41.3 111.23-72.9 9.8-49.8 9-121.5 9-121.5zm-75.12 125.2h-46.63v-114.2c0-49.7-64-51.6-64 6.9v62.5h-46.33V197c0-58.5-64-56.6-64-6.9v114.2H90.19c0-122.1-5.2-147.9 18.41-175 25.9-28.9 79.82-30.8 103.83 6.1l11.6 19.5 11.6-19.5c24.11-37.1 78.12-34.8 103.83-6.1 23.71 27.3 18.4 53 18.4 175z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/pawamoy" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://linkedin.com/in/timothée-mazzucotelli-0321607b/" target="_blank" rel="noopener" title="linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["announce.dismiss", "content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy", "content.tooltips", "navigation.footer", "navigation.indexes", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "search.highlight", "search.suggest", "toc.follow"], "search": "../../assets/javascripts/workers/search.f2da59ea.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.65061dd4.min.js"></script>
+      
+        <script src="../../assets/_markdown_exec_pyodide.js"></script>
+      
+    
+  </body>
+</html>
