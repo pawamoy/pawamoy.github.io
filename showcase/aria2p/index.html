@@ -1925,14 +1925,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../failprint/" class="md-nav__link">
+      <a href="../duty/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     
   
     <span class="md-typeset">
-      failprint
+      duty
     </span>
   
 
@@ -2240,43 +2240,14 @@
 <li>Documentation: <a href="https://pawamoy.github.io/aria2p">https://pawamoy.github.io/aria2p</a></li>
 </ul>
 <hr />
-<p>I like automating things, or at least making them scriptable,
-controllable from the command line.
-One of those "things" is downloading stuff from the internet.
-I tried some GUI applications for torrents (Transmission, Deluge),
-and was always disappointed by their lack of CLI-friendliness.</p>
-<p>On <a href="https://reddit.com/r/torrents">r/torrents</a>, people pointed me to
-<a href="https://rakshasa.github.io/rtorrent/">Rtorrent</a> (or is it RTorrent? rTorrent?),
-which seems to be extremely configurable, scriptable, and powerful.
-But it also seemed very complicated to grasp, particularly because it
-implements its own configuration language.</p>
-<p>So here I went again... doing things myself. Well, not really myself.
-I chose to write a client for <a href="https://aria2.github.io/">aria2</a>, because
-it offered an XML-RPC and a JSON-RPC interface.</p>
-<p>And this is how <code>aria2p</code> was born!
-I started by creating a client with nothing more, nothing less than what
-<code>aria2</code> exposes in its JSON-RPC interface. And then I built upon that client
-to provide more high-level methods.
-The manual page of <code>aria2</code> is really well detailed, so it helped a lot.</p>
-<p>I'm now running it on a RaspberryPi on which a hard-drive is plugged.
-I can define callbacks (as Python functions) to process a download's files
-when it finishes, like moving them in the right directory based on their
-extension.</p>
-<p>I really enjoyed writing this library and command-line tool,
-and I poured all my experience in Python in this project's
-management and configuration. I always use it as my sandbox for new
-cutting edge analysis tools or static site generators.</p>
-<p>I also learned how to write an HTOP-like interface, something I always
-admired and wanted to try coding. There were some challenges, like
-managing vertical+horizontal scroll while following a particular line or not,
-as well as separating the data from the logic and the presentation,
-or making the interface snappy, reacting fast to user input, without
-loosing them. It's not finished though! There is room for a lot of improvements,
-like charts at the top of the window, a status bar, additional views
-for download details, configuration option, more actions, etc.</p>
-<p>I want to write a tutorial on how to write an HTOP-like interface in Python
-someday, using <code>aria2p</code> as an example. Such a tutorial would have helped me
-tremendously back then, so I'm sure it would help other developers.</p>
+<p>I like automating things, or at least making them scriptable, controllable from the command line. One of those "things" is downloading stuff from the internet. I tried some GUI applications for torrents (Transmission, Deluge), and was always disappointed by their lack of CLI-friendliness.</p>
+<p>On <a href="https://reddit.com/r/torrents">r/torrents</a>, people pointed me to <a href="https://rakshasa.github.io/rtorrent/">Rtorrent</a> (or is it RTorrent? rTorrent?), which seems to be extremely configurable, scriptable, and powerful. But it also seemed very complicated to grasp, particularly because it implements its own configuration language.</p>
+<p>So here I went again... doing things myself. Well, not really myself. I chose to write a client for <a href="https://aria2.github.io/">aria2</a>, because it offered an XML-RPC and a JSON-RPC interface.</p>
+<p>And this is how <code>aria2p</code> was born! I started by creating a client with nothing more, nothing less than what <code>aria2</code> exposes in its JSON-RPC interface. And then I built upon that client to provide more high-level methods. The manual page of <code>aria2</code> is really well detailed, so it helped a lot.</p>
+<p>I'm now running it on a RaspberryPi on which a hard-drive is plugged. I can define callbacks (as Python functions) to process a download's files when it finishes, like moving them in the right directory based on their extension.</p>
+<p>I really enjoyed writing this library and command-line tool, and I poured all my experience in Python in this project's management and configuration. I always use it as my sandbox for new cutting edge analysis tools or static site generators.</p>
+<p>I also learned how to write an HTOP-like interface, something I always admired and wanted to try coding. There were some challenges, like managing vertical+horizontal scroll while following a particular line or not, as well as separating the data from the logic and the presentation, or making the interface snappy, reacting fast to user input, without loosing them. It's not finished though! There is room for a lot of improvements, like charts at the top of the window, a status bar, additional views for download details, configuration option, more actions, etc.</p>
+<p>I want to write a tutorial on how to write an HTOP-like interface in Python someday, using <code>aria2p</code> as an example. Such a tutorial would have helped me tremendously back then, so I'm sure it would help other developers.</p>
 
 
 

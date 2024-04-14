@@ -1985,14 +1985,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../showcase/failprint/" class="md-nav__link">
+      <a href="../../showcase/duty/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     
   
     <span class="md-typeset">
-      failprint
+      duty
     </span>
   
 
@@ -2314,23 +2314,12 @@
   
     <div class="crop-excerpt"><img src="/assets/gunicorn_logs.png"/></div>
   
-  <p>I recently started playing with <a href="https://fastapi.tiangolo.com/">FastAPI</a>
-and <a href="https://www.python-httpx.org/">HTTPX</a>,
-and I am deploying my app with <a href="https://gunicorn.org/">Gunicorn</a> and
-<a href="https://www.uvicorn.org/">Uvicorn</a> workers.</p>
-<p>But when serving, the logs from each component looks quite different
-from the others. I want them to all look the same, so I can easily read them
-or exploit them in something like <a href="https://www.elastic.co/kibana">Kibana</a>.</p>
-<p>After a lot of hours trying to understand
-how <a href="https://docs.python.org/3/library/logging.html">Python logging</a> works,
-and how to override libraries' logging settings,
-here is what I have...</p>
+  <p>I recently started playing with <a href="https://fastapi.tiangolo.com/">FastAPI</a> and <a href="https://www.python-httpx.org/">HTTPX</a>, and I am deploying my app with <a href="https://gunicorn.org/">Gunicorn</a> and <a href="https://www.uvicorn.org/">Uvicorn</a> workers.</p>
+<p>But when serving, the logs from each component looks quite different from the others. I want them to all look the same, so I can easily read them or exploit them in something like <a href="https://www.elastic.co/kibana">Kibana</a>.</p>
+<p>After a lot of hours trying to understand how <a href="https://docs.python.org/3/library/logging.html">Python logging</a> works, and how to override libraries' logging settings, here is what I have...</p>
 <!--more-->
 
-<p>A single <code>run.py</code> file!
-I didn't want to split logging configuration, Gunicorn configuration,
-and the rest of the code into multiple files, as it was harder to wrap
-my head around it.</p>
+<p>A single <code>run.py</code> file! I didn't want to split logging configuration, Gunicorn configuration, and the rest of the code into multiple files, as it was harder to wrap my head around it.</p>
 <h2 id="gunicorn-uvicorn-version">Gunicorn + Uvicorn version<a class="headerlink" href="#gunicorn-uvicorn-version" title="Permanent link">¤</a></h2>
 <p>Everything is contained in this single file:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
@@ -2363,7 +2352,9 @@ my head around it.</p>
             <span class="n">frame</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">f_back</span>
             <span class="n">depth</span> <span class="o">+=</span> <span class="mi">1</span>
 
-        <span class="n">logger</span><span class="o">.</span><span class="n">opt</span><span class="p">(</span><span class="n">depth</span><span class="o">=</span><span class="n">depth</span><span class="p">,</span> <span class="n">exception</span><span class="o">=</span><span class="n">record</span><span class="o">.</span><span class="n">exc_info</span><span class="p">)</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">level</span><span class="p">,</span> <span class="n">record</span><span class="o">.</span><span class="n">getMessage</span><span class="p">())</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">opt</span><span class="p">(</span><span class="n">depth</span><span class="o">=</span><span class="n">depth</span><span class="p">,</span> <span class="n">exception</span><span class="o">=</span><span class="n">record</span><span class="o">.</span><span class="n">exc_info</span><span class="p">)</span><span class="o">.</span><span class="n">log</span><span class="p">(</span>
+            <span class="n">level</span><span class="p">,</span> <span class="n">record</span><span class="o">.</span><span class="n">getMessage</span><span class="p">()</span>
+        <span class="p">)</span>
 
 
 <span class="k">class</span> <span class="nc">StubbedGunicornLogger</span><span class="p">(</span><span class="n">Logger</span><span class="p">):</span>
@@ -2387,7 +2378,8 @@ my head around it.</p>
 
     <span class="k">def</span> <span class="nf">load_config</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="n">key</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="n">key</span><span class="p">:</span> <span class="n">value</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
             <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="o">.</span><span class="n">settings</span> <span class="ow">and</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
         <span class="p">}</span>
         <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -2397,7 +2389,7 @@ my head around it.</p>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">application</span>
 
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">intercept_handler</span> <span class="o">=</span> <span class="n">InterceptHandler</span><span class="p">()</span>
     <span class="c1"># logging.basicConfig(handlers=[intercept_handler], level=LOG_LEVEL)</span>
     <span class="c1"># logging.root.handlers = [intercept_handler]</span>
@@ -2425,13 +2417,12 @@ my head around it.</p>
         <span class="s2">&quot;accesslog&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
         <span class="s2">&quot;errorlog&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
         <span class="s2">&quot;worker_class&quot;</span><span class="p">:</span> <span class="s2">&quot;uvicorn.workers.UvicornWorker&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;logger_class&quot;</span><span class="p">:</span> <span class="n">StubbedGunicornLogger</span>
+        <span class="s2">&quot;logger_class&quot;</span><span class="p">:</span> <span class="n">StubbedGunicornLogger</span><span class="p">,</span>
     <span class="p">}</span>
 
     <span class="n">StandaloneApplication</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </code></pre></div>
-<p>If you are in a hurry, copy-paste it, change the Gunicorn options at the end,
-and try it!</p>
+<p>If you are in a hurry, copy-paste it, change the Gunicorn options at the end, and try it!</p>
 <p>If you're not, I will explain each part below.</p>
 <hr />
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
@@ -2442,25 +2433,17 @@ and try it!</p>
 <span class="kn">from</span> <span class="nn">gunicorn.glogging</span> <span class="kn">import</span> <span class="n">Logger</span>
 <span class="kn">from</span> <span class="nn">loguru</span> <span class="kn">import</span> <span class="n">logger</span>
 </code></pre></div>
-<p>This part is easy, we simply import the things we need.
-The Gunicorn <code>BaseApplication</code> so we can run Gunicorn directly from this script,
-and its <code>Logger</code> that we will override a bit.
-We are using <a href="https://github.com/Delgan/loguru">Loguru</a> later in the code,
-to have a pretty log format, or to serialize them.</p>
+<p>This part is easy, we simply import the things we need. The Gunicorn <code>BaseApplication</code> so we can run Gunicorn directly from this script, and its <code>Logger</code> that we will override a bit. We are using <a href="https://github.com/Delgan/loguru">Loguru</a> later in the code, to have a pretty log format, or to serialize them.</p>
 <hr />
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">my_app.app</span> <span class="kn">import</span> <span class="n">app</span>
 </code></pre></div>
-<p>In my project, I have a <code>my_app</code> package with an <code>app</code> module.
-My FastAPI application is declared in this module, something like
-<code>app = FastAPI()</code>.</p>
+<p>In my project, I have a <code>my_app</code> package with an <code>app</code> module. My FastAPI application is declared in this module, something like <code>app = FastAPI()</code>.</p>
 <hr />
 <div class="highlight"><pre><span></span><code><span class="n">LOG_LEVEL</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLevelName</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;LOG_LEVEL&quot;</span><span class="p">,</span> <span class="s2">&quot;DEBUG&quot;</span><span class="p">))</span>
 <span class="n">JSON_LOGS</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;JSON_LOGS&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;1&quot;</span> <span class="k">else</span> <span class="kc">False</span>
 <span class="n">WORKERS</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;GUNICORN_WORKERS&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">))</span>
 </code></pre></div>
-<p>We setup some values from environment variables, useful for development vs.
-production setups. <code>JSON_LOGS</code> tells if we should serialize the logs to JSON,
-and <code>WORKERS</code> tells how many workers we want to have.</p>
+<p>We setup some values from environment variables, useful for development vs. production setups. <code>JSON_LOGS</code> tells if we should serialize the logs to JSON, and <code>WORKERS</code> tells how many workers we want to have.</p>
 <hr />
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">InterceptHandler</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">Handler</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">emit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">record</span><span class="p">):</span>
@@ -2476,11 +2459,11 @@ and <code>WORKERS</code> tells how many workers we want to have.</p>
             <span class="n">frame</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">f_back</span>
             <span class="n">depth</span> <span class="o">+=</span> <span class="mi">1</span>
 
-        <span class="n">logger</span><span class="o">.</span><span class="n">opt</span><span class="p">(</span><span class="n">depth</span><span class="o">=</span><span class="n">depth</span><span class="p">,</span> <span class="n">exception</span><span class="o">=</span><span class="n">record</span><span class="o">.</span><span class="n">exc_info</span><span class="p">)</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">level</span><span class="p">,</span> <span class="n">record</span><span class="o">.</span><span class="n">getMessage</span><span class="p">())</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">opt</span><span class="p">(</span><span class="n">depth</span><span class="o">=</span><span class="n">depth</span><span class="p">,</span> <span class="n">exception</span><span class="o">=</span><span class="n">record</span><span class="o">.</span><span class="n">exc_info</span><span class="p">)</span><span class="o">.</span><span class="n">log</span><span class="p">(</span>
+            <span class="n">level</span><span class="p">,</span> <span class="n">record</span><span class="o">.</span><span class="n">getMessage</span><span class="p">()</span>
+        <span class="p">)</span>
 </code></pre></div>
-<p>This code is copy-pasted from Loguru's documentation!
-This handler will be used to intercept the logs emitted by libraries
-and re-emit them through Loguru.</p>
+<p>This code is copy-pasted from Loguru's documentation! This handler will be used to intercept the logs emitted by libraries and re-emit them through Loguru.</p>
 <hr />
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">StubbedGunicornLogger</span><span class="p">(</span><span class="n">Logger</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cfg</span><span class="p">):</span>
@@ -2492,11 +2475,7 @@ and re-emit them through Loguru.</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">error_logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">LOG_LEVEL</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">access_logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">LOG_LEVEL</span><span class="p">)</span>
 </code></pre></div>
-<p>This code was copied from this
-<a href="https://github.com/benoitc/gunicorn/issues/1572#issuecomment-430747811">GitHub comment</a>
-by <a href="https://github.com/dcosson">@dcosson</a>. Thanks!
-It will allow us to override Gunicorn's own logging configuration
-so its logs can be formatted like the rest.</p>
+<p>This code was copied from this <a href="https://github.com/benoitc/gunicorn/issues/1572#issuecomment-430747811">GitHub comment</a> by <a href="https://github.com/dcosson">@dcosson</a>. Thanks! It will allow us to override Gunicorn's own logging configuration so its logs can be formatted like the rest.</p>
 <hr />
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">StandaloneApplication</span><span class="p">(</span><span class="n">BaseApplication</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Our Gunicorn application.&quot;&quot;&quot;</span>
@@ -2508,7 +2487,8 @@ so its logs can be formatted like the rest.</p>
 
     <span class="k">def</span> <span class="nf">load_config</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="n">key</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="n">key</span><span class="p">:</span> <span class="n">value</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
             <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="o">.</span><span class="n">settings</span> <span class="ow">and</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
         <span class="p">}</span>
         <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -2517,86 +2497,60 @@ so its logs can be formatted like the rest.</p>
     <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">application</span>
 </code></pre></div>
-<p>This code is taken from
-<a href="https://docs.gunicorn.org/en/stable/custom.html">Gunicorn's documentation</a>.
-We declare a simple Gunicorn application that we will be able to run.
-It accepts all Gunicorn's options.</p>
+<p>This code is taken from <a href="https://docs.gunicorn.org/en/stable/custom.html">Gunicorn's documentation</a>. We declare a simple Gunicorn application that we will be able to run. It accepts all Gunicorn's options.</p>
 <hr />
-<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">intercept_handler</span> <span class="o">=</span> <span class="n">InterceptHandler</span><span class="p">()</span>
     <span class="c1"># logging.basicConfig(handlers=[intercept_handler], level=LOG_LEVEL)</span>
     <span class="c1"># logging.root.handlers = [intercept_handler]</span>
     <span class="n">logging</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">LOG_LEVEL</span><span class="p">)</span>
 </code></pre></div>
-<p>We simply instantiate our interception handler,
-and set the log level on the root logger.</p>
-<p>Once again, I fail to understand how this works exactly, as the two commented
-lines have no impact on the result. I did a lot of trial and error and ended
-up with something working, but I cannot entirely explain why.
-The idea here was to set the handler on the root logger so it intercepts
-everything, but it was not enough (logs were not all intercepted).</p>
+<p>We simply instantiate our interception handler, and set the log level on the root logger.</p>
+<p>Once again, I fail to understand how this works exactly, as the two commented lines have no impact on the result. I did a lot of trial and error and ended up with something working, but I cannot entirely explain why. The idea here was to set the handler on the root logger so it intercepts everything, but it was not enough (logs were not all intercepted).</p>
 <hr />
-<div class="highlight"><pre><span></span><code>    <span class="n">seen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">[</span>
-        <span class="o">*</span><span class="n">logging</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">manager</span><span class="o">.</span><span class="n">loggerDict</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span>
-        <span class="s2">&quot;gunicorn&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;gunicorn.access&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;gunicorn.error&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;uvicorn&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;uvicorn.access&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;uvicorn.error&quot;</span><span class="p">,</span>
-    <span class="p">]:</span>
-        <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
-            <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
-            <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">handlers</span> <span class="o">=</span> <span class="p">[</span><span class="n">intercept_handler</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><code><span class="n">seen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">[</span>
+    <span class="o">*</span><span class="n">logging</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">manager</span><span class="o">.</span><span class="n">loggerDict</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span>
+    <span class="s2">&quot;gunicorn&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;gunicorn.access&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;gunicorn.error&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;uvicorn&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;uvicorn.access&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;uvicorn.error&quot;</span><span class="p">,</span>
+<span class="p">]:</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+        <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">handlers</span> <span class="o">=</span> <span class="p">[</span><span class="n">intercept_handler</span><span class="p">]</span>
 </code></pre></div>
-<p>Here we iterate on all the possible loggers declared by libraries
-to override their handlers with our interception handler.
-This is where we actually configure every logger to behave the same.</p>
-<p>For a reason that I fail to understand, Gunicorn and Uvicorn do not appear
-in the root logger manager, so we have to hardcode them in the list.</p>
-<p>We also use a set to avoid setting the interception handler on the parent
-of a logger that is already configured, because otherwise logs would be
-emitted twice or more. I'm not sure this code can handle levels of
-nested loggers deeper than two.</p>
+<p>Here we iterate on all the possible loggers declared by libraries to override their handlers with our interception handler. This is where we actually configure every logger to behave the same.</p>
+<p>For a reason that I fail to understand, Gunicorn and Uvicorn do not appear in the root logger manager, so we have to hardcode them in the list.</p>
+<p>We also use a set to avoid setting the interception handler on the parent of a logger that is already configured, because otherwise logs would be emitted twice or more. I'm not sure this code can handle levels of nested loggers deeper than two.</p>
 <hr />
-<div class="highlight"><pre><span></span><code>    <span class="n">logger</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">handlers</span><span class="o">=</span><span class="p">[{</span><span class="s2">&quot;sink&quot;</span><span class="p">:</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="s2">&quot;serialize&quot;</span><span class="p">:</span> <span class="n">JSON_LOGS</span><span class="p">}])</span>
+<div class="highlight"><pre><span></span><code><span class="n">logger</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">handlers</span><span class="o">=</span><span class="p">[{</span><span class="s2">&quot;sink&quot;</span><span class="p">:</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="s2">&quot;serialize&quot;</span><span class="p">:</span> <span class="n">JSON_LOGS</span><span class="p">}])</span>
 </code></pre></div>
-<p>Here we configure Loguru to write on the standard output,
-and to serialize logs if needed.</p>
-<p>At some point I was also using <code>activation=[("", True)]</code>
-(<a href="https://loguru.readthedocs.io/en/stable/api/logger.html#loguru._logger.Logger.configure">see Loguru's docs</a>),
-but it seems it's not required either.</p>
+<p>Here we configure Loguru to write on the standard output, and to serialize logs if needed.</p>
+<p>At some point I was also using <code>activation=[("", True)]</code> (<a href="https://loguru.readthedocs.io/en/stable/api/logger.html#loguru._logger.Logger.configure">see Loguru's docs</a>), but it seems it's not required either.</p>
 <hr />
-<div class="highlight"><pre><span></span><code>    <span class="n">options</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;bind&quot;</span><span class="p">:</span> <span class="s2">&quot;0.0.0.0&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;workers&quot;</span><span class="p">:</span> <span class="n">WORKERS</span><span class="p">,</span>
-        <span class="s2">&quot;accesslog&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;errorlog&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;worker_class&quot;</span><span class="p">:</span> <span class="s2">&quot;uvicorn.workers.UvicornWorker&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;logger_class&quot;</span><span class="p">:</span> <span class="n">StubbedGunicornLogger</span>
-    <span class="p">}</span>
+<div class="highlight"><pre><span></span><code><span class="n">options</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;bind&quot;</span><span class="p">:</span> <span class="s2">&quot;0.0.0.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;workers&quot;</span><span class="p">:</span> <span class="n">WORKERS</span><span class="p">,</span>
+    <span class="s2">&quot;accesslog&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;errorlog&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;worker_class&quot;</span><span class="p">:</span> <span class="s2">&quot;uvicorn.workers.UvicornWorker&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;logger_class&quot;</span><span class="p">:</span> <span class="n">StubbedGunicornLogger</span><span class="p">,</span>
+<span class="p">}</span>
 
-    <span class="n">StandaloneApplication</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="n">StandaloneApplication</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </code></pre></div>
-<p>Finally, we set our Gunicorn options, wiring things up,
-and run our application!</p>
+<p>Finally, we set our Gunicorn options, wiring things up, and run our application!</p>
 <hr />
 <p>Well, I'm not really proud of this code, but it works!</p>
 <p><img alt="logs" src="../../assets/gunicorn_logs.png" /></p>
 <p><img alt="logs_json" src="../../assets/gunicorn_logs_json.png" /></p>
 <h2 id="uvicorn-only-version">Uvicorn-only version<a class="headerlink" href="#uvicorn-only-version" title="Permanent link">¤</a></h2>
 <p><small><em>Added Nov 11, 2020.</em></small></p>
-<p>The Uvicorn-only version is way more simple.
-Note that since this post was published the first time,
-a new Uvicorn version was released, which contained a fix
-for its logging configuration:
-could be in <a href="https://github.com/encode/uvicorn/compare/0.11.5...0.11.6">0.11.6</a>
-(<a href="https://github.com/encode/uvicorn/commit/e382440aa6b604ecdd323288279876767ab36443"><em>Don't override the root logger</em></a>)
-or <a href="https://github.com/encode/uvicorn/releases/tag/0.12.0">0.12.0</a>
-(<a href="https://github.com/encode/uvicorn/commit/df81b1684493ad97e8ba3fa323cc329089880a7c"><em>Dont set log level for root logger</em></a>).</p>
-<p>This simplifies a lot the <code>setup_logging</code> function,
-which now makes more sense and is easier to understand:</p>
+<p>The Uvicorn-only version is way more simple. Note that since this post was published the first time, a new Uvicorn version was released, which contained a fix for its logging configuration: could be in <a href="https://github.com/encode/uvicorn/compare/0.11.5...0.11.6">0.11.6</a> (<a href="https://github.com/encode/uvicorn/commit/e382440aa6b604ecdd323288279876767ab36443"><em>Don't override the root logger</em></a>) or <a href="https://github.com/encode/uvicorn/releases/tag/0.12.0">0.12.0</a> (<a href="https://github.com/encode/uvicorn/commit/df81b1684493ad97e8ba3fa323cc329089880a7c"><em>Dont set log level for root logger</em></a>).</p>
+<p>This simplifies a lot the <code>setup_logging</code> function, which now makes more sense and is easier to understand:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">sys</span>
@@ -2622,7 +2576,9 @@ which now makes more sense and is easier to understand:</p>
             <span class="n">frame</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">f_back</span>
             <span class="n">depth</span> <span class="o">+=</span> <span class="mi">1</span>
 
-        <span class="n">logger</span><span class="o">.</span><span class="n">opt</span><span class="p">(</span><span class="n">depth</span><span class="o">=</span><span class="n">depth</span><span class="p">,</span> <span class="n">exception</span><span class="o">=</span><span class="n">record</span><span class="o">.</span><span class="n">exc_info</span><span class="p">)</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">level</span><span class="p">,</span> <span class="n">record</span><span class="o">.</span><span class="n">getMessage</span><span class="p">())</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">opt</span><span class="p">(</span><span class="n">depth</span><span class="o">=</span><span class="n">depth</span><span class="p">,</span> <span class="n">exception</span><span class="o">=</span><span class="n">record</span><span class="o">.</span><span class="n">exc_info</span><span class="p">)</span><span class="o">.</span><span class="n">log</span><span class="p">(</span>
+            <span class="n">level</span><span class="p">,</span> <span class="n">record</span><span class="o">.</span><span class="n">getMessage</span><span class="p">()</span>
+        <span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">setup_logging</span><span class="p">():</span>
@@ -2640,7 +2596,7 @@ which now makes more sense and is easier to understand:</p>
     <span class="n">logger</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">handlers</span><span class="o">=</span><span class="p">[{</span><span class="s2">&quot;sink&quot;</span><span class="p">:</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="s2">&quot;serialize&quot;</span><span class="p">:</span> <span class="n">JSON_LOGS</span><span class="p">}])</span>
 
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">server</span> <span class="o">=</span> <span class="n">Server</span><span class="p">(</span>
         <span class="n">Config</span><span class="p">(</span>
             <span class="s2">&quot;my_app.app:app&quot;</span><span class="p">,</span>

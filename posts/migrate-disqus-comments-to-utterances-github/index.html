@@ -1972,14 +1972,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../showcase/failprint/" class="md-nav__link">
+      <a href="../../showcase/duty/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     
   
     <span class="md-typeset">
-      failprint
+      duty
     </span>
   
 
@@ -2286,43 +2286,20 @@
     by Timothée Mazzucotelli
   </p>
   
-  <p>When I replaced <a href="https://jekyllrb.com/">Jekyll</a>
-and my <a href="https://github.com/pawamoy/jekyll-readthedocs/">Jekyll-ReadTheDocs theme</a>
-with <a href="https://www.mkdocs.org/">MkDocs</a>
-and a <a href="https://github.com/pawamoy/website">blog-customised version</a> of
-the <a href="https://squidfunk.github.io/mkdocs-material/">Material for MkDocs theme</a>,
-the URLs of my posts changed.</p>
-<p>I was using <a href="https://disqus.com">Disqus</a> for comments,
-and they provide a way to migrate threads from old URLs to new URLs.
-Unfortunately, this time it didn't work for some reason
-(I had already done it once in the past and it worked fine).</p>
-<p>I've read more and more criticism about Disqus related to privacy,
-so I looked at a replacement.
-The Disqus thread migration was not working so it was the perfect occasion!</p>
-<p>I've read a few webpages and got interested in <a href="https://posativ.org/isso/">Isso</a>.
-Unfortunately again, I <a href="https://github.com/posativ/isso/issues/671">did not manage</a>
-to install it on my Raspberry Pi.</p>
-<p>So I went with a much simpler solution: <a href="https://utteranc.es/">Utterances</a>.
-You basically enable a GitHub app on your repository,
-add a script in your posts pages, and voilà: your new comment section
-powered by GitHub issues.</p>
+  <p>When I replaced <a href="https://jekyllrb.com/">Jekyll</a> and my <a href="https://github.com/pawamoy/jekyll-readthedocs/">Jekyll-ReadTheDocs theme</a> with <a href="https://www.mkdocs.org/">MkDocs</a> and a <a href="https://github.com/pawamoy/website">blog-customised version</a> of the <a href="https://squidfunk.github.io/mkdocs-material/">Material for MkDocs theme</a>, the URLs of my posts changed.</p>
+<p>I was using <a href="https://disqus.com">Disqus</a> for comments, and they provide a way to migrate threads from old URLs to new URLs. Unfortunately, this time it didn't work for some reason (I had already done it once in the past and it worked fine).</p>
+<p>I've read more and more criticism about Disqus related to privacy, so I looked at a replacement. The Disqus thread migration was not working so it was the perfect occasion!</p>
+<p>I've read a few webpages and got interested in <a href="https://posativ.org/isso/">Isso</a>. Unfortunately again, I <a href="https://github.com/posativ/isso/issues/671">did not manage</a> to install it on my Raspberry Pi.</p>
+<p>So I went with a much simpler solution: <a href="https://utteranc.es/">Utterances</a>. You basically enable a GitHub app on your repository, add a script in your posts pages, and voilà: your new comment section powered by GitHub issues.</p>
 <!--more-->
 
-<p>I'm not completely satisfied because readers will need to log in
-with their GitHub account to comment (no anonymous comments),
-and you can't have nested discussions (well, just like in GitHub issues).</p>
+<p>I'm not completely satisfied because readers will need to log in with their GitHub account to comment (no anonymous comments), and you can't have nested discussions (well, just like in GitHub issues).</p>
 <p>But this was really easy to setup <img alt="😄" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1f604.svg" title=":smile:" />!</p>
-<p>Now I just needed to migrate the Disqus comments into GitHub issues.
-To do this semi-automatically, I wrote the following script.
-"Semi-automatically" because I still had to write a "test" comment
-in each one of my posts so Utterances would initiate/create the issues.
-I guess it could be implemented in the script directly,
-but since I just had a dozen of posts, I took the easy/repetitive way.</p>
+<p>Now I just needed to migrate the Disqus comments into GitHub issues. To do this semi-automatically, I wrote the following script. "Semi-automatically" because I still had to write a "test" comment in each one of my posts so Utterances would initiate/create the issues. I guess it could be implemented in the script directly, but since I just had a dozen of posts, I took the easy/repetitive way.</p>
 <h2 id="the-script">The script<a class="headerlink" href="#the-script" title="Permanent link">¤</a></h2>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>You'll have to create the initial issues before running the script!
-Serve your blog locally, and write a "test" comment in every post that has comments.</p>
+<p>You'll have to create the initial issues before running the script! Serve your blog locally, and write a "test" comment in every post that has comments.</p>
 </div>
 <p>First, <a href="https://help.disqus.com/en/articles/1717164-comments-export">export your Disqus comments</a>.</p>
 <p>Then you'll need two Python libraries:</p>
@@ -2330,10 +2307,8 @@ Serve your blog locally, and write a "test" comment in every post that has comme
 <li><a href="https://pypi.org/project/PyGithub/"><code>pygithub</code></a></li>
 <li><a href="https://pypi.org/project/xmltodict/"><code>xmltodict</code></a></li>
 </ul>
-<p>You'll also need to create a token on GitHub,
-with just the <code>public repos</code> access.</p>
-<p>Write the following environment variables in a file,
-and source it.</p>
+<p>You'll also need to create a token on GitHub, with just the <code>public repos</code> access.</p>
+<p>Write the following environment variables in a file, and source it.</p>
 <div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">FILEPATH</span><span class="o">=</span><span class="s2">&quot;comments.xml&quot;</span>
 <span class="nb">export</span><span class="w"> </span><span class="nv">USERNAME</span><span class="o">=</span><span class="s2">&quot;yourUsername&quot;</span>
 <span class="nb">export</span><span class="w"> </span><span class="nv">TOKEN</span><span class="o">=</span><span class="s2">&quot;yourToken&quot;</span>
@@ -2395,7 +2370,7 @@ and source it.</p>
         <span class="n">body</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;*Original date: </span><span class="si">{</span><span class="n">date</span><span class="si">}</span><span class="s2">*</span><span class="se">\n\n</span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="c1"># don&#39;t add original author when it&#39;s you</span>
         <span class="k">if</span> <span class="n">user</span> <span class="o">!=</span> <span class="n">USERNAME</span><span class="p">:</span>
-            <span class="n">body</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;*Original author:* **</span><span class="si">{</span><span class="n">name</span><span class="si">}{</span><span class="n">mention</span><span class="si">}</span><span class="s2">**  </span><span class="se">\n</span><span class="si">{</span><span class="n">body</span><span class="si">}</span><span class="s2">&quot;</span> 
+            <span class="n">body</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;*Original author:* **</span><span class="si">{</span><span class="n">name</span><span class="si">}{</span><span class="n">mention</span><span class="si">}</span><span class="s2">**  </span><span class="se">\n</span><span class="si">{</span><span class="n">body</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Posting </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">posts</span><span class="p">)</span><span class="si">}</span><span class="s2"> to issue </span><span class="si">{</span><span class="n">issue</span><span class="o">.</span><span class="n">number</span><span class="si">}</span><span class="s2">    </span><span class="se">\r</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
         <span class="n">issue</span><span class="o">.</span><span class="n">create_comment</span><span class="p">(</span><span class="n">body</span><span class="p">)</span>
         <span class="c1"># prevent hitting rate limits!</span>
@@ -2407,9 +2382,7 @@ and source it.</p>
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">disqus_to_github</span><span class="p">()</span>
 </code></pre></div>
-<p>I wrote this for a one-time, personal use only,
-so it could easily crash when you try it!
-Just use your Python skills and adapt it <img alt="😉" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1f609.svg" title=":wink:" /></p>
+<p>I wrote this for a one-time, personal use only, so it could easily crash when you try it! Just use your Python skills and adapt it <img alt="😉" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1f609.svg" title=":wink:" /></p>
 
   <!-- Giscus -->
   <!-- https://squidfunk.github.io/mkdocs-material/setup/adding-a-comment-system/#giscus-integration -->

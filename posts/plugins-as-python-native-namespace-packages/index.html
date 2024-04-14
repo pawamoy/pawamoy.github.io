@@ -1998,14 +1998,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../showcase/failprint/" class="md-nav__link">
+      <a href="../../showcase/duty/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     
   
     <span class="md-typeset">
-      failprint
+      duty
     </span>
   
 
@@ -2338,18 +2338,11 @@
     by Timothée Mazzucotelli
   </p>
   
-  <p>A user of <a href="https://github.com/pawamoy/mkdocstrings"><code>mkdocstrings</code></a>
-wrote a Crystal handler for their own use-case.
-They asked on <a href="https://gitter.im/mkdocstrings/community">the Gitter channel</a>
-if we could allow to load external handlers, so they don't have to fork
-the project and install the fork, but rather just install their
-lightweight package containing just the handler.</p>
-<p>We both saw Python namespace packages as good candidates,
-so I experimented a bit, and here are my conclusions.</p>
+  <p>A user of <a href="https://github.com/pawamoy/mkdocstrings"><code>mkdocstrings</code></a> wrote a Crystal handler for their own use-case. They asked on <a href="https://gitter.im/mkdocstrings/community">the Gitter channel</a> if we could allow to load external handlers, so they don't have to fork the project and install the fork, but rather just install their lightweight package containing just the handler.</p>
+<p>We both saw Python namespace packages as good candidates, so I experimented a bit, and here are my conclusions.</p>
 <!--more-->
 
-<p>Based on the documentation, there are
-<a href="https://packaging.python.org/guides/packaging-namespace-packages/#creating-a-namespace-package">3 ways of creating a Python namespace package</a>:</p>
+<p>Based on the documentation, there are <a href="https://packaging.python.org/guides/packaging-namespace-packages/#creating-a-namespace-package">3 ways of creating a Python namespace package</a>:</p>
 <ul>
 <li>native namespace packages</li>
 <li>pkgutil-style namespace packages</li>
@@ -2357,20 +2350,16 @@ so I experimented a bit, and here are my conclusions.</p>
 </ul>
 <p>I only considered the first two options (I'll let you read the docs to see why).</p>
 <h2 id="native-namespace-packages">Native namespace packages<a class="headerlink" href="#native-namespace-packages" title="Permanent link">¤</a></h2>
-<p>Native namespace packages are Python 3 compatible only.
-Good, I don't support Python 2 in my projects.</p>
-<p>To write a native namespace package, you just have to do one thing:
-drop the <code>__init__.py</code>!</p>
+<p>Native namespace packages are Python 3 compatible only. Good, I don't support Python 2 in my projects.</p>
+<p>To write a native namespace package, you just have to do one thing: drop the <code>__init__.py</code>!</p>
 <div class="highlight"><pre><span></span><code>my_namespace_package/
     my_module_a.py
 
 my_namespace_package/
     my_module_b.py
 </code></pre></div>
-<p>Install both packages and you will be able to import
-both <code>my_module_a</code> and <code>my_module_b</code> from <code>my_namespace_package</code>.</p>
-<p>If you want to provide deeper modules, you will have to drop
-all <code>__init__.py</code> files along the way:</p>
+<p>Install both packages and you will be able to import both <code>my_module_a</code> and <code>my_module_b</code> from <code>my_namespace_package</code>.</p>
+<p>If you want to provide deeper modules, you will have to drop all <code>__init__.py</code> files along the way:</p>
 <div class="highlight"><pre><span></span><code># main package
 package/
     level1/
@@ -2387,13 +2376,10 @@ package/
         level2/
             plugin_module.py
 </code></pre></div>
-<p>Notice how we don't have any <code>__init__.py</code> in <code>package</code>, <code>level1</code> and <code>level2</code>.
-This is required for the plugin package to add modules there.</p>
-<p>In this example, <code>subpackage</code> has an <code>__init__.py</code> file,
-it means that our plugin package could not add a module into it.</p>
+<p>Notice how we don't have any <code>__init__.py</code> in <code>package</code>, <code>level1</code> and <code>level2</code>. This is required for the plugin package to add modules there.</p>
+<p>In this example, <code>subpackage</code> has an <code>__init__.py</code> file, it means that our plugin package could not add a module into it.</p>
 <h2 id="pkgutil-style-namespace-packages"><code>pkgutil</code>-style namespace packages<a class="headerlink" href="#pkgutil-style-namespace-packages" title="Permanent link">¤</a></h2>
-<p>The <code>pkgutil</code> way is compatible with Python 2 and Python 3.
-It allows to keep <code>__init__.py</code> modules.</p>
+<p>The <code>pkgutil</code> way is compatible with Python 2 and Python 3. It allows to keep <code>__init__.py</code> modules.</p>
 <div class="highlight"><pre><span></span><code># main package
 package/
     __init__.py
@@ -2414,25 +2400,16 @@ package/
 </code></pre></div>
 <p>Each <code>__init__.py</code> must contain this code:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">pkgutil</span> <span class="kn">import</span> <span class="n">extend_path</span>
+
 <span class="n">__path__</span> <span class="o">=</span> <span class="n">extend_path</span><span class="p">(</span><span class="n">__path__</span><span class="p">,</span> <span class="vm">__name__</span><span class="p">)</span>
 </code></pre></div>
-<p>Basically, it's a bit like the native way,
-except that you keep your <code>__init__.py</code> modules,
-<strong>but they must be identical across all packages!</strong></p>
-<p>The <code>__init__.py</code> modules of the plugin will overwrite the
-<code>__init__.py</code> modules of the main package. If they are not
-identical, things will break (mostly imports).</p>
-<p>So, with the native way, you cannot write code in <code>__init__.py</code>
-because those modules must not exist,
-and with the <code>pkgutil</code> way you must not write code in <code>__init__.py</code>
-because you don't want to have users duplicate it in their own.</p>
+<p>Basically, it's a bit like the native way, except that you keep your <code>__init__.py</code> modules, <strong>but they must be identical across all packages!</strong></p>
+<p>The <code>__init__.py</code> modules of the plugin will overwrite the <code>__init__.py</code> modules of the main package. If they are not identical, things will break (mostly imports).</p>
+<p>So, with the native way, you cannot write code in <code>__init__.py</code> because those modules must not exist, and with the <code>pkgutil</code> way you must not write code in <code>__init__.py</code> because you don't want to have users duplicate it in their own.</p>
 <p>At this state, I prefer the native way, as it's less files to write.</p>
 <h2 id="what-i-would-have-liked">What I would have liked<a class="headerlink" href="#what-i-would-have-liked" title="Permanent link">¤</a></h2>
 <p>Maybe namespace packages are not the best option for plugins.</p>
-<p>But I would have loved being able to write my main package normally,
-with <code>__init__.py</code>, and as much code in those as I want,
-and write the plugin package <em>without any</em> <code>__init__.py</code>, so as to
-"plug" (i.e. merge) additional modules into the main package:</p>
+<p>But I would have loved being able to write my main package normally, with <code>__init__.py</code>, and as much code in those as I want, and write the plugin package <em>without any</em> <code>__init__.py</code>, so as to "plug" (i.e. merge) additional modules into the main package:</p>
 <div class="highlight"><pre><span></span><code># main package
 package/
     __init__.py
@@ -2448,9 +2425,7 @@ package/
         level2/
             plugin_module.py
 </code></pre></div>
-<p>The order of installation would not matter of course,
-as merging the main package into the plugin one, or the opposite,
-would result in the same final package on the disk:</p>
+<p>The order of installation would not matter of course, as merging the main package into the plugin one, or the opposite, would result in the same final package on the disk:</p>
 <div class="highlight"><pre><span></span><code># main package
 package/
     __init__.py
@@ -2461,18 +2436,10 @@ package/
             builtin_module.py
             plugin_module.py
 </code></pre></div>
-<p>The main package author doesn't even have to think about plugins
-and prepare the field by removing <code>__init__.py</code> where it is needed.
-Instead, they just write their package normally.</p>
-<p>Then users can write a namespace package, mimicking the main package
-structure, but without <code>__init__.py</code> files, and BOOM, they
-successfully wrote a plugin!</p>
-<p>Native namespace packages look like they are trying to be implicit,
-but in my taste they are still not implicit enough.</p>
-<p>Also, merging namespace packages into packages of the same name
-would allow easy patching of projects! Something not quite working
-like you want to? Quickly create a namespace package with just the
-patched module, and list it as a dependency.</p>
+<p>The main package author doesn't even have to think about plugins and prepare the field by removing <code>__init__.py</code> where it is needed. Instead, they just write their package normally.</p>
+<p>Then users can write a namespace package, mimicking the main package structure, but without <code>__init__.py</code> files, and BOOM, they successfully wrote a plugin!</p>
+<p>Native namespace packages look like they are trying to be implicit, but in my taste they are still not implicit enough.</p>
+<p>Also, merging namespace packages into packages of the same name would allow easy patching of projects! Something not quite working like you want to? Quickly create a namespace package with just the patched module, and list it as a dependency.</p>
 <p>What do you use to allow plugins in your Python projects <img alt="🙂" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1f642.svg" title=":slightly_smiling_face:" />?</p>
 
   <!-- Giscus -->

@@ -2024,14 +2024,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../showcase/failprint/" class="md-nav__link">
+      <a href="../../showcase/duty/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     
   
     <span class="md-typeset">
-      failprint
+      duty
     </span>
   
 
@@ -2390,19 +2390,15 @@
     by Timothée Mazzucotelli
   </p>
   
-  <p>In my Python projects,
-I use a combination of <a href="https://github.com/pawamoy/duty">Duty</a>
-(my task runner) and <code>make</code>.</p>
-<p>My <code>Makefile</code> declares the same tasks as the ones written in <code>duties.py</code>,
-but in a generic manner:</p>
+  <p>In my Python projects, I use a combination of <a href="https://github.com/pawamoy/duty">Duty</a> (my task runner) and <code>make</code>.</p>
+<p>My <code>Makefile</code> declares the same tasks as the ones written in <code>duties.py</code>, but in a generic manner:</p>
 <div class="highlight"><pre><span></span><code><span class="nv">TASKS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>check<span class="w"> </span><span class="nb">test</span><span class="w"> </span>release
 
 <span class="nf">.PHONY</span><span class="o">:</span><span class="w"> </span><span class="k">$(</span><span class="nv">TASKS</span><span class="k">)</span>
 <span class="nf">$(TASKS)</span><span class="o">:</span>
 <span class="w">    </span>@poetry<span class="w"> </span>run<span class="w"> </span>duty<span class="w"> </span><span class="nv">$@</span>
 </code></pre></div>
-<p>So, instead of running <code>poetry run duty check</code>, I can run <code>make check</code>.
-Convenient, right?</p>
+<p>So, instead of running <code>poetry run duty check</code>, I can run <code>make check</code>. Convenient, right?</p>
 <p>Except that some duties (tasks) accept arguments. For example:</p>
 <div class="highlight"><pre><span></span><code>poetry<span class="w"> </span>run<span class="w"> </span>duty<span class="w"> </span>release<span class="w"> </span><span class="nv">version</span><span class="o">=</span><span class="m">0</span>.1.2
 </code></pre></div>
@@ -2423,21 +2419,15 @@ Convenient, right?</p>
 <span class="nf">$(TASKS)</span><span class="o">:</span>
 <span class="w">    </span>@poetry<span class="w"> </span>run<span class="w"> </span>duty<span class="w"> </span><span class="nv">$@</span>
 </code></pre></div>
-<p>Meh. My Makefile rules are not generic anymore.
-Besides, what if the argument is optional?
-If I don't pass it when running <code>make</code>,
-the command will end up being <code>poetry run duty release version=</code>,
-which is just wrong.</p>
-<p>Instead, I'd like to find a generic way to insert the arguments
-in the command just as they are typed on the command line:</p>
+<p>Meh. My Makefile rules are not generic anymore. Besides, what if the argument is optional? If I don't pass it when running <code>make</code>, the command will end up being <code>poetry run duty release version=</code>, which is just wrong.</p>
+<p>Instead, I'd like to find a generic way to insert the arguments in the command just as they are typed on the command line:</p>
 <div class="highlight"><pre><span></span><code>make<span class="w"> </span>release
 <span class="c1"># =&gt; poetry run duty release</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>make<span class="w"> </span>release<span class="w"> </span><span class="nv">version</span><span class="o">=</span><span class="m">0</span>.1.2
 <span class="c1"># =&gt; poetry run duty release version=0.1.2</span>
 </code></pre></div>
-<p>Well, after a few hours playing with Makefiles features,
-I got a nice solution!</p>
+<p>Well, after a few hours playing with Makefiles features, I got a nice solution!</p>
 <h2 id="sorcery">Sorcery<a class="headerlink" href="#sorcery" title="Permanent link">¤</a></h2>
 <p>Let me sprinkle this dark magic right here:</p>
 <div class="highlight"><pre><span></span><code><span class="nv">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">$(</span>foreach<span class="w"> </span>a,<span class="k">$($(</span>subst<span class="w"> </span>-,_,<span class="nv">$1</span><span class="k">)</span>_args<span class="k">)</span>,<span class="k">$(if</span><span class="w"> </span><span class="k">$(</span>value<span class="w"> </span><span class="nv">$a</span><span class="k">)</span>,<span class="nv">$a</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nv">$a</span><span class="k">)</span><span class="s2">&quot;</span><span class="k">))</span>
@@ -2461,8 +2451,7 @@ I got a nice solution!</p>
 <h2 id="recipe">Recipe<a class="headerlink" href="#recipe" title="Permanent link">¤</a></h2>
 <div class="highlight"><pre><span></span><code><span class="nv">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">$(</span>foreach<span class="w"> </span>a,<span class="k">$($(</span>subst<span class="w"> </span>-,_,<span class="nv">$1</span><span class="k">)</span>_args<span class="k">)</span>,<span class="k">$(if</span><span class="w"> </span><span class="k">$(</span>value<span class="w"> </span><span class="nv">$a</span><span class="k">)</span>,<span class="nv">$a</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nv">$a</span><span class="k">)</span><span class="s2">&quot;</span><span class="k">))</span>
 </code></pre></div>
-<p>The heart of the magic. We declare a function called <code>args</code>.
-We later call it with <code>$(call args,$@)</code>.</p>
+<p>The heart of the magic. We declare a function called <code>args</code>. We later call it with <code>$(call args,$@)</code>.</p>
 <p>It could be described like this:</p>
 <div class="highlight"><pre><span></span><code>args reference := first parameter
 replace - by _ in args reference
@@ -2479,8 +2468,7 @@ for each argument name
 <span class="nv">release_args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>version
 <span class="nv">test_args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>match
 </code></pre></div>
-<p>When running <code>make docs-serve host=0.0.0.0</code>,
-the <code>args</code> function will do the following:</p>
+<p>When running <code>make docs-serve host=0.0.0.0</code>, the <code>args</code> function will do the following:</p>
 <div class="highlight"><pre><span></span><code>args_ref := &quot;docs-serve&quot;
 args_ref becomes &quot;docs_serve&quot; (replace)
 args_ref becomes &quot;docs_serve_args&quot;
@@ -2493,20 +2481,15 @@ arg &quot;port&quot;:
   variable &quot;port&quot; is empty
   print nothing
 </code></pre></div>
-<p>So when calling <code>$(call args,$@)</code>, <code>$@</code> is replaced
-by the rule name, which is <code>docs-serve</code> in this example,
-and <code>host=0.0.0.0</code> is added to the command.</p>
+<p>So when calling <code>$(call args,$@)</code>, <code>$@</code> is replaced by the rule name, which is <code>docs-serve</code> in this example, and <code>host=0.0.0.0</code> is added to the command.</p>
 <p>We successfully re-built the arguments passed on the command line!</p>
 <h2 id="side-effects">Side-effects<a class="headerlink" href="#side-effects" title="Permanent link">¤</a></h2>
-<p>Arguments can be passed to <code>make</code> in no particular order.
-The following commands are all equivalent:</p>
+<p>Arguments can be passed to <code>make</code> in no particular order. The following commands are all equivalent:</p>
 <div class="highlight"><pre><span></span><code>make<span class="w"> </span>hello<span class="w"> </span><span class="nv">world</span><span class="o">=</span>earth<span class="w"> </span>foo<span class="w"> </span><span class="nv">bar</span><span class="o">=</span>baz
 make<span class="w"> </span>hello<span class="w"> </span>foo<span class="w"> </span><span class="nv">bar</span><span class="o">=</span>baz<span class="w"> </span><span class="nv">world</span><span class="o">=</span>earth
 make<span class="w"> </span><span class="nv">bar</span><span class="o">=</span>baz<span class="w"> </span>hello<span class="w"> </span>foo<span class="w"> </span><span class="nv">world</span><span class="o">=</span>earth
 </code></pre></div>
-<p>It can be seen as an advantage but as an inconvenient as well,
-because you cannot have arguments with the same name for different commands.
-Or at least, you could not use these commands and arguments at the same time.</p>
+<p>It can be seen as an advantage but as an inconvenient as well, because you cannot have arguments with the same name for different commands. Or at least, you could not use these commands and arguments at the same time.</p>
 <div class="highlight"><pre><span></span><code><span class="nv">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">$(</span>foreach<span class="w"> </span>a,<span class="k">$($(</span>subst<span class="w"> </span>-,_,<span class="nv">$1</span><span class="k">)</span>_args<span class="k">)</span>,<span class="k">$(if</span><span class="w"> </span><span class="k">$(</span>value<span class="w"> </span><span class="nv">$a</span><span class="k">)</span>,<span class="nv">$a</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nv">$a</span><span class="k">)</span><span class="s2">&quot;</span><span class="k">))</span>
 
 <span class="nv">rule1_args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>version

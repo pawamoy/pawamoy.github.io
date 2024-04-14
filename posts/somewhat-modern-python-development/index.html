@@ -2237,14 +2237,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../showcase/failprint/" class="md-nav__link">
+      <a href="../../showcase/duty/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     
   
     <span class="md-typeset">
-      failprint
+      duty
     </span>
   
 
@@ -2816,51 +2816,15 @@
     by Timothée Mazzucotelli
   </p>
   
-  <p>In this post I present my latest project template for Python projects,
-<a href="https://github.com/pawamoy/copier-pdm">copier-pdm</a>,
-based on the great <a href="https://github.com/copier-org/copier">Copier</a>.</p>
-<p>This parodic title was inspired by the
-<a href="https://cjolowicz.github.io/posts/hypermodern-python-01-setup/">"Hypermodern Python"</a>
-article series by <a href="https://github.com/cjolowicz">Claudio Jolowicz</a>.
-Indeed, my Python development setup has parts that could considered
-modern by some, and old-school by others, so I found it funny
-to call it "more-or-less modern".</p>
+  <p>In this post I present my latest project template for Python projects, <a href="https://github.com/pawamoy/copier-pdm">copier-pdm</a>, based on the great <a href="https://github.com/copier-org/copier">Copier</a>.</p>
+<p>This parodic title was inspired by the <a href="https://cjolowicz.github.io/posts/hypermodern-python-01-setup/">"Hypermodern Python"</a> article series by <a href="https://github.com/cjolowicz">Claudio Jolowicz</a>. Indeed, my Python development setup has parts that could considered modern by some, and old-school by others, so I found it funny to call it "more-or-less modern".</p>
 <!--more-->
 
 <hr />
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">¤</a></h2>
-<p>As Claudio points it out in his article series,
-the Python landscape has changed considerably this
-last decade, and even more so these last few years.
-Python is now one of the most used languages in the world,
-and we see a plethora of new projects coming up to life.
-Code formatters, linters, test runners, task runners,
-documentation generators, project managers, wheel builders
-and installers, dependency resolvers, CLI/TUI/API frameworks,
-static/runtime type checkers. It can be hard
-for new-comers to choose their tools and libraries,
-or even learn about their existence. Seasoned developers
-might see a lot of these new projects as new "toys"
-that will just be unmaintained one year from now.
-Sometimes, they are right. But I think it's important
-to keep an open-mind and try new fancy projects,
-even if they're not widely accepted/used by
-the community of Python developers (experts and beginners),
-or even create your own tools and libraries. Sometimes, it pays.
-Sometimes, you fill a niche and get progressive adoption.</p>
-<p>That's what I've been doing for a few years now.
-I'm far from being the most experienced Python developer,
-but I've grown to know the ecosytem quite well.
-I have my opinions, which not everybody will share.
-And I know (almost) exactly what I need as a Python developer.
-This is why I have created my own template for Python projects.
-It is very opinionated, and makes use of some of my own tools
-which are probably completely unknown to the community.</p>
-<p>This post presents all the tools
-and libraries used in my template, categorized and ordered
-from general aspects of project templating and Python projects,
-to very specific things like "what do I want to see in the
-standard output of my task runner":</p>
+<p>As Claudio points it out in his article series, the Python landscape has changed considerably this last decade, and even more so these last few years. Python is now one of the most used languages in the world, and we see a plethora of new projects coming up to life. Code formatters, linters, test runners, task runners, documentation generators, project managers, wheel builders and installers, dependency resolvers, CLI/TUI/API frameworks, static/runtime type checkers. It can be hard for new-comers to choose their tools and libraries, or even learn about their existence. Seasoned developers might see a lot of these new projects as new "toys" that will just be unmaintained one year from now. Sometimes, they are right. But I think it's important to keep an open-mind and try new fancy projects, even if they're not widely accepted/used by the community of Python developers (experts and beginners), or even create your own tools and libraries. Sometimes, it pays. Sometimes, you fill a niche and get progressive adoption.</p>
+<p>That's what I've been doing for a few years now. I'm far from being the most experienced Python developer, but I've grown to know the ecosytem quite well. I have my opinions, which not everybody will share. And I know (almost) exactly what I need as a Python developer. This is why I have created my own template for Python projects. It is very opinionated, and makes use of some of my own tools which are probably completely unknown to the community.</p>
+<p>This post presents all the tools and libraries used in my template, categorized and ordered from general aspects of project templating and Python projects, to very specific things like "what do I want to see in the standard output of my task runner":</p>
 <ul>
 <li><a href="#project-templating-copier">Project templating</a>: creating a template, generating projects, updating generated projects.</li>
 <li><a href="#project-management-pdm">Project management</a>: metadata, dependencies, building and publishing wheels.</li>
@@ -2871,16 +2835,7 @@ standard output of my task runner":</p>
 </ul>
 <h2 id="project-templating-copier">Project templating: Copier<a class="headerlink" href="#project-templating-copier" title="Permanent link">¤</a></h2>
 <p><img alt="copier logo" src="../../assets/copier-logo.png" /></p>
-<p>Copier is a project templating tool.
-It is able to generate a project from a given template,
-prompting the user for some information, and injecting
-this information into the generated files.
-A template is basically a git repository with
-templated files and folders,
-as well as a configuration file for Copier.
-Files ending with a <code>.jinja</code> extension will be rendered
-using <a href="https://palletsprojects.com/p/jinja/">Jinja</a>.
-The Jinja context will be populated with the user's answers.</p>
+<p>Copier is a project templating tool. It is able to generate a project from a given template, prompting the user for some information, and injecting this information into the generated files. A template is basically a git repository with templated files and folders, as well as a configuration file for Copier. Files ending with a <code>.jinja</code> extension will be rendered using <a href="https://palletsprojects.com/p/jinja/">Jinja</a>. The Jinja context will be populated with the user's answers.</p>
 <div class="highlight"><pre><span></span><code><span class="gp">% </span>copier<span class="w"> </span>gh:pawamoy/copier-pdm<span class="w"> </span>test-project
 <span class="go">🎤 Your project name</span>
 <span class="go">   Test Project</span>
@@ -2894,57 +2849,21 @@ The Jinja context will be populated with the user's answers.</p>
 <span class="go">   pawamoy</span>
 <span class="go">...</span>
 </code></pre></div>
-<p>A template is very helpful when you create lots of new project:
-you avoid writing boilerplate code again and again.</p>
-<p>Now, Copier does not just allow to generate projects.
-<strong>It is also able to <em>update</em> generated projects
-when newer versions of templates are released.</strong></p>
+<p>A template is very helpful when you create lots of new project: you avoid writing boilerplate code again and again.</p>
+<p>Now, Copier does not just allow to generate projects. <strong>It is also able to <em>update</em> generated projects when newer versions of templates are released.</strong></p>
 <details class="info">
 <summary>Story time: from Cookiecutter to Copier</summary>
-<p>Most of Python developers probably know about <a href="https://github.com/cookiecutter/cookiecutter">CookieCutter</a>.
-It's a project templating tool that allows to write language-and-technology-agnostic templates.
-Templates are basically a folder, with files and other folders in it,
-whose names and contents can be "templated", i.e. use variables, conditions and loops.
-The templating language used is <a href="https://jinja2docs.readthedocs.io/en/stable/">Jinja2</a>,
-another well known project.</p>
-<p>Despite its popularity, CookieCutter lacks a crucial feature: upstream-to-downstream updates.
-Let say you create your perfect Python project template with CookieCutter.
-You use it to generate 5 or 6 projects with it. With time, these 5 or 6 projects will start
-to diverge, and there's no integrated way into CookieCutter to prevent it.
-You will apply clever things from project N back into the template itself,
-but there's no way to apply these same modifications onto the other projects.
-It effectively makes your template "single-use" or "one-time" only,
-because once a project is generated, there's no way to keep it in sync with the template
-evolutions themselves. And this is something users are trying to achieve,
-see <a href="https://github.com/cookiecutter/cookiecutter/issues/784">cookiecutter#784</a> and
-<a href="https://github.com/cookiecutter/cookiecutter/issues/1004">cookiecutter#1004</a>.</p>
-<p>In fact, there is a way, and it's called <a href="https://github.com/cruft/cruft">Cruft</a>
-(other alternatives exist but I feel like Cruft is the most popular).
-But Cruft is a wrapper around CookieCutter so it can only do so much to improve it.
-It does not have access to CookieCutter's internals, and therefore cannot provide
-a completely integrated, native project-updating experience (at least in my opinion,
-I will let you try it out if you are using CookieCutter, and let me know if I'm wrong <img alt="😄" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1f604.svg" title=":smile:" />).</p>
-<p>This is where <a href="https://github.com/copier-org/copier">Copier</a> shines:
-that feature is built-in, by design. One of Copier's main goals
-is to make it easy to update your already-generated projects
-when your template evolves. It means that, even when you manage dozens of projects
-that were generated using a single template, you can easily, almost automatically
-keep them in sync, while still allowing small differences here and there.
-I won't go into the details of how the update mechanism works (git operations, basically),
-but you can see a <a href="https://copier.readthedocs.io/en/latest/updating/#how-the-update-works">diagram and explanation here</a>. </p>
+<p>Most of Python developers probably know about <a href="https://github.com/cookiecutter/cookiecutter">CookieCutter</a>. It's a project templating tool that allows to write language-and-technology-agnostic templates. Templates are basically a folder, with files and other folders in it, whose names and contents can be "templated", i.e. use variables, conditions and loops. The templating language used is <a href="https://jinja2docs.readthedocs.io/en/stable/">Jinja2</a>, another well known project.</p>
+<p>Despite its popularity, CookieCutter lacks a crucial feature: upstream-to-downstream updates. Let say you create your perfect Python project template with CookieCutter. You use it to generate 5 or 6 projects with it. With time, these 5 or 6 projects will start to diverge, and there's no integrated way into CookieCutter to prevent it. You will apply clever things from project N back into the template itself, but there's no way to apply these same modifications onto the other projects. It effectively makes your template "single-use" or "one-time" only, because once a project is generated, there's no way to keep it in sync with the template evolutions themselves. And this is something users are trying to achieve, see <a href="https://github.com/cookiecutter/cookiecutter/issues/784">cookiecutter#784</a> and <a href="https://github.com/cookiecutter/cookiecutter/issues/1004">cookiecutter#1004</a>.</p>
+<p>In fact, there is a way, and it's called <a href="https://github.com/cruft/cruft">Cruft</a> (other alternatives exist but I feel like Cruft is the most popular). But Cruft is a wrapper around CookieCutter so it can only do so much to improve it. It does not have access to CookieCutter's internals, and therefore cannot provide a completely integrated, native project-updating experience (at least in my opinion, I will let you try it out if you are using CookieCutter, and let me know if I'm wrong <img alt="😄" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1f604.svg" title=":smile:" />).</p>
+<p>This is where <a href="https://github.com/copier-org/copier">Copier</a> shines: that feature is built-in, by design. One of Copier's main goals is to make it easy to update your already-generated projects when your template evolves. It means that, even when you manage dozens of projects that were generated using a single template, you can easily, almost automatically keep them in sync, while still allowing small differences here and there. I won't go into the details of how the update mechanism works (git operations, basically), but you can see a <a href="https://copier.readthedocs.io/en/latest/updating/#how-the-update-works">diagram and explanation here</a>.</p>
 <div class="admonition quote">
 <p class="admonition-title">To quote Copier's docs:</p>
-<p><em>Although Copier was born as a code scaffolding tool,
-it is today a code lifecycle management tool. This makes it somehow unique.</em></p>
+<p><em>Although Copier was born as a code scaffolding tool, it is today a code lifecycle management tool. This makes it somehow unique.</em></p>
 </div>
 </details>
 <h3 id="creating-a-template">Creating a template<a class="headerlink" href="#creating-a-template" title="Permanent link">¤</a></h3>
-<p>To create a template using Copier, you have to know
-<a href="https://jinja.palletsprojects.com/en/3.1.x/api/#basics">the basics of Jinja</a>.
-Then you can simply read the <a href="https://copier.readthedocs.io/en/latest/#quick-start">Quickstart section</a> of Copier's docs.
-This will give you an idea of what is possible. If you already know and use CookieCutter, you'll see that it's similar:
-you can put the templated stuff into a subdirectory of your git repository.
-One small difference is that the context is available globally rather than under the <code>cookiecutter</code> key.</p>
+<p>To create a template using Copier, you have to know <a href="https://jinja.palletsprojects.com/en/3.1.x/api/#basics">the basics of Jinja</a>. Then you can simply read the <a href="https://copier.readthedocs.io/en/latest/#quick-start">Quickstart section</a> of Copier's docs. This will give you an idea of what is possible. If you already know and use CookieCutter, you'll see that it's similar: you can put the templated stuff into a subdirectory of your git repository. One small difference is that the context is available globally rather than under the <code>cookiecutter</code> key.</p>
 <p>A minimal Copier template could look like this:</p>
 <div class="highlight"><pre><span></span><code>📁<span class="w"> </span>template/
 ├──<span class="w"> </span>📁<span class="w"> </span>project/
@@ -2959,16 +2878,12 @@ One small difference is that the context is available globally rather than under
 <div class="highlight"><span class="filename">template/project/README.md.jinja</span><pre><span></span><code><span class="gh"># {{ project_name }}</span>
 </code></pre></div>
 <h3 id="generating-a-project">Generating a project<a class="headerlink" href="#generating-a-project" title="Permanent link">¤</a></h3>
-<p>To get a feel of what it's like to generate a project from a real-life template,
-you can try to generate a project using my <code>copier-pdm</code> template.
-Just run this in a terminal:</p>
+<p>To get a feel of what it's like to generate a project from a real-life template, you can try to generate a project using my <code>copier-pdm</code> template. Just run this in a terminal:</p>
 <div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>pipx
 pipx<span class="w"> </span>run<span class="w"> </span>copier<span class="w"> </span>gh:pawamoy/copier-pdm<span class="w"> </span>newproject
 </code></pre></div>
 <p><img alt="copier generate " src="../../assets/copier-pdm-generate.svg" /></p>
-<p>An important thing to know is that you should immediately stage and commit
-every generated file and folder, even if you want to delete some of them,
-because this will help later during updates.</p>
+<p>An important thing to know is that you should immediately stage and commit every generated file and folder, even if you want to delete some of them, because this will help later during updates.</p>
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>newproject
 git<span class="w"> </span>init
 git<span class="w"> </span>add<span class="w"> </span>-A
@@ -2976,90 +2891,33 @@ git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </sp
 <span class="c1"># now modify and commit as much as you want!</span>
 </code></pre></div>
 <h3 id="updating-generated-projects">Updating generated projects<a class="headerlink" href="#updating-generated-projects" title="Permanent link">¤</a></h3>
-<p>Let say you just changed something in your template.
-All you need to be able to update your projects generated from this template,
-is to push a new tag, then go into your generated project(s) and run <code>copier -f update</code>.
-Copier will automatically apply the modifications to your project,
-while keeping the project's own changes intact.
-You can review the changes in your favorite tool (VSCode "Source Control" tab, <code>git add -p</code>, etc.),
-stage and commit. That's it!</p>
-<p>You can see all my "template upgrade" commits on GitHub with this search:
-<a href="https://github.com/search?q=chore%3A+Template+upgrade+user%3Apawamoy&amp;type=commits">"chore: Template upgrade user:pawamoy"</a>.</p>
-<p>For more information on the update process,
-see <a href="https://copier.readthedocs.io/en/stable/updating/#how-the-update-works">how the update works</a>.</p>
+<p>Let say you just changed something in your template. All you need to be able to update your projects generated from this template, is to push a new tag, then go into your generated project(s) and run <code>copier -f update</code>. Copier will automatically apply the modifications to your project, while keeping the project's own changes intact. You can review the changes in your favorite tool (VSCode "Source Control" tab, <code>git add -p</code>, etc.), stage and commit. That's it!</p>
+<p>You can see all my "template upgrade" commits on GitHub with this search: <a href="https://github.com/search?q=chore%3A+Template+upgrade+user%3Apawamoy&amp;type=commits">"chore: Template upgrade user:pawamoy"</a>.</p>
+<p>For more information on the update process, see <a href="https://copier.readthedocs.io/en/stable/updating/#how-the-update-works">how the update works</a>.</p>
 <h2 id="project-management-pdm">Project management: PDM<a class="headerlink" href="#project-management-pdm" title="Permanent link">¤</a></h2>
 <p><img src="../../assets/pdm-logo.png" style="max-width: 300px;" /></p>
-<p>Now that we have templates and can generate projects, we must choose a project management tool.
-Traditional setups include <code>setuptools</code>' <code>setup.py</code> file, with some <code>MANIFEST.in</code> and <code>requirements.txt</code> files.
-We can spice things up with <a href="https://github.com/jazzband/pip-tools/">pip-tools</a> or other alternatives.
-We can use modern, minimalist tools like <a href="https://github.com/pypa/flit">Flit</a>.
-Or we can use full-fledge, all-in-one managers like <a href="https://github.com/pypa/hatch">Hatch</a>,
-<a href="https://python-poetry.org/">Poetry</a>, or <a href="https://pdm.fming.dev/">PDM</a>.</p>
+<p>Now that we have templates and can generate projects, we must choose a project management tool. Traditional setups include <code>setuptools</code>' <code>setup.py</code> file, with some <code>MANIFEST.in</code> and <code>requirements.txt</code> files. We can spice things up with <a href="https://github.com/jazzband/pip-tools/">pip-tools</a> or other alternatives. We can use modern, minimalist tools like <a href="https://github.com/pypa/flit">Flit</a>. Or we can use full-fledge, all-in-one managers like <a href="https://github.com/pypa/hatch">Hatch</a>, <a href="https://python-poetry.org/">Poetry</a>, or <a href="https://pdm.fming.dev/">PDM</a>.</p>
 <details class="info">
 <summary>Story time: from Poetry to PDM</summary>
-<p>When the community came to learn about Poetry, it was a revolution: finally a tool
-that removed all the boilerplate and complexity around packaging and publishing Python projects.
-Everything was declared in <code>pyproject.toml</code>, and nothing else.
-You could manage your dependencies, virtualenvs being handled for you (great for beginners),
-you could build wheels and source distributions and publish them to PyPI with simple commands
-like <code>poetry build</code> and <code>poetry publish</code>. Poetry seriously improved the UX around project management
-and packaging in the Python ecosystem. I'll forever be thankful for that.</p>
-<p>But Poetry also took some annoying design decisions. They looked good at first,
-but were a huge hindrance for projects, depending on their environment.
-To make it short, I'm referring to this,
-<a href="https://github.com/python-poetry/poetry/issues/1632">"Allow user to override PyPI URL without modifying pyproject.toml"</a>,
-and other things like the inconsistencies in how to configure things / how the configuration is used,
-and the lack of option to disable SSL verification.
-I was maybe a bit thown-off by the complete absence of answer to my request for guidance in the PR I sent
-(working change, just hard to test),
-but I really can't blame them for this because they were literally assaulted with issues and PRs.</p>
-<p>Then I learned about PDM. It had all the good things Poetry had, and it removed
-the previously mentioned pain points, namely: it was able to read <code>pip</code>'s configuration.
-It made using private indexes <em>so easy</em>: setup <code>pip</code>'s index-url and trusted-host and you're done.
-Your own configuration does not contaminate other users through <code>pyproject.toml</code>
-(note: PDM 2.0 doesn't read <code>pip</code>'s configuration anymore, but you can still configure
-your index outside of <code>pyproject.toml</code>).</p>
-<p>Even more interesting, it offered support for the (draft) <a href="https://peps.python.org/pep-0582/">PEP 582</a>.
-Since then, it gained several other outstanding features, like a <a href="https://pnpm.io/">pnpm</a>-like cache,
-a powerful plugin system, development dependencies groups, etc.
-<a href="https://github.com/noirbizarre">@noirbizarre</a> posted a
-<a href="https://github.com/pdm-project/pdm/discussions/1162#discussioncomment-3041456">very nice comment</a>
-about PDM, summarizing all these wonderful features.
-<a href="https://github.com/frostming">@frostming</a> is doing a fantastic job at maintaining PDM.</p>
+<p>When the community came to learn about Poetry, it was a revolution: finally a tool that removed all the boilerplate and complexity around packaging and publishing Python projects. Everything was declared in <code>pyproject.toml</code>, and nothing else. You could manage your dependencies, virtualenvs being handled for you (great for beginners), you could build wheels and source distributions and publish them to PyPI with simple commands like <code>poetry build</code> and <code>poetry publish</code>. Poetry seriously improved the UX around project management and packaging in the Python ecosystem. I'll forever be thankful for that.</p>
+<p>But Poetry also took some annoying design decisions. They looked good at first, but were a huge hindrance for projects, depending on their environment. To make it short, I'm referring to this, <a href="https://github.com/python-poetry/poetry/issues/1632">"Allow user to override PyPI URL without modifying pyproject.toml"</a>, and other things like the inconsistencies in how to configure things / how the configuration is used, and the lack of option to disable SSL verification. I was maybe a bit thown-off by the complete absence of answer to my request for guidance in the PR I sent (working change, just hard to test), but I really can't blame them for this because they were literally assaulted with issues and PRs.</p>
+<p>Then I learned about PDM. It had all the good things Poetry had, and it removed the previously mentioned pain points, namely: it was able to read <code>pip</code>'s configuration. It made using private indexes <em>so easy</em>: setup <code>pip</code>'s index-url and trusted-host and you're done. Your own configuration does not contaminate other users through <code>pyproject.toml</code> (note: PDM 2.0 doesn't read <code>pip</code>'s configuration anymore, but you can still configure your index outside of <code>pyproject.toml</code>).</p>
+<p>Even more interesting, it offered support for the (draft) <a href="https://peps.python.org/pep-0582/">PEP 582</a>. Since then, it gained several other outstanding features, like a <a href="https://pnpm.io/">pnpm</a>-like cache, a powerful plugin system, development dependencies groups, etc. <a href="https://github.com/noirbizarre">@noirbizarre</a> posted a <a href="https://github.com/pdm-project/pdm/discussions/1162#discussioncomment-3041456">very nice comment</a> about PDM, summarizing all these wonderful features. <a href="https://github.com/frostming">@frostming</a> is doing a fantastic job at maintaining PDM.</p>
 </details>
-<p>One of the main interests in using PDM is its ability to use
-<a href="https://peps.python.org/pep-0582/">PEP 582</a>'s <code>__pypackages__</code> installation folders.
-No more virtualenvs! Combined with its package cache, dependencies are installed
-insanely fast, and your environment won't break when you update your Python versions.
-Obviously, it also drastically reduces the disk-space taken by your dependencies.</p>
+<p>One of the main interests in using PDM is its ability to use <a href="https://peps.python.org/pep-0582/">PEP 582</a>'s <code>__pypackages__</code> installation folders. No more virtualenvs! Combined with its package cache, dependencies are installed insanely fast, and your environment won't break when you update your Python versions. Obviously, it also drastically reduces the disk-space taken by your dependencies.</p>
 <p><img alt="pdm install" src="../../assets/pdm-install.svg" /></p>
-<p>If you still want to use virtualenvs, PDM natively supports them as well,
-and can manage them for you, just like Poetry.</p>
+<p>If you still want to use virtualenvs, PDM natively supports them as well, and can manage them for you, just like Poetry.</p>
 <h3 id="installing-and-using-pdm">Installing and using PDM<a class="headerlink" href="#installing-and-using-pdm" title="Permanent link">¤</a></h3>
 <p>My recommandation to install PDM is to use <a href="https://pypa.github.io/pipx/">pipx</a>:</p>
 <div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>pipx
 pipx<span class="w"> </span>install<span class="w"> </span>pdm
 </code></pre></div>
-<p>I also like to enable PEP 582 support globally
-(<a href="https://pdm.fming.dev/latest/usage/pep582/#enable-pep-582-globally">docs</a>),
-so that <code>python</code> is always aware of packages installed in a <code>__pypackages__</code> folder:</p>
+<p>I also like to enable PEP 582 support globally (<a href="https://pdm.fming.dev/latest/usage/pep582/#enable-pep-582-globally">docs</a>), so that <code>python</code> is always aware of packages installed in a <code>__pypackages__</code> folder:</p>
 <div class="highlight"><pre><span></span><code>pdm<span class="w"> </span>--pep582<span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bash_profile
 </code></pre></div>
-<p>The commands written to <code>.bash_profile</code> simply add a subfolder of PDM to the <code>PYTHONPATH</code>
-environment variable. This folder contains a <code>sitecustomize.py</code> module,
-which Python executes upon starting. The module in turn will add subfolders
-of <code>__pypackages__</code> (when it exists) to <code>sys.path</code>. The end result is
-that you can run <code>python</code> and import dependencies normally,
-or even call modules with <code>python -m thing</code>,
-without having to use <code>pdm run python ...</code>. One limitation
-is that you still won't be able to call installed script directly,
-for example <code>pytest</code>, like in an activated virtual environment.
-For this, you'll have to run <code>pdm run pytest</code> (but remember that
-if packages support it, you can run <code>python -m pytest</code> instead).</p>
+<p>The commands written to <code>.bash_profile</code> simply add a subfolder of PDM to the <code>PYTHONPATH</code> environment variable. This folder contains a <code>sitecustomize.py</code> module, which Python executes upon starting. The module in turn will add subfolders of <code>__pypackages__</code> (when it exists) to <code>sys.path</code>. The end result is that you can run <code>python</code> and import dependencies normally, or even call modules with <code>python -m thing</code>, without having to use <code>pdm run python ...</code>. One limitation is that you still won't be able to call installed script directly, for example <code>pytest</code>, like in an activated virtual environment. For this, you'll have to run <code>pdm run pytest</code> (but remember that if packages support it, you can run <code>python -m pytest</code> instead).</p>
 <h3 id="declaring-your-project-metadata">Declaring your project metadata<a class="headerlink" href="#declaring-your-project-metadata" title="Permanent link">¤</a></h3>
-<p>PDM reads project metadata in <code>pyproject.toml</code>.
-It relies on <a href="https://peps.python.org/pep-0517/">PEP 517</a> (build system)
-and <a href="https://peps.python.org/pep-0621/">PEP 621</a> (project metadata):</p>
+<p>PDM reads project metadata in <code>pyproject.toml</code>. It relies on <a href="https://peps.python.org/pep-0517/">PEP 517</a> (build system) and <a href="https://peps.python.org/pep-0621/">PEP 621</a> (project metadata):</p>
 <div class="highlight"><span class="filename">pyproject.toml</span><pre><span></span><code><span class="k">[build-system]</span>
 <span class="n">requires</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;pdm-pep517&quot;</span><span class="p">]</span>
 <span class="n">build-backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;pdm.pep517.api&quot;</span>
@@ -3082,9 +2940,7 @@ and <a href="https://peps.python.org/pep-0621/">PEP 621</a> (project metadata):<
 <span class="w">    </span><span class="s">&quot;Typing :: Typed&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 </code></pre></div>
-<p>This example hardcodes the version but you can
-<a href="https://pdm.fming.dev/2.1/pyproject/build/#dynamic-version-from-scm">fetch it from SCM</a>
-(Git tags).</p>
+<p>This example hardcodes the version but you can <a href="https://pdm.fming.dev/2.1/pyproject/build/#dynamic-version-from-scm">fetch it from SCM</a> (Git tags).</p>
 <p>Projects using the <a href="https://blog.ionelmc.ro/2014/05/25/python-packaging/"><code>src</code> layout</a> are supported:</p>
 <div class="highlight"><span class="filename">pyproject.toml</span><pre><span></span><code><span class="k">[tool.pdm.build]</span>
 <span class="n">package-dir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;src&quot;</span>
@@ -3101,12 +2957,8 @@ and <a href="https://peps.python.org/pep-0621/">PEP 621</a> (project metadata):<
 <span class="w">  </span><span class="s">&quot;pytest&gt;=7.1&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 </code></pre></div>
-<p>Note that this is not specific to PDM. Any tool that relies on PEP 621
-will be able to read these dependencies.</p>
-<p>Development dependencies however are not specified by PEP 621,
-so the next part is specific to PDM and will not work with other dependencies managers.
-Development dependencies can be separated into multiple groups,
-just like optional dependencies:</p>
+<p>Note that this is not specific to PDM. Any tool that relies on PEP 621 will be able to read these dependencies.</p>
+<p>Development dependencies however are not specified by PEP 621, so the next part is specific to PDM and will not work with other dependencies managers. Development dependencies can be separated into multiple groups, just like optional dependencies:</p>
 <div class="highlight"><span class="filename">pyproject.toml</span><pre><span></span><code><span class="k">[tool.pdm.dev-dependencies]</span>
 <span class="n">docs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="s">&quot;mkdocs&gt;=1.3&quot;</span><span class="p">,</span>
@@ -3128,40 +2980,21 @@ pdm<span class="w"> </span>install<span class="w"> </span>-G<span class="w"> </s
 pdm<span class="w"> </span>install<span class="w"> </span>--no-default<span class="w"> </span>-G<span class="w"> </span>docs<span class="w"> </span>-G<span class="w"> </span>tests<span class="w">  </span><span class="c1"># installs docs and tests groups only</span>
 </code></pre></div>
 <h3 id="building-and-publishing-wheels">Building and publishing wheels<a class="headerlink" href="#building-and-publishing-wheels" title="Permanent link">¤</a></h3>
-<p>To build source and wheel distributions, simply run <code>pdm build</code>.
-To publish them, simply run <code>pdm publish</code>! Or use <a href="https://twine.readthedocs.io/en/stable/">Twine</a>.</p>
+<p>To build source and wheel distributions, simply run <code>pdm build</code>. To publish them, simply run <code>pdm publish</code>! Or use <a href="https://twine.readthedocs.io/en/stable/">Twine</a>.</p>
 <p>It is possible to customize the build process, see PDM's docs for more info.</p>
 <h2 id="task-runner-duty">Task runner: duty<a class="headerlink" href="#task-runner-duty" title="Permanent link">¤</a></h2>
-<p>At this point we are able to declare and install dependencies and development dependencies.
-We will want to use some of them to run quality analysis and execute test suites.</p>
-<p><a href="https://pdm.fming.dev/2.1/usage/scripts/">PDM supports npm-like scripts</a>,
-but I don't use them because I find them not expressive/powerful enough.
-I prefer writing my tasks with the full power of Python.
-That makes them more verbose, but way more flexible,
-and you can use code from dependencies directly instead of calling subprocesses.</p>
+<p>At this point we are able to declare and install dependencies and development dependencies. We will want to use some of them to run quality analysis and execute test suites.</p>
+<p><a href="https://pdm.fming.dev/2.1/usage/scripts/">PDM supports npm-like scripts</a>, but I don't use them because I find them not expressive/powerful enough. I prefer writing my tasks with the full power of Python. That makes them more verbose, but way more flexible, and you can use code from dependencies directly instead of calling subprocesses.</p>
 <p>I tried many task runners and eventually ended up writing my own: <a href="https://pawamoy.github.io/duty/">duty</a>.</p>
 <details class="info">
 <summary>Story time: from tox to Invoke to duty, and why not nox</summary>
-<p>A few years ago, when I was writing Django-apps, I was using <a href="https://tox.wiki/en/latest/">tox</a>
-to test my apps on multiple Django versions. I was happy with it, but found it a bit slow
-when running jobs on a P*D-sized matrix (Python versions, Django versions).
-Fortunately <a href="https://github.com/tox-dev/detox">detox</a> was able to run tox envs in parallel.</p>
-<p>At some point I stopped writing Django apps, and started searching an alternative
-to tox with a lighter output, because I really don't like seeing <em>walls</em> of text
-when a single line is enough (test passed? just print ok).</p>
-<p>I started playing with <a href="https://www.pyinvoke.org/">Invoke</a>,
-but quickly had issues with it,
-notably <a href="https://github.com/pyinvoke/invoke/issues/763">in Windows runs on GitHub</a>.
-I also felt limited in that I couldn't run Python code directly, only subprocesses.
-I tried to implement such a feature in Invoke, but couldn't manage to do it.</p>
-<p>I also played with <a href="https://nox.thea.codes/en/stable/">Nox</a>, but found it
-too slow as well, even when reusing virtualenvs. And the console output was again
-too heavy for my taste. Now that <a href="https://pdm.fming.dev/2.1/usage/advanced/#use-nox-as-the-runner">PDM supports Nox</a>,
-I should definitely give it another try though!</p>
+<p>A few years ago, when I was writing Django-apps, I was using <a href="https://tox.wiki/en/latest/">tox</a> to test my apps on multiple Django versions. I was happy with it, but found it a bit slow when running jobs on a P*D-sized matrix (Python versions, Django versions). Fortunately <a href="https://github.com/tox-dev/detox">detox</a> was able to run tox envs in parallel.</p>
+<p>At some point I stopped writing Django apps, and started searching an alternative to tox with a lighter output, because I really don't like seeing <em>walls</em> of text when a single line is enough (test passed? just print ok).</p>
+<p>I started playing with <a href="https://www.pyinvoke.org/">Invoke</a>, but quickly had issues with it, notably <a href="https://github.com/pyinvoke/invoke/issues/763">in Windows runs on GitHub</a>. I also felt limited in that I couldn't run Python code directly, only subprocesses. I tried to implement such a feature in Invoke, but couldn't manage to do it.</p>
+<p>I also played with <a href="https://nox.thea.codes/en/stable/">Nox</a>, but found it too slow as well, even when reusing virtualenvs. And the console output was again too heavy for my taste. Now that <a href="https://pdm.fming.dev/2.1/usage/advanced/#use-nox-as-the-runner">PDM supports Nox</a>, I should definitely give it another try though!</p>
 <p>In the end, I wrote my own task runner, duty, which is heavily inspired by Invoke.</p>
 </details>
-<p>With duty, tasks are declared by default in a <code>duties.py</code> file at the root of the repository.
-You import the decorator, and decorate functions with it:</p>
+<p>With duty, tasks are declared by default in a <code>duties.py</code> file at the root of the repository. You import the decorator, and decorate functions with it:</p>
 <div class="highlight"><span class="filename">duties.py</span><pre><span></span><code><span class="kn">from</span> <span class="nn">duty</span> <span class="kn">import</span> <span class="n">duty</span>
 
 
@@ -3170,98 +3003,53 @@ You import the decorator, and decorate functions with it:</p>
     <span class="n">ctx</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;flake8 src&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>You can then run decorated function (duties) on the command line: <code>duty lint</code>.</p>
-<p>The <code>ctx</code> (for context) argument is injected by duty when running the task.
-Its <code>run</code> method accepts strings (shell commands), list of strings, and Python callables.
-Yes, you can run callables directly, no need for subprocesses.
-Depending on the library, it will be easy or hard to replace the subprocess
-with a direct call:</p>
+<p>The <code>ctx</code> (for context) argument is injected by duty when running the task. Its <code>run</code> method accepts strings (shell commands), list of strings, and Python callables. Yes, you can run callables directly, no need for subprocesses. Depending on the library, it will be easy or hard to replace the subprocess with a direct call:</p>
 <div class="highlight"><span class="filename">duties.py</span><pre><span></span><code><span class="kn">from</span> <span class="nn">duty</span> <span class="kn">import</span> <span class="n">duty</span>
 
 
 <span class="nd">@duty</span>
 <span class="k">def</span> <span class="nf">lint</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
     <span class="kn">from</span> <span class="nn">flake8.main.cli</span> <span class="kn">import</span> <span class="n">main</span> <span class="k">as</span> <span class="n">flake8</span>
+
     <span class="n">ctx</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">flake8</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;src&quot;</span><span class="p">])</span>
 
 
 <span class="nd">@duty</span>
 <span class="k">def</span> <span class="nf">docs</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
     <span class="kn">from</span> <span class="nn">mkdocs.__main__</span> <span class="kn">import</span> <span class="n">cli</span> <span class="k">as</span> <span class="n">mkdocs</span>
+
     <span class="n">cli</span><span class="p">([</span><span class="s2">&quot;build&quot;</span><span class="p">])</span>
 </code></pre></div>
-<p><strong>I urge Python developers to expose their CLI entrypoint outside of <code>__main__</code>,
-and to make it accept command line parameters.</strong> Otherwise we have
-to import from <code>__main__</code>, and/or patch <code>sys.argv</code>, which is ugly.
-Library first, CLI second!</p>
-<p>In the worst cases, you'll have to rebuild part of the CLI logic
-by copy/pasting code to make it work. For these cases,
-maybe it's easier to just run a subprocess.</p>
-<p>By default, duty will print the command that runs, and update
-the line with a check mark if it returns a success value
-(0 for subprocess, 0, None, True or truthy value for callables).
-If the command fails (non-zero, False or exception),
-duty will also print the captured output.
-Bye bye walls of text, hello very sexy output!</p>
+<p><strong>I urge Python developers to expose their CLI entrypoint outside of <code>__main__</code>, and to make it accept command line parameters.</strong> Otherwise we have to import from <code>__main__</code>, and/or patch <code>sys.argv</code>, which is ugly. Library first, CLI second!</p>
+<p>In the worst cases, you'll have to rebuild part of the CLI logic by copy/pasting code to make it work. For these cases, maybe it's easier to just run a subprocess.</p>
+<p>By default, duty will print the command that runs, and update the line with a check mark if it returns a success value (0 for subprocess, 0, None, True or truthy value for callables). If the command fails (non-zero, False or exception), duty will also print the captured output. Bye bye walls of text, hello very sexy output!</p>
 <p>Success:</p>
 <p><img alt="duty success" src="../../assets/duty-success.svg" /></p>
 <p>Failure:</p>
 <p><img alt="duty failure" src="../../assets/duty-failure.svg" /></p>
-<p>You can also output <a href="http://testanything.org/"><code>tap</code></a>.
-Refer to <a href="https://pawamoy.github.io/duty/usage/">duty's documentation</a> for many more examples.</p>
+<p>You can also output <a href="http://testanything.org/"><code>tap</code></a>. Refer to <a href="https://pawamoy.github.io/duty/usage/">duty's documentation</a> for many more examples.</p>
 <h3 id="project-setup-running-tasks">Project setup, running tasks<a class="headerlink" href="#project-setup-running-tasks" title="Permanent link">¤</a></h3>
-<p>When I clone one of my projects, I want to be able to set it up
-in one command. Setting it up is basically installing the dependencies.
-With PDM, that command would be <code>pdm install</code>.
-But that installs dependencies for only one Python version,
-and since I'm not using tox or nox, I need to install
-dependencies for every Python version I want to support.</p>
+<p>When I clone one of my projects, I want to be able to set it up in one command. Setting it up is basically installing the dependencies. With PDM, that command would be <code>pdm install</code>. But that installs dependencies for only one Python version, and since I'm not using tox or nox, I need to install dependencies for every Python version I want to support.</p>
 <div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span>py<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">3</span>.7<span class="w"> </span><span class="m">3</span>.8<span class="w"> </span><span class="m">3</span>.9<span class="w"> </span><span class="m">3</span>.10<span class="w"> </span><span class="m">3</span>.11<span class="p">;</span><span class="w"> </span><span class="k">do</span>
 <span class="w">    </span>pdm<span class="w"> </span>use<span class="w"> </span>-f<span class="w"> </span>python<span class="nv">$py</span>
 <span class="w">    </span>pdm<span class="w"> </span>install
 <span class="k">done</span>
 </code></pre></div>
-<p>Again, I'm not using tox or nox, and I also need to be able
-to run some tasks on all supported Python versions.
-Typically tests, but quality analysis as well,
-because it needs to pass whatever the Python version is.</p>
+<p>Again, I'm not using tox or nox, and I also need to be able to run some tasks on all supported Python versions. Typically tests, but quality analysis as well, because it needs to pass whatever the Python version is.</p>
 <div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span>py<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">3</span>.7<span class="w"> </span><span class="m">3</span>.8<span class="w"> </span><span class="m">3</span>.9<span class="w"> </span><span class="m">3</span>.10<span class="w"> </span><span class="m">3</span>.11<span class="p">;</span><span class="w"> </span><span class="k">do</span>
 <span class="w">    </span>pdm<span class="w"> </span>use<span class="w"> </span>-f<span class="w"> </span>python<span class="nv">$py</span>
 <span class="w">    </span>pdm<span class="w"> </span>run<span class="w"> </span>duty<span class="w"> </span><span class="nb">test</span>
 <span class="k">done</span>
 </code></pre></div>
-<p>The end result is that I have two Bash scripts,
-<a href="https://github.com/pawamoy/copier-pdm/blob/0.10.1/project/scripts/setup.sh"><code>setup.sh</code></a> and
-<a href="https://github.com/pawamoy/copier-pdm/blob/0.10.1/project/scripts/multirun.sh"><code>multirun.sh</code></a>
-in a scripts folder. Bash is usually available, even on Windows thanks
-to <a href="https://gitforwindows.org/">Git-for-Windows</a>. However I don't want
-to run these scripts with <code>bash scripts/setup.sh</code> or <code>./scripts/multirun.sh duty test</code>.
-It's way too long to type. So I decided to also write a Makefile.
-Make is not easily available on Windows, so I lose a bit of cross-platformness,
-but it's just so convenient on GNU/Linux systems.</p>
+<p>The end result is that I have two Bash scripts, <a href="https://github.com/pawamoy/copier-pdm/blob/0.10.1/project/scripts/setup.sh"><code>setup.sh</code></a> and <a href="https://github.com/pawamoy/copier-pdm/blob/0.10.1/project/scripts/multirun.sh"><code>multirun.sh</code></a> in a scripts folder. Bash is usually available, even on Windows thanks to <a href="https://gitforwindows.org/">Git-for-Windows</a>. However I don't want to run these scripts with <code>bash scripts/setup.sh</code> or <code>./scripts/multirun.sh duty test</code>. It's way too long to type. So I decided to also write a Makefile. Make is not easily available on Windows, so I lose a bit of cross-platformness, but it's just so convenient on GNU/Linux systems.</p>
 <p><a href="https://github.com/pawamoy/copier-pdm/blob/0.10.1/project/Makefile.jinja">Checkout my Makefile on GitHub.</a></p>
-<p>With this Makefile, I can simply type <code>make setup</code> after cloning a project.
-This action will try to install pipx if it's not available,
-and then it will try to install PDM with pipx if it's not available.
-Finally, it will run <code>pdm install</code> for a defined set of Python versions
-(at the time of writing: 3.7 up to 3.11).</p>
-<p>I can also type <code>make format</code>, or <code>make check</code>, or <code>make test</code>,
-and depending on the action, it will run it only once, using
-the Python version currently selected through PDM, or run it
-on all supported Python versions.</p>
-<p>If my duties (tasks) accept arguments, I can pass them
-from the command line: <code>make release version=1.0.0</code>,
-or <code>make test match="this or that"</code>.</p>
-<p>Once I fixed something or added a new feature,
-and wrote tests for it, I can format my code, check its quality,
-run the tests, generate a coverage HTML report, generate
-a changelog entry, commit everything, build and publish
-a new release, and then publish docs <em>with a single line</em>:</p>
+<p>With this Makefile, I can simply type <code>make setup</code> after cloning a project. This action will try to install pipx if it's not available, and then it will try to install PDM with pipx if it's not available. Finally, it will run <code>pdm install</code> for a defined set of Python versions (at the time of writing: 3.7 up to 3.11).</p>
+<p>I can also type <code>make format</code>, or <code>make check</code>, or <code>make test</code>, and depending on the action, it will run it only once, using the Python version currently selected through PDM, or run it on all supported Python versions.</p>
+<p>If my duties (tasks) accept arguments, I can pass them from the command line: <code>make release version=1.0.0</code>, or <code>make test match="this or that"</code>.</p>
+<p>Once I fixed something or added a new feature, and wrote tests for it, I can format my code, check its quality, run the tests, generate a coverage HTML report, generate a changelog entry, commit everything, build and publish a new release, and then publish docs <em>with a single line</em>:</p>
 <div class="highlight"><pre><span></span><code>make<span class="w"> </span>format<span class="w"> </span>check<span class="w"> </span><span class="nb">test</span><span class="w"> </span>coverage<span class="w"> </span>changelog<span class="w"> </span>release<span class="w"> </span><span class="nv">version</span><span class="o">=</span><span class="m">2</span>.13.1
 </code></pre></div>
-<p>No time is lost installing dependencies for each task
-since I pre-installed my dependencies for every Python version,
-and all the output is unified and minimal, showing details
-only if something went wrong.</p>
+<p>No time is lost installing dependencies for each task since I pre-installed my dependencies for every Python version, and all the output is unified and minimal, showing details only if something went wrong.</p>
 <p>Here's a real run that published <a href="https://pypi.org/project/dependenpy/">dependenpy v3.3.2 on pypi.org</a>:</p>
 <p><img alt="make all" src="../../assets/make-all.svg" /></p>
 <p>The next sections will present each action (format, check, test, etc.) in details.</p>
@@ -3278,8 +3066,7 @@ only if something went wrong.</p>
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<p>My configuration file is very basic and not very strict.
-It can probably be improved a lot.</p>
+<p>My configuration file is very basic and not very strict. It can probably be improved a lot.</p>
 <div class="highlight"><span class="filename">config/mypy.ini</span><pre><span></span><code><span class="k">[mypy]</span>
 <span class="na">ignore_missing_imports</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">true</span>
 <span class="na">warn_unused_ignores</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">true</span>
@@ -3305,41 +3092,21 @@ It can probably be improved a lot.</p>
 </div>
 </div>
 <hr />
-<p>For code quality analysis, I use <a href="https://flake8.pycqa.org/en/latest/">Flake8</a>
-with a battery of plugins:</p>
+<p>For code quality analysis, I use <a href="https://flake8.pycqa.org/en/latest/">Flake8</a> with a battery of plugins:</p>
 <ul>
-<li><a href="https://pypi.org/project/darglint/">darglint</a>:
-    docstrings linter that checks (missing) parameters, returns and exceptions in docstrings</li>
-<li><a href="https://pypi.org/project/flake8-bandit/">flake8-bandit</a>:
-    plugin that integrates <a href="https://pypi.org/project/bandit/">Bandit</a></li>
-<li><a href="https://pypi.org/project/flake8-black/">flake8-black</a>:
-    plugin that checks if <a href="https://pypi.org/project/black/">Black</a> would make changes</li>
-<li><a href="https://pypi.org/project/flake8-bugbear/">flake8-bugbear</a>:
-    "finds likely bugs and design problems in your program"</li>
-<li><a href="https://pypi.org/project/flake8-builtins/">flake8-builtins</a>:
-    checks that you don't shadow builtins with variables or parameters</li>
-<li><a href="https://pypi.org/project/flake8-comprehensions/">flake8-comprehensions</a>:
-    helps you write better list/set/dict comprehensions</li>
-<li><a href="https://pypi.org/project/flake8-docstrings/">flake8-docstrings</a>:
-    plugin that integrates <a href="https://github.com/pycqa/pydocstyle">pydocstyle</a></li>
-<li><a href="https://pypi.org/project/flake8-pytest-style/">flake8-pytest-style</a>:
-    checks common style issues or inconsistencies with pytest-based tests</li>
-<li><a href="https://pypi.org/project/flake8-string-format/">flake8-string-format</a>:
-    checks formatted-strings and f-strings for errors</li>
-<li><a href="https://pypi.org/project/flake8-tidy-imports/">flake8-tidy-imports</a>:
-    I use this one to forbid relative imports</li>
-<li><a href="https://pypi.org/project/flake8-variables-names/">flake8-variables-names</a>:
-    helps to write more readable variables names</li>
-<li><a href="https://pypi.org/project/pep8-naming/">pep8-naming</a>:
-    famous PEP8 checks</li>
-<li><a href="https://pypi.org/project/wps-light/">wps-light</a>:
-    a lighter fork (no dependencies)
-    of <a href="https://pypi.org/project/wemake-python-styleguide/">wemake-python-styleguide</a>,
-    a very strict and opinionated plugin for Flake8. You'll see that I disable
-    a good part of its warnigns in my template, because they feel
-    too cumbersome to me. The rest of the warnings can be annoying,
-    but are very valuable to me: they definitely force you to write
-    more readable and maintainable code.</li>
+<li><a href="https://pypi.org/project/darglint/">darglint</a>: docstrings linter that checks (missing) parameters, returns and exceptions in docstrings</li>
+<li><a href="https://pypi.org/project/flake8-bandit/">flake8-bandit</a>: plugin that integrates <a href="https://pypi.org/project/bandit/">Bandit</a></li>
+<li><a href="https://pypi.org/project/flake8-black/">flake8-black</a>: plugin that checks if <a href="https://pypi.org/project/black/">Black</a> would make changes</li>
+<li><a href="https://pypi.org/project/flake8-bugbear/">flake8-bugbear</a>: "finds likely bugs and design problems in your program"</li>
+<li><a href="https://pypi.org/project/flake8-builtins/">flake8-builtins</a>: checks that you don't shadow builtins with variables or parameters</li>
+<li><a href="https://pypi.org/project/flake8-comprehensions/">flake8-comprehensions</a>: helps you write better list/set/dict comprehensions</li>
+<li><a href="https://pypi.org/project/flake8-docstrings/">flake8-docstrings</a>: plugin that integrates <a href="https://github.com/pycqa/pydocstyle">pydocstyle</a></li>
+<li><a href="https://pypi.org/project/flake8-pytest-style/">flake8-pytest-style</a>: checks common style issues or inconsistencies with pytest-based tests</li>
+<li><a href="https://pypi.org/project/flake8-string-format/">flake8-string-format</a>: checks formatted-strings and f-strings for errors</li>
+<li><a href="https://pypi.org/project/flake8-tidy-imports/">flake8-tidy-imports</a>: I use this one to forbid relative imports</li>
+<li><a href="https://pypi.org/project/flake8-variables-names/">flake8-variables-names</a>: helps to write more readable variables names</li>
+<li><a href="https://pypi.org/project/pep8-naming/">pep8-naming</a>: famous PEP8 checks</li>
+<li><a href="https://pypi.org/project/wps-light/">wps-light</a>: a lighter fork (no dependencies) of <a href="https://pypi.org/project/wemake-python-styleguide/">wemake-python-styleguide</a>, a very strict and opinionated plugin for Flake8. You'll see that I disable a good part of its warnigns in my template, because they feel too cumbersome to me. The rest of the warnings can be annoying, but are very valuable to me: they definitely force you to write more readable and maintainable code.</li>
 </ul>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:3"><input checked="checked" id="duty_1" name="__tabbed_2" type="radio" /><input id="flake8-config" name="__tabbed_2" type="radio" /><input id="output_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="duty_1">duty</label><label for="flake8-config">Flake8 config</label><label for="output_1">Output</label></div>
 <div class="tabbed-content">
@@ -3358,8 +3125,7 @@ with a battery of plugins:</p>
 <span class="na">ignore</span><span class="w"> </span><span class="o">=</span>
 <span class="w">    </span><span class="na">...</span>
 </code></pre></div>
-<p>I truncated the file because it is a bit long, please
-<a href="https://github.com/pawamoy/copier-pdm/blob/0.10.1/project/config/flake8.ini">check it out on GitHub</a>.</p>
+<p>I truncated the file because it is a bit long, please <a href="https://github.com/pawamoy/copier-pdm/blob/0.10.1/project/config/flake8.ini">check it out on GitHub</a>.</p>
 </div>
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="gp">$ </span>make<span class="w"> </span>check-quality
@@ -3426,19 +3192,15 @@ with a battery of plugins:</p>
 </div>
 <div class="admonition info">
 <p class="admonition-title">Idea: use ssort</p>
-<p>I'm also looking at <a href="https://github.com/bwhmather/ssort">ssort</a>,
-but it probably needs some enhancements before we're able to use it.</p>
+<p>\
+I'm also looking at <a href="https://github.com/bwhmather/ssort">ssort</a>, but it probably needs some enhancements before we're able to use it.</p>
 </div>
 <h3 id="security-analysis">Security analysis<a class="headerlink" href="#security-analysis" title="Permanent link">¤</a></h3>
-<p>Security analysis is partly with <a href="https://github.com/pyupio/safety">safety</a>,
-which queries a curated PyUP.io database to show dependencies that are vulnerable.</p>
+<p>Security analysis is partly with <a href="https://github.com/pyupio/safety">safety</a>, which queries a curated PyUP.io database to show dependencies that are vulnerable.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="duty_3" name="__tabbed_4" type="radio" /><input id="output_3" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="duty_3">duty</label><label for="output_3">Output</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<p>The duty is a bit long here, because I try to ensure
-safety's modules are not patched by malicious packages installed
-in the current environment. Rebuilding the CLI logic also allows
-us to lighten up or even rework the output.</p>
+<p>The duty is a bit long here, because I try to ensure safety's modules are not patched by malicious packages installed in the current environment. Rebuilding the CLI logic also allows us to lighten up or even rework the output.</p>
 <div class="highlight"><span class="filename">duties.py</span><pre><span></span><code><span class="nd">@duty</span>
 <span class="k">def</span> <span class="nf">check_dependencies</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
     <span class="c1"># undo possible patching</span>
@@ -3572,22 +3334,15 @@ us to lighten up or even rework the output.</p>
 </div>
 </div>
 <p>I'm considering using/creating tooling around the <a href="https://osv.dev/">OSV database</a> instead.</p>
-<p>The <a href="#quality-analysis">code quality analysis</a>, presented earlier,
-also checks the code for security risks using Bandit.</p>
+<p>The <a href="#quality-analysis">code quality analysis</a>, presented earlier, also checks the code for security risks using Bandit.</p>
 <h3 id="test-suite">Test suite<a class="headerlink" href="#test-suite" title="Permanent link">¤</a></h3>
 <p>Tests are written and executed using <a href="https://docs.pytest.org/en/7.1.x/">pytest</a> and plugins:</p>
 <ul>
-<li>sometimes <a href="https://pypi.org/project/pytest-asyncio/">pytest-asyncio</a>,
-    to test asynchronous code</li>
-<li><a href="https://pypi.org/project/pytest-cov/">pytest-cov</a>,
-    which uses <a href="https://github.com/nedbat/coveragepy">Coverage.py</a>
-    to build code coverage reports</li>
-<li><a href="https://pypi.org/project/pytest-randomly/">pytest-randomly</a>,
-    to randomize the order of tests, to make sure each test is independant from the others</li>
-<li><a href="https://pypi.org/project/pytest-xdist/">pytest-xdist</a>,
-    to run tests in parallel and therefore speed up the test runs</li>
-<li>sometimes <a href="https://hypothesis.readthedocs.io/en/latest/">hypothesis</a>,
-    to test huge ranges of input values</li>
+<li>sometimes <a href="https://pypi.org/project/pytest-asyncio/">pytest-asyncio</a>, to test asynchronous code</li>
+<li><a href="https://pypi.org/project/pytest-cov/">pytest-cov</a>, which uses <a href="https://github.com/nedbat/coveragepy">Coverage.py</a> to build code coverage reports</li>
+<li><a href="https://pypi.org/project/pytest-randomly/">pytest-randomly</a>, to randomize the order of tests, to make sure each test is independant from the others</li>
+<li><a href="https://pypi.org/project/pytest-xdist/">pytest-xdist</a>, to run tests in parallel and therefore speed up the test runs</li>
+<li>sometimes <a href="https://hypothesis.readthedocs.io/en/latest/">hypothesis</a>, to test huge ranges of input values</li>
 </ul>
 <div class="tabbed-set tabbed-alternate" data-tabs="5:4"><input checked="checked" id="duty_4" name="__tabbed_5" type="radio" /><input id="pytest-config" name="__tabbed_5" type="radio" /><input id="coverage-config" name="__tabbed_5" type="radio" /><input id="output_4" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="duty_4">duty</label><label for="pytest-config">pytest config</label><label for="coverage-config">coverage config</label><label for="output_4">Output</label></div>
 <div class="tabbed-content">
@@ -3690,62 +3445,21 @@ also checks the code for security risks using Bandit.</p>
 <p>The coverage action also generates an HTML report that can later be integrated into the docs.</p>
 <div class="admonition info">
 <p class="admonition-title">Idea: use ward</p>
-<p>I'm also looking at <a href="https://github.com/darrenburns/ward">ward</a>,
-but it feels a bit hard to leave pytest and its huge community.</p>
+<p> I'm also looking at <a href="https://github.com/darrenburns/ward">ward</a>, but it feels a bit hard to leave pytest and its huge community.</p>
 </div>
 <h2 id="documentation-mkdocs">Documentation: MkDocs<a class="headerlink" href="#documentation-mkdocs" title="Permanent link">¤</a></h2>
-<p>To write documentation for your project, I suggest using <a href="https://www.mkdocs.org/">MkDocs</a>.
-The well-known alternative is of course <a href="https://www.sphinx-doc.org/en/master/">Sphinx</a>.
-Sphinx is battle-tested and more targeted towards Python project documentation,
-but I've found MkDocs to be easier to work with.</p>
-<p>Combined to the great <a href="https://squidfunk.github.io/mkdocs-material/">Material for MkDocs</a> theme,
-it gives you a beautiful and responsive website
-for your documentation pages, or even for your blog.
-And combined to the <a href="https://mkdocstrings.github.io/">mkdocstrings</a> plugin,
-you can auto-generate documentation for your Python API
-(modules, functions, classes, methods, attributes, etc.).</p>
+<p>To write documentation for your project, I suggest using <a href="https://www.mkdocs.org/">MkDocs</a>. The well-known alternative is of course <a href="https://www.sphinx-doc.org/en/master/">Sphinx</a>. Sphinx is battle-tested and more targeted towards Python project documentation, but I've found MkDocs to be easier to work with.</p>
+<p>Combined to the great <a href="https://squidfunk.github.io/mkdocs-material/">Material for MkDocs</a> theme, it gives you a beautiful and responsive website for your documentation pages, or even for your blog. And combined to the <a href="https://mkdocstrings.github.io/">mkdocstrings</a> plugin, you can auto-generate documentation for your Python API (modules, functions, classes, methods, attributes, etc.).</p>
 <p><img src="../../assets/mkdocs-material.svg" style="max-width: 200px;"/>
 <img src="../../assets/mkdocstrings-logo.png" style="max-width: 300px;"/></p>
 <details class="info">
 <summary>Story time: from Sphinx to MkDocs</summary>
-<p>A few years ago (around 2020), I bumped into the Pydantic project (again).
-I had already seen it before, mainly interested in its settings configuration ability
-that could replace most of the logic in my Django app
-<a href="https://github.com/pawamoy/django-appsettings">django-appsettings</a>.
-This time, when I landed on its docs pages, I thought: "wow, this looks nice".
-Then, a bit later, <a href="https://fastapi.tiangolo.com/">FastAPI</a> exploded in our faces,
-and I thought again: "hey, looks familiar, and I love it!".
-So I looked around and saw that it used MkDocs and a theme called "Material for MkDocs".</p>
-<p>I started migrating my projects to MkDocs and Material for MkDocs from Sphinx,
-because it looked nicer than the ReadTheDocs theme, and was far easier to use.
-Indeed, for the six previous years I had been using Sphinx for my projects
-documentation, and I never quite enjoyed writing docs with it.
-This was before the <a href="https://myst-parser.readthedocs.io/en/latest/">MyST parser</a>
-or <a href="https://github.com/readthedocs/recommonmark">recommonmark</a> (which I used a bit later),
-so I was writing my documentation in <a href="https://www.writethedocs.org/guide/writing/reStructuredText/">reStructuredText</a>.
-I constantly had to check the syntax of rST and the Sphinx docs
-to achieve basic things. In particular, I wanted to have ToC (Table of Contents)
-entries in the sidebar for every documented module, class or function
-auto-generated with Sphinx's autodoc extension.
-I posted <a href="https://github.com/sphinx-doc/sphinx/issues/6316">a question on StackOverflow</a>
-and then found a <a href="https://github.com/sphinx-doc/sphinx/issues/6316">feature request</a> on Sphinx's bugtracker:
-the answer was "it's not possible (yet)".</p>
-<p>So I thought, hey, why not bring that in MkDocs instead of Sphinx?
-At the time, the only viable option for autodoc in MkDocs was
-Tom Christie's <a href="https://github.com/tomchristie/mkautodoc">mkautodoc</a>.
-Tom expressed his lack of capacity to work on the project,
-and I had an itch to scratch, so I decided to create my own MkDocs plugin
-for auto-documentation. This is how mkdocstrings was born.
-Tom's code has been very helpful at the beginning of the project
-(mkdocstrings' <code>:::</code> syntax actually comes from mkautodoc),
-so thanks Tom!</p>
-<p>Today we have a thriving MkDocs community and ecosystem,
-and I think it gave a nice push to the Sphinx community which,
-to me, seemed to stagnate a bit.</p>
+<p>A few years ago (around 2020), I bumped into the Pydantic project (again). I had already seen it before, mainly interested in its settings configuration ability that could replace most of the logic in my Django app <a href="https://github.com/pawamoy/django-appsettings">django-appsettings</a>. This time, when I landed on its docs pages, I thought: "wow, this looks nice". Then, a bit later, <a href="https://fastapi.tiangolo.com/">FastAPI</a> exploded in our faces, and I thought again: "hey, looks familiar, and I love it!". So I looked around and saw that it used MkDocs and a theme called "Material for MkDocs".</p>
+<p>I started migrating my projects to MkDocs and Material for MkDocs from Sphinx, because it looked nicer than the ReadTheDocs theme, and was far easier to use. Indeed, for the six previous years I had been using Sphinx for my projects documentation, and I never quite enjoyed writing docs with it. This was before the <a href="https://myst-parser.readthedocs.io/en/latest/">MyST parser</a> or <a href="https://github.com/readthedocs/recommonmark">recommonmark</a> (which I used a bit later), so I was writing my documentation in <a href="https://www.writethedocs.org/guide/writing/reStructuredText/">reStructuredText</a>. I constantly had to check the syntax of rST and the Sphinx docs to achieve basic things. In particular, I wanted to have ToC (Table of Contents) entries in the sidebar for every documented module, class or function auto-generated with Sphinx's autodoc extension. I posted <a href="https://github.com/sphinx-doc/sphinx/issues/6316">a question on StackOverflow</a> and then found a <a href="https://github.com/sphinx-doc/sphinx/issues/6316">feature request</a> on Sphinx's bugtracker: the answer was "it's not possible (yet)".</p>
+<p>So I thought, hey, why not bring that in MkDocs instead of Sphinx? At the time, the only viable option for autodoc in MkDocs was Tom Christie's <a href="https://github.com/tomchristie/mkautodoc">mkautodoc</a>. Tom expressed his lack of capacity to work on the project, and I had an itch to scratch, so I decided to create my own MkDocs plugin for auto-documentation. This is how mkdocstrings was born. Tom's code has been very helpful at the beginning of the project (mkdocstrings' <code>:::</code> syntax actually comes from mkautodoc), so thanks Tom!</p>
+<p>Today we have a thriving MkDocs community and ecosystem, and I think it gave a nice push to the Sphinx community which, to me, seemed to stagnate a bit.</p>
 </details>
-<p>With MkDocs, you write your documentation in Markdown files,
-inside a <code>docs</code> folder. Then you configure MkDocs in <code>mkdocs.yml</code>,
-at the root of your repository:</p>
+<p>With MkDocs, you write your documentation in Markdown files, inside a <code>docs</code> folder. Then you configure MkDocs in <code>mkdocs.yml</code>, at the root of your repository:</p>
 <div class="highlight"><pre><span></span><code>📁<span class="w"> </span>./
 ├──<span class="w"> </span>📁<span class="w"> </span>docs/
 │<span class="w">   </span>└──<span class="w"> </span>📄<span class="w"> </span>index.md
@@ -3755,11 +3469,10 @@ at the root of your repository:</p>
 <span class="nt">theme</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">material</span>
 <span class="nt">plugins</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">search</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mkdocstrings</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">search</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mkdocstrings</span>
 </code></pre></div>
-<p>With mkdocstrings, you can inject documentation of an object
-using the <code>::: identifier</code> syntax. For example, if you have a project like this:</p>
+<p>With mkdocstrings, you can inject documentation of an object using the <code>::: identifier</code> syntax. For example, if you have a project like this:</p>
 <div class="highlight"><pre><span></span><code>📁<span class="w"> </span>./
 └──<span class="w"> </span>📁<span class="w"> </span>project/
 <span class="w">    </span>├──<span class="w"> </span>📄<span class="w"> </span>__init__.py
@@ -3767,6 +3480,7 @@ using the <code>::: identifier</code> syntax. For example, if you have a project
 </code></pre></div>
 <p>...and this class in <code>module.py</code>:</p>
 <div class="highlight"><span class="filename">./project/module.py</span><pre><span></span><code><span class="sd">&quot;&quot;&quot;This module is not very useful.&quot;&quot;&quot;</span>
+
 
 <span class="k">class</span> <span class="nc">AlmostEmptyClass</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This class doesn&#39;t allow to do a lot of things.&quot;&quot;&quot;</span>
@@ -3779,22 +3493,15 @@ using the <code>::: identifier</code> syntax. For example, if you have a project
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">thing</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">something</span>
 </code></pre></div>
-<p>...you can inject documentation for your class like so,
-in a Markdown file, for example <code>index.md</code>:</p>
+<p>...you can inject documentation for your class like so, in a Markdown file, for example <code>index.md</code>:</p>
 <div class="highlight"><span class="filename">./docs/index.md</span><pre><span></span><code>::: project.module.AlmostEmptyClass
 </code></pre></div>
 <p>Or you could inject the whole module docs, recursively:</p>
 <div class="highlight"><span class="filename">./docs/index.md</span><pre><span></span><code>::: project.module
 </code></pre></div>
-<p>There's even
-<a href="https://mkdocstrings.github.io/recipes/#automatic-code-reference-pages">a recipe to automatically document all your modules</a>.</p>
-<p><strong>If you want to learn in details how to build documentation
-with MkDocs, Material for MkDocs, and mkdocstrings,
-I can't recommend this guide enough, from <em>Real Python</em>:
-<a href="https://realpython.com/python-project-documentation-with-mkdocs/">Build Your Python Project Documentation With MkDocs</a>.</strong></p>
-<p>Building the docs locally is as easy as running <code>mkdocs build</code>,
-and deploying them onto GitHub Pages
-is just a matter of running <code>mkdocs gh-deploy</code>.</p>
+<p>There's even <a href="https://mkdocstrings.github.io/recipes/#automatic-code-reference-pages">a recipe to automatically document all your modules</a>.</p>
+<p><strong>If you want to learn in details how to build documentation with MkDocs, Material for MkDocs, and mkdocstrings, I can't recommend this guide enough, from <em>Real Python</em>: <a href="https://realpython.com/python-project-documentation-with-mkdocs/">Build Your Python Project Documentation With MkDocs</a>.</strong></p>
+<p>Building the docs locally is as easy as running <code>mkdocs build</code>, and deploying them onto GitHub Pages is just a matter of running <code>mkdocs gh-deploy</code>.</p>
 <p>The <code>copier-pdm</code> template provides these actions/duties to check, build and deploy your docs:</p>
 <ul>
 <li><code>make docs</code>: build the docs locally, in the <code>site</code> directory</li>
@@ -3803,12 +3510,8 @@ is just a matter of running <code>mkdocs gh-deploy</code>.</p>
 <li><code>make check-docs</code>: build docs in strict mode, failing at any warning or error</li>
 </ul>
 <h2 id="continuous-integration-github-actions">Continuous Integration: GitHub Actions<a class="headerlink" href="#continuous-integration-github-actions" title="Permanent link">¤</a></h2>
-<p>GitHub Actions allows to do continuous integration
-on most major operating systems: Linux, MacOS and Windows,
-which is very nice when you build a cross-platform tool or library.</p>
-<p>To follow the DRY principle, what is executed in CI can be executed locally,
-and reciprocally. Locally, we use <code>duty</code> to run the tasks,
-so we do the same in CI:</p>
+<p>GitHub Actions allows to do continuous integration on most major operating systems: Linux, MacOS and Windows, which is very nice when you build a cross-platform tool or library.</p>
+<p>To follow the DRY principle, what is executed in CI can be executed locally, and reciprocally. Locally, we use <code>duty</code> to run the tasks, so we do the same in CI:</p>
 <div class="highlight"><span class="filename">.github/workflows/ci.yml</span><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ci</span>
 
 <span class="nt">jobs</span><span class="p">:</span>
@@ -3816,80 +3519,75 @@ so we do the same in CI:</p>
 <span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
 
 <span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Checkout</span>
-<span class="w">      </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v2</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Checkout</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v2</span>
 
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Set up PDM</span>
-<span class="w">      </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pdm-project/setup-pdm@v2.6</span><span class="w">  </span><span class="c1"># (1)</span>
-<span class="w">      </span><span class="nt">with</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">python-version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3.8&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Set up PDM</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pdm-project/setup-pdm@v2.6</span><span class="w"> </span><span class="c1"># (1)</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">python-version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;3.8&#39;</span>
 
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Resolving dependencies</span>
-<span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pdm lock</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Resolving dependencies</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pdm lock</span>
 
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Install dependencies</span>
-<span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pdm install -G duty -G docs -G quality -G typing -G security</span><span class="w">  </span><span class="c1"># (2)</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Install dependencies</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pdm install -G duty -G docs -G quality -G typing -G security</span><span class="w"> </span><span class="c1"># (2)</span>
 
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Check if the documentation builds correctly</span>
-<span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pdm run duty check-docs</span><span class="w">  </span><span class="c1"># (3)</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Check if the documentation builds correctly</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pdm run duty check-docs</span><span class="w"> </span><span class="c1"># (3)</span>
 
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Check the code quality</span>
-<span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pdm run duty check-quality</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Check the code quality</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pdm run duty check-quality</span>
 
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Check if the code is correctly typed</span>
-<span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pdm run duty check-types</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Check if the code is correctly typed</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pdm run duty check-types</span>
 
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Check for vulnerabilities in dependencies</span>
-<span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pdm run duty check-dependencies</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Check for vulnerabilities in dependencies</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pdm run duty check-dependencies</span>
 
 <span class="w">  </span><span class="nt">tests</span><span class="p">:</span>
 
 <span class="w">    </span><span class="nt">strategy</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">matrix</span><span class="p">:</span>
 <span class="w">        </span><span class="nt">os</span><span class="p">:</span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">macos-latest</span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">windows-latest</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">macos-latest</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">windows-latest</span>
 <span class="w">        </span><span class="nt">python-version</span><span class="p">:</span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;3.7&quot;</span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;3.8&quot;</span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;3.9&quot;</span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;3.10&quot;</span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;3.11-dev&quot;</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;3.7&#39;</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;3.8&#39;</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;3.9&#39;</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;3.10&#39;</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;3.11&#39;</span>
 
 <span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ matrix.os }}</span>
 
 <span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Checkout</span>
-<span class="w">      </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v2</span><span class="w">    </span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Checkout</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v2</span>
 
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Set up PDM</span>
-<span class="w">      </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pdm-project/setup-pdm@v2.6</span>
-<span class="w">      </span><span class="nt">with</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">python-version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ matrix.python-version }}</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Set up PDM</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pdm-project/setup-pdm@v2.6</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">python-version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ matrix.python-version }}</span>
 
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Install dependencies</span>
-<span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pdm install --no-editable -G duty -G tests</span><span class="w">  </span><span class="c1"># (4)</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Install dependencies</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pdm install --no-editable -G duty -G tests</span><span class="w"> </span><span class="c1"># (4)</span>
 
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Run the test suite</span>
-<span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pdm run duty test</span><span class="w">  </span><span class="c1"># (5)</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Run the test suite</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pdm run duty test</span><span class="w"> </span><span class="c1"># (5)</span>
 </code></pre></div>
 <ol>
-<li>The PDM project provides this very convenient
-    <a href="https://github.com/pdm-project/setup-pdm"><code>setup-pdm</code> GitHub action</a>.</li>
+<li>The PDM project provides this very convenient <a href="https://github.com/pdm-project/setup-pdm"><code>setup-pdm</code> GitHub action</a>.</li>
 <li>We install production dependencies and every necessary development dependency.</li>
 <li>And we run each check sequentially: docs, quality, types, security. That should be fast enough.</li>
-<li>We only install production dependencies and tests development dependencies.
-    We tell PDM not to use an editable installation method,
-    to be as close as a production environment as possible. </li>
+<li>We only install production dependencies and tests development dependencies. We tell PDM not to use an editable installation method, to be as close as a production environment as possible.</li>
 <li>We run the test suite.</li>
 </ol>
-<p>That's it. No special cases for CI. Whats runs up there
-can run down here with <code>make check test</code>.</p>
+<p>That's it. No special cases for CI. Whats runs up there can run down here with <code>make check test</code>.</p>
 <h2 id="workflow-integrating-everything-together">Workflow: integrating everything together<a class="headerlink" href="#workflow-integrating-everything-together" title="Permanent link">¤</a></h2>
 <p>Now let see the typical workflow with all these tools integrated together.</p>
-<p>If you don't already have a local clone of your project,
-you clone it, enter it and install dependencies:</p>
+<p>If you don't already have a local clone of your project, you clone it, enter it and install dependencies:</p>
 <div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>...
 <span class="nb">cd</span><span class="w"> </span>...
 make<span class="w"> </span>setup
@@ -3897,75 +3595,41 @@ make<span class="w"> </span>setup
 <p>Then you can start working on a bugfix, feature or documentation improvement.</p>
 <div class="highlight"><pre><span></span><code>git<span class="w"> </span>switch<span class="w"> </span>-c<span class="w"> </span>fix-some-bug
 </code></pre></div>
-<p>For example, you add a test to your test suite to assert that it fails
-with the current code, and then run the test suite:</p>
+<p>For example, you add a test to your test suite to assert that it fails with the current code, and then run the test suite:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># add a failing test, then</span>
 make<span class="w"> </span><span class="nb">test</span>
 </code></pre></div>
-<p>It fails successfully on every Python version.
-You can now fix the code itself, and run the test suite again
-to make sure it's fixed for every Python version you support:</p>
+<p>It fails successfully on every Python version. You can now fix the code itself, and run the test suite again to make sure it's fixed for every Python version you support:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># fix the code, then</span>
 make<span class="w"> </span><span class="nb">test</span>
 </code></pre></div>
-<p>The test passes on every version, great.
-Make sure the code is well-formatted and there's no code smells:</p>
+<p>The test passes on every version, great. Make sure the code is well-formatted and there's no code smells:</p>
 <div class="highlight"><pre><span></span><code>make<span class="w"> </span>format<span class="w"> </span>check
 <span class="c1"># fix any code smell</span>
 </code></pre></div>
-<p>If you wrote or updated documentation, serve the site locally
-to check if everything renders correctly:</p>
+<p>If you wrote or updated documentation, serve the site locally to check if everything renders correctly:</p>
 <div class="highlight"><pre><span></span><code>make<span class="w"> </span>docs-serve
 <span class="c1"># go to localhost:8000</span>
 </code></pre></div>
-<p>You are ready to commit. At some point you will want to release
-a new version, and therefore add a new entry in the changelog.
-You will be able to auto-generate such an entry thanks to
-<a href="https://github.com/pawamoy/git-changelog">git-changelog</a>,
-but only if you follow the
-<a href="https://gist.github.com/brianclements/841ea7bffdb01346392c">Angular commit-message convention</a>,
-prefixing commit messages with a type like <code>feat</code> or <code>fix</code>.</p>
+<p>You are ready to commit. At some point you will want to release a new version, and therefore add a new entry in the changelog. You will be able to auto-generate such an entry thanks to <a href="https://github.com/pawamoy/git-changelog">git-changelog</a>, but only if you follow the <a href="https://gist.github.com/brianclements/841ea7bffdb01346392c">Angular commit-message convention</a>, prefixing commit messages with a type like <code>feat</code> or <code>fix</code>.</p>
 <div class="highlight"><pre><span></span><code>git<span class="w"> </span>commit<span class="w"> </span>-am<span class="w"> </span><span class="s2">&quot;fix: Fix broken feature X&quot;</span>
 </code></pre></div>
-<p>After some commits (and/or merged pull requests),
-and if you are ready to release a new version,
-you can update your changelog and see
-if the suggestion new version matches your expectations:</p>
+<p>After some commits (and/or merged pull requests), and if you are ready to release a new version, you can update your changelog and see if the suggestion new version matches your expectations:</p>
 <div class="highlight"><pre><span></span><code>make<span class="w"> </span>changelog
 <span class="c1"># review CHANGELOG.md</span>
 </code></pre></div>
 <p>The new version is based on your latest Git tag.</p>
-<p>With a major version of <code>0</code>, fixes and code refactoring
-will increment the patch version by 1, and features will increment
-the minor version by 1. Breaking changes (detected using the body
-of the commit message) won't increment the major version.</p>
-<p>With a major version higher than 0, detected breaking changes
-will increment the major version.</p>
-<p>Changes since the last release will be nicely organized
-in sections such as "Features" and "Bug fixes".</p>
-<p>The changelog should only be updated when you are ready
-to publish a new release. Then, simply build and publish
-a new release of your project, providing the same version
-that was added to the changelog (you don't need to commit it):</p>
+<p>With a major version of <code>0</code>, fixes and code refactoring will increment the patch version by 1, and features will increment the minor version by 1. Breaking changes (detected using the body of the commit message) won't increment the major version.</p>
+<p>With a major version higher than 0, detected breaking changes will increment the major version.</p>
+<p>Changes since the last release will be nicely organized in sections such as "Features" and "Bug fixes".</p>
+<p>The changelog should only be updated when you are ready to publish a new release. Then, simply build and publish a new release of your project, providing the same version that was added to the changelog (you don't need to commit it):</p>
 <div class="highlight"><pre><span></span><code>make<span class="w"> </span>release<span class="w"> </span><span class="nv">version</span><span class="o">=</span><span class="m">1</span>.2.3
 <span class="c1"># check out your new release on pypi.org!</span>
 </code></pre></div>
-<p>The changelog and release parts are explained a bit more in the
-<a href="https://pawamoy.github.io/copier-pdm/work/#changelog">Changelog</a> and
-<a href="https://pawamoy.github.io/copier-pdm/work/#releases">Releases</a> sections of the
-<a href="https://pawamoy.github.io/copier-pdm/requirements/">template's documentation</a>.</p>
+<p>The changelog and release parts are explained a bit more in the <a href="https://pawamoy.github.io/copier-pdm/work/#changelog">Changelog</a> and <a href="https://pawamoy.github.io/copier-pdm/work/#releases">Releases</a> sections of the <a href="https://pawamoy.github.io/copier-pdm/requirements/">template's documentation</a>.</p>
 <h2 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Permanent link">¤</a></h2>
-<p>What I like about this template and the projects generated with it,
-is that they are pretty much self-contained. You have everything
-you need at the tips of your fingers, and don't have to rely
-on particular online services to perform specific actions.
-Don't like GitHub Actions? Switch to something else!
-You'll always be able to run checks and tests locally,
-or publish a new release or a documentation update from
-your local machine.</p>
-<p>I hope you enjoyed the article, or at least learned one or two things.
-In any case, don't hesitate to leave a comment: I'll gladly fix any
-mistake I made, or elaborate if something isn't clear enough.</p>
+<p>What I like about this template and the projects generated with it, is that they are pretty much self-contained. You have everything you need at the tips of your fingers, and don't have to rely on particular online services to perform specific actions. Don't like GitHub Actions? Switch to something else! You'll always be able to run checks and tests locally, or publish a new release or a documentation update from your local machine.</p>
+<p>I hope you enjoyed the article, or at least learned one or two things. In any case, don't hesitate to leave a comment: I'll gladly fix any mistake I made, or elaborate if something isn't clear enough.</p>
 
   <!-- Giscus -->
   <!-- https://squidfunk.github.io/mkdocs-material/setup/adding-a-comment-system/#giscus-integration -->

@@ -1922,14 +1922,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../showcase/failprint/" class="md-nav__link">
+      <a href="../../showcase/duty/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     
   
     <span class="md-typeset">
-      failprint
+      duty
     </span>
   
 
@@ -2236,6 +2236,7 @@
 <span class="na">sqlalchemy.url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">sqlite:///db.sqlite</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">my_app.db</span> <span class="kn">import</span> <span class="n">metadata</span>
+
 <span class="n">target_metadata</span> <span class="o">=</span> <span class="n">metadata</span>
 </code></pre></div>
 <p>I was now able to generate the initial migration with the following command, making sure I removed the <code>ondelete="CASCADE"</code> arguments from my models' foreign keys:</p>
@@ -2243,6 +2244,7 @@
 </code></pre></div>
 <p>The first issue I had was that Alembic was generating a migration that would <em>drop</em> tables instead of creating them. After some investigation, I realized that it was because the <code>metadata</code> object I imported was <em>empty</em>. With Ormar, the metadata object is populated only when loading the models definitions. So instead of importing it from my <code>db</code> module which only instantiated it, I imported it from my <code>models</code> module which uses it to declare my models classes:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">my_app.models</span> <span class="kn">import</span> <span class="n">metadata</span>
+
 <span class="n">target_metadata</span> <span class="o">=</span> <span class="n">metadata</span>
 </code></pre></div>
 <p>I deleted the broken migration, and recreated a correct one:</p>
@@ -2262,7 +2264,7 @@ Please refer to the batch mode feature which allows for SQLite migrations using 
 <div class="highlight"><pre><span></span><code><span class="n">context</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span>
     <span class="n">connection</span><span class="o">=</span><span class="n">connection</span><span class="p">,</span>
     <span class="n">target_metadata</span><span class="o">=</span><span class="n">target_metadata</span><span class="p">,</span>
-    <span class="n">render_as_batch</span><span class="o">=</span><span class="kc">True</span>
+    <span class="n">render_as_batch</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="c1"># in both run_migrations_offline() and run_migrations_online()!</span>
@@ -2273,14 +2275,16 @@ Please refer to the batch mode feature which allows for SQLite migrations using 
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_url</span><span class="p">():</span>
     <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;SQLITE_DB&quot;</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">get_main_option</span><span class="p">(</span><span class="s2">&quot;sqlalchemy.url&quot;</span><span class="p">))</span>
 
-<span class="c1"># in run_migrations_offline:</span>
+    <span class="c1"># in run_migrations_offline:</span>
     <span class="n">url</span> <span class="o">=</span> <span class="n">get_url</span><span class="p">()</span>
 
-<span class="c1"># in run_migrations_online:</span>
+    <span class="c1"># in run_migrations_online:</span>
     <span class="n">configuration</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get_section</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">config_ini_section</span><span class="p">)</span>
     <span class="n">configuration</span><span class="p">[</span><span class="s2">&quot;sqlalchemy.url&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_url</span><span class="p">()</span>
     <span class="n">connectable</span> <span class="o">=</span> <span class="n">engine_from_config</span><span class="p">(</span>
-        <span class="n">configuration</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;sqlalchemy.&quot;</span><span class="p">,</span> <span class="n">poolclass</span><span class="o">=</span><span class="n">pool</span><span class="o">.</span><span class="n">NullPool</span><span class="p">,</span>
+        <span class="n">configuration</span><span class="p">,</span>
+        <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;sqlalchemy.&quot;</span><span class="p">,</span>
+        <span class="n">poolclass</span><span class="o">=</span><span class="n">pool</span><span class="o">.</span><span class="n">NullPool</span><span class="p">,</span>
     <span class="p">)</span>
 </code></pre></div>
 <p>I was inspired by <a href="https://github.com/tiangolo/full-stack-fastapi-postgresql/blob/master/%7B%7Bcookiecutter.project_slug%7D%7D/backend/app/alembic/env.py">this FastAPI example</a>.</p>
@@ -2304,6 +2308,7 @@ Please refer to the batch mode feature which allows for SQLite migrations using 
 <span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">()</span>
 <span class="n">app</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">database</span> <span class="o">=</span> <span class="n">database</span>
 
+
 <span class="nd">@app</span><span class="o">.</span><span class="n">on_event</span><span class="p">(</span><span class="s2">&quot;startup&quot;</span><span class="p">)</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">startup</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Startup application.&quot;&quot;&quot;</span>
@@ -2320,9 +2325,7 @@ Please refer to the batch mode feature which allows for SQLite migrations using 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">database</span><span class="o">.</span><span class="n">is_connected</span><span class="p">:</span>
         <span class="k">await</span> <span class="n">database</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
 </code></pre></div>
-<p>In my <a href="./">next post</a>,
-you will see how to write tests for such setups,
-but also how to configure all this in a more robust and elegant way.</p>
+<p>In my <a href="./">next post</a>, you will see how to write tests for such setups, but also how to configure all this in a more robust and elegant way.</p>
 
   <!-- Giscus -->
   <!-- https://squidfunk.github.io/mkdocs-material/setup/adding-a-comment-system/#giscus-integration -->

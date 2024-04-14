@@ -2089,14 +2089,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../showcase/failprint/" class="md-nav__link">
+      <a href="../../showcase/duty/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     
   
     <span class="md-typeset">
-      failprint
+      duty
     </span>
   
 
@@ -2522,97 +2522,55 @@
   
     <div class="crop-excerpt"><img src="/assets/quest2.png"/></div>
   
-  <p>A few days ago I was finally able to setup my Linux computer and Oculus Quest 2
-to play some Steam VR games wirelessly. It tooks me several attempts over
-many months, and it was one of the most complicated process I had to discover
-and follow. So I figured I would share a small step-by-step guide to help others.</p>
-<p>Even though the process was painful for me at times, I would like to make it clear
-that the ALVR and SideQuest teams and their community have nothing to do with that:
-they are doing an <em>amazing job</em> and I'm very thankful for that.</p>
+  <p>A few days ago I was finally able to setup my Linux computer and Oculus Quest 2 to play some Steam VR games wirelessly. It tooks me several attempts over many months, and it was one of the most complicated process I had to discover and follow. So I figured I would share a small step-by-step guide to help others.</p>
+<p>Even though the process was painful for me at times, I would like to make it clear that the ALVR and SideQuest teams and their community have nothing to do with that: they are doing an <em>amazing job</em> and I'm very thankful for that.</p>
 <!--more-->
 
 <hr />
 <h2 id="preparation">Preparation<a class="headerlink" href="#preparation" title="Permanent link">¤</a></h2>
 <ul>
-<li>I recommend doing this with a friend: you'll probably have to put
-  the Quest 2 headset back and forth many times. It's easier if there's one
-  person on the computer and another one wearing the headset.
-  It's definitely doable alone though, just a bit more annoying.</li>
+<li>I recommend doing this with a friend: you'll probably have to put the Quest 2 headset back and forth many times. It's easier if there's one person on the computer and another one wearing the headset. It's definitely doable alone though, just a bit more annoying.</li>
 <li>Make sure your headset and controllers are charged.</li>
-<li>Make sure your headset is up-to-date. Go to Settings, System, Updates,
-and install any available updates.</li>
-<li>Make sure your headset is connected to WiFi, and that your computer
-  is connected to the same network, preferably over a wired connection.
-  The Wifi emitter should broadcast on the 5GHz range. I don't know if this is
-  mandatory or if other ranges work too (2.4GHz, 6GHz, etc.). I suppose
-  it's just a matter of performance.</li>
-<li>Get a good USB-C cable. Preferably a long one: if wireless doesn't work in the end,
-  you will at least have a long cable to allow you to move more freely when playing.</li>
+<li>Make sure your headset is up-to-date. Go to Settings, System, Updates, and install any available updates.</li>
+<li>Make sure your headset is connected to WiFi, and that your computer is connected to the same network, preferably over a wired connection. The Wifi emitter should broadcast on the 5GHz range. I don't know if this is mandatory or if other ranges work too (2.4GHz, 6GHz, etc.). I suppose it's just a matter of performance.</li>
+<li>Get a good USB-C cable. Preferably a long one: if wireless doesn't work in the end, you will at least have a long cable to allow you to move more freely when playing.</li>
 </ul>
-<p>At any step of the way, if something isn't working,
-it's probably a good idea to reboot.</p>
+<p>At any step of the way, if something isn't working, it's probably a good idea to reboot.</p>
 <h2 id="install-steamvr">Install SteamVR<a class="headerlink" href="#install-steamvr" title="Permanent link">¤</a></h2>
-<p>This one is easy. Open Steam, search for SteamVR in the store, and install it.
-It weighs 5GB so better start downloading now.</p>
+<p>This one is easy. Open Steam, search for SteamVR in the store, and install it. It weighs 5GB so better start downloading now.</p>
 <p><img alt="steamvr" src="../../assets/steamvr.png" /></p>
 <h2 id="install-some-system-packages">Install some system packages<a class="headerlink" href="#install-some-system-packages" title="Permanent link">¤</a></h2>
 <p>ALVR will need some packages to allow the connection from your Quest 2.</p>
 <div class="highlight"><pre><span></span><code>yay<span class="w"> </span>-S<span class="w"> </span>pipewire<span class="w"> </span>pipewire-alsa<span class="w"> </span>pipewire-pulse
 </code></pre></div>
-<p>The last two packages will replace <code>pulseaudio</code> and <code>pulseaudio-alsa</code>.
-<a href="https://wiki.archlinux.org/title/PipeWire">PipeWire</a> seems to be a modern
-and promising solution, so I took the leap and replaced them. To make sure
-audio was still working, I rebooted the computer and played some audio files,
-as well as videos in the browser. All worked fine.</p>
-<p>ALVR also offers to configure your firewall to add rules allowing the
-Quest 2 client to connect. If you don't have a firewall like <code>ufw</code> installed,
-it's alright, you don't need it. ALVR will tell you it couldn't configure
-the firewall, but it shouldn't cause any issue: without a firewall the ports
-used by ALVR will be open. If you still want to install a setup a firewall,
-you can use <code>ufw</code>:</p>
+<p>The last two packages will replace <code>pulseaudio</code> and <code>pulseaudio-alsa</code>. <a href="https://wiki.archlinux.org/title/PipeWire">PipeWire</a> seems to be a modern and promising solution, so I took the leap and replaced them. To make sure audio was still working, I rebooted the computer and played some audio files, as well as videos in the browser. All worked fine.</p>
+<p>ALVR also offers to configure your firewall to add rules allowing the Quest 2 client to connect. If you don't have a firewall like <code>ufw</code> installed, it's alright, you don't need it. ALVR will tell you it couldn't configure the firewall, but it shouldn't cause any issue: without a firewall the ports used by ALVR will be open. If you still want to install a setup a firewall, you can use <code>ufw</code>:</p>
 <div class="highlight"><pre><span></span><code>yay<span class="w"> </span>-S<span class="w"> </span>ufw
 sudo<span class="w"> </span>ufw<span class="w"> </span><span class="nb">enable</span>
 </code></pre></div>
-<p><em>I think</em> you will also need to install <a href="https://wiki.archlinux.org/title/Android_Debug_Bridge">ADB</a>,
-because if I understand correctly, the Oculus Quest 2 runs an Android system.
-I'm not sure because I have done all this many months ago.</p>
+<p><em>I think</em> you will also need to install <a href="https://wiki.archlinux.org/title/Android_Debug_Bridge">ADB</a>, because if I understand correctly, the Oculus Quest 2 runs an Android system. I'm not sure because I have done all this many months ago.</p>
 <div class="highlight"><pre><span></span><code>yay<span class="w"> </span>-S<span class="w"> </span>adb
 </code></pre></div>
 <h2 id="install-a-rust-toolchain">Install a Rust toolchain<a class="headerlink" href="#install-a-rust-toolchain" title="Permanent link">¤</a></h2>
-<p>ALVR will be installed from sources, and it's written in Rust,
-so you'll need a Rust toolchain. Official guides recommend <code>rustup</code>:</p>
+<p>ALVR will be installed from sources, and it's written in Rust, so you'll need a Rust toolchain. Official guides recommend <code>rustup</code>:</p>
 <div class="highlight"><pre><span></span><code>yay<span class="w"> </span>-S<span class="w"> </span>rustup
 rustup<span class="w"> </span>update
 </code></pre></div>
-<p>Make sure to run <code>rustup update</code> if you already had <code>rustup</code> installed:
-compiling ALVR will require recent versions of <code>rustc</code>.</p>
+<p>Make sure to run <code>rustup update</code> if you already had <code>rustup</code> installed: compiling ALVR will require recent versions of <code>rustc</code>.</p>
 <h2 id="install-alvr">Install ALVR<a class="headerlink" href="#install-alvr" title="Permanent link">¤</a></h2>
 <p>Now you can install ALVR:</p>
 <div class="highlight"><pre><span></span><code>yay<span class="w"> </span>-S<span class="w"> </span>alvr
 </code></pre></div>
 <div class="admonition warning">
 <p class="admonition-title">It takes a lot of RAM!</p>
-<p>
-Compiling ALVR took <strong>13GB of RAM</strong> on my system.
-Make sure to close all other programs on your computer before installing ALVR.
-It can take quite some time too, even with a good CPU.</p>
+<p> Compiling ALVR took <strong>13GB of RAM</strong> on my system. Make sure to close all other programs on your computer before installing ALVR. It can take quite some time too, even with a good CPU.</p>
 </div>
 <h2 id="setup-alvr">Setup ALVR<a class="headerlink" href="#setup-alvr" title="Permanent link">¤</a></h2>
 <div class="admonition tip">
 <p class="admonition-title">Plug the headset</p>
-<p>
-At this point, I recommend plugging the headset onto the computer
-with the USB-C cable, and powering on the headset. I don't remember
-exactly when, but you'll get system popups in the headset asking
-you to allow USB data transfer, debug mode and other similar things.
-Also, it will let you know early if the USB-C cable is good enough
-for your headset to be detected by ALVR/SideQuest (months ago
-my headset was not detected and it probably was because my USB-C
-cable was not good enough).</p>
+<p> At this point, I recommend plugging the headset onto the computer with the USB-C cable, and powering on the headset. I don't remember exactly when, but you'll get system popups in the headset asking you to allow USB data transfer, debug mode and other similar things. Also, it will let you know early if the USB-C cable is good enough for your headset to be detected by ALVR/SideQuest (months ago my headset was not detected and it probably was because my USB-C cable was not good enough).</p>
 </div>
-<p>You should now have an <code>alvr_dashboard</code> command on your system,
-but before running it launch SteamVR once and close it.
-Official guides say it's needed to initialize SteamVR's configuration.</p>
+<p>You should now have an <code>alvr_dashboard</code> command on your system, but before running it launch SteamVR once and close it. Official guides say it's needed to initialize SteamVR's configuration.</p>
 <p>Now run <code>alvr_dashboard</code>. It will run a setup wizard, asking you to:</p>
 <ul>
 <li>reset settings: click reset</li>
@@ -2623,95 +2581,49 @@ Official guides say it's needed to initialize SteamVR's configuration.</p>
 <li>read some information: click next</li>
 </ul>
 <p>ALVR and your system should now be configured correctly.</p>
-<p>On ALVR's <strong>Connections</strong> tab, you will see a warning that
-"the streamer is not connected". Simply click the "Launch SteamVR" button
-to run SteamVR from ALVR.</p>
+<p>On ALVR's <strong>Connections</strong> tab, you will see a warning that "the streamer is not connected". Simply click the "Launch SteamVR" button to run SteamVR from ALVR.</p>
 <p><img alt="alvr_connections" src="../../assets/alvr_connections.png" /></p>
-<p><em>In the screenshot you see that I already have a trusted client.
-In your case, you shouldn't see any trusted client: don't worry, we will do that later.</em></p>
-<p>In the <strong>Installation</strong> tab, you'll see
-a button to "register ALVR driver". It is supposed to configure SteamVR
-so that launching it directly from Steam will also run ALVR alongside it.
-It does not work for me, so I always first open ALVR and then launch SteamVR from it.</p>
+<p><em>In the screenshot you see that I already have a trusted client. In your case, you shouldn't see any trusted client: don't worry, we will do that later.</em></p>
+<p>In the <strong>Installation</strong> tab, you'll see a button to "register ALVR driver". It is supposed to configure SteamVR so that launching it directly from Steam will also run ALVR alongside it. It does not work for me, so I always first open ALVR and then launch SteamVR from it.</p>
 <p><img alt="alvr_installation" src="../../assets/alvr_installation.png" /></p>
-<p>Once SteamVR is running, you should see a small window and icons
-telling you that the headset is correctly detected:</p>
+<p>Once SteamVR is running, you should see a small window and icons telling you that the headset is correctly detected:</p>
 <p><img alt="steamvr_connected" src="../../assets/steamvr_connected.png" /></p>
 <h2 id="install-sidequest">Install SideQuest<a class="headerlink" href="#install-sidequest" title="Permanent link">¤</a></h2>
-<p>SideQuest will allow you to "sideload" (upload) files onto your Quest 2.
-We will use it to sideload the SideQuest app on the headset.
-Why isn't there a SideQuest app installable in the Meta Quest Store? I don't know.
-Probably because the devs didn't have time or capacity to do that yet,
-or because of policy reasons, like Meta not allowing it <img alt="🤷" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1f937.svg" title=":shrug:" /></p>
+<p>SideQuest will allow you to "sideload" (upload) files onto your Quest 2. We will use it to sideload the SideQuest app on the headset. Why isn't there a SideQuest app installable in the Meta Quest Store? I don't know. Probably because the devs didn't have time or capacity to do that yet, or because of policy reasons, like Meta not allowing it <img alt="🤷" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1f937.svg" title=":shrug:" /></p>
 <ul>
 <li>Download the SideQuest "easy installer" here: <a href="https://sidequestvr.com/setup-howto">https://sidequestvr.com/setup-howto</a>.</li>
 <li>Go to your Downloads folder and extract the archive.</li>
 <li>Go into the extracted folder and run <code>./sidequestlite</code>.</li>
 </ul>
 <p><img alt="sidequest" src="../../assets/sidequest.png" /></p>
-<p>SideQuest greets you with a button to open some setup instructions.
-Click on it to watch a video showing you stop steps to follow:
-enabling developer mode on the headset and installing ADB.</p>
+<p>SideQuest greets you with a button to open some setup instructions. Click on it to watch a video showing you stop steps to follow: enabling developer mode on the headset and installing ADB.</p>
 <p><img alt="sidequest_setup" src="../../assets/sidequest_setup.png" /></p>
-<p>I did that months ago, so I don't remember if I had any issues (I think I didn't).
-The only annoying thing is that I had a mess of Meta, Facebook, Oculus and email accounts,
-and I had to ask support to merge my accounts. In these cases, support asks
-for the headset and controllers unique identifiers, and I had to watch a video
-on YouTube made by a random person to learn how to "open" the headset
-because the official docs were very poor on how to do this.</p>
-<p>Upon completing the setup, you will get popups in the headset asking you
-to authorize the connection: allow it and if asked, always remember your choice.</p>
-<p>Once you have completed the setup, the home tab of SideQuest should display
-an "Install SideQuest in your headset" button. Click on it, wait a bit.
-In my case, since it's already installed, it shows "Reinstall SideQuest".</p>
+<p>I did that months ago, so I don't remember if I had any issues (I think I didn't). The only annoying thing is that I had a mess of Meta, Facebook, Oculus and email accounts, and I had to ask support to merge my accounts. In these cases, support asks for the headset and controllers unique identifiers, and I had to watch a video on YouTube made by a random person to learn how to "open" the headset because the official docs were very poor on how to do this.</p>
+<p>Upon completing the setup, you will get popups in the headset asking you to authorize the connection: allow it and if asked, always remember your choice.</p>
+<p>Once you have completed the setup, the home tab of SideQuest should display an "Install SideQuest in your headset" button. Click on it, wait a bit. In my case, since it's already installed, it shows "Reinstall SideQuest".</p>
 <p><img alt="sidequest_complete" src="../../assets/sidequest_complete.png" /></p>
 <p>Leave SideQuest opened on your compute, and head into the headset (pun intended).</p>
 <h2 id="install-alvr-app-in-headset">Install ALVR app in headset<a class="headerlink" href="#install-alvr-app-in-headset" title="Permanent link">¤</a></h2>
-<p>In the headset, go to Applications, and filter with "unknown sources".
-You should see the SideQuest app. If you don't, go back to SideQuest on the computer
-and click on "Reinstall" or "Update". Do that until the app shows up in the headset.</p>
-<p>Once the SideQuest app shows up in your "unknown sources" applications,
-you can launch it, and close SideQuest on your computer.</p>
-<p>The SideQuest app will ask you to register your headset by going to <a href="https://sdq.st/link">https://sdq.st/link</a>
-and entering the code displayed in your headset. I think you will need to create an account for that.
-Once you entered the code, a popup in the headset will ask you to accept the connection. Accept it.</p>
-<p>You should now be able to explore SideQuest's contents in your headset.
-Search for ALVR and install it. Why isn't there an ALVR app directly in the Meta Quest Store?
-I don't know, and it's probably because of the same reasons there isn't a SideQuest app either.</p>
-<p>Once installed, run the ALVR app in your headset. It will ask you to "Trust" the client
-on your computer, so go back to your computer, in the ALVR Dashboard, and click
-"Trust" in the Connections tab. If everything was configured correctly,
-the headset should now be linked and trusted. Back into the headset,
-the ALVR app should now bring you to a virtual room, displaying a board
-with all your Steam VR games.</p>
+<p>In the headset, go to Applications, and filter with "unknown sources". You should see the SideQuest app. If you don't, go back to SideQuest on the computer and click on "Reinstall" or "Update". Do that until the app shows up in the headset.</p>
+<p>Once the SideQuest app shows up in your "unknown sources" applications, you can launch it, and close SideQuest on your computer.</p>
+<p>The SideQuest app will ask you to register your headset by going to <a href="https://sdq.st/link">https://sdq.st/link</a> and entering the code displayed in your headset. I think you will need to create an account for that. Once you entered the code, a popup in the headset will ask you to accept the connection. Accept it.</p>
+<p>You should now be able to explore SideQuest's contents in your headset. Search for ALVR and install it. Why isn't there an ALVR app directly in the Meta Quest Store? I don't know, and it's probably because of the same reasons there isn't a SideQuest app either.</p>
+<p>Once installed, run the ALVR app in your headset. It will ask you to "Trust" the client on your computer, so go back to your computer, in the ALVR Dashboard, and click "Trust" in the Connections tab. If everything was configured correctly, the headset should now be linked and trusted. Back into the headset, the ALVR app should now bring you to a virtual room, displaying a board with all your Steam VR games.</p>
 <h2 id="play-games">Play games<a class="headerlink" href="#play-games" title="Permanent link">¤</a></h2>
-<p>Now each time you want to play VR games wirelessly in your Quest 2 headset,
-you'll have to:</p>
+<p>Now each time you want to play VR games wirelessly in your Quest 2 headset, you'll have to:</p>
 <ul>
 <li>run <code>alvr_dashboard</code> on your computer</li>
 <li>launch SteamVR through it</li>
 <li>launch the ALVR app in your headset</li>
 <li>launch a Steam VR game from the virtual ALVR room</li>
 </ul>
-<p>You might get some issues, like some games detecting wrong controllers,
-preventing you to play, or audio not coming out of the headset.</p>
-<p>For the controllers, it might be possible to change some settings
-in SteamVR settings (click the menu icon in the small SteamVR window),
-but for some reason the settings window is bugged
-on my computer, so I can't configure anything there.</p>
-<p>For the audio issue, you can easily open <code>pavucontrol</code> to output
-audio on something else, like a sound system plugged on your computer.
-I'm not sure yet how to fix it for good and have audio come out of the headset,
-and even official guides say it's very experimental yet.</p>
-<p>In any case, make sure to check out <a href="https://github.com/alvr-org/ALVR/wiki">ALVR's wiki</a>,
-particularly any Troubleshooting page.</p>
+<p>You might get some issues, like some games detecting wrong controllers, preventing you to play, or audio not coming out of the headset.</p>
+<p>For the controllers, it might be possible to change some settings in SteamVR settings (click the menu icon in the small SteamVR window), but for some reason the settings window is bugged on my computer, so I can't configure anything there.</p>
+<p>For the audio issue, you can easily open <code>pavucontrol</code> to output audio on something else, like a sound system plugged on your computer. I'm not sure yet how to fix it for good and have audio come out of the headset, and even official guides say it's very experimental yet.</p>
+<p>In any case, make sure to check out <a href="https://github.com/alvr-org/ALVR/wiki">ALVR's wiki</a>, particularly any Troubleshooting page.</p>
 <p>Happy VR!</p>
 <h2 id="further-notes">Further notes<a class="headerlink" href="#further-notes" title="Permanent link">¤</a></h2>
-<p>I recently learned about <a href="https://store.steampowered.com/app/353380/Steam_Link/">Steam Link</a>.
-I told myself: "amazing! finally something straightforward, I won't have to tinker
-with third-party stuff!". I didn't even <strong>wonder</strong> if it would work on Linux,
-because, you know, it works over the network so if I can install it both on the computer and the headset,
-and Steam can run the game, then the OS doesn't matter, right?</p>
+<p>I recently learned about <a href="https://store.steampowered.com/app/353380/Steam_Link/">Steam Link</a>. I told myself: "amazing! finally something straightforward, I won't have to tinker with third-party stuff!". I didn't even <strong>wonder</strong> if it would work on Linux, because, you know, it works over the network so if I can install it both on the computer and the headset, and Steam can run the game, then the OS doesn't matter, right?</p>
 <pre class="mermaid"><code>flowchart LR
 s[Steam]
 slc[Steam Link]
@@ -2720,11 +2632,8 @@ slh[Steam Link]
 q[Quest 2]
 
 s --- slc --- w --- slh --- q</code></pre>
-<p>Well no, it doesn't work on Linux <img alt="🤦" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1f926.svg" title=":facepalm:" />
-And I find this very surprising given <a href="https://store.steampowered.com/steamos">SteamOS</a>
-itself is based on Linux.</p>
-<p>Or maybe it's only the Quest2 part that doesn't work?
-I have no idea. I'll be happy to update the post if someone knows this <img alt="😄" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1f604.svg" title=":smile:" /></p>
+<p>Well no, it doesn't work on Linux <img alt="🤦" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1f926.svg" title=":facepalm:" /> And I find this very surprising given <a href="https://store.steampowered.com/steamos">SteamOS</a> itself is based on Linux.</p>
+<p>Or maybe it's only the Quest2 part that doesn't work? I have no idea. I'll be happy to update the post if someone knows this <img alt="😄" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1f604.svg" title=":smile:" /></p>
 <p>Anyway, I'll keep an eye on it!</p>
 
   <!-- Giscus -->

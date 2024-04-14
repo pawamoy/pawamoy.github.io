@@ -1922,14 +1922,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../showcase/failprint/" class="md-nav__link">
+      <a href="../../showcase/duty/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     
   
     <span class="md-typeset">
-      failprint
+      duty
     </span>
   
 
@@ -2217,9 +2217,7 @@
     by Timothée Mazzucotelli
   </p>
   
-  <p>When you type <code>change git commit</code> or similar keywords in a search engine,
-you find many answers explaning how to rewrite a commit <em>message</em>,
-but not how to actually modify the <em>contents</em> of the commit.</p>
+  <p>When you type <code>change git commit</code> or similar keywords in a search engine, you find many answers explaning how to rewrite a commit <em>message</em>, but not how to actually modify the <em>contents</em> of the commit.</p>
 <p>This post quickly explains how to do that.</p>
 <!--more-->
 
@@ -2230,36 +2228,27 @@ In this screenshot I use my <code>gl</code> alias which expands to:</p>
 <div class="highlight"><pre><span></span><code>git<span class="w"> </span>log<span class="w"> </span>--pretty<span class="o">=</span>format:<span class="s1">&#39;%C(yellow)%h %Cgreen%ad %Cblue%an%Cgreen%d %Creset%s&#39;</span><span class="w"> </span>--date<span class="o">=</span>short<span class="w"> </span>--graph
 </code></pre></div>
 <p></small></p>
-<p>Here I want to modify the contents of the third commit,
-<code>feat: Refactor and add features</code>, because I mistakenly
-committed modifications to the changelog
-which I didn't want.</p>
-<p>So I run an interactive git rebase down to this commit
-by running:</p>
+<p>Here I want to modify the contents of the third commit, <code>feat: Refactor and add features</code>, because I mistakenly committed modifications to the changelog which I didn't want.</p>
+<p>So I run an interactive git rebase down to this commit by running:</p>
 <div class="highlight"><pre><span></span><code>git<span class="w"> </span>rebase<span class="w"> </span>-i<span class="w"> </span>HEAD~3
 </code></pre></div>
 <p><img alt="edit-commit-2" src="../../assets/edit-commit2.png" /></p>
-<p>This command launches your git editor (vim here)
-to tell git what to do. Here we tell git to stop
-right after the commit we want to modify:</p>
+<p>This command launches your git editor (vim here) to tell git what to do. Here we tell git to stop right after the commit we want to modify:</p>
 <p><img alt="edit-commit-3" src="../../assets/edit-commit3.png" /></p>
-<p>We save and quit this temporary file (with <code>:wq</code>),
-and git tells us that it stopped at the desired commit:</p>
+<p>We save and quit this temporary file (with <code>:wq</code>), and git tells us that it stopped at the desired commit:</p>
 <p><img alt="edit-commit-4" src="../../assets/edit-commit4.png" /></p>
 <p><small>
 Don't pay attention to the commit SHA:
 I took the screenshot afterwards so they don't match <img alt="😄" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1f604.svg" title=":smile:" />
 </small></p>
 <p>Now you can start modifying, adding or deleting files!</p>
-<p>In my case I wanted to remove wrong sections in <code>CHANGELOG.md</code>,
-as well as remove conflict-resolution lines in <code>pyproject.toml</code>.</p>
+<p>In my case I wanted to remove wrong sections in <code>CHANGELOG.md</code>, as well as remove conflict-resolution lines in <code>pyproject.toml</code>.</p>
 <p><img alt="edit-commit-5" src="../../assets/edit-commit5.png" /></p>
 <p><small>
 In this screenshot I use my <code>gs</code> alias
 which expands to <code>git status -sb</code>.
 </small> </p>
-<p>All you have to do now is to amend the current commit
-(the one at which we stopped, the one we wanted to modify):</p>
+<p>All you have to do now is to amend the current commit (the one at which we stopped, the one we wanted to modify):</p>
 <div class="highlight"><pre><span></span><code>git<span class="w"> </span>commit<span class="w"> </span>-a<span class="w"> </span>--amend<span class="w"> </span>--no-edit
 <span class="c1"># --no-edit because we don&#39;t want to edit the message</span>
 </code></pre></div>

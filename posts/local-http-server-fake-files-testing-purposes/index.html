@@ -2088,14 +2088,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../showcase/failprint/" class="md-nav__link">
+      <a href="../../showcase/duty/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     
   
     <span class="md-typeset">
-      failprint
+      duty
     </span>
   
 
@@ -2518,51 +2518,23 @@
     by Timothée Mazzucotelli
   </p>
   
-  <p>I have developed a Python client/library
-for <a href="https://aria2.github.io/"><code>aria2</code></a>
-called <a href="https://github.com/pawamoy/aria2p"><code>aria2p</code></a>.</p>
-<p>To test my code, I spawn <code>aria2c</code> processes
-to interact with them and see if everything works correctly.
-I know I could mock the calls, but I feel like actually
-testing the interaction between my client and <code>aria2c</code>
-is a better way to ensure my code does its best.</p>
-<p>Until recently the test suite fed actual downloads to <code>aria2c</code>
-(like Linux distributions ISOs, metalinks, magnets, or torrents),
-but of course the inevitable happened: some URLs broke.</p>
-<p>So I decided to go full local.
-This post describes my attempt at spawning local HTTP servers
-to serve fake/virtual files efficiently,
-files that are then fed to <code>aria2c</code>.</p>
+  <p>I have developed a Python client/library for <a href="https://aria2.github.io/"><code>aria2</code></a> called <a href="https://github.com/pawamoy/aria2p"><code>aria2p</code></a>.</p>
+<p>To test my code, I spawn <code>aria2c</code> processes to interact with them and see if everything works correctly. I know I could mock the calls, but I feel like actually testing the interaction between my client and <code>aria2c</code> is a better way to ensure my code does its best.</p>
+<p>Until recently the test suite fed actual downloads to <code>aria2c</code> (like Linux distributions ISOs, metalinks, magnets, or torrents), but of course the inevitable happened: some URLs broke.</p>
+<p>So I decided to go full local. This post describes my attempt at spawning local HTTP servers to serve fake/virtual files efficiently, files that are then fed to <code>aria2c</code>.</p>
 <!--more-->
 
 <h2 id="the-basics-httpserver">The basics: <code>http.server</code><a class="headerlink" href="#the-basics-httpserver" title="Permanent link">¤</a></h2>
-<p>As you may already know, Python's standard library provides
-a ready-to-go HTTP server that can serve files from a folder.
-It lives in the <code>http.server</code> module, and you can run it in
-a single command:</p>
+<p>As you may already know, Python's standard library provides a ready-to-go HTTP server that can serve files from a folder. It lives in the <code>http.server</code> module, and you can run it in a single command:</p>
 <div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>http.server
 </code></pre></div>
-<p>This will serve the contents of your current working directory
-on <code>http://0.0.0.0:8000</code>.</p>
-<p>I was already using it in some tests when I needed to feed
-very small files to <code>aria2c</code>. I was serving <code>aria2p</code>'s code folder
-to use the LICENSE file: 759 bytes.</p>
-<p>So, the simplest solution that immediately came to mind was:
-dump text into files with predefined sizes,
-like 1B, 100B, 1KiB, 100KiB, 1MiB, 10MiB, 100MiB, etc.
-And do this each time you run the test suite,
-in a temporary directory that you will serve using
-Python's built-in HTTP server.</p>
-<p>But that sounds a bit wasteful, right? Wasting disk cycles on
-expensive SSDs is not really attractive.
-So it led me to the next solution.</p>
+<p>This will serve the contents of your current working directory on <code>http://0.0.0.0:8000</code>.</p>
+<p>I was already using it in some tests when I needed to feed very small files to <code>aria2c</code>. I was serving <code>aria2p</code>'s code folder to use the LICENSE file: 759 bytes.</p>
+<p>So, the simplest solution that immediately came to mind was: dump text into files with predefined sizes, like 1B, 100B, 1KiB, 100KiB, 1MiB, 10MiB, 100MiB, etc. And do this each time you run the test suite, in a temporary directory that you will serve using Python's built-in HTTP server.</p>
+<p>But that sounds a bit wasteful, right? Wasting disk cycles on expensive SSDs is not really attractive. So it led me to the next solution.</p>
 <h3 id="serving-files-from-memory">Serving files from memory<a class="headerlink" href="#serving-files-from-memory" title="Permanent link">¤</a></h3>
-<p>Instead of creating files on the disk,
-why not just create them in memory?</p>
-<p>So I looked at the sources in <code>http.server</code>,
-particularly how <code>SimpleHTTPRequestHandler</code>
-sends the files contents to the client,
-and eventually ended up with this code:</p>
+<p>Instead of creating files on the disk, why not just create them in memory?</p>
+<p>So I looked at the sources in <code>http.server</code>, particularly how <code>SimpleHTTPRequestHandler</code> sends the files contents to the client, and eventually ended up with this code:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># http_server.py</span>
 <span class="kn">import</span> <span class="nn">shutil</span>
 <span class="kn">import</span> <span class="nn">socketserver</span>
@@ -2594,19 +2566,11 @@ and eventually ended up with this code:</p>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Running HTTP server on port 8000&quot;</span><span class="p">)</span>
     <span class="n">run_http_server</span><span class="p">(</span><span class="mi">8000</span><span class="p">)</span>
 </code></pre></div>
-<p>This snippet can be run directly with <code>python http_server.py</code>.
-The <code>run_http_server</code> can also be imported somewhere else.</p>
-<p>This server accepts GET requests on the path <code>/{size}</code>,
-which allows us to choose the size of the file we want to download.
-For example: <code>GET http://localhost:8000/1024</code> for 1Kib.
-The files are then only composed of ones.</p>
-<p>There is a problem however:
-this server will not support a heavy load
-(lots of tests running in parallel),
-because it can handle only one request at a time.</p>
+<p>This snippet can be run directly with <code>python http_server.py</code>. The <code>run_http_server</code> can also be imported somewhere else.</p>
+<p>This server accepts GET requests on the path <code>/{size}</code>, which allows us to choose the size of the file we want to download. For example: <code>GET http://localhost:8000/1024</code> for 1Kib. The files are then only composed of ones.</p>
+<p>There is a problem however: this server will not support a heavy load (lots of tests running in parallel), because it can handle only one request at a time.</p>
 <h3 id="multi-threading">Multi-threading<a class="headerlink" href="#multi-threading" title="Permanent link">¤</a></h3>
-<p>Thankfully, <code>socketserver</code> also provides a <code>ThreadingTCPServer</code>
-we can use. It's as simple as:</p>
+<p>Thankfully, <code>socketserver</code> also provides a <code>ThreadingTCPServer</code> we can use. It's as simple as:</p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">run_http_server</span><span class="p">(</span><span class="n">port</span><span class="o">=</span><span class="n">PORT</span><span class="p">):</span>
     <span class="k">with</span> <span class="n">socketserver</span><span class="o">.</span><span class="n">ThreadingTCPServer</span><span class="p">((</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">port</span><span class="p">),</span> <span class="n">RequestHandler</span><span class="p">)</span> <span class="k">as</span> <span class="n">httpd</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
@@ -2615,11 +2579,8 @@ we can use. It's as simple as:</p>
             <span class="n">httpd</span><span class="o">.</span><span class="n">server_close</span><span class="p">()</span>
 </code></pre></div>
 <h3 id="reusable-address">Reusable address<a class="headerlink" href="#reusable-address" title="Permanent link">¤</a></h3>
-<p>Even with the <code>finally</code> clause,
-I noticed that the address kept being "in use"
-for up to a minute sometimes, after the server was killed.</p>
-<p>This can be alleviated with the <code>allow_reuse_address</code> attribute
-of the socket server:</p>
+<p>Even with the <code>finally</code> clause, I noticed that the address kept being "in use" for up to a minute sometimes, after the server was killed.</p>
+<p>This can be alleviated with the <code>allow_reuse_address</code> attribute of the socket server:</p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Server</span><span class="p">(</span><span class="n">socketserver</span><span class="o">.</span><span class="n">ThreadingTCPServer</span><span class="p">):</span>
     <span class="n">allow_reuse_address</span> <span class="o">=</span> <span class="kc">True</span>
 
@@ -2632,19 +2593,11 @@ of the socket server:</p>
             <span class="n">httpd</span><span class="o">.</span><span class="n">server_close</span><span class="p">()</span>
 </code></pre></div>
 <h3 id="still-not-enough">Still not enough<a class="headerlink" href="#still-not-enough" title="Permanent link">¤</a></h3>
-<p>But even with all this, many tests were still failing,
-and the standard error captured by <code>pytest</code> showed
-a lot of <code>BrokenPipe</code> errors coming from the server.</p>
-<p>I think it's because this server is way too simple,
-and handles only GET requests. Maybe <code>aria2c</code> is using
-HEAD as well? What about its "pausing" feature,
-allowing to pause downloads and resume them?
-Will the server handle it correctly?</p>
-<p>So, instead of digging more into this,
-I decided to try running a <em>proper</em> server.</p>
+<p>But even with all this, many tests were still failing, and the standard error captured by <code>pytest</code> showed a lot of <code>BrokenPipe</code> errors coming from the server.</p>
+<p>I think it's because this server is way too simple, and handles only GET requests. Maybe <code>aria2c</code> is using HEAD as well? What about its "pausing" feature, allowing to pause downloads and resume them? Will the server handle it correctly?</p>
+<p>So, instead of digging more into this, I decided to try running a <em>proper</em> server.</p>
 <h2 id="with-fastapi">With FastAPI<a class="headerlink" href="#with-fastapi" title="Permanent link">¤</a></h2>
-<p>I've been using <a href="https://fastapi.tiangolo.com/">FastAPI</a> recently,
-so I gave it a try. A very small amount of code was needed:</p>
+<p>I've been using <a href="https://fastapi.tiangolo.com/">FastAPI</a> recently, so I gave it a try. A very small amount of code was needed:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># http_server.py</span>
 <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
 
@@ -2656,22 +2609,14 @@ so I gave it a try. A very small amount of code was needed:</p>
 
 <span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{size}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="n">size</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">StreamingResponse</span><span class="p">(</span><span class="n">BytesIO</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;1&quot;</span> <span class="o">*</span> <span class="n">size</span><span class="p">),</span> <span class="n">media_type</span><span class="o">=</span><span class="s2">&quot;application/octet-stream&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">StreamingResponse</span><span class="p">(</span>
+        <span class="n">BytesIO</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;1&quot;</span> <span class="o">*</span> <span class="n">size</span><span class="p">),</span> <span class="n">media_type</span><span class="o">=</span><span class="s2">&quot;application/octet-stream&quot;</span>
+    <span class="p">)</span>
 </code></pre></div>
-<p>I went with a <code>StreamingResponse</code>
-because the <code>FileResponse</code> only accepts paths to actual files.</p>
-<p>To run the server, I run this command: <code>uvicorn http_server:app</code>.
-And it seems to work great!
-All the tests that were previously failing now pass.</p>
+<p>I went with a <code>StreamingResponse</code> because the <code>FileResponse</code> only accepts paths to actual files.</p>
+<p>To run the server, I run this command: <code>uvicorn http_server:app</code>. And it seems to work great! All the tests that were previously failing now pass.</p>
 <h3 id="trying-to-be-clever">Trying to be clever<a class="headerlink" href="#trying-to-be-clever" title="Permanent link">¤</a></h3>
-<p>I'm still not really satisfied with this solution.
-It feels wasteful to allocate memory for each handled request.
-I tried storing the <code>BytesIO</code> object into a dictionary,
-with sizes as keys, but I guess their buffer get consumed
-when sending the response, so this doesn't work
-on subsequent requests using the same size.
-Instead of storing the <code>BytesIO</code> objects,
-we can store the strings themselves!</p>
+<p>I'm still not really satisfied with this solution. It feels wasteful to allocate memory for each handled request. I tried storing the <code>BytesIO</code> object into a dictionary, with sizes as keys, but I guess their buffer get consumed when sending the response, so this doesn't work on subsequent requests using the same size. Instead of storing the <code>BytesIO</code> objects, we can store the strings themselves!</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
 
 <span class="kn">from</span> <span class="nn">fastapi</span> <span class="kn">import</span> <span class="n">FastAPI</span>
@@ -2680,19 +2625,17 @@ we can store the strings themselves!</p>
 <span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">()</span>
 <span class="n">allocated</span> <span class="o">=</span> <span class="p">{}</span>
 
+
 <span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{size}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">size</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">allocated</span><span class="p">:</span>
         <span class="n">allocated</span><span class="p">[</span><span class="n">size</span><span class="p">]</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;1&quot;</span> <span class="o">*</span> <span class="n">size</span>
-    <span class="k">return</span> <span class="n">StreamingResponse</span><span class="p">(</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">allocated</span><span class="p">[</span><span class="n">size</span><span class="p">]),</span> <span class="n">media_type</span><span class="o">=</span><span class="s2">&quot;application/octet-stream&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">StreamingResponse</span><span class="p">(</span>
+        <span class="n">BytesIO</span><span class="p">(</span><span class="n">allocated</span><span class="p">[</span><span class="n">size</span><span class="p">]),</span> <span class="n">media_type</span><span class="o">=</span><span class="s2">&quot;application/octet-stream&quot;</span>
+    <span class="p">)</span>
 </code></pre></div>
-<p>But even then, why allocating memory at all?
-Couldn't we have a really "virtual" file,
-some kind of generator that generates chunks of data,
-sent as a streaming response, and that stops at the desired size?</p>
-<p>Well the <code>StreamingResponse</code>
-<a href="https://fastapi.tiangolo.com/advanced/custom-response/#streamingresponse">accepts async generators</a>,
-so here's what I tried:</p>
+<p>But even then, why allocating memory at all? Couldn't we have a really "virtual" file, some kind of generator that generates chunks of data, sent as a streaming response, and that stops at the desired size?</p>
+<p>Well the <code>StreamingResponse</code> <a href="https://fastapi.tiangolo.com/advanced/custom-response/#streamingresponse">accepts async generators</a>, so here's what I tried:</p>
 <div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">virtual_file</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">chunks</span><span class="o">=</span><span class="mi">4096</span><span class="p">):</span>
     <span class="k">while</span> <span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">yield</span> <span class="sa">b</span><span class="s2">&quot;1&quot;</span> <span class="o">*</span> <span class="nb">min</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">chunks</span><span class="p">)</span>
@@ -2703,12 +2646,9 @@ so here's what I tried:</p>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">StreamingResponse</span><span class="p">(</span><span class="n">virtual_file</span><span class="p">(</span><span class="n">size</span><span class="p">),</span> <span class="n">media_type</span><span class="o">=</span><span class="s2">&quot;application/octet-stream&quot;</span><span class="p">)</span>
 </code></pre></div>
-<p>It seems to work, and the memory footprint is much, much lower,
-but I get a lot of <code>socket.send() raised exception.</code> messages from FastAPI,
-and a test occasionally fails. Anyway, I think it's good enough.</p>
+<p>It seems to work, and the memory footprint is much, much lower, but I get a lot of <code>socket.send() raised exception.</code> messages from FastAPI, and a test occasionally fails. Anyway, I think it's good enough.</p>
 <h3 id="additional-niceties">Additional niceties<a class="headerlink" href="#additional-niceties" title="Permanent link">¤</a></h3>
-<p>To make it easier to choose a medium-to-big file size,
-we can accept a unit suffix:</p>
+<p>To make it easier to choose a medium-to-big file size, we can accept a unit suffix:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">fastapi</span> <span class="kn">import</span> <span class="n">FastAPI</span>
 <span class="kn">from</span> <span class="nn">fastapi.responses</span> <span class="kn">import</span> <span class="n">StreamingResponse</span>
 
@@ -2722,11 +2662,11 @@ we can accept a unit suffix:</p>
         <span class="k">pass</span>
     <span class="n">size</span> <span class="o">=</span> <span class="n">size</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">size</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;k&quot;</span><span class="p">):</span>
-        <span class="n">multiplier</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="mi">10</span>
+        <span class="n">multiplier</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="mi">10</span>
     <span class="k">elif</span> <span class="n">size</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;m&quot;</span><span class="p">):</span>
-        <span class="n">multiplier</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="mi">20</span>
+        <span class="n">multiplier</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="mi">20</span>
     <span class="k">elif</span> <span class="n">size</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;g&quot;</span><span class="p">):</span>
-        <span class="n">multiplier</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="mi">30</span>
+        <span class="n">multiplier</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="mi">30</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;size unit not supported:&quot;</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
     <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">&quot;kmg&quot;</span><span class="p">))</span> <span class="o">*</span> <span class="n">multiplier</span>
@@ -2745,24 +2685,14 @@ we can accept a unit suffix:</p>
         <span class="n">media_type</span><span class="o">=</span><span class="s2">&quot;application/octet-stream&quot;</span><span class="p">,</span>
     <span class="p">)</span>
 </code></pre></div>
-<p>Note that the route <code>size</code> argument is not an integer anymore but a string.
-It allows us to send GET requests like <code>/4k</code> or <code>/100m</code>,
-values that are then translated to bytes.</p>
+<p>Note that the route <code>size</code> argument is not an integer anymore but a string. It allows us to send GET requests like <code>/4k</code> or <code>/100m</code>, values that are then translated to bytes.</p>
 <h2 id="pytest-fixture">Pytest fixture<a class="headerlink" href="#pytest-fixture" title="Permanent link">¤</a></h2>
-<p>Since I run tests in parallel thanks to the <code>pytest-xdist</code> plugin,
-I must make sure I run only one instance of the HTTP server.</p>
-<p>We can accomplish this by checking the worker ID
-(to handle both parallel and non-parallel cases)
-and by using a lock.</p>
-<p>The worker ID will be <code>master</code> for non-parallel runs.
-It can be obtained with the <code>worker_id</code> fixture.</p>
-<p>For the lock, I chose to use <code>mkdir</code> as it's an atomic operation.
-If the directory already exists, the operation fails
-(someone else already got the lock).</p>
-<p>Once the server is running, we must make sure it's ready,
-so we send GET requests until it responds.</p>
-<p>We put all this in a function and declare it a "fixture"
-with "session" scope and "automatic use":</p>
+<p>Since I run tests in parallel thanks to the <code>pytest-xdist</code> plugin, I must make sure I run only one instance of the HTTP server.</p>
+<p>We can accomplish this by checking the worker ID (to handle both parallel and non-parallel cases) and by using a lock.</p>
+<p>The worker ID will be <code>master</code> for non-parallel runs. It can be obtained with the <code>worker_id</code> fixture.</p>
+<p>For the lock, I chose to use <code>mkdir</code> as it's an atomic operation. If the directory already exists, the operation fails (someone else already got the lock).</p>
+<p>Once the server is running, we must make sure it's ready, so we send GET requests until it responds.</p>
+<p>We put all this in a function and declare it a "fixture" with "session" scope and "automatic use":</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># tests/conftest.py</span>
 <span class="kn">import</span> <span class="nn">subprocess</span>
 <span class="kn">import</span> <span class="nn">sys</span>
@@ -2773,14 +2703,16 @@ with "session" scope and "automatic use":</p>
 
 
 <span class="k">def</span> <span class="nf">spawn_and_wait_server</span><span class="p">(</span><span class="n">port</span><span class="o">=</span><span class="mi">8000</span><span class="p">):</span>
-    <span class="n">process</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">([</span>
-        <span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span>
-        <span class="s2">&quot;-m&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;uvicorn&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;tests.http_server:app&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;--port&quot;</span><span class="p">,</span>
-        <span class="nb">str</span><span class="p">(</span><span class="n">port</span><span class="p">),</span>
-    <span class="p">])</span>
+    <span class="n">process</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span>
+            <span class="s2">&quot;-m&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;uvicorn&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;tests.http_server:app&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;--port&quot;</span><span class="p">,</span>
+            <span class="nb">str</span><span class="p">(</span><span class="n">port</span><span class="p">),</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
     <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;http://localhost:</span><span class="si">{</span><span class="n">port</span><span class="si">}</span><span class="s2">/1&quot;</span><span class="p">)</span>
@@ -2819,8 +2751,7 @@ with "session" scope and "automatic use":</p>
     <span class="n">process</span><span class="o">.</span><span class="n">kill</span><span class="p">()</span>
     <span class="n">process</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
 </code></pre></div>
-<p>With this, each time you run your test suite,
-exactly one instance of the HTTP server will run.</p>
+<p>With this, each time you run your test suite, exactly one instance of the HTTP server will run.</p>
 
   <!-- Giscus -->
   <!-- https://squidfunk.github.io/mkdocs-material/setup/adding-a-comment-system/#giscus-integration -->

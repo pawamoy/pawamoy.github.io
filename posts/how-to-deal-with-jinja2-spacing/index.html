@@ -1985,14 +1985,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../showcase/failprint/" class="md-nav__link">
+      <a href="../../showcase/duty/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     
   
     <span class="md-typeset">
-      failprint
+      duty
     </span>
   
 
@@ -2312,17 +2312,11 @@
     by Timothée Mazzucotelli
   </p>
   
-  <p>It started with
-<a href="https://github.com/triaxtec/openapi-python-client/issues/138#issuecomment-670053183">a comment in a GitHub issue</a>.</p>
+  <p>It started with <a href="https://github.com/triaxtec/openapi-python-client/issues/138#issuecomment-670053183">a comment in a GitHub issue</a>.</p>
 <blockquote>
 <p>I often find it difficult to wrangle spacing jinja2 templates especially around optional clauses.</p>
 </blockquote>
-<p>I couldn't wrap my head either about this.
-So I decided to write a script and test every combination
-of newlines, indentation and dashes or no dashes in <code>{%-</code>,
-with the goal being to find combinations
-that will not have an extra middle line
-when an optional Jinja clause is false.</p>
+<p>I couldn't wrap my head either about this. So I decided to write a script and test every combination of newlines, indentation and dashes or no dashes in <code>{%-</code>, with the goal being to find combinations that will not have an extra middle line when an optional Jinja clause is false.</p>
 <!--more-->
 
 <h2 id="script">Script<a class="headerlink" href="#script" title="Permanent link">¤</a></h2>
@@ -2384,138 +2378,138 @@ when an optional Jinja clause is false.</p>
 </code></pre></div>
 <h2 id="results">Results<a class="headerlink" href="#results" title="Permanent link">¤</a></h2>
 <p>Only 19 different combinations are valid on the 448 tested ones:</p>
-<div class="highlight"><pre><span></span><code>  a
-  {% if x -%}
-  b
-  {% endif -%}
-  c
+<div class="highlight"><pre><span></span><code><span class="x">  a</span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">x</span> -<span class="cp">%}</span>
+<span class="x">  b</span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">endif</span> -<span class="cp">%}</span>
+<span class="x">  c</span>
 
----
+<span class="x">---</span>
 
-  a
-  {% if x -%}
-  b
-  {% endif -%}  c
+<span class="x">  a</span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">x</span> -<span class="cp">%}</span>
+<span class="x">  b</span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">endif</span> -<span class="cp">%}</span><span class="x">  c</span>
 
----
+<span class="x">---</span>
 
-  a
-  {% if x -%}  b
-  {% endif -%}
-  c
+<span class="x">  a</span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">x</span> -<span class="cp">%}</span><span class="x">  b</span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">endif</span> -<span class="cp">%}</span>
+<span class="x">  c</span>
 
----
+<span class="x">---</span>
 
-  a
-  {% if x -%}  b
-  {% endif -%}  c
+<span class="x">  a</span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">x</span> -<span class="cp">%}</span><span class="x">  b</span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">endif</span> -<span class="cp">%}</span><span class="x">  c</span>
 
----
+<span class="x">---</span>
 
-  a
-  {%- if x %}
-  b
-  {%- endif %}
-  c
+<span class="x">  a</span>
+<span class="x">  </span><span class="cp">{%</span>- <span class="k">if</span> <span class="nv">x</span> <span class="cp">%}</span>
+<span class="x">  b</span>
+<span class="x">  </span><span class="cp">{%</span>- <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">  c</span>
 
----
+<span class="x">---</span>
 
-  a
-  {%- if x %}
-  b{% endif %}
-  c
+<span class="x">  a</span>
+<span class="x">  </span><span class="cp">{%</span>- <span class="k">if</span> <span class="nv">x</span> <span class="cp">%}</span>
+<span class="x">  b</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">  c</span>
 
----
+<span class="x">---</span>
 
-  a
-  {%- if x %}
-  b{%- endif %}
-  c
+<span class="x">  a</span>
+<span class="x">  </span><span class="cp">{%</span>- <span class="k">if</span> <span class="nv">x</span> <span class="cp">%}</span>
+<span class="x">  b</span><span class="cp">{%</span>- <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">  c</span>
 
----
+<span class="x">---</span>
 
-  a
-{% if x %}  b
-{% endif %}  c
+<span class="x">  a</span>
+<span class="cp">{%</span> <span class="k">if</span> <span class="nv">x</span> <span class="cp">%}</span><span class="x">  b</span>
+<span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span><span class="x">  c</span>
 
----
+<span class="x">---</span>
 
-  a
-{%- if x %}
-  b
-{%- endif %}
-  c
+<span class="x">  a</span>
+<span class="cp">{%</span>- <span class="k">if</span> <span class="nv">x</span> <span class="cp">%}</span>
+<span class="x">  b</span>
+<span class="cp">{%</span>- <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">  c</span>
 
----
+<span class="x">---</span>
 
-  a
-{%- if x %}
-  b{% endif %}
-  c
+<span class="x">  a</span>
+<span class="cp">{%</span>- <span class="k">if</span> <span class="nv">x</span> <span class="cp">%}</span>
+<span class="x">  b</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">  c</span>
 
----
+<span class="x">---</span>
 
-  a
-{%- if x %}
-  b{%- endif %}
-  c
+<span class="x">  a</span>
+<span class="cp">{%</span>- <span class="k">if</span> <span class="nv">x</span> <span class="cp">%}</span>
+<span class="x">  b</span><span class="cp">{%</span>- <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">  c</span>
 
----
+<span class="x">---</span>
 
-  a{% if x %}
-  b
-  {%- endif %}
-  c
+<span class="x">  a</span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">x</span> <span class="cp">%}</span>
+<span class="x">  b</span>
+<span class="x">  </span><span class="cp">{%</span>- <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">  c</span>
 
----
+<span class="x">---</span>
 
-  a{% if x %}
-  b
-{%- endif %}
-  c
+<span class="x">  a</span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">x</span> <span class="cp">%}</span>
+<span class="x">  b</span>
+<span class="cp">{%</span>- <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">  c</span>
 
----
+<span class="x">---</span>
 
-  a{% if x %}
-  b{% endif %}
-  c
+<span class="x">  a</span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">x</span> <span class="cp">%}</span>
+<span class="x">  b</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">  c</span>
 
----
+<span class="x">---</span>
 
-  a{% if x %}
-  b{%- endif %}
-  c
+<span class="x">  a</span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">x</span> <span class="cp">%}</span>
+<span class="x">  b</span><span class="cp">{%</span>- <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">  c</span>
 
----
+<span class="x">---</span>
 
-  a{%- if x %}
-  b
-  {%- endif %}
-  c
+<span class="x">  a</span><span class="cp">{%</span>- <span class="k">if</span> <span class="nv">x</span> <span class="cp">%}</span>
+<span class="x">  b</span>
+<span class="x">  </span><span class="cp">{%</span>- <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">  c</span>
 
----
+<span class="x">---</span>
 
-  a{%- if x %}
-  b
-{%- endif %}
-  c
+<span class="x">  a</span><span class="cp">{%</span>- <span class="k">if</span> <span class="nv">x</span> <span class="cp">%}</span>
+<span class="x">  b</span>
+<span class="cp">{%</span>- <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">  c</span>
 
----
+<span class="x">---</span>
 
-  a{%- if x %}
-  b{% endif %}
-  c
+<span class="x">  a</span><span class="cp">{%</span>- <span class="k">if</span> <span class="nv">x</span> <span class="cp">%}</span>
+<span class="x">  b</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">  c</span>
 
----
+<span class="x">---</span>
 
-  a{%- if x %}
-  b{%- endif %}
-  c
+<span class="x">  a</span><span class="cp">{%</span>- <span class="k">if</span> <span class="nv">x</span> <span class="cp">%}</span>
+<span class="x">  b</span><span class="cp">{%</span>- <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">  c</span>
 
-tested: 448
-valid: 19
+<span class="x">tested: 448</span>
+<span class="x">valid: 19</span>
 </code></pre></div>
-<p>Each one of these will render as </p>
+<p>Each one of these will render as</p>
 <div class="highlight"><pre><span></span><code>  a
   b
   c
@@ -2526,57 +2520,56 @@ valid: 19
 </code></pre></div>
 <p>...when the condition is false.</p>
 <p>Now you just have to pick the style you prefer!</p>
-<p>I find these three particularly readable (the first two are better when <code>b</code>  spans on multiple lines):</p>
-<div class="highlight"><pre><span></span><code>  a
-  {%- if x %}
-  b
-  {%- endif %}
-  c
+<p>I find these three particularly readable (the first two are better when <code>b</code> spans on multiple lines):</p>
+<div class="highlight"><pre><span></span><code><span class="x">  a</span>
+<span class="x">  </span><span class="cp">{%</span>- <span class="k">if</span> <span class="nv">x</span> <span class="cp">%}</span>
+<span class="x">  b</span>
+<span class="x">  </span><span class="cp">{%</span>- <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">  c</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>  a
-  {% if x -%}
-  b
-  {% endif -%}
-  c
+<div class="highlight"><pre><span></span><code><span class="x">  a</span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">x</span> -<span class="cp">%}</span>
+<span class="x">  b</span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">endif</span> -<span class="cp">%}</span>
+<span class="x">  c</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>  a{% if x %}
-  b{% endif %}
-  c
+<div class="highlight"><pre><span></span><code><span class="x">  a</span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">x</span> <span class="cp">%}</span>
+<span class="x">  b</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">  c</span>
 </code></pre></div>
 <p>The third example readability can also be improved:</p>
-<div class="highlight"><pre><span></span><code>  a   {%- if x %}
-  b   {%- endif %}
-  c
+<div class="highlight"><pre><span></span><code><span class="x">  a   </span><span class="cp">{%</span>- <span class="k">if</span> <span class="nv">x</span> <span class="cp">%}</span>
+<span class="x">  b   </span><span class="cp">{%</span>- <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">  c</span>
 </code></pre></div>
-<p>Here is an example with blank lines in <code>b</code>'s contents.
-The first one collapses contents up, while the second collapses content down.</p>
-<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Run</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">pause</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pausing&quot;</span><span class="p">)</span>
-    <span class="p">{</span><span class="o">%-</span> <span class="k">if</span> <span class="n">stoppable</span> <span class="o">%</span><span class="p">}</span>
+<p>Here is an example with blank lines in <code>b</code>'s contents. The first one collapses contents up, while the second collapses content down.</p>
+<div class="highlight"><pre><span></span><code><span class="x">class Run:</span>
+<span class="x">    def pause(self):</span>
+<span class="x">        print(&quot;pausing&quot;)</span>
+<span class="x">    </span><span class="cp">{%</span>- <span class="k">if</span> <span class="nv">stoppable</span> <span class="cp">%}</span>
 
 
-    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;stopping&quot;</span><span class="p">)</span>
-    <span class="p">{</span><span class="o">%-</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+<span class="x">    def stop(self):</span>
+<span class="x">        print(&quot;stopping&quot;)</span>
+<span class="x">    </span><span class="cp">{%</span>- <span class="k">endif</span> <span class="cp">%}</span>
 
 
-    <span class="k">def</span> <span class="nf">resume</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-      <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;resuming&quot;</span><span class="p">)</span>
+<span class="x">    def resume(self):</span>
+<span class="x">      print(&quot;resuming&quot;)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Run</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">pause</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pausing&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="x">class Run:</span>
+<span class="x">    def pause(self):</span>
+<span class="x">        print(&quot;pausing&quot;)</span>
 
 
-    <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">stoppable</span> <span class="o">-%</span><span class="p">}</span>
-    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;stopping&quot;</span><span class="p">)</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">stoppable</span> -<span class="cp">%}</span>
+<span class="x">    def stop(self):</span>
+<span class="x">        print(&quot;stopping&quot;)</span>
 
 
-    <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">-%</span><span class="p">}</span>
-    <span class="k">def</span> <span class="nf">resume</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;resuming&quot;</span><span class="p">)</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">endif</span> -<span class="cp">%}</span>
+<span class="x">    def resume(self):</span>
+<span class="x">        print(&quot;resuming&quot;)</span>
 </code></pre></div>
 
   <!-- Giscus -->

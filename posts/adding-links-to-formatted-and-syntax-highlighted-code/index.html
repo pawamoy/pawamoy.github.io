@@ -1994,14 +1994,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../showcase/failprint/" class="md-nav__link">
+      <a href="../../showcase/duty/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     
   
     <span class="md-typeset">
-      failprint
+      duty
     </span>
   
 
@@ -2338,18 +2338,12 @@
   }
 </style>
 
-<p>One of the features of <a href="https://mkdocstrings.github.io/python">mkdocstrings-python</a>
-is its ability to automatically render cross-references to objects of the documented package
-in code block signatures.</p>
-<p>Adding links to code blocks is possible in HTML,
-but doing so while preserving Pygments syntax highlighting
-<em>and</em> Black formatting was not an easy task.
-This post explains how it works.</p>
+<p>One of the features of <a href="https://mkdocstrings.github.io/python">mkdocstrings-python</a> is its ability to automatically render cross-references to objects of the documented package in code block signatures.</p>
+<p>Adding links to code blocks is possible in HTML, but doing so while preserving Pygments syntax highlighting <em>and</em> Black formatting was not an easy task. This post explains how it works.</p>
 <!--more-->
 
 <hr />
-<p>Let say we document a Python package that exposes one function and one class:
-<code>do</code> and <code>Action</code>. The function takes an instance of the class as parameter:</p>
+<p>Let say we document a Python package that exposes one function and one class: <code>do</code> and <code>Action</code>. The function takes an instance of the class as parameter:</p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Action</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;An action.&quot;&quot;&quot;</span>
 
@@ -2357,14 +2351,12 @@ This post explains how it works.</p>
 <span class="k">def</span> <span class="nf">do</span><span class="p">(</span><span class="n">action</span><span class="p">:</span> <span class="n">Action</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Do an action.&quot;&quot;&quot;</span>
 </code></pre></div>
-<p>Let say we now want to document both using <a href="https://www.mkdocs.org/">MkDocs</a> and <a href="https://mkdocstrings.github.io">mkdocstrings</a>.
-In our Markdown page we would add the autodoc instructions:</p>
+<p>Let say we now want to document both using <a href="https://www.mkdocs.org/">MkDocs</a> and <a href="https://mkdocstrings.github.io">mkdocstrings</a>. In our Markdown page we would add the autodoc instructions:</p>
 <div class="highlight"><pre><span></span><code>::: package.Action
 
 ::: package.do
 </code></pre></div>
-<p>...which, depending on how we configured mkdocstrings,
-would render something like this:</p>
+<p>...which, depending on how we configured mkdocstrings, would render something like this:</p>
 
 
 <div class="doc doc-object doc-class">
@@ -2412,8 +2404,7 @@ would render something like this:</p>
 
   </div>
 
-</div><p>The challenge is to render the signature of <code>do</code> like this instead,
-with <code>Action</code> linking to the rendered docs for the corresponding class:</p>
+</div><p>The challenge is to render the signature of <code>do</code> like this instead, with <code>Action</code> linking to the rendered docs for the corresponding class:</p>
 
 
 
@@ -2436,14 +2427,8 @@ with <code>Action</code> linking to the rendered docs for the corresponding clas
   </div>
 
 </div><p>So how do we do this?</p>
-<p>Obviously we can use the
-<a href="https://mkdocstrings.github.io/python/usage/configuration/signatures/#signature_crossrefs"><code>signature_crossrefs</code></a>
-option of mkdocstrings-python (which at the time of writing is available to my sponsors only),
-but that's not the point of this post.</p>
-<p>Let's take a look at the first signature.
-We can inspect the HTML generated for the signature
-of the <code>do</code> function, it looks like this
-<small>(with added line breaks for readability)</small>:</p>
+<p>Obviously we can use the <a href="https://mkdocstrings.github.io/python/usage/configuration/signatures/#signature_crossrefs"><code>signature_crossrefs</code></a> option of mkdocstrings-python (which at the time of writing is available to my sponsors only), but that's not the point of this post.</p>
+<p>Let's take a look at the first signature. We can inspect the HTML generated for the signature of the <code>do</code> function, it looks like this <small>(with added line breaks for readability)</small>:</p>
 <div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">pre</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">code</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;n&quot;</span><span class="p">&gt;</span>do<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
@@ -2454,46 +2439,36 @@ of the <code>do</code> function, it looks like this
   <span class="p">&lt;/</span><span class="nt">code</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">pre</span><span class="p">&gt;</span>
 </code></pre></div>
-<p>Can we parse this, find spans with class <code>n</code>, and add links there?
-We could, but there are a few issues with this approach:</p>
+<p>Can we parse this, find spans with class <code>n</code>, and add links there? We could, but there are a few issues with this approach:</p>
 <ul>
 <li>we don't know which names (<code>n</code>) should be linked</li>
 <li>we don't have the names' full path (<code>Action</code>'s path really is <code>actions.Action</code> here)</li>
 <li>parsing and modifying HTML is costly</li>
 </ul>
-<p>We can't either add links first, then syntax highlight or format the code:
-neither Pygments nor Black support coloring/formatting code while
-retaining HTML tags around names.</p>
-<p>The only way to do this correctly and efficiently is by adding
-pre-processing and post-processing steps.</p>
+<p>We can't either add links first, then syntax highlight or format the code: neither Pygments nor Black support coloring/formatting code while retaining HTML tags around names.</p>
+<p>The only way to do this correctly and efficiently is by adding pre-processing and post-processing steps.</p>
 <ol>
-<li>First, we need the full path of names that must be linked.
-   In mkdocstrings, thanks to <a href="https://mkdocstrings.github.io/griffe">Griffe</a>, expressions (like signatures)
-   are stored as a list-like structure, on which we can iterate.
-   Elements of this list-like structure are strings or instances
-   of a special class that represent linkable names.
-   Thanks to these, we know what to link, and we have the names' full path.</li>
-<li>When preparing our string for formatting/syntax highlighting,
-   we simply join string elements together. For each name,
-   we precompute its HTML link, store it in a map with a unique identifer,
-   and join this identifier to the main string. These identifiers
-   must answer to a few constraints: they must be unique (obviously),
-   they must have the same length as the original name (for formatting reasons),
-   and they must be valid Python variable names (for formatting reasons too).</li>
+<li>First, we need the full path of names that must be linked. In mkdocstrings, thanks to <a href="https://mkdocstrings.github.io/griffe">Griffe</a>, expressions (like signatures) are stored as a list-like structure, on which we can iterate. Elements of this list-like structure are strings or instances of a special class that represent linkable names. Thanks to these, we know what to link, and we have the names' full path.</li>
+<li>When preparing our string for formatting/syntax highlighting, we simply join string elements together. For each name, we precompute its HTML link, store it in a map with a unique identifer, and join this identifier to the main string. These identifiers must answer to a few constraints: they must be unique (obviously), they must have the same length as the original name (for formatting reasons), and they must be valid Python variable names (for formatting reasons too).</li>
 <li>We format and syntax highlight this main string.</li>
-<li>We finally replace each unique identifier stored in our map
-   by the precomputed HTML link. Tada!</li>
+<li>We finally replace each unique identifier stored in our map by the precomputed HTML link. Tada!</li>
 </ol>
 <p>Let's illustrate this process with our example setup above.</p>
 <ol>
 <li>
 <p>The signature of the function <code>do</code> could be stored like this:</p>
-<div class="highlight"><pre><span></span><code><span class="n">expression</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;do&quot;</span><span class="p">,</span> <span class="s2">&quot;(&quot;</span><span class="p">,</span> <span class="s2">&quot;action&quot;</span><span class="p">,</span> <span class="s2">&quot;: &quot;</span><span class="p">,</span> <span class="n">Name</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="s2">&quot;Action&quot;</span><span class="p">,</span> <span class="n">full_path</span><span class="o">=</span><span class="s2">&quot;actions.Action&quot;</span><span class="p">),</span> <span class="s2">&quot;)&quot;</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><code><span class="n">expression</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;do&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;(&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;action&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;: &quot;</span><span class="p">,</span>
+    <span class="n">Name</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="s2">&quot;Action&quot;</span><span class="p">,</span> <span class="n">full_path</span><span class="o">=</span><span class="s2">&quot;actions.Action&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;)&quot;</span><span class="p">,</span>
+<span class="p">]</span>
 </code></pre></div>
 </li>
 <li>
-<p>We build our main string,
-   while computing and storing links for names:</p>
+<p>We build our main string, while computing and storing links for names:</p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">build_string</span><span class="p">(</span><span class="n">expression</span><span class="p">,</span> <span class="n">stored_links</span><span class="p">):</span>
     <span class="n">string_parts</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">expression</span><span class="p">:</span>
@@ -2501,9 +2476,12 @@ pre-processing and post-processing steps.</p>
             <span class="n">string_parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">unique_id</span> <span class="o">=</span> <span class="n">get_unique_id</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">source</span><span class="p">)</span>  <span class="c1"># _dx7ej</span>
-            <span class="n">stored_links</span><span class="p">[</span><span class="n">unique_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_url_to</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">full_path</span><span class="p">)</span>  <span class="c1"># &lt;a href=&quot;#actions.Action&quot;&gt;Action&lt;/a&gt;</span>
+            <span class="n">stored_links</span><span class="p">[</span><span class="n">unique_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_url_to</span><span class="p">(</span>
+                <span class="n">name</span><span class="o">.</span><span class="n">full_path</span>
+            <span class="p">)</span>  <span class="c1"># &lt;a href=&quot;#actions.Action&quot;&gt;Action&lt;/a&gt;</span>
             <span class="n">string_parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">unique_id</span><span class="p">)</span>
     <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">string_parts</span><span class="p">)</span>
+
 
 <span class="n">stored_links</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="n">main_string</span> <span class="o">=</span> <span class="n">build_string</span><span class="p">(</span><span class="n">expression</span><span class="p">,</span> <span class="n">stored_links</span><span class="p">)</span>
@@ -2558,17 +2536,9 @@ pre-processing and post-processing steps.</p>
 </code></pre></div>
 </li>
 </ol>
-<p>Ensuring the ids are unique within the final highlighted string is not easy,
-since we don't know the contents of the highlighted string in advance.
-In mkdocstrings-python we use ASCII digits as well as letters,
- and prefix the ids with an underscore, to reduce
-the risk of collision with other existing variables in the expression.
-The length constraint increases the collision risk when variables have short names.
-We always create ids of minimum length 3, even for variable names of length 1 or 2.</p>
+<p>Ensuring the ids are unique within the final highlighted string is not easy, since we don't know the contents of the highlighted string in advance. In mkdocstrings-python we use ASCII digits as well as letters, and prefix the ids with an underscore, to reduce the risk of collision with other existing variables in the expression. The length constraint increases the collision risk when variables have short names. We always create ids of minimum length 3, even for variable names of length 1 or 2.</p>
 <hr />
-<p>The whole process is even more involved in mkdocstrings-python:
-we have an additional intermediate step with <a href="https://mkdocstrings.github.io/autorefs">autorefs</a>,
-and we have to integrate the solution within Jinja templates!</p>
+<p>The whole process is even more involved in mkdocstrings-python: we have an additional intermediate step with <a href="https://mkdocstrings.github.io/autorefs">autorefs</a>, and we have to integrate the solution within Jinja templates!</p>
 
   <!-- Giscus -->
   <!-- https://squidfunk.github.io/mkdocs-material/setup/adding-a-comment-system/#giscus-integration -->

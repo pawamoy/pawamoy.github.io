@@ -10,7 +10,7 @@
       
       
       
-        <link rel="canonical" href="https://pawamoy.github.io/showcase/failprint/">
+        <link rel="canonical" href="https://pawamoy.github.io/showcase/duty/">
       
       
         <link rel="prev" href="../dependenpy/">
@@ -27,7 +27,7 @@
     
     
       
-        <title>failprint - pawamoy's website</title>
+        <title>duty - pawamoy's website</title>
       
     
     
@@ -88,7 +88,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#failprint" class="md-skip">
+        <a href="#duty" class="md-skip">
           Skip to content
         </a>
       
@@ -124,7 +124,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              failprint
+              duty
             
           </span>
         </div>
@@ -1931,7 +1931,7 @@
     
   
     <span class="md-typeset">
-      failprint
+      duty
     </span>
   
 
@@ -2217,7 +2217,7 @@
                   
 
   
-    <a href="https://github.com/pawamoy/website/edit/master/docs/showcase/failprint.md" title="Edit this page" class="md-content__button md-icon">
+    <a href="https://github.com/pawamoy/website/edit/master/docs/showcase/duty.md" title="Edit this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4v-2m10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1 2.1 2.1Z"/></svg>
     </a>
@@ -2226,20 +2226,25 @@
     
       
     
-    <a href="https://github.com/pawamoy/website/raw/master/docs/showcase/failprint.md" title="View source of this page" class="md-content__button md-icon">
+    <a href="https://github.com/pawamoy/website/raw/master/docs/showcase/duty.md" title="View source of this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.15 8.15 0 0 1-1.23-2Z"/></svg>
     </a>
   
 
 
-<h1 id="failprint">failprint<a class="headerlink" href="#failprint" title="Permanent link">¤</a></h1>
-<p><img alt="failprint" src="../../assets/failprint.svg" /></p>
+<h1 id="duty">duty<a class="headerlink" href="#duty" title="Permanent link">¤</a></h1>
+<p><img alt="duty" src="../../assets/failprint.svg" /></p>
 <ul>
-<li>Repository: <a href="https://github.com/pawamoy/failprint">https://github.com/pawamoy/failprint</a></li>
-<li>Documentation: <a href="https://pawamoy.github.io/failprint">https://pawamoy.github.io/failprint</a></li>
+<li>Repository: <a href="https://github.com/pawamoy/duty">https://github.com/pawamoy/duty</a></li>
+<li>Documentation: <a href="https://pawamoy.github.io/duty">https://pawamoy.github.io/duty</a></li>
 </ul>
 <hr />
+<p>A few years ago, when I was writing Django-apps, I was using <a href="https://tox.wiki/en/latest/">tox</a> to test my apps on multiple Django versions. I was happy with it, but found it a bit slow when running jobs on a P*D-sized matrix (Python versions, Django versions). Fortunately <a href="https://github.com/tox-dev/detox">detox</a> was able to run tox envs in parallel.</p>
+<p>At some point I stopped writing Django apps, and started searching an alternative to tox with a lighter output, because I really don't like seeing <em>walls</em> of text when a single line is enough (test passed? just print ok).</p>
+<p>I started playing with <a href="https://www.pyinvoke.org/">Invoke</a>, but quickly had issues with it, notably <a href="https://github.com/pyinvoke/invoke/issues/763">in Windows runs on GitHub</a>. I also felt limited in that I couldn't run Python code directly, only subprocesses. I tried to implement such a feature in Invoke, but couldn't manage to do it.</p>
+<p>I also played with <a href="https://nox.thea.codes/en/stable/">Nox</a>, but found it too slow as well, even when reusing virtualenvs. And the console output was again too heavy for my taste. Now that <a href="https://pdm.fming.dev/2.1/usage/advanced/#use-nox-as-the-runner">PDM supports Nox</a>, I should definitely give it another try though!</p>
+<p>In the end, I wrote my own task runner, <a href="https://github.com/pawamoy/duty">duty</a>, which is heavily inspired by Invoke. duty is based on <a href="https://github.com/pawamoy/failprint">failprint</a>, an other project of mine that deals with running commands and capturing their output. On top of that, duty adds the concept of tasks, task collections, and other helpful utilities, like callables for popular Python tools.</p>
 
 
 

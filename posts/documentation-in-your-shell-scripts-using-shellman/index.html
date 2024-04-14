@@ -2069,14 +2069,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../showcase/failprint/" class="md-nav__link">
+      <a href="../../showcase/duty/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     
   
     <span class="md-typeset">
-      failprint
+      duty
     </span>
   
 
@@ -2480,49 +2480,40 @@
     by Timothée Mazzucotelli
   </p>
   
-  <p>When I write a script, I like to have a <code>-h, --help</code> option to help me remember what it does
-and how it works. But I was never delighted to write this help text. Besides, when your script's
-options change, you have to update the help text.</p>
-<p>I also always liked man pages, their search feature and their ability to scroll up and down
-and not leave any output in the console. But maintaining a man page is even more tedious than
-maintaining a help text.</p>
-<p>This is why I thought of using documentation in shell scripts. So I wrote <a href="https://github.com/Pawamoy/shellman">shellman</a>.</p>
+  <p>When I write a script, I like to have a <code>-h, --help</code> option to help me remember what it does and how it works. But I was never delighted to write this help text. Besides, when your script's options change, you have to update the help text.</p>
+<p>I also always liked man pages, their search feature and their ability to scroll up and down and not leave any output in the console. But maintaining a man page is even more tedious than maintaining a help text.</p>
+<p>This is why I thought of using documentation in shell scripts. So I wrote <a href="https://github.com/pawamoy/shellman">shellman</a>.</p>
 <!--more-->
 
 <ul>
 <li><a href="#writing-doc">Writing doc</a></li>
 <li><a href="#using-shellman">Using shellman</a></li>
 <li><a href="#an-example">An example</a></li>
-<li><a href="#how-it-looks">How it looks</a></li>
+<li><a href="#how-it-looks">How it looks</a><ul>
 <li><a href="#text">Text</a></li>
 <li><a href="#man">Man</a></li>
 <li><a href="#markdown">Markdown</a></li>
+</ul>
+</li>
 <li><a href="#more">More</a></li>
 </ul>
 <h2 id="writing-doc">Writing doc<a class="headerlink" href="#writing-doc" title="Permanent link">¤</a></h2>
-<p>Shellman can read special comments in your file. These special comments are the documentation
-of your script or library. They simply begin with two sharps instead of one:</p>
+<p>Shellman can read special comments in your file. These special comments are the documentation of your script or library. They simply begin with two sharps instead of one:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># A normal comment.</span>
 <span class="c1">## A documentation comment.</span>
 </code></pre></div>
-<p>Also, to give a special meaning to your documentation, each documentation line can be tagged,
-just like you would do in doxygen documentation:</p>
+<p>Also, to give a special meaning to your documentation, each documentation line can be tagged, just like you would do in doxygen documentation:</p>
 <div class="highlight"><pre><span></span><code><span class="c1">## \brief A brief description.</span>
 <span class="c1">## \desc A long description.</span>
 <span class="c1">## You can write many lines in this tag.</span>
 </code></pre></div>
 <h2 id="using-shellman">Using shellman<a class="headerlink" href="#using-shellman" title="Permanent link">¤</a></h2>
-<p>After reading and loading all the documentation written in a file, shellman will then be able
-to output it on stdout (on in another file) in different formats, such as text, man page
-or markdown.</p>
+<p>After reading and loading all the documentation written in a file, shellman will then be able to output it on stdout (on in another file) in different formats, such as text, man page or markdown.</p>
 <div class="highlight"><pre><span></span><code>shellman<span class="w"> </span>my_script.sh<span class="w">  </span><span class="c1"># text output by default</span>
 man<span class="w"> </span>&lt;<span class="o">(</span>shellman<span class="w"> </span>--format<span class="w"> </span>man<span class="w"> </span>my_script.sh<span class="o">)</span>
 <span class="c1"># Available formats for -f, --format option: text, man, markdown</span>
 </code></pre></div>
-<p>Shellman also has a <code>--check</code> option that will not output anything, but instead check for
-written documentation in a file. A simple <code>--check</code> option will return 0 or 1, but display no
-warnings. Add a <code>--warn</code> option to print warnings on stderr. It will help you fix your
-documentation, or even do some linting and continuous integration on your scripts' documentation.</p>
+<p>Shellman also has a <code>--check</code> option that will not output anything, but instead check for written documentation in a file. A simple <code>--check</code> option will return 0 or 1, but display no warnings. Add a <code>--warn</code> option to print warnings on stderr. It will help you fix your documentation, or even do some linting and continuous integration on your scripts' documentation.</p>
 <h2 id="an-example">An example<a class="headerlink" href="#an-example" title="Permanent link">¤</a></h2>
 <p>Here is an example of how I write documentation in my scripts now:</p>
 <div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
@@ -2622,8 +2613,7 @@ the current instruction when using -x option.
 <p>... which would look like:</p>
 <p><img alt="markdown output" src="../../assets/markdown-output.png" /></p>
 <h2 id="more">More<a class="headerlink" href="#more" title="Permanent link">¤</a></h2>
-<p>Shellman supports more tags, in particular: function tags.
-See its <a href="https://github.com/Pawamoy/shellman/wiki">documentation</a>.</p>
+<p>Shellman supports more tags, in particular: function tags. See its <a href="https://github.com/pawamoy/shellman/wiki">documentation</a>.</p>
 
   <!-- Giscus -->
   <!-- https://squidfunk.github.io/mkdocs-material/setup/adding-a-comment-system/#giscus-integration -->

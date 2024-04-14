@@ -2114,14 +2114,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../showcase/failprint/" class="md-nav__link">
+      <a href="../../showcase/duty/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     
   
     <span class="md-typeset">
-      failprint
+      duty
     </span>
   
 
@@ -2570,21 +2570,11 @@
     by Timothée Mazzucotelli
   </p>
   
-  <p>As you may know, <a href="https://www.rstudio.com/products/shiny/shiny-server/">Shiny Server</a> comes in two versions: open-source and
-professional. The professional adds security and authentication features
-like <em>password protected applications</em>, and <em>controlled access via SSL and LDAP,
-Active Directory, Google OAuth, PAM, proxied authentication, or passwords</em>.
-If you need these authentication features but don't want or can't spend
-<a href="https://www.rstudio.com/pricing/#ShinyProPricing">$9,995 per year</a> for the professional edition, then I got a solution for you!</p>
+  <p>As you may know, <a href="https://www.rstudio.com/products/shiny/shiny-server/">Shiny Server</a> comes in two versions: open-source and professional. The professional adds security and authentication features like <em>password protected applications</em>, and <em>controlled access via SSL and LDAP, Active Directory, Google OAuth, PAM, proxied authentication, or passwords</em>. If you need these authentication features but don't want or can't spend <a href="https://www.rstudio.com/pricing/#ShinyProPricing">$9,995 per year</a> for the professional edition, then I got a solution for you!</p>
 <!--more-->
 
-<p>In this post, I will show how to wrap one or several Shiny applications into
-a Django application to add authentication and access control to your Shiny
-apps. The shining star here will not be Django, as you could replace it by
-any other web application you want, but the famous NginX reverse proxy,
-accompanied by its devoted <a href="https://nginx.org/en/docs/http/ngx_http_auth_request_module.html">auth-request</a> module.</p>
-<p>The code used in this post is also available as a <a href="https://github.com/Pawamoy/docker-nginx-auth-request-django-shiny-example">repository on GitHub</a>.
-It contains a Docker configuration so you can try it easily.</p>
+<p>In this post, I will show how to wrap one or several Shiny applications into a Django application to add authentication and access control to your Shiny apps. The shining star here will not be Django, as you could replace it by any other web application you want, but the famous NginX reverse proxy, accompanied by its devoted <a href="https://nginx.org/en/docs/http/ngx_http_auth_request_module.html">auth-request</a> module.</p>
+<p>The code used in this post is also available as a <a href="https://github.com/Pawamoy/docker-nginx-auth-request-django-shiny-example">repository on GitHub</a>. It contains a Docker configuration so you can try it easily.</p>
 <p><strong>On the menu</strong></p>
 <ul>
 <li><a href="#overview">Overview</a></li>
@@ -2594,48 +2584,23 @@ It contains a Docker configuration so you can try it easily.</p>
 <li><a href="#try-it-with-a-dockerized-project">Try it with a Dockerized project</a></li>
 <li><a href="#__comments">Comments</a></li>
 </ul>
-<p>What most of you will be interested in is starting at section 2:
-<a href="#proxying-shiny-requests-to-the-shiny-app">Proxying</a>, though <a href="#wrapping-a-shiny-app-into-a-django-powered-page">Wrapping</a> is interesting as well if you
-want to create an interface to access multiple Shiny apps.</p>
+<p>What most of you will be interested in is starting at section 2: <a href="#proxying-shiny-requests-to-the-shiny-app">Proxying</a>, though <a href="#wrapping-a-shiny-app-into-a-django-powered-page">Wrapping</a> is interesting as well if you want to create an interface to access multiple Shiny apps.</p>
 <hr />
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">¤</a></h2>
-<p>Let's look at some pictures to see what we want to accomplish. The first picture
-shows our client-server architecture. The client can communicate with the server
-on the port 80 or 443 (HTTP or HTTPs), but not on the ports 8000 or 8100, which
-are used internally by Django and Shiny. This can be configured through the
-firewall.</p>
+<p>Let's look at some pictures to see what we want to accomplish. The first picture shows our client-server architecture. The client can communicate with the server on the port 80 or 443 (HTTP or HTTPs), but not on the ports 8000 or 8100, which are used internally by Django and Shiny. This can be configured through the firewall.</p>
 <p><img alt="client-server-architecture" src="../../assets/client-server-architecture.png" /></p>
-<p>The second picture shows what happens when the client requests the URL
-that the Shiny app is served on. As we wrap the Shiny app into a Django-powered
-page, the request is proxied directly to Django by NginX. Django then gets the
-initial Shiny page HTML contents with an internal HTTP Get request, and renders
-it in a <code>iframe</code> (we will see the details later). It then returns this rendered
-page to NginX, which returns it to the client.</p>
+<p>The second picture shows what happens when the client requests the URL that the Shiny app is served on. As we wrap the Shiny app into a Django-powered page, the request is proxied directly to Django by NginX. Django then gets the initial Shiny page HTML contents with an internal HTTP Get request, and renders it in a <code>iframe</code> (we will see the details later). It then returns this rendered page to NginX, which returns it to the client.</p>
 <p><img alt="client-requests-shiny" src="../../assets/client-requests-shiny.png" /></p>
-<p>The third picture shows each subsequent requests from the client to the server
-through a WebSocket, and how NginX is asking authorization to Django. When NginX
-receives the request, it sends a sub-request to Django, asking for permission
-to proxy the request to Shiny and return the response to the client. If Django
-says yes (HTTP 200), NginX proxies the request to Shiny. If Django says no
-(HTTP 403 or any other error code), NginX rejects the request by returning
-HTTP 403 as a response to the client.</p>
+<p>The third picture shows each subsequent requests from the client to the server through a WebSocket, and how NginX is asking authorization to Django. When NginX receives the request, it sends a sub-request to Django, asking for permission to proxy the request to Shiny and return the response to the client. If Django says yes (HTTP 200), NginX proxies the request to Shiny. If Django says no (HTTP 403 or any other error code), NginX rejects the request by returning HTTP 403 as a response to the client.</p>
 <p><img alt="client-shiny-subrequests" src="../../assets/client-shiny-subrequests.png" /></p>
-<p>OK, let's try it! To begin, create a directory that we will use for this
-tutorial:</p>
+<p>OK, let's try it! To begin, create a directory that we will use for this tutorial:</p>
 <div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>django-shiny
 <span class="nb">cd</span><span class="w"> </span>django-shiny
 </code></pre></div>
 <hr />
 <h2 id="wrapping-a-shiny-app-into-a-django-powered-page">Wrapping a Shiny app into a Django-powered page<a class="headerlink" href="#wrapping-a-shiny-app-into-a-django-powered-page" title="Permanent link">¤</a></h2>
-<p>This first section will help you setup an example project to follow this
-tutorial, but the first two steps described are optional. You can immediately
-jump to the <a href="#proxying-shiny-requests-to-the-shiny-app">Proxying Shiny requests</a>
-section where we will a use pre-setup example project using Docker. You will
-need to install Docker if you don't already have it. See <a href="https://docs.docker.com/install/">Install Docker</a> for
-installation instructions.</p>
-<p>The third step however might be interesting to read if you need to wrap your
-Shiny app into a Django-powered page and website, instead of just using Django
-as an external authentication / authorization backend.</p>
+<p>This first section will help you setup an example project to follow this tutorial, but the first two steps described are optional. You can immediately jump to the <a href="#proxying-shiny-requests-to-the-shiny-app">Proxying Shiny requests</a> section where we will a use pre-setup example project using Docker. You will need to install Docker if you don't already have it. See <a href="https://docs.docker.com/install/">Install Docker</a> for installation instructions.</p>
+<p>The third step however might be interesting to read if you need to wrap your Shiny app into a Django-powered page and website, instead of just using Django as an external authentication / authorization backend.</p>
 <ol>
 <li><a href="#the-shiny-app">The Shiny app</a></li>
 <li><a href="#the-django-app">The Django app</a></li>
@@ -2643,15 +2608,13 @@ as an external authentication / authorization backend.</p>
 </ol>
 <hr />
 <h3 id="the-shiny-app">The Shiny app<a class="headerlink" href="#the-shiny-app" title="Permanent link">¤</a></h3>
-<p>Let's get a Shiny app example from <a href="https://shiny.rstudio.com/gallery/">RStudio's gallery</a>.
-The code is available on GitHub in <a href="https://github.com/rstudio/shiny-examples/tree/master/001-hello">this repository</a>.</p>
+<p>Let's get a Shiny app example from <a href="https://shiny.rstudio.com/gallery/">RStudio's gallery</a>. The code is available on GitHub in <a href="https://github.com/rstudio/shiny-examples/tree/master/001-hello">this repository</a>.</p>
 <p>Clone it in a sub-directory called <code>shinyapp</code>:</p>
 <div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>--depth<span class="o">=</span><span class="m">1</span><span class="w"> </span>https://github.com/rstudio/shiny-examples
 mv<span class="w"> </span>shiny-examples/001-hello<span class="w"> </span>shinyapp
 rm<span class="w"> </span>-rf<span class="w"> </span>shiny-examples
 </code></pre></div>
-<p>We also need to install the Shiny R package. If you don't already have R
-installed, you can install a recent version with the following commands:</p>
+<p>We also need to install the Shiny R package. If you don't already have R installed, you can install a recent version with the following commands:</p>
 <div class="highlight"><pre><span></span><code>sudo add-apt-repository &quot;deb http://cran.rstudio.com/bin/linux/ubuntu trusty/&quot;
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
 sudo add-apt-repository ppa:marutter/rdev
@@ -2664,12 +2627,10 @@ sudo apt-get install -y r-base
 <p>To run the Shiny application on port 8100, use the following command:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>R<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;shiny::runApp(appDir=&#39;shinyapp&#39;, port=8100)&quot;</span>
 </code></pre></div>
-<p>Try to go to <code>http://localhost:8100</code>      to see if the app is running.</p>
+<p>Try to go to <code>http://localhost:8100</code> to see if the app is running.</p>
 <hr />
 <h3 id="the-django-app">The Django app<a class="headerlink" href="#the-django-app" title="Permanent link">¤</a></h3>
-<p>We will create a new Django project called <code>djangoapp</code>. If you don't already
-have Django installed on your system, install it in a virtualenv with
-<code>pip install Django</code>, or system-wide with <code>sudo pip install Django</code>.</p>
+<p>We will create a new Django project called <code>djangoapp</code>. If you don't already have Django installed on your system, install it in a virtualenv with <code>pip install Django</code>, or system-wide with <code>sudo pip install Django</code>.</p>
 <p>To create the project, run the following command:</p>
 <div class="highlight"><pre><span></span><code>django-admin<span class="w"> </span>startproject<span class="w"> </span>djangoapp
 </code></pre></div>
@@ -2715,19 +2676,17 @@ have Django installed on your system, install it in a virtualenv with
 </ol>
 <hr />
 <h4 id="create-the-wrapping-view">Create the wrapping view<a class="headerlink" href="#create-the-wrapping-view" title="Permanent link">¤</a></h4>
-<p>Let's create our wrapping view. First make sure you have listed <code>djangoapp</code>
-in the Django settings' <code>INSTALLED_APPS</code>:</p>
+<p>Let's create our wrapping view. First make sure you have listed <code>djangoapp</code> in the Django settings' <code>INSTALLED_APPS</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># settings.py</span>
 
 <span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s1">&#39;django.contrib.admin&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;django.contrib.auth&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;django.contrib.contenttypes&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;django.contrib.sessions&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;django.contrib.messages&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;django.contrib.staticfiles&#39;</span><span class="p">,</span>
-
-    <span class="s1">&#39;djangoapp&#39;</span>
+    <span class="s2">&quot;django.contrib.admin&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;django.contrib.auth&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;django.contrib.contenttypes&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;django.contrib.sessions&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;django.contrib.messages&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;django.contrib.staticfiles&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;djangoapp&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 </code></pre></div>
 <p>Then we can add the URL in <code>urls.py</code>:</p>
@@ -2737,8 +2696,8 @@ in the Django settings' <code>INSTALLED_APPS</code>:</p>
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">views</span>
 
 <span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;admin/&#39;</span><span class="p">,</span> <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">),</span>
-    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;shiny/&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">shiny</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;shiny&#39;</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;admin/&quot;</span><span class="p">,</span> <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;shiny/&quot;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">shiny</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;shiny&quot;</span><span class="p">),</span>
 <span class="p">]</span>
 </code></pre></div>
 <p>And now we create the view in a new <code>views.py</code> file:</p>
@@ -2746,19 +2705,18 @@ in the Django settings' <code>INSTALLED_APPS</code>:</p>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span><span class="p">,</span> <span class="n">redirect</span>
 
+
 <span class="k">def</span> <span class="nf">shiny</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;djangoapp/shiny.html&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s2">&quot;djangoapp/shiny.html&quot;</span><span class="p">)</span>
 </code></pre></div>
 <hr />
 <h4 id="create-the-wrapping-html-page">Create the wrapping HTML page<a class="headerlink" href="#create-the-wrapping-html-page" title="Permanent link">¤</a></h4>
-<p>Since we tell the view to render the <code>djangoapp/shiny.html</code> template, we need
-to create it:</p>
+<p>Since we tell the view to render the <code>djangoapp/shiny.html</code> template, we need to create it:</p>
 <div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>-p<span class="w"> </span>djangoapp/djangoapp/templates/djangoapp
 touch<span class="w"> </span>djangoapp/djangoapp/templates/djangoapp/shiny.html
 <span class="c1"># too much of djangoapp already, I know</span>
 </code></pre></div>
-<p>And write its contents. We simply add a title, to know we are in the wrapping
-view, and then we add a script to retrieve the Shiny app contents:</p>
+<p>And write its contents. We simply add a title, to know we are in the wrapping view, and then we add a script to retrieve the Shiny app contents:</p>
 <div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>We are in the wrapping page!<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
 
 <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;contents&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
@@ -2789,17 +2747,12 @@ view, and then we add a script to retrieve the Shiny app contents:</p>
 <p>Several things happen here:</p>
 <ul>
 <li>we declare a <code>div</code> of ID <code>contents</code> in which we will add an <code>iframe</code>,</li>
-<li>we make use of JQuery's <code>$(document).ready</code> and <code>$.getJSON</code> methods to
-  load HTML contents from an URL returning JSON,</li>
-<li>we create the <code>iframe</code>, add it in the document, then write the HTML contents
-  inside of it. We also reassign the <code>WebSocket</code> variable to the value of the
-  <code>iframe</code> one.</li>
+<li>we make use of JQuery's <code>$(document).ready</code> and <code>$.getJSON</code> methods to load HTML contents from an URL returning JSON,</li>
+<li>we create the <code>iframe</code>, add it in the document, then write the HTML contents inside of it. We also reassign the <code>WebSocket</code> variable to the value of the <code>iframe</code> one.</li>
 </ul>
 <hr />
 <h4 id="create-the-json-view">Create the JSON view<a class="headerlink" href="#create-the-json-view" title="Permanent link">¤</a></h4>
-<p>As you maybe guessed, work is not finished. We need to add the <code>shiny_contents</code>
-URL and view in the Django app. The view must return the contents of the Shiny
-app initial page as JSON.</p>
+<p>As you maybe guessed, work is not finished. We need to add the <code>shiny_contents</code> URL and view in the Django app. The view must return the contents of the Shiny app initial page as JSON.</p>
 <p>Add the URL in <code>urls.py</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
 <span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">path</span>
@@ -2807,9 +2760,9 @@ app initial page as JSON.</p>
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">views</span>
 
 <span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;admin/&#39;</span><span class="p">,</span> <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">),</span>
-    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;shiny/&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">shiny</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;shiny&#39;</span><span class="p">),</span>
-    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;shiny_contents/&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">shiny_contents</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;shiny_contents&#39;</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;admin/&quot;</span><span class="p">,</span> <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;shiny/&quot;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">shiny</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;shiny&quot;</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;shiny_contents/&quot;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">shiny_contents</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;shiny_contents&quot;</span><span class="p">),</span>
 <span class="p">]</span>
 </code></pre></div>
 <p>Add the view to <code>views.py</code>:</p>
@@ -2822,37 +2775,25 @@ app initial page as JSON.</p>
 
 
 <span class="k">def</span> <span class="nf">shiny</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;djangoapp/shiny.html&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s2">&quot;djangoapp/shiny.html&quot;</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">shiny_contents</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://localhost:8100&#39;</span><span class="p">)</span>
-    <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span><span class="s1">&#39;html_contents&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">soup</span><span class="p">)})</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;http://localhost:8100&quot;</span><span class="p">)</span>
+    <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s2">&quot;html.parser&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span><span class="s2">&quot;html_contents&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">soup</span><span class="p">)})</span>
 </code></pre></div>
-<p>We are using requests and BeautifulSoup to get the HTML contents and return
-it as text, dumped as JSON. If you know a better way, let me know in the
-comments!</p>
+<p>We are using requests and BeautifulSoup to get the HTML contents and return it as text, dumped as JSON. If you know a better way, let me know in the comments!</p>
 <p>To install requests and BeautifulSoup: <code>pip install requests beautifulsoup4</code>.</p>
-<p>OK, let's try! Run both the Shiny application and the Django application, then
-go to <a href="http://localhost:8000/shiny">http://localhost:8000/shiny</a> to see how it goes!</p>
+<p>OK, let's try! Run both the Shiny application and the Django application, then go to <a href="http://localhost:8000/shiny">http://localhost:8000/shiny</a> to see how it goes!</p>
 <p>You should see something like the following image:</p>
 <p><img alt="screenshot-django-shiny" src="../../assets/screenshot-django-shiny.png" /></p>
-<p>But since Shiny requests are not proxied, they are simply lost in-between, and
-your Shiny app will not respond, nor get a nice look because the static assets
-will not be loaded. We will fix this in the next section:
-<a href="#proxying-shiny-requests-to-the-shiny-app">Proxying Shiny requests</a>.</p>
-<p>This is it for the setup and the Django-wrapped Shiny page. For the rest of the
-tutorial, I will explain how to configure NginX and Django to act as proxy
-and authorization servers. The result is available for you to try in this
-repository: <a href="https://github.com/Pawamoy/docker-nginx-auth-request-django-shiny-example">https://github.com/Pawamoy/docker-nginx-auth-request-django-shiny-example</a>.
-See the <a href="#try-it-with-a-dockerized-project">Try it out</a> section.</p>
+<p>But since Shiny requests are not proxied, they are simply lost in-between, and your Shiny app will not respond, nor get a nice look because the static assets will not be loaded. We will fix this in the next section: <a href="#proxying-shiny-requests-to-the-shiny-app">Proxying Shiny requests</a>.</p>
+<p>This is it for the setup and the Django-wrapped Shiny page. For the rest of the tutorial, I will explain how to configure NginX and Django to act as proxy and authorization servers. The result is available for you to try in this repository: <a href="https://github.com/Pawamoy/docker-nginx-auth-request-django-shiny-example">https://github.com/Pawamoy/docker-nginx-auth-request-django-shiny-example</a>. See the <a href="#try-it-with-a-dockerized-project">Try it out</a> section.</p>
 <hr />
 <h2 id="proxying-shiny-requests-to-the-shiny-app">Proxying Shiny requests to the Shiny app<a class="headerlink" href="#proxying-shiny-requests-to-the-shiny-app" title="Permanent link">¤</a></h2>
-<p>This is time for NginX to come on stage. We need to create our new,
-project-specific configuration file in <code>/etc/nginx/sites-available/djangoshiny</code>.</p>
-<p>We will tell NginX to proxy every request with an URL like <code>shiny/*</code> to our
-Shiny app. All other requests will be proxied to the Django app.</p>
+<p>This is time for NginX to come on stage. We need to create our new, project-specific configuration file in <code>/etc/nginx/sites-available/djangoshiny</code>.</p>
+<p>We will tell NginX to proxy every request with an URL like <code>shiny/*</code> to our Shiny app. All other requests will be proxied to the Django app.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># declare your Django app</span>
 <span class="k">upstream</span><span class="w"> </span><span class="s">djangoapp_server</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kn">server</span><span class="w"> </span><span class="n">localhost</span><span class="p">:</span><span class="mi">8000</span><span class="p">;</span>
@@ -2910,24 +2851,13 @@ Shiny app. All other requests will be proxied to the Django app.</p>
 <p>Once you're ready, enable this configuration by linking it like this:</p>
 <div class="highlight"><pre><span></span><code>sudo ln -s /etc/nginx/sites-available/djangoshiny /etc/nginx/sites-enabled/djangoshiny
 </code></pre></div>
-<p>Now reload NginX, and that's it! If you launch both Django on port 8000, and
-Shiny on port 8100, you should be able to connect to <code>http://localhost/shiny</code>
-and enjoy your Django-wrapped Shiny application functioning properly!</p>
-<p>There is still one thing we need to add: authentication and authorization.
-I won't show how to create sign-in / sign-up / sign-out views: you can
-find all the documentation to enable Django authentication system online.
-What I will show you is how to make Django act as an authorization server
-for Shiny.</p>
+<p>Now reload NginX, and that's it! If you launch both Django on port 8000, and Shiny on port 8100, you should be able to connect to <code>http://localhost/shiny</code> and enjoy your Django-wrapped Shiny application functioning properly!</p>
+<p>There is still one thing we need to add: authentication and authorization. I won't show how to create sign-in / sign-up / sign-out views: you can find all the documentation to enable Django authentication system online. What I will show you is how to make Django act as an authorization server for Shiny.</p>
 <hr />
 <h2 id="adding-an-authentication-step-for-every-shiny-request">Adding an authentication step for every Shiny request<a class="headerlink" href="#adding-an-authentication-step-for-every-shiny-request" title="Permanent link">¤</a></h2>
-<p>We want all requests proxied to Shiny to be authorized by Django. For this we
-are gonna use the <a href="https://nginx.org/en/docs/http/ngx_http_auth_request_module.html">auth-request</a> module. This module is not compiled in
-NginX by default on distributions like Ubuntu / Debian. If you want to recompile
-NginX with auth-request enabled, check how I do it in <a href="https://github.com/Pawamoy/docker-nginx-auth-request-django-shiny-example/blob/master/Dockerfile.nginx">this Dockerfile</a>.</p>
-<p>An easier solution is to use the Docker setup from the same repository, with
-the official NginX image which already supports auth-request.</p>
-<p>So, once your NginX is ready, add this authorization step in the configuration
-file:</p>
+<p>We want all requests proxied to Shiny to be authorized by Django. For this we are gonna use the <a href="https://nginx.org/en/docs/http/ngx_http_auth_request_module.html">auth-request</a> module. This module is not compiled in NginX by default on distributions like Ubuntu / Debian. If you want to recompile NginX with auth-request enabled, check how I do it in <a href="https://github.com/Pawamoy/docker-nginx-auth-request-django-shiny-example/blob/master/Dockerfile.nginx">this Dockerfile</a>.</p>
+<p>An easier solution is to use the Docker setup from the same repository, with the official NginX image which already supports auth-request.</p>
+<p>So, once your NginX is ready, add this authorization step in the configuration file:</p>
 <div class="highlight"><pre><span></span><code><span class="w">    </span><span class="k">location</span><span class="w"> </span><span class="p">~</span><span class="w"> </span><span class="sr">/shiny/.+</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">        </span><span class="c1"># we tell nginx to call that location for each request</span>
@@ -2958,44 +2888,36 @@ file:</p>
 <span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">X-Original-URI</span><span class="w"> </span><span class="nv">$request_uri</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 </code></pre></div>
-<p>Of course, we also need to write the view called by the <code>shiny_auth/</code> URL.
-It's a very simple one. First add the URL in <code>urls.py</code>:</p>
+<p>Of course, we also need to write the view called by the <code>shiny_auth/</code> URL. It's a very simple one. First add the URL in <code>urls.py</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
 <span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">path</span>
 
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">views</span>
 
 <span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;admin/&#39;</span><span class="p">,</span> <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">),</span>
-    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;shiny/&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">shiny</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;shiny&#39;</span><span class="p">),</span>
-    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;shiny_contents/&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">shiny_contents</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;shiny_contents&#39;</span><span class="p">),</span>
-    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;shiny_auth/&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">shiny_auth</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;admin/&quot;</span><span class="p">,</span> <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;shiny/&quot;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">shiny</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;shiny&quot;</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;shiny_contents/&quot;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">shiny_contents</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;shiny_contents&quot;</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;shiny_auth/&quot;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">shiny_auth</span><span class="p">),</span>
 <span class="p">]</span>
 </code></pre></div>
 <p>And then the view in <code>views.py</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponse</span>
+
 
 <span class="k">def</span> <span class="nf">shiny_auth</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="mi">403</span><span class="p">)</span>
 </code></pre></div>
-<p>Et voilà! If the user is authenticated, Django will say "OK". If the user is
-not authenticated, Django will say "No". But you could implement any logic
-you need instead of just checking if the user is authenticated or not. You
-could have several Shiny apps served on different URLs, powered by Django
-(in wrapping pages, as we saw earlier), and grant access to users with a
-permission system, etc..</p>
+<p>Et voilà! If the user is authenticated, Django will say "OK". If the user is not authenticated, Django will say "No". But you could implement any logic you need instead of just checking if the user is authenticated or not. You could have several Shiny apps served on different URLs, powered by Django (in wrapping pages, as we saw earlier), and grant access to users with a permission system, etc..</p>
 <h2 id="try-it-with-a-dockerized-project">Try it with a Dockerized project<a class="headerlink" href="#try-it-with-a-dockerized-project" title="Permanent link">¤</a></h2>
 <p>Clone the repository and build the images with the following commands:</p>
 <div class="highlight"><pre><span></span><code>git clone https://github.com/Pawamoy/docker-nginx-auth-request-django-shiny-example docker-django-shiny
 cd docker-django-shiny
 sudo make all
 </code></pre></div>
-<p>This first build should take quite some time. It will build Shiny and Django
-images, get static assets, create the database, create a super user, and then
-run the application. You will then be able to go to <code>http://localhost:8000</code>
-to see it in action.</p>
+<p>This first build should take quite some time. It will build Shiny and Django images, get static assets, create the database, create a super user, and then run the application. You will then be able to go to <code>http://localhost:8000</code> to see it in action.</p>
 <p>To print the available <code>make</code> commands, simply run <code>make</code>.</p>
 
   <!-- Giscus -->

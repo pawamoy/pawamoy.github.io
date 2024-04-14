@@ -2050,14 +2050,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../showcase/failprint/" class="md-nav__link">
+      <a href="../../showcase/duty/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     
   
     <span class="md-typeset">
-      failprint
+      duty
     </span>
   
 
@@ -2444,9 +2444,7 @@
   
     <div class="crop-excerpt"><img src="/assets/alembic_post.png"/></div>
   
-  <p>In the <a href="../add-alembic-migrations-to-existing-fastapi-ormar-project/">previous post</a>
-I showed how to add Alembic migrations to an existing FastAPI + Ormar project.
-In this post we will see how to write unit tests for such applications.</p>
+  <p>In the <a href="../add-alembic-migrations-to-existing-fastapi-ormar-project/">previous post</a> I showed how to add Alembic migrations to an existing FastAPI + Ormar project. In this post we will see how to write unit tests for such applications.</p>
 <!--more-->
 
 <p>We start with the following project layout:</p>
@@ -2459,8 +2457,7 @@ In this post we will see how to write unit tests for such applications.</p>
 └──<span class="w"> </span>📁<span class="w"> </span>tests/
 </code></pre></div>
 <h2 id="database-models">Database models<a class="headerlink" href="#database-models" title="Permanent link">¤</a></h2>
-<p>Let say we have three models: Artist, Album and Track.
-To keep things simple, we just add a <code>name</code> field on each. </p>
+<p>Let say we have three models: Artist, Album and Track. To keep things simple, we just add a <code>name</code> field on each.</p>
 <div class="highlight"><span class="filename">src/project/models.py</span><pre><span></span><code><span class="sd">&quot;&quot;&quot;Database models.&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">os</span>
@@ -2500,8 +2497,7 @@ To keep things simple, we just add a <code>name</code> field on each. </p>
     <span class="n">album</span><span class="p">:</span> <span class="n">Album</span> <span class="o">=</span> <span class="n">ormar</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Album</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="database-and-migrations-helpers">Database and migrations helpers<a class="headerlink" href="#database-and-migrations-helpers" title="Permanent link">¤</a></h2>
-<p>Now lets create helpers to easily (re)create, update (migrate) or stamp the database.
-We will put everything that is related to migrations in a migrations subpackage:</p>
+<p>Now lets create helpers to easily (re)create, update (migrate) or stamp the database. We will put everything that is related to migrations in a migrations subpackage:</p>
 <div class="highlight"><pre><span></span><code>📁<span class="w"> </span>./
 ├──<span class="w"> </span>📁<span class="w"> </span>src/
 │<span class="w">   </span>└──<span class="w"> </span>📁<span class="w"> </span>project/
@@ -2512,9 +2508,7 @@ We will put everything that is related to migrations in a migrations subpackage:
 │<span class="w">       </span>└──<span class="w"> </span>📄<span class="w"> </span>models.py
 └──<span class="w"> </span>📁<span class="w"> </span>tests/
 </code></pre></div>
-<p>We will define helpers in the <code>__init__</code> module.
-<a href="https://pypi.org/project/loguru/">Loguru</a> will be used to log things,
-but that's optional and you can remove logging lines or use another logging framework.</p>
+<p>We will define helpers in the <code>__init__</code> module. <a href="https://pypi.org/project/loguru/">Loguru</a> will be used to log things, but that's optional and you can remove logging lines or use another logging framework.</p>
 <div class="highlight"><span class="filename">src/project/migrations/__init__.py</span><pre><span></span><code><span class="sd">&quot;&quot;&quot;Database migrations modules.&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
@@ -2576,9 +2570,7 @@ but that's optional and you can remove logging lines or use another logging fram
         <span class="n">create_database</span><span class="p">(</span><span class="n">db_url</span><span class="o">=</span><span class="n">db_url</span><span class="p">)</span>
         <span class="n">stamp_database</span><span class="p">(</span><span class="n">db_url</span><span class="o">=</span><span class="n">db_url</span><span class="p">)</span>
 </code></pre></div>
-<p>Note how each function accepts a <code>db_url</code> parameter:
-this will be very useful to support different environments,
-such as development, production and testing.</p>
+<p>Note how each function accepts a <code>db_url</code> parameter: this will be very useful to support different environments, such as development, production and testing.</p>
 <p>We still need the Alembic configuration module:</p>
 <div class="highlight"><pre><span></span><code>📁<span class="w"> </span>./
 ├──<span class="w"> </span>📁<span class="w"> </span>src/
@@ -2644,8 +2636,7 @@ such as development, production and testing.</p>
     <span class="n">run_migrations_online</span><span class="p">()</span>
 </code></pre></div>
 <h2 id="automatic-database-creationupdate">Automatic database creation/update<a class="headerlink" href="#automatic-database-creationupdate" title="Permanent link">¤</a></h2>
-<p>Now, lets configure our FastAPI app so that the database is automatically
-created or updated every time we run our app (using <a href="https://www.uvicorn.org/">uvicorn</a> for example):</p>
+<p>Now, lets configure our FastAPI app so that the database is automatically created or updated every time we run our app (using <a href="https://www.uvicorn.org/">uvicorn</a> for example):</p>
 <div class="highlight"><pre><span></span><code>📁<span class="w"> </span>./
 ├──<span class="w"> </span>📁<span class="w"> </span>src/
 │<span class="w">   </span>└──<span class="w"> </span>📁<span class="w"> </span>project/
@@ -2681,29 +2672,12 @@ created or updated every time we run our app (using <a href="https://www.uvicorn
 </code></pre></div>
 <p>Creating or updating the database in the <code>startup</code> event allows several things:</p>
 <ul>
-<li>in a development environment, developers can simply run the server,
-    and the database is automatically created. They don't have to worry
-    about running a database creation command. Similarly, they can
-    simply delete the <code>db.sqlite</code> file and restart the server to empty
-    their local database, or copy a pre-populated SQlite file to reset
-    their local database to a particular state.</li>
-<li>in a production environment, in which you have no control (no possibility
-    to run custom shell commands), migrations are applied automatically
-    upon starting the server. If there are no (new) migrations,
-    the startup event is a no-op: nothing happens and the server starts
-    normally, with the current database untouched.
-    Note that we ensure only one instance of the server will apply the migrations,
-    as to prevent multiple parallel/concurrent accesses to a potentially
-    shared storage space (for example multiple pods accessing the same persistent volume
-    on a Kubernetes infrastructure).</li>
-<li>in a testing environment, tests will be able to provide a unique database URL
-    (a local file path) so that they each have their own temporary database.
-    It means tests will be able to run in parallel,
-    for example using <a href="https://pypi.org/project/pytest-xdist/">pytest-xdist</a>.</li>
+<li>in a development environment, developers can simply run the server, and the database is automatically created. They don't have to worry about running a database creation command. Similarly, they can simply delete the <code>db.sqlite</code> file and restart the server to empty their local database, or copy a pre-populated SQlite file to reset their local database to a particular state.</li>
+<li>in a production environment, in which you have no control (no possibility to run custom shell commands), migrations are applied automatically upon starting the server. If there are no (new) migrations, the startup event is a no-op: nothing happens and the server starts normally, with the current database untouched. Note that we ensure only one instance of the server will apply the migrations, as to prevent multiple parallel/concurrent accesses to a potentially shared storage space (for example multiple pods accessing the same persistent volume on a Kubernetes infrastructure).</li>
+<li>in a testing environment, tests will be able to provide a unique database URL (a local file path) so that they each have their own temporary database. It means tests will be able to run in parallel, for example using <a href="https://pypi.org/project/pytest-xdist/">pytest-xdist</a>.</li>
 </ul>
 <h2 id="pytest-fixture">Pytest fixture<a class="headerlink" href="#pytest-fixture" title="Permanent link">¤</a></h2>
-<p>Now lets create a Pytest fixture that will allow each test
-to get access to its own unique, temporary database:</p>
+<p>Now lets create a Pytest fixture that will allow each test to get access to its own unique, temporary database:</p>
 <div class="highlight"><pre><span></span><code>📁<span class="w"> </span>./
 ├──<span class="w"> </span>📁<span class="w"> </span>src/
 │<span class="w">   </span>└──<span class="w"> </span>📁<span class="w"> </span>project/
@@ -2756,18 +2730,10 @@ to get access to its own unique, temporary database:</p>
     <span class="k">async</span> <span class="k">with</span> <span class="n">httpx_client</span> <span class="k">as</span> <span class="n">client</span><span class="p">,</span> <span class="n">lifespan</span><span class="p">:</span>
         <span class="k">yield</span> <span class="n">client</span>
 </code></pre></div>
-<p>You'll notice that we use <a href="https://pypi.org/project/asgi-lifespan/">asgi-lifespan</a>.
-Without it, the startup and shutdown ASGI events would not be triggered.</p>
-<p>In the startup event, we apply migrations using the URL in <code>BaseMeta.database.url</code>.
-This allows us to monkeypatch the <code>database</code> attribute in our fixture to change
-the database URL for each test.</p>
+<p>You'll notice that we use <a href="https://pypi.org/project/asgi-lifespan/">asgi-lifespan</a>. Without it, the startup and shutdown ASGI events would not be triggered.</p>
+<p>In the startup event, we apply migrations using the URL in <code>BaseMeta.database.url</code>. This allows us to monkeypatch the <code>database</code> attribute in our fixture to change the database URL for each test.</p>
 <h2 id="model-instances-factories">Model instances factories<a class="headerlink" href="#model-instances-factories" title="Permanent link">¤</a></h2>
-<p>In our tests, we'll want to insert some rows in the database to test our API.
-Doing so manually can be cumbersome, as you have to define each instance
-one after the other, linking them together.
-To ease the process, we use <a href="https://pypi.org/project/factory-boy/">factory-boy</a>,
-with which we'll be able to define model factories. With these factories,
-it will be very easy to create instances of models in our tests.</p>
+<p>In our tests, we'll want to insert some rows in the database to test our API. Doing so manually can be cumbersome, as you have to define each instance one after the other, linking them together. To ease the process, we use <a href="https://pypi.org/project/factory-boy/">factory-boy</a>, with which we'll be able to define model factories. With these factories, it will be very easy to create instances of models in our tests.</p>
 <div class="highlight"><pre><span></span><code>📁<span class="w"> </span>./
 ├──<span class="w"> </span>📁<span class="w"> </span>src/
 │<span class="w">   </span>└──<span class="w"> </span>📁<span class="w"> </span>project/
@@ -2814,8 +2780,7 @@ it will be very easy to create instances of models in our tests.</p>
     <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;track name&quot;</span>
     <span class="n">album</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="n">SubFactory</span><span class="p">(</span><span class="n">AlbumFactory</span><span class="p">)</span>
 </code></pre></div>
-<p>With these factories you can now create an artist, album and track,
-all linked together, using a single line of code:</p>
+<p>With these factories you can now create an artist, album and track, all linked together, using a single line of code:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">tests</span> <span class="kn">import</span> <span class="n">factories</span>
 
 <span class="n">track</span> <span class="o">=</span> <span class="n">factories</span><span class="o">.</span><span class="n">TrackFactory</span><span class="p">()</span>
@@ -2827,20 +2792,11 @@ all linked together, using a single line of code:</p>
     <span class="n">album__artist__name</span><span class="o">=</span><span class="s2">&quot;other artist name&quot;</span><span class="p">,</span>
 <span class="p">)</span>
 </code></pre></div>
-<p>Refer to <a href="https://factoryboy.readthedocs.io/en/stable/">factory-boy's documentation</a> for more examples.
-You could also use <a href="https://pypi.org/project/Faker/">Faker</a>
-to set more relevant default values to your instances attributes.</p>
+<p>Refer to <a href="https://factoryboy.readthedocs.io/en/stable/">factory-boy's documentation</a> for more examples. You could also use <a href="https://pypi.org/project/Faker/">Faker</a> to set more relevant default values to your instances attributes.</p>
 <h2 id="populating-the-database-with-data">Populating the database with data<a class="headerlink" href="#populating-the-database-with-data" title="Permanent link">¤</a></h2>
-<p>Creating instances is nice, but they are not magically inserted in the database for us.
-Since instances are Ormar model instances, we could technically use the <code>save()</code> method
-on the instances we create to save them in the database, however I did not try that
-and cannot guarantee it will work for multiple instances linked together at once.</p>
-<p>Instead, and only if you have added
-<a href="https://en.wikipedia.org/wiki/Create,_read,_update_and_delete">CRUD operations</a>
-to your API, you can call your API routes to create the instances in the database.</p>
-<p>For this, I chose to create a new helper module,
-but that's probably not the best design you can come up with,
-so feel free to discard the next suggestions and follow your instincts.</p>
+<p>Creating instances is nice, but they are not magically inserted in the database for us. Since instances are Ormar model instances, we could technically use the <code>save()</code> method on the instances we create to save them in the database, however I did not try that and cannot guarantee it will work for multiple instances linked together at once.</p>
+<p>Instead, and only if you have added <a href="https://en.wikipedia.org/wiki/Create,_read,_update_and_delete">CRUD operations</a> to your API, you can call your API routes to create the instances in the database.</p>
+<p>For this, I chose to create a new helper module, but that's probably not the best design you can come up with, so feel free to discard the next suggestions and follow your instincts.</p>
 <div class="highlight"><pre><span></span><code>📁<span class="w"> </span>./
 ├──<span class="w"> </span>📁<span class="w"> </span>src/
 │<span class="w">   </span>└──<span class="w"> </span>📁<span class="w"> </span>project/
@@ -2909,8 +2865,7 @@ so feel free to discard the next suggestions and follow your instincts.</p>
     <span class="k">return</span> <span class="n">track</span>
 </code></pre></div>
 <h2 id="example-tests">Example tests<a class="headerlink" href="#example-tests" title="Permanent link">¤</a></h2>
-<p>Now you can easily populate the database in tests,
-and call other API routes to test their behavior and output.</p>
+<p>Now you can easily populate the database in tests, and call other API routes to test their behavior and output.</p>
 <div class="highlight"><pre><span></span><code>📁<span class="w"> </span>./
 ├──<span class="w"> </span>📁<span class="w"> </span>src/
 │<span class="w">   </span>└──<span class="w"> </span>📁<span class="w"> </span>project/
@@ -2939,9 +2894,7 @@ and call other API routes to test their behavior and output.</p>
     <span class="n">track</span> <span class="o">=</span> <span class="k">await</span> <span class="n">helpers</span><span class="o">.</span><span class="n">create_track</span><span class="p">(</span><span class="n">async_client</span><span class="p">)</span>
     <span class="c1"># ...then test other API routes</span>
 </code></pre></div>
-<p>Note how we use the previously defined fixture <code>async_client</code>.
-Just adding that fixture as a parameter to our test function
-ensures we have a temporary, dedicated database for this test.</p>
+<p>Note how we use the previously defined fixture <code>async_client</code>. Just adding that fixture as a parameter to our test function ensures we have a temporary, dedicated database for this test.</p>
 
   <!-- Giscus -->
   <!-- https://squidfunk.github.io/mkdocs-material/setup/adding-a-comment-system/#giscus-integration -->

@@ -1925,14 +1925,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../failprint/" class="md-nav__link">
+      <a href="../duty/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     
   
     <span class="md-typeset">
-      failprint
+      duty
     </span>
   
 
@@ -2240,93 +2240,23 @@
 <li>Documentation: <a href="https://pawamoy.github.io/copier-pdm/">https://pawamoy.github.io/copier-pdm/</a></li>
 </ul>
 <hr />
-<p>I was first introduced to project templating
-with <a href="https://github.com/cookiecutter/cookiecutter">CookieCutter</a>
-and especially
-the <a href="https://github.com/ionelmc/cookiecutter-pylibrary">cookiecutter-pylibrary</a>
-from <a href="https://github.com/ionelmc">@ionelmc</a>.
-I learned many, many things about Python thanks to Ionel and his template,
-discovering its features, design choices, opinions, and selected tools
-during the years I worked with it.
-I eventually forked it into my own
-<a href="https://github.com/pawamoy/cookiecutter-pydjama">cookiecutter-pydjama</a>,
-which was mostly designed to quickstart Django apps.
-Then I slowly stopped using Django, and therefore stopped
-maintaing my cookiecutter, which is now archived.</p>
-<p>Back when I was still using cookiecutters,
-one of the main challenges was to keep generated projects
-up-to-date with the latest change in the upstream cookiecutters.
-I'm always working on a lot of Python projects in parallel,
-so without a way to keep each one of them tightly structured,
-they all drift apart and it's hell to maintain them and
-switch from one to another.</p>
-<p>A solution to this, discussed on CookieCutter's issue tracker,
-was to set up a <code>template</code> branch on the generated repositories,
-branch that was dedicated to receiving templates updates.
-These updates were then merged into the main branch,
-so as to allow a bit of drifting from the template,
-but still stay up-to-date.
-It was implemented using a clever mix of git and bash commands.
-And it was not perfect.</p>
-<p>Then <a href="https://github.com/cruft/cruft">cruft</a>
-(by <a href="https://github.com/timothycrosley">@timothycrosley</a>)
-made its appearance.
-At that time I was not really using templates anymore, but was still lurking on
-<a href="https://github.com/cookiecutter/cookiecutter/issues/784">cookiecutter#784</a> and
-<a href="https://github.com/cookiecutter/cookiecutter/issues/1004">cookiecutter#1004</a>
-to make sure I would not miss any great attempt at solving this problem.</p>
-<p>Cruft is basically a wrapper around CookieCutter that brings this
-updating functionality using some git magic.
-Like a more robust and efficient version of my previous shell script.
-I used it for some time, discovered some issues, sent one or two PRs.
-But I was not really satisfied, and the project was not really active
-(it is now, thanks to <a href="https://github.com/samj1912">@samj1912</a> who
-really improved it).</p>
-<p>And then, <em><a href="https://github.com/copier-org/copier">Copier</a></em> made its entrance.
-A modest entrance. But a very interesting one.
-In a few hours of checking it and testing it, I was hooked.
-I took my old cookiecutter and started translating it to a Copier template,
-opening issues with feedback in the process.
-And it worked so well!
-I used this opportunity to also update my tools stack,
-trying out new bleeding-edge cool things to build the best
-Python project template I could.</p>
-<p>And this is how <a href="https://github.com/pawamoy/copier-poetry">copier-poetry</a>
-was born!</p>
+<p>I was first introduced to project templating with <a href="https://github.com/cookiecutter/cookiecutter">CookieCutter</a> and especially the <a href="https://github.com/ionelmc/cookiecutter-pylibrary">cookiecutter-pylibrary</a> from <a href="https://github.com/ionelmc">@ionelmc</a>. I learned many, many things about Python thanks to Ionel and his template, discovering its features, design choices, opinions, and selected tools during the years I worked with it. I eventually forked it into my own <a href="https://github.com/pawamoy/cookiecutter-pydjama">cookiecutter-pydjama</a>, which was mostly designed to quickstart Django apps. Then I slowly stopped using Django, and therefore stopped maintaing my cookiecutter, which is now archived.</p>
+<p>Back when I was still using cookiecutters, one of the main challenges was to keep generated projects up-to-date with the latest change in the upstream cookiecutters. I'm always working on a lot of Python projects in parallel, so without a way to keep each one of them tightly structured, they all drift apart and it's hell to maintain them and switch from one to another.</p>
+<p>A solution to this, discussed on CookieCutter's issue tracker, was to set up a <code>template</code> branch on the generated repositories, branch that was dedicated to receiving templates updates. These updates were then merged into the main branch, so as to allow a bit of drifting from the template, but still stay up-to-date. It was implemented using a clever mix of git and bash commands. And it was not perfect.</p>
+<p>Then <a href="https://github.com/cruft/cruft">cruft</a> (by <a href="https://github.com/timothycrosley">@timothycrosley</a>) made its appearance. At that time I was not really using templates anymore, but was still lurking on <a href="https://github.com/cookiecutter/cookiecutter/issues/784">cookiecutter#784</a> and <a href="https://github.com/cookiecutter/cookiecutter/issues/1004">cookiecutter#1004</a> to make sure I would not miss any great attempt at solving this problem.</p>
+<p>Cruft is basically a wrapper around CookieCutter that brings this updating functionality using some git magic. Like a more robust and efficient version of my previous shell script. I used it for some time, discovered some issues, sent one or two PRs. But I was not really satisfied, and the project was not really active (it is now, thanks to <a href="https://github.com/samj1912">@samj1912</a> who really improved it).</p>
+<p>And then, <em><a href="https://github.com/copier-org/copier">Copier</a></em> made its entrance. A modest entrance. But a very interesting one. In a few hours of checking it and testing it, I was hooked. I took my old cookiecutter and started translating it to a Copier template, opening issues with feedback in the process. And it worked so well! I used this opportunity to also update my tools stack, trying out new bleeding-edge cool things to build the best Python project template I could.</p>
+<p>And this is how <a href="https://github.com/pawamoy/copier-poetry">copier-poetry</a> was born!</p>
 <p><em>Wait what? copier-</em><em>poetry</em><em>? not -</em><em>pdm</em><em>?</em></p>
-<p>Well yeah, before PDM,
-I was using <a href="https://github.com/python-poetry/poetry">Poetry</a>
-(and am still using it).
-Poetry simply revolutionized Python packaging and dependency management.
-I'll let you see for yourself.
-At some point though I discovered <a href="https://github.com/pdm-project/pdm">PDM</a>,
-and it promised such great things!
-The exceptional UX of Poetry, but more in touch with the new cool PEPs
-around <code>pyproject.toml</code> and packaging, like (and I quote):</p>
+<p>Well yeah, before PDM, I was using <a href="https://github.com/python-poetry/poetry">Poetry</a> (and am still using it). Poetry simply revolutionized Python packaging and dependency management. I'll let you see for yourself. At some point though I discovered <a href="https://github.com/pdm-project/pdm">PDM</a>, and it promised such great things! The exceptional UX of Poetry, but more in touch with the new cool PEPs around <code>pyproject.toml</code> and packaging, like (and I quote):</p>
 <ul>
-<li><a href="https://www.python.org/dev/peps/pep-0582/">PEP 582</a>
-  local package installer and runner, no virtualenv involved at all.</li>
+<li><a href="https://www.python.org/dev/peps/pep-0582/">PEP 582</a> local package installer and runner, no virtualenv involved at all.</li>
 <li><a href="https://www.python.org/dev/peps/pep-0621/">PEP 621</a> project metadata format.</li>
 </ul>
-<p>And it reads <code>pip</code>'s configuration, which makes it so easier to integrate
-in corporate environments! And it has <em>groups for development dependencies</em> <img alt="😱" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1f631.svg" title=":scream:" /></p>
-<p><em>(It's funny because <a href="https://github.com/sdispater">@sdispater</a> and
-<a href="https://github.com/frostming/">@frostming</a>, authors of Poetry and PDM,
-seem to have worked together before!)</em></p>
-<p>I couldn't resist and duplicated <em>copier-poetry</em> into <em>copier-pdm</em>.
-It's the same thing, but with PDM instead of Poetry.
-If you are using <em>copier-poetry</em>, I'm sorry, all my love
-will now go into <em>copier-pdm</em> and I likely won't update <em>copier-poetry</em> anymore <img alt="😕" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1f615.svg" title=":confused:" />
-But I'll review your PRs of course!</p>
-<p>To go back to Copier: Copier is a templating system and CLI tool
-with the ability to generate projects from templates (using Jinja2)
-and the ability to <em>update</em> them, which is <em>built-in</em>, when the template evolves!
-Not being a wrapper around another tool allows it to have great features,
-such as migrations, tasks, self-templating, multi-templating,
-interactive prompts, and more!
-At the time of writing, <a href="https://github.com/Yajo">@Yajo</a>
-has put and is putting a lot of work into improving Copier,
-and I can't wait for v6!</p>
+<p>And it reads <code>pip</code>'s configuration, which makes it so easier to integrate in corporate environments! And it has <em>groups for development dependencies</em> <img alt="😱" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1f631.svg" title=":scream:" /></p>
+<p><em>(It's funny because <a href="https://github.com/sdispater">@sdispater</a> and <a href="https://github.com/frostming/">@frostming</a>, authors of Poetry and PDM, seem to have worked together before!)</em></p>
+<p>I couldn't resist and duplicated <em>copier-poetry</em> into <em>copier-pdm</em>. It's the same thing, but with PDM instead of Poetry. If you are using <em>copier-poetry</em>, I'm sorry, all my love will now go into <em>copier-pdm</em> and I likely won't update <em>copier-poetry</em> anymore <img alt="😕" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1f615.svg" title=":confused:" /> But I'll review your PRs of course!</p>
+<p>To go back to Copier: Copier is a templating system and CLI tool with the ability to generate projects from templates (using Jinja2) and the ability to <em>update</em> them, which is <em>built-in</em>, when the template evolves! Not being a wrapper around another tool allows it to have great features, such as migrations, tasks, self-templating, multi-templating, interactive prompts, and more! At the time of writing, <a href="https://github.com/Yajo">@Yajo</a> has put and is putting a lot of work into improving Copier, and I can't wait for v6!</p>
 
 
 

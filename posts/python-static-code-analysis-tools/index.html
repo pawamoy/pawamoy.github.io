@@ -2075,14 +2075,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../showcase/failprint/" class="md-nav__link">
+      <a href="../../showcase/duty/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     
   
     <span class="md-typeset">
-      failprint
+      duty
     </span>
   
 
@@ -2492,112 +2492,60 @@
     by Timothée Mazzucotelli
   </p>
   
-  <p>Python static code analysis is often used in Continuous Integration.
-I use it in every Python or Django package I develop,
-into a <a href="https://github.com/tox-dev/tox">Tox</a> configuration. The difficult part is to choose the right tools,
-because there are many, and to configure them correctly.</p>
-<p>Thankfully, there also are tools using other tools to reduce the amount
-of configuration we have to do. This ends up in a big mix of tools, which
-is represented in the following chart.</p>
+  <p>Python static code analysis is often used in Continuous Integration. I use it in every Python or Django package I develop, into a <a href="https://github.com/tox-dev/tox">Tox</a> configuration. The difficult part is to choose the right tools, because there are many, and to configure them correctly.</p>
+<p>Thankfully, there also are tools using other tools to reduce the amount of configuration we have to do. This ends up in a big mix of tools, which is represented in the following chart.</p>
 <!--more-->
 
 <p><img alt="Chart" src="../../assets/python-static-code-analysis-tools.png" /></p>
-<p>In this post, we will see the advantages and disadvantages of these tools,
-and compare them a bit.</p>
+<p>In this post, we will see the advantages and disadvantages of these tools, and compare them a bit.</p>
 <p><em>Chart realized with Draw.io.</em></p>
 <h2 id="the-aggregator-tools">The "aggregator" tools<a class="headerlink" href="#the-aggregator-tools" title="Permanent link">¤</a></h2>
-<p>Some tools have a unique purpose, while others aim at doing more.
-This is the case of <a href="https://github.com/landscapeio/prospector">Prospector</a>, <a href="https://github.com/klen/pylama">Pylama</a>, <a href="https://github.com/PyCQA/pylint">Pylint</a> and <a href="https://github.com/PyCQA/flake8">Flake8</a>.</p>
+<p>Some tools have a unique purpose, while others aim at doing more. This is the case of <a href="https://github.com/landscapeio/prospector">Prospector</a>, <a href="https://github.com/klen/pylama">Pylama</a>, <a href="https://github.com/PyCQA/pylint">Pylint</a> and <a href="https://github.com/PyCQA/flake8">Flake8</a>.</p>
 <p>I see two types of aggregators here:</p>
 <ol>
 <li>the ones that do everything themselves (mostly): <a href="https://github.com/PyCQA/pylint">Pylint</a>,</li>
-<li>and the ones that combine the result of many smaller tools:
-   <a href="https://github.com/landscapeio/prospector">Prospector</a>, <a href="https://github.com/klen/pylama">Pylama</a> and <a href="https://github.com/PyCQA/flake8">Flake8</a>.</li>
+<li>and the ones that combine the result of many smaller tools: <a href="https://github.com/landscapeio/prospector">Prospector</a>, <a href="https://github.com/klen/pylama">Pylama</a> and <a href="https://github.com/PyCQA/flake8">Flake8</a>.</li>
 </ol>
-<p>What is funny here is that both <a href="https://github.com/landscapeio/prospector">Prospector</a> and <a href="https://github.com/klen/pylama">Pylama</a> use not only tools used
-by <a href="https://github.com/PyCQA/pylint">Pylint</a>, but <a href="https://github.com/PyCQA/pylint">Pylint</a> as well! There is a bit of overlap here.</p>
+<p>What is funny here is that both <a href="https://github.com/landscapeio/prospector">Prospector</a> and <a href="https://github.com/klen/pylama">Pylama</a> use not only tools used by <a href="https://github.com/PyCQA/pylint">Pylint</a>, but <a href="https://github.com/PyCQA/pylint">Pylint</a> as well! There is a bit of overlap here.</p>
 <h3 id="pylint">Pylint<a class="headerlink" href="#pylint" title="Permanent link">¤</a></h3>
-<p>What I like in <a href="https://github.com/PyCQA/pylint">Pylint</a> is its ability to rate your code, and keep a record
-of its evolution, telling you if it has improved or regressed between
-each run. I also love it's <strong>Similar</strong> tool, a one of its
-kind, used to output the similarities in your code. You can run it with
-<code>python -m pylint.checkers.similar FILES</code>.
-It's very fast, but will start to take some time with a lot of files.</p>
+<p>What I like in <a href="https://github.com/PyCQA/pylint">Pylint</a> is its ability to rate your code, and keep a record of its evolution, telling you if it has improved or regressed between each run. I also love it's <strong>Similar</strong> tool, a one of its kind, used to output the similarities in your code. You can run it with <code>python -m pylint.checkers.similar FILES</code>. It's very fast, but will start to take some time with a lot of files.</p>
 <h3 id="pylama">Pylama<a class="headerlink" href="#pylama" title="Permanent link">¤</a></h3>
-<p><a href="https://github.com/klen/pylama">Pylama</a> seems not to have much activity since last year and has unresolved issues
-and open pull requests. At the time of writing, it's <a href="https://github.com/PyCQA/pydocstyle">Pydocstyle</a> integration
-is broken. I also tried using it from Python because I wanted to count
-the number of issues in some code, and was unsuccessful to do so.
-Still, I used <a href="https://github.com/klen/pylama">Pylama</a> for some time because I liked a lot how it can be
-configured, directly in <code>setup.cfg</code>. Its options are simple to use
-and simple to configure. I find ignoring warnings in <a href="https://github.com/klen/pylama">Pylama</a> much more easier
-than in <a href="https://github.com/landscapeio/prospector">Prospector</a>, as they are all ignored on the same line, and are consistent
-between them (only names composed of a letter and a code). <a href="https://github.com/klen/pylama">Pylama</a> can also be
-deactivated in specific locations of your code with comments like
-<code># pylama:ignore=D105,D106</code>, and recognizes <code># noqa</code> comments.</p>
+<p><a href="https://github.com/klen/pylama">Pylama</a> seems not to have much activity since last year and has unresolved issues and open pull requests. At the time of writing, it's <a href="https://github.com/PyCQA/pydocstyle">Pydocstyle</a> integration is broken. I also tried using it from Python because I wanted to count the number of issues in some code, and was unsuccessful to do so. Still, I used <a href="https://github.com/klen/pylama">Pylama</a> for some time because I liked a lot how it can be configured, directly in <code>setup.cfg</code>. Its options are simple to use and simple to configure. I find ignoring warnings in <a href="https://github.com/klen/pylama">Pylama</a> much more easier than in <a href="https://github.com/landscapeio/prospector">Prospector</a>, as they are all ignored on the same line, and are consistent between them (only names composed of a letter and a code). <a href="https://github.com/klen/pylama">Pylama</a> can also be deactivated in specific locations of your code with comments like <code># pylama:ignore=D105,D106</code>, and recognizes <code># noqa</code> comments.</p>
 <h3 id="prospector">Prospector<a class="headerlink" href="#prospector" title="Permanent link">¤</a></h3>
-<p><a href="https://github.com/landscapeio/prospector">Prospector</a> is my favorite here: I used it for quite some time before switching
-to <a href="https://github.com/klen/pylama">Pylama</a>, and I'm back with it now. I was afraid that it was deperishing,
-because maintainers did not seem to answer pull requests and fix broken
-integration, but many fixes have been pushed now. I think it's a great project
-and it deserves more activity!</p>
-<p>What I like about <a href="https://github.com/landscapeio/prospector">Prospector</a> is that it uses many tools to check many things,
-and it does it well: as I said earlier, there is some overlap between tools;
-<a href="https://github.com/landscapeio/prospector">Prospector</a> handles that by keeping a record of similar warnings and only keep
-one of each to avoid redundancy in its reports! This is not done by default
-in <a href="https://github.com/klen/pylama">Pylama</a>, so you have to manually ignore redundant warnings in its
-configuration.</p>
-<p><a href="https://github.com/landscapeio/prospector">Prospector</a> also helped me discover tools I never heard of before, like <a href="https://github.com/landscapeio/dodgy">Dodgy</a>,
-<a href="https://github.com/jendrikseipp/vulture">Vulture</a>, <a href="https://github.com/regebro/pyroma">Pyroma</a> and <a href="https://github.com/timothycrosley/frosted">Frosted</a>. I would like to see integrations for <a href="https://github.com/rubik/radon">Radon</a>
-(used by <a href="https://github.com/klen/pylama">Pylama</a>) as it offers the same thing as <a href="https://github.com/PyCQA/mccabe">McCabe</a> plus other stuff,
-as well as for <a href="https://github.com/openstack/bandit">Bandit</a> which is a Python code security checker.</p>
-<p>What I miss in <a href="https://github.com/landscapeio/prospector">Prospector</a> is the ability to configure it directly in
-<code>setup.cfg</code>, which I enjoyed a lot with <a href="https://github.com/klen/pylama">Pylama</a>.</p>
-<p><em>This is another story but I am trying hard to reduce the number of configuration
-files in my projects. I think tools should be able to find their configuration
-files into a specific location of your project, not only in the root directory,
-where configuration files pile up. I would be very happy to see some sort of
-standard for configuration files location rising, just as what EditorConfig is
-doing. Maybe a ConfigConfig standard? With a .configconfig file at the root of
-the repository telling where to find the configuraton files, and tools being
-able to read it, or by default search at the root or in the <code>config</code> folder?</em></p>
+<p><a href="https://github.com/landscapeio/prospector">Prospector</a> is my favorite here: I used it for quite some time before switching to <a href="https://github.com/klen/pylama">Pylama</a>, and I'm back with it now. I was afraid that it was deperishing, because maintainers did not seem to answer pull requests and fix broken integration, but many fixes have been pushed now. I think it's a great project and it deserves more activity!</p>
+<p>What I like about <a href="https://github.com/landscapeio/prospector">Prospector</a> is that it uses many tools to check many things, and it does it well: as I said earlier, there is some overlap between tools; <a href="https://github.com/landscapeio/prospector">Prospector</a> handles that by keeping a record of similar warnings and only keep one of each to avoid redundancy in its reports! This is not done by default in <a href="https://github.com/klen/pylama">Pylama</a>, so you have to manually ignore redundant warnings in its configuration.</p>
+<p><a href="https://github.com/landscapeio/prospector">Prospector</a> also helped me discover tools I never heard of before, like <a href="https://github.com/landscapeio/dodgy">Dodgy</a>, <a href="https://github.com/jendrikseipp/vulture">Vulture</a>, <a href="https://github.com/regebro/pyroma">Pyroma</a> and <a href="https://github.com/timothycrosley/frosted">Frosted</a>. I would like to see integrations for <a href="https://github.com/rubik/radon">Radon</a> (used by <a href="https://github.com/klen/pylama">Pylama</a>) as it offers the same thing as <a href="https://github.com/PyCQA/mccabe">McCabe</a> plus other stuff, as well as for <a href="https://github.com/openstack/bandit">Bandit</a> which is a Python code security checker.</p>
+<p>What I miss in <a href="https://github.com/landscapeio/prospector">Prospector</a> is the ability to configure it directly in <code>setup.cfg</code>, which I enjoyed a lot with <a href="https://github.com/klen/pylama">Pylama</a>.</p>
+<p><em>This is another story but I am trying hard to reduce the number of configuration files in my projects. I think tools should be able to find their configuration files into a specific location of your project, not only in the root directory, where configuration files pile up. I would be very happy to see some sort of standard for configuration files location rising, just as what EditorConfig is doing. Maybe a ConfigConfig standard? With a .configconfig file at the root of the repository telling where to find the configuraton files, and tools being able to read it, or by default search at the root or in the <code>config</code> folder?</em></p>
 <h3 id="flake8">Flake8<a class="headerlink" href="#flake8" title="Permanent link">¤</a></h3>
-<p>I don't have much to say about <a href="https://github.com/PyCQA/flake8">Flake8</a> here. I did try it some time ago,
-but since <a href="https://github.com/landscapeio/prospector">Prospector</a> does what it does, I won't use it. But it's only my
-personal choice and it can be a really good choice for others if they don't
-need to run all the possible code analysis tools in the world (unlike me :D).</p>
+<p>I don't have much to say about <a href="https://github.com/PyCQA/flake8">Flake8</a> here. I did try it some time ago, but since <a href="https://github.com/landscapeio/prospector">Prospector</a> does what it does, I won't use it. But it's only my personal choice and it can be a really good choice for others if they don't need to run all the possible code analysis tools in the world (unlike me :D).</p>
 <h2 id="the-do-one-thing-but-do-it-well-tools">The "do-one-thing-but-do-it-well" tools<a class="headerlink" href="#the-do-one-thing-but-do-it-well-tools" title="Permanent link">¤</a></h2>
 <p>Work in progress, coming soon!</p>
-<p>Meanwhile, please share your thoughts! Did I say something wrong? Did I forget
-great tools? Did I write <em>"tools"</em> to much?
-I will gladly update the post with your sharings!</p>
+<p>Meanwhile, please share your thoughts! Did I say something wrong? Did I forget great tools? Did I write <em>"tools"</em> to much? I will gladly update the post with your sharings!</p>
 <h2 id="also-worth-noticing">Also worth noticing<a class="headerlink" href="#also-worth-noticing" title="Permanent link">¤</a></h2>
-<p>Go check <a href="https://github.com/pyupio/safety">Safety</a> from <a href="https://pyup.io/">PyUp.io</a>, which check your requirements (dependencies)
-for known-vulnerabilities! Also <a href="https://github.com/python-security/pyt">Pyt</a> for which I didn't take enough time
-to understand what it does and how it works,
-and great <em>Code Quality</em> web-services like <a href="https://landscape.io/">Landscape.io</a> and <a href="https://www.codacy.com/">Codacy</a>!</p>
+<p>Go check <a href="https://github.com/pyupio/safety">Safety</a> from <a href="https://pyup.io/">PyUp.io</a>, which check your requirements (dependencies) for known-vulnerabilities! Also <a href="https://github.com/python-security/pyt">Pyt</a> for which I didn't take enough time to understand what it does and how it works, and great <em>Code Quality</em> web-services like <a href="https://landscape.io/">Landscape.io</a> and <a href="https://www.codacy.com/">Codacy</a>!</p>
 <hr />
 <h4 id="links">Links:<a class="headerlink" href="#links" title="Permanent link">¤</a></h4>
 <ul>
-<li>Bandit: <a href="">https://github.com/openstack/bandit</a></li>
-<li>Codacy: <a href="">https://www.codacy.com/</a></li>
-<li>Dodgy: <a href="">https://github.com/landscapeio/dodgy</a></li>
-<li>Draw.io: <a href="">https://www.draw.io/</a></li>
-<li>Flake8: <a href="">https://github.com/PyCQA/flake8</a></li>
-<li>Frosted: <a href="">https://github.com/timothycrosley/frosted</a></li>
-<li>Landscape.io: <a href="">https://landscape.io/</a></li>
-<li>McCabe: <a href="">https://github.com/PyCQA/mccabe</a></li>
-<li>Prospector: <a href="">https://github.com/landscapeio/prospector</a></li>
-<li>Pydocstyle: <a href="">https://github.com/PyCQA/pydocstyle</a></li>
-<li>Pylama: <a href="">https://github.com/klen/pylama</a></li>
-<li>Pylint: <a href="">https://github.com/PyCQA/pylint</a></li>
-<li>Pyroma: <a href="">https://github.com/regebro/pyroma</a></li>
-<li>Pyt: <a href="">https://github.com/python-security/pyt</a></li>
-<li>PyUp.io: <a href="">https://pyup.io/</a></li>
-<li>Radon: <a href="">https://github.com/rubik/radon</a></li>
-<li>Safety: <a href="">https://github.com/pyupio/safety</a></li>
-<li>Tox: <a href="">https://github.com/tox-dev/tox</a></li>
-<li>Vulture: <a href="">https://github.com/jendrikseipp/vulture</a></li>
+<li>Bandit: <a href="https://github.com/openstack/bandit">https://github.com/openstack/bandit</a></li>
+<li>Codacy: <a href="https://www.codacy.com/">https://www.codacy.com/</a></li>
+<li>Dodgy: <a href="https://github.com/landscapeio/dodgy">https://github.com/landscapeio/dodgy</a></li>
+<li>Draw.io: <a href="https://www.draw.io/">https://www.draw.io/</a></li>
+<li>Flake8: <a href="https://github.com/PyCQA/flake8">https://github.com/PyCQA/flake8</a></li>
+<li>Frosted: <a href="https://github.com/timothycrosley/frosted">https://github.com/timothycrosley/frosted</a></li>
+<li>Landscape.io: <a href="https://landscape.io/">https://landscape.io/</a></li>
+<li>McCabe: <a href="https://github.com/PyCQA/mccabe">https://github.com/PyCQA/mccabe</a></li>
+<li>Prospector: <a href="https://github.com/landscapeio/prospector">https://github.com/landscapeio/prospector</a></li>
+<li>Pydocstyle: <a href="https://github.com/PyCQA/pydocstyle">https://github.com/PyCQA/pydocstyle</a></li>
+<li>Pylama: <a href="https://github.com/klen/pylama">https://github.com/klen/pylama</a></li>
+<li>Pylint: <a href="https://github.com/PyCQA/pylint">https://github.com/PyCQA/pylint</a></li>
+<li>Pyroma: <a href="https://github.com/regebro/pyroma">https://github.com/regebro/pyroma</a></li>
+<li>Pyt: <a href="https://github.com/python-security/pyt">https://github.com/python-security/pyt</a></li>
+<li>PyUp.io: <a href="https://pyup.io/">https://pyup.io/</a></li>
+<li>Radon: <a href="https://github.com/rubik/radon">https://github.com/rubik/radon</a></li>
+<li>Safety: <a href="https://github.com/pyupio/safety">https://github.com/pyupio/safety</a></li>
+<li>Tox: <a href="https://github.com/tox-dev/tox">https://github.com/tox-dev/tox</a></li>
+<li>Vulture: <a href="https://github.com/jendrikseipp/vulture">https://github.com/jendrikseipp/vulture</a></li>
 </ul>
 
   <!-- Giscus -->

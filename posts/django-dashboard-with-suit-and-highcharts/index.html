@@ -2069,14 +2069,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../showcase/failprint/" class="md-nav__link">
+      <a href="../../showcase/duty/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     
   
     <span class="md-typeset">
-      failprint
+      duty
     </span>
   
 
@@ -2482,14 +2482,7 @@
   
     <div class="crop-excerpt"><img src="/assets/pie-chart.png"/></div>
   
-  <p>One day my boss said "I want to see some statistical data about the users".
-I immediately thought about adding a custom page in the admin panel instead
-of creating a new view with admin restriction. I was already using
-<a href="https://github.com/darklow/django-suit">django-suit</a> which is a great theme (and more) for the Django admin panel,
-so I searched for a way to add a custom view within Suit. Looking at the
-<a href="https://github.com/darklow/django-suit/issues/409">issue</a> from <a href="https://github.com/brunocascio">brunocascio</a> on the repo, I found the <a href="https://github.com/darklow/django-suit/issues/409#issuecomment-132355444">comment</a> written
-by <a href="https://github.com/rouxxx">rouxxx</a> and linking to this <a href="https://coderwall.com/p/ieh-sg/django-custom-dashboard-easy">post about django dashboard</a>.
-I had then all I needed to start a proof of concept.</p>
+  <p>One day my boss said "I want to see some statistical data about the users". I immediately thought about adding a custom page in the admin panel instead of creating a new view with admin restriction. I was already using <a href="https://github.com/darklow/django-suit">django-suit</a> which is a great theme (and more) for the Django admin panel, so I searched for a way to add a custom view within Suit. Looking at the <a href="https://github.com/darklow/django-suit/issues/409">issue</a> from <a href="https://github.com/brunocascio">brunocascio</a> on the repo, I found the <a href="https://github.com/darklow/django-suit/issues/409#issuecomment-132355444">comment</a> written by <a href="https://github.com/rouxxx">rouxxx</a> and linking to this <a href="https://coderwall.com/p/ieh-sg/django-custom-dashboard-easy">post about django dashboard</a>. I had then all I needed to start a proof of concept.</p>
 <!--more-->
 
 <p><strong>Contents</strong></p>
@@ -2522,8 +2515,7 @@ I had then all I needed to start a proof of concept.</p>
         <span class="n">urls</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">AdminMixin</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">get_urls</span><span class="p">()</span>
         <span class="k">del</span> <span class="n">urls</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">custom_url</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^$&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">admin_view</span><span class="p">(</span><span class="n">DashboardMainView</span><span class="o">.</span><span class="n">as_view</span><span class="p">()),</span>
-                <span class="n">name</span><span class="o">=</span><span class="s2">&quot;index&quot;</span><span class="p">)</span>
+            <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^$&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">admin_view</span><span class="p">(</span><span class="n">DashboardMainView</span><span class="o">.</span><span class="n">as_view</span><span class="p">()),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;index&quot;</span><span class="p">)</span>
         <span class="p">]</span>
 
         <span class="k">return</span> <span class="n">custom_url</span> <span class="o">+</span> <span class="n">urls</span>
@@ -2534,7 +2526,6 @@ I had then all I needed to start a proof of concept.</p>
 <span class="sd">    A Django AdminSite with the AdminMixin to allow registering custom</span>
 <span class="sd">    dashboard view.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">pass</span>
 </code></pre></div>
 <p>Next, update the contents of <code>views.py</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># -*- coding: utf-8 -*-</span>
@@ -2544,7 +2535,7 @@ I had then all I needed to start a proof of concept.</p>
 
 
 <span class="k">class</span> <span class="nc">DashboardMainView</span><span class="p">(</span><span class="n">TemplateView</span><span class="p">):</span>
-    <span class="n">template_name</span> <span class="o">=</span> <span class="s1">&#39;dashboard/main.html&#39;</span>
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s2">&quot;dashboard/main.html&quot;</span>
 
     <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">context</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_context_data</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -2567,16 +2558,14 @@ I had then all I needed to start a proof of concept.</p>
 <span class="p">{%</span><span class="w"> </span><span class="nt">endblock</span><span class="w"> </span><span class="p">%}</span>
 </code></pre></div>
 <h2 id="step-2-activate-your-brand-new-dashboard">Step 2: activate your brand new dashboard<a class="headerlink" href="#step-2-activate-your-brand-new-dashboard" title="Permanent link">¤</a></h2>
-<p>Add your <code>dashboard</code> app in your
-<code>settings.INSTALLED_APPS</code>, but also replace <code>django.contrib.admin</code> by
-<code>django.contrib.admin.apps.SimpleAdminConfig</code> (thanks rouxxx):</p>
+<p>Add your <code>dashboard</code> app in your <code>settings.INSTALLED_APPS</code>, but also replace <code>django.contrib.admin</code> by <code>django.contrib.admin.apps.SimpleAdminConfig</code> (thanks rouxxx):</p>
 <div class="highlight"><pre><span></span><code><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="s1">&#39;suit&#39;</span><span class="p">,</span>  <span class="c1"># Beautiful admin interface</span>
+    <span class="s2">&quot;suit&quot;</span><span class="p">,</span>  <span class="c1"># Beautiful admin interface</span>
     <span class="c1"># Replace &#39;django.contrib.admin&#39; for dashboard</span>
     <span class="c1"># &#39;django.contrib.admin&#39;,</span>
-    <span class="s1">&#39;django.contrib.admin.apps.SimpleAdminConfig&#39;</span><span class="p">,</span>
+    <span class="s2">&quot;django.contrib.admin.apps.SimpleAdminConfig&quot;</span><span class="p">,</span>
     <span class="c1"># ...</span>
-    <span class="s1">&#39;dashboard&#39;</span><span class="p">,</span>
+    <span class="s2">&quot;dashboard&quot;</span><span class="p">,</span>
     <span class="c1"># ...</span>
 <span class="p">)</span>
 </code></pre></div>
@@ -2586,7 +2575,7 @@ I had then all I needed to start a proof of concept.</p>
 <span class="n">admin</span><span class="o">.</span><span class="n">site</span> <span class="o">=</span> <span class="n">DashboardSite</span><span class="p">()</span>
 <span class="n">admin</span><span class="o">.</span><span class="n">autodiscover</span><span class="p">()</span>
 </code></pre></div>
-<p><strong>EDIT:</strong> with Django 1.9.5, you will need one more line:<br />
+<p><strong>EDIT:</strong> with Django 1.9.5, you will need one more line:\
 (See <a href="#comment-2643754439">Gustavo's comment</a> at the bottom.)</p>
 <div class="highlight"><pre><span></span><code><span class="n">admin</span><span class="o">.</span><span class="n">site</span> <span class="o">=</span> <span class="n">DashboardSite</span><span class="p">()</span>
 <span class="n">admin</span><span class="o">.</span><span class="n">sites</span><span class="o">.</span><span class="n">site</span> <span class="o">=</span> <span class="n">admin</span><span class="o">.</span><span class="n">site</span>
@@ -2594,40 +2583,41 @@ I had then all I needed to start a proof of concept.</p>
 </code></pre></div>
 <p>Your <code>urlpatterns</code> should not be subject to change:</p>
 <div class="highlight"><pre><span></span><code><span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^admin/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">)),</span>
-    <span class="c1">#...</span>
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^admin/&quot;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">)),</span>
+    <span class="c1"># ...</span>
 <span class="p">]</span>
 </code></pre></div>
 <p>That's it, go check your new empty dashboard!</p>
 <p><img alt="Empty dashboard" src="../../assets/empty-dashboard.png" /></p>
 <h2 id="step-3-highcharts">Step 3: Highcharts!<a class="headerlink" href="#step-3-highcharts" title="Permanent link">¤</a></h2>
-<p>I was already familiar with <a href="http://www.highcharts.com/">Highcharts</a> since I use it in my project, so
-it made sense to use it in the admin dashboard too.</p>
-<p>Somewhere in your project, you will have functions that compute or retrieve
-data from your database(s) or else. Add these data in the <code>context</code>
-dictionary of the <code>DashboardMainView</code> in <code>dashboard/views.py</code>.</p>
+<p>I was already familiar with <a href="http://www.highcharts.com/">Highcharts</a> since I use it in my project, so it made sense to use it in the admin dashboard too.</p>
+<p>Somewhere in your project, you will have functions that compute or retrieve data from your database(s) or else. Add these data in the <code>context</code> dictionary of the <code>DashboardMainView</code> in <code>dashboard/views.py</code>.</p>
 <p>Example:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">core.data</span> <span class="kn">import</span> <span class="n">get_country_name_by_code</span>
 <span class="kn">from</span> <span class="nn">statistics.sitewide</span> <span class="kn">import</span> <span class="n">nb_patients_per_country</span>
 
 
 <span class="k">class</span> <span class="nc">DashboardMainView</span><span class="p">(</span><span class="n">TemplateView</span><span class="p">):</span>
-    <span class="n">template_name</span> <span class="o">=</span> <span class="s1">&#39;dashboard/main.html&#39;</span>
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s2">&quot;dashboard/main.html&quot;</span>
 
     <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">context</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_context_data</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;nb_patients_per_country&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span>
-            <span class="p">[{</span><span class="s1">&#39;country&#39;</span><span class="p">:</span> <span class="n">get_country_name_by_code</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="s1">&#39;patients&#39;</span><span class="p">:</span> <span class="n">v</span><span class="p">}</span>
-             <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">nb_patients_per_country</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">],</span>
-            <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;patients&#39;</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">context</span><span class="p">[</span><span class="s2">&quot;nb_patients_per_country&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="p">{</span><span class="s2">&quot;country&quot;</span><span class="p">:</span> <span class="n">get_country_name_by_code</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="s2">&quot;patients&quot;</span><span class="p">:</span> <span class="n">v</span><span class="p">}</span>
+                <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">nb_patients_per_country</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">v</span> <span class="o">&gt;</span> <span class="mi">0</span>
+            <span class="p">],</span>
+            <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;patients&quot;</span><span class="p">],</span>
+            <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
 
         <span class="c1"># I filtered the 0 values out, and used get_country_name_by_code to</span>
         <span class="c1"># have the countries names translated!</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">render_to_response</span><span class="p">(</span><span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">)</span>
 </code></pre></div>
-<p>Then in your template, add links to Highchart, and use the previous data
-to create, for example, a pie chart:</p>
+<p>Then in your template, add links to Highchart, and use the previous data to create, for example, a pie chart:</p>
 <div class="highlight"><pre><span></span><code>{% block content %}
   <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;http://code.highcharts.com/highcharts.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;http://code.highcharts.com/highcharts-more.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
@@ -2690,8 +2680,7 @@ to create, for example, a pie chart:</p>
 </code></pre></div>
 <p>Here is the result:</p>
 <p><img alt="Pie chart" src="../../assets/pie-chart.png" /></p>
-<p>For other types of chart, go check the Highcharts <a href="http://www.highcharts.com/demo">demos</a> and their excellent
-<a href="http://api.highcharts.com/highcharts">API documentation</a>!</p>
+<p>For other types of chart, go check the Highcharts <a href="http://www.highcharts.com/demo">demos</a> and their excellent <a href="http://api.highcharts.com/highcharts">API documentation</a>!</p>
 <h2 id="more-customization">More customization<a class="headerlink" href="#more-customization" title="Permanent link">¤</a></h2>
 <h4 id="customizable-contents">Customizable contents<a class="headerlink" href="#customizable-contents" title="Permanent link">¤</a></h4>
 <ul>
@@ -2699,45 +2688,51 @@ to create, for example, a pie chart:</p>
 <li><a href="#more-dashboard-pages">Add more pages to your dashboard</a></li>
 </ul>
 <h3 id="columns">Columns<a class="headerlink" href="#columns" title="Permanent link">¤</a></h3>
-<p>If like me you would like to use columns in the dashboard, you will be
-disappointed since we cannot use Bootstrap's column classes (<code>col-md</code> and
-stuff) for I don't know what reason. Instead, Suit provides the <code>suit-column</code>
-class which lets you stack multiple columns on one row. But you can't specify
-the width and they won't have the same size. Here is a CSS starting point to
-poorly imitate Bootstrap's columns:</p>
+<p>If like me you would like to use columns in the dashboard, you will be disappointed since we cannot use Bootstrap's column classes (<code>col-md</code> and stuff) for I don't know what reason. Instead, Suit provides the <code>suit-column</code> class which lets you stack multiple columns on one row. But you can't specify the width and they won't have the same size. Here is a CSS starting point to poorly imitate Bootstrap's columns:</p>
 <div class="highlight"><pre><span></span><code><span class="p">.</span><span class="nc">suit-row-1-col</span><span class="w"> </span><span class="p">.</span><span class="nc">suit-column</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
 <span class="p">}</span>
+
 <span class="p">.</span><span class="nc">suit-row-2-col</span><span class="w"> </span><span class="p">.</span><span class="nc">suit-column</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="kt">%</span><span class="p">;</span>
 <span class="p">}</span>
+
 <span class="p">.</span><span class="nc">suit-row-3-col</span><span class="w"> </span><span class="p">.</span><span class="nc">suit-column</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="mf">33.33</span><span class="kt">%</span><span class="p">;</span>
 <span class="p">}</span>
+
 <span class="p">.</span><span class="nc">suit-row-4-col</span><span class="w"> </span><span class="p">.</span><span class="nc">suit-column</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="kt">%</span><span class="p">;</span>
 <span class="p">}</span>
+
 <span class="p">.</span><span class="nc">suit-row-5-col</span><span class="w"> </span><span class="p">.</span><span class="nc">suit-column</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="kt">%</span><span class="p">;</span>
 <span class="p">}</span>
+
 <span class="p">.</span><span class="nc">suit-row-6-col</span><span class="w"> </span><span class="p">.</span><span class="nc">suit-column</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="mf">16.66</span><span class="kt">%</span><span class="p">;</span>
 <span class="p">}</span>
+
 <span class="p">.</span><span class="nc">suit-row-7-col</span><span class="w"> </span><span class="p">.</span><span class="nc">suit-column</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="mf">14.28</span><span class="kt">%</span><span class="p">;</span>
 <span class="p">}</span>
+
 <span class="p">.</span><span class="nc">suit-row-8-col</span><span class="w"> </span><span class="p">.</span><span class="nc">suit-column</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="mf">12.5</span><span class="kt">%</span><span class="p">;</span>
 <span class="p">}</span>
+
 <span class="p">.</span><span class="nc">suit-row-9-col</span><span class="w"> </span><span class="p">.</span><span class="nc">suit-column</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="mf">11.11</span><span class="kt">%</span><span class="p">;</span>
 <span class="p">}</span>
+
 <span class="p">.</span><span class="nc">suit-row-10-col</span><span class="w"> </span><span class="p">.</span><span class="nc">suit-column</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="kt">%</span><span class="p">;</span>
 <span class="p">}</span>
+
 <span class="p">.</span><span class="nc">suit-row-11-col</span><span class="w"> </span><span class="p">.</span><span class="nc">suit-column</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="mf">9.09</span><span class="kt">%</span><span class="p">;</span>
 <span class="p">}</span>
+
 <span class="p">.</span><span class="nc">suit-row-12-col</span><span class="w"> </span><span class="p">.</span><span class="nc">suit-column</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="mf">8.333</span><span class="kt">%</span><span class="p">;</span>
 <span class="p">}</span>
@@ -2757,16 +2752,11 @@ poorly imitate Bootstrap's columns:</p>
 </code></pre></div>
 <p>...and which results like this:</p>
 <p><img alt="Columns" src="../../assets/columns.png" /></p>
-<p>But this tweak is very limited because you can't have columns with different
-sizes on the same row...</p>
+<p>But this tweak is very limited because you can't have columns with different sizes on the same row...</p>
 <h3 id="more-dashboard-pages">More dashboard pages<a class="headerlink" href="#more-dashboard-pages" title="Permanent link">¤</a></h3>
-<p>Just add your additional URLs in <code>dashboard.sites.AdminMixin</code> (they should
-maybe be added at the end of the original URLs:
-<code>return custom_url + urls + additional_urls</code>), create the views and the
-templates and it's done.</p>
+<p>Just add your additional URLs in <code>dashboard.sites.AdminMixin</code> (they should maybe be added at the end of the original URLs: <code>return custom_url + urls + additional_urls</code>), create the views and the templates and it's done.</p>
 <h3 id="django-suit-dashboard">Django Suit Dashboard<a class="headerlink" href="#django-suit-dashboard" title="Permanent link">¤</a></h3>
-<p>I wrote a Django app to do this: <a href="https://github.com/Pawamoy/django-suit-dashboard">django-suit-dashboard</a>. Go take a look!
-(and please keep in mind it's just a beta and it could/will be improved).</p>
+<p>I wrote a Django app to do this: <a href="https://github.com/Pawamoy/django-suit-dashboard">django-suit-dashboard</a>. Go take a look! (and please keep in mind it's just a beta and it could/will be improved).</p>
 
   <!-- Giscus -->
   <!-- https://squidfunk.github.io/mkdocs-material/setup/adding-a-comment-system/#giscus-integration -->
