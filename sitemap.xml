@@ -2,207 +2,212 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://pawamoy.github.io/</loc>
-         <lastmod>2024-04-14</lastmod>
+         <lastmod>2024-05-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pawamoy.github.io/about/</loc>
-         <lastmod>2024-04-14</lastmod>
+         <lastmod>2024-05-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pawamoy.github.io/credits/</loc>
-         <lastmod>2024-04-14</lastmod>
+         <lastmod>2024-05-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pawamoy.github.io/insiders/</loc>
-         <lastmod>2024-04-14</lastmod>
+         <lastmod>2024-05-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pawamoy.github.io/showcase/</loc>
-         <lastmod>2024-04-14</lastmod>
+         <lastmod>2024-05-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pawamoy.github.io/notes/install_printer_on_linux/</loc>
-         <lastmod>2024-04-14</lastmod>
+         <lastmod>2024-05-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pawamoy.github.io/posts/add-alembic-migrations-to-existing-fastapi-ormar-project/</loc>
-         <lastmod>2024-04-14</lastmod>
+         <lastmod>2024-05-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pawamoy.github.io/posts/adding-links-to-formatted-and-syntax-highlighted-code/</loc>
-         <lastmod>2024-04-14</lastmod>
+         <lastmod>2024-05-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pawamoy.github.io/posts/challenge-fill-space-one-line-90-degree-same-direction/</loc>
-         <lastmod>2024-04-14</lastmod>
+         <lastmod>2024-05-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pawamoy.github.io/posts/django-auth-server-for-shiny/</loc>
-         <lastmod>2024-04-14</lastmod>
+         <lastmod>2024-05-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pawamoy.github.io/posts/django-dashboard-with-suit-and-highcharts/</loc>
-         <lastmod>2024-04-14</lastmod>
+         <lastmod>2024-05-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pawamoy.github.io/posts/docker-compose-django-postgres-nginx/</loc>
-         <lastmod>2024-04-14</lastmod>
+         <lastmod>2024-05-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pawamoy.github.io/posts/documentation-in-your-shell-scripts-using-shellman/</loc>
-         <lastmod>2024-04-14</lastmod>
+         <lastmod>2024-05-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pawamoy.github.io/posts/dual-screens-setup-nvidia-bunsenlabs-debian-jessie/</loc>
-         <lastmod>2024-04-14</lastmod>
+         <lastmod>2024-05-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pawamoy.github.io/posts/how-to-deal-with-jinja2-spacing/</loc>
-         <lastmod>2024-04-14</lastmod>
+         <lastmod>2024-05-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pawamoy.github.io/posts/howto-edit-git-commit-contents/</loc>
-         <lastmod>2024-04-14</lastmod>
+         <lastmod>2024-05-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pawamoy.github.io/posts/local-http-server-fake-files-testing-purposes/</loc>
-         <lastmod>2024-04-14</lastmod>
+         <lastmod>2024-05-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pawamoy.github.io/posts/migrate-disqus-comments-to-utterances-github/</loc>
-         <lastmod>2024-04-14</lastmod>
+         <lastmod>2024-05-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pawamoy.github.io/posts/pass-makefile-args-as-typed-in-command-line/</loc>
-         <lastmod>2024-04-14</lastmod>
+         <lastmod>2024-05-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pawamoy.github.io/posts/plugins-as-python-native-namespace-packages/</loc>
-         <lastmod>2024-04-14</lastmod>
+         <lastmod>2024-05-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pawamoy.github.io/posts/python-static-code-analysis-tools/</loc>
-         <lastmod>2024-04-14</lastmod>
+         <lastmod>2024-05-01</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://pawamoy.github.io/posts/same-pytest-fixtures-with-different-scopes/</loc>
+         <lastmod>2024-05-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pawamoy.github.io/posts/save-pytest-logs-as-artifact-gitlab-ci/</loc>
-         <lastmod>2024-04-14</lastmod>
+         <lastmod>2024-05-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pawamoy.github.io/posts/somewhat-modern-python-development/</loc>
-         <lastmod>2024-04-14</lastmod>
+         <lastmod>2024-05-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pawamoy.github.io/posts/steam-linux-alvr-quest2/</loc>
-         <lastmod>2024-04-14</lastmod>
+         <lastmod>2024-05-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pawamoy.github.io/posts/testing-fastapi-ormar-alembic-apps/</loc>
-         <lastmod>2024-04-14</lastmod>
+         <lastmod>2024-05-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pawamoy.github.io/posts/the-insiders-journey/</loc>
-         <lastmod>2024-04-14</lastmod>
+         <lastmod>2024-05-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pawamoy.github.io/posts/tingling-sensation-witnessing-existence/</loc>
-         <lastmod>2024-04-14</lastmod>
+         <lastmod>2024-05-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pawamoy.github.io/posts/tips-for-writing-good-python-cli-libraries/</loc>
-         <lastmod>2024-04-14</lastmod>
+         <lastmod>2024-05-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pawamoy.github.io/posts/unify-logging-for-a-gunicorn-uvicorn-app/</loc>
-         <lastmod>2024-04-14</lastmod>
+         <lastmod>2024-05-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pawamoy.github.io/posts/write-and-use-a-tox-plugin-from-inside-your-package/</loc>
-         <lastmod>2024-04-14</lastmod>
+         <lastmod>2024-05-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pawamoy.github.io/showcase/aria2p/</loc>
-         <lastmod>2024-04-14</lastmod>
+         <lastmod>2024-05-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pawamoy.github.io/showcase/copier-pdm/</loc>
-         <lastmod>2024-04-14</lastmod>
+         <lastmod>2024-05-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pawamoy.github.io/showcase/dependenpy/</loc>
-         <lastmod>2024-04-14</lastmod>
+         <lastmod>2024-05-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pawamoy.github.io/showcase/duty/</loc>
-         <lastmod>2024-04-14</lastmod>
+         <lastmod>2024-05-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pawamoy.github.io/showcase/git-changelog/</loc>
-         <lastmod>2024-04-14</lastmod>
+         <lastmod>2024-05-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pawamoy.github.io/showcase/griffe/</loc>
-         <lastmod>2024-04-14</lastmod>
+         <lastmod>2024-05-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pawamoy.github.io/showcase/mkdocstrings/</loc>
-         <lastmod>2024-04-14</lastmod>
+         <lastmod>2024-05-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pawamoy.github.io/showcase/mvodb/</loc>
-         <lastmod>2024-04-14</lastmod>
+         <lastmod>2024-05-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pawamoy.github.io/showcase/shell-history/</loc>
-         <lastmod>2024-04-14</lastmod>
+         <lastmod>2024-05-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pawamoy.github.io/showcase/shelldemo/</loc>
-         <lastmod>2024-04-14</lastmod>
+         <lastmod>2024-05-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pawamoy.github.io/showcase/shellman/</loc>
-         <lastmod>2024-04-14</lastmod>
+         <lastmod>2024-05-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>

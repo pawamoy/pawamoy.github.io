@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://pawamoy.github.io/posts/documentation-in-your-shell-scripts-using-shellman/">
+        <link rel="canonical" href="https://pawamoy.github.io/posts/same-pytest-fixtures-with-different-scopes/">
       
       
-        <link rel="prev" href="../write-and-use-a-tox-plugin-from-inside-your-package/">
+        <link rel="prev" href="../../credits/">
       
       
-        <link rel="next" href="../django-dashboard-with-suit-and-highcharts/">
+        <link rel="next" href="../tingling-sensation-witnessing-existence/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Documentation in your shell scripts using shellman - pawamoy's website</title>
+        <title>Same Pytest fixtures with different scopes - pawamoy's website</title>
       
     
     
@@ -88,7 +88,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#writing-doc" class="md-skip">
+        <a href="#move-fixtures-actual-code-into-external-helpers" class="md-skip">
           Skip to content
         </a>
       
@@ -124,7 +124,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Documentation in your shell scripts using shellman
+              Same Pytest fixtures with different scopes
             
           </span>
         </div>
@@ -300,7 +300,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../same-pytest-fixtures-with-different-scopes/" class="md-tabs__link">
+        <a href="./" class="md-tabs__link">
           
   
     
@@ -552,6 +552,8 @@
                 
   
   
+    
+  
   
     
     
@@ -569,12 +571,12 @@
       
       
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" checked>
         
           
           <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="">
@@ -594,7 +596,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4_1">
             <span class="md-nav__icon md-icon"></span>
             
@@ -609,9 +611,33 @@
                 
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../same-pytest-fixtures-with-different-scopes/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    
+  
+    Same Pytest fixtures with different scopes
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -626,6 +652,63 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#move-fixtures-actual-code-into-external-helpers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          Move fixtures' actual code into external helpers
+        </span>
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#use-these-helpers-in-fixtures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          Use these helpers in fixtures
+        </span>
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#duplicate-fixtures-with-different-scopes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          Duplicate fixtures with different scopes
+        </span>
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1553,8 +1636,6 @@
                 
   
   
-    
-  
   
     
     
@@ -1572,12 +1653,12 @@
       
       
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_8" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_8" >
         
           
           <label class="md-nav__link" for="__nav_4_8" id="__nav_4_8_label" tabindex="">
@@ -1597,7 +1678,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4_8">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1638,33 +1719,9 @@
                 
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    
-  
-    Documentation in your shell scripts using shellman
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../documentation-in-your-shell-scripts-using-shellman/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1679,134 +1736,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#writing-doc" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        <span class="md-typeset">
-          Writing doc
-        </span>
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#using-shellman" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        <span class="md-typeset">
-          Using shellman
-        </span>
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#an-example" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        <span class="md-typeset">
-          An example
-        </span>
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#how-it-looks" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        <span class="md-typeset">
-          How it looks
-        </span>
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="How it looks">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#text" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        <span class="md-typeset">
-          Text
-        </span>
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#man" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        <span class="md-typeset">
-          Man
-        </span>
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#markdown" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        <span class="md-typeset">
-          Markdown
-        </span>
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#more" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        <span class="md-typeset">
-          More
-        </span>
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -2380,11 +2309,11 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#writing-doc" class="md-nav__link">
+  <a href="#move-fixtures-actual-code-into-external-helpers" class="md-nav__link">
     <span class="md-ellipsis">
       
         <span class="md-typeset">
-          Writing doc
+          Move fixtures' actual code into external helpers
         </span>
       
     </span>
@@ -2393,11 +2322,11 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#using-shellman" class="md-nav__link">
+  <a href="#use-these-helpers-in-fixtures" class="md-nav__link">
     <span class="md-ellipsis">
       
         <span class="md-typeset">
-          Using shellman
+          Use these helpers in fixtures
         </span>
       
     </span>
@@ -2406,82 +2335,11 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#an-example" class="md-nav__link">
+  <a href="#duplicate-fixtures-with-different-scopes" class="md-nav__link">
     <span class="md-ellipsis">
       
         <span class="md-typeset">
-          An example
-        </span>
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#how-it-looks" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        <span class="md-typeset">
-          How it looks
-        </span>
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="How it looks">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#text" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        <span class="md-typeset">
-          Text
-        </span>
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#man" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        <span class="md-typeset">
-          Man
-        </span>
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#markdown" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        <span class="md-typeset">
-          Markdown
-        </span>
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#more" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        <span class="md-typeset">
-          More
+          Duplicate fixtures with different scopes
         </span>
       
     </span>
@@ -2502,146 +2360,269 @@
               
               <article class="md-content__inner md-typeset">
                 
-  <h1>Documentation in your shell scripts using shellman</h1>
+  <h1>Same Pytest fixtures with different scopes</h1>
   <p class="post-meta">
-    Published Dec 07, 2016
+    Published Mar 19, 2023
     by Timothée Mazzucotelli
   </p>
   
-  <p>When I write a script, I like to have a <code>-h, --help</code> option to help me remember what it does and how it works. But I was never delighted to write this help text. Besides, when your script's options change, you have to update the help text.</p>
-<p>I also always liked man pages, their search feature and their ability to scroll up and down and not leave any output in the console. But maintaining a man page is even more tedious than maintaining a help text.</p>
-<p>This is why I thought of using documentation in shell scripts. So I wrote <a href="https://github.com/pawamoy/shellman">shellman</a>.</p>
+  <p>How to use the same Pytest fixtures with different scopes, to prevent slowing down your test suite?</p>
 <!--more-->
 
+<p>I've recently started experimenting with mutiple <a href="https://docs.pytest.org/en/6.2.x/parametrize.html">parametrizations</a> above tests, to run tests on every combination of possible values of different options. Concretely, I'm testing the output of a function that generates HTML. Since this function can potentially generate lots of HTML, I also use <a href="https://pypi.org/project/inline-snapshot/">inline-snapshot</a> to automatically store the output in external files and update my test code to reference them for the next runs. I then just have to check the generated HTML to assert it matches my expectations, and fix it if it doesn't.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">inline_snapshot</span> <span class="kn">import</span> <span class="n">snapshot</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;option1&quot;</span><span class="p">,</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">None</span><span class="p">])</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;option2&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;value1&quot;</span><span class="p">,</span> <span class="s2">&quot;value2&quot;</span><span class="p">])</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;option3&quot;</span><span class="p">,</span> <span class="p">[(),</span> <span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">)])</span>
+<span class="k">def</span> <span class="nf">test_options_combinations</span><span class="p">(</span><span class="n">option1</span><span class="p">,</span> <span class="n">option2</span><span class="p">,</span> <span class="n">option3</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">generate_html</span><span class="p">(</span><span class="n">option1</span><span class="p">,</span> <span class="n">option2</span><span class="p">,</span> <span class="n">option3</span><span class="p">)</span> <span class="o">==</span> <span class="n">snapshot</span><span class="p">()</span>
+</code></pre></div>
+<p>With such parametrization, I easily end up with hundreds of tests (they grow exponentially with each additional parametrization or option value). When the parametrized tests use function-scoped fixtures, they slow down the tests a lot, even if the fixtures are not very expensive. They're just executed over and over hundreds of time, so it starts being noticeable (one second, five seconds, fifteen seconds, etc.). These fixtures are function-scoped because they can be customized through Pytest's <code>request</code> fixture. But for the parametrized tests, they don't need customization. So I tried to duplicate the fixtures and make them session-scoped, but Pytest complains that they use function-scoped fixtures. After a bit of tinkering, here is what I ended up with:</p>
 <ul>
-<li><a href="#writing-doc">Writing doc</a></li>
-<li><a href="#using-shellman">Using shellman</a></li>
-<li><a href="#an-example">An example</a></li>
-<li><a href="#how-it-looks">How it looks</a><ul>
-<li><a href="#text">Text</a></li>
-<li><a href="#man">Man</a></li>
-<li><a href="#markdown">Markdown</a></li>
+<li>move fixtures' actual code into external helpers</li>
+<li>use these helpers in fixtures</li>
+<li>fixtures are now short and can easily be duplicated with different scopes</li>
 </ul>
-</li>
-<li><a href="#more">More</a></li>
-</ul>
-<h2 id="writing-doc">Writing doc<a class="headerlink" href="#writing-doc" title="Permanent link">¤</a></h2>
-<p>Shellman can read special comments in your file. These special comments are the documentation of your script or library. They simply begin with two sharps instead of one:</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># A normal comment.</span>
-<span class="c1">## A documentation comment.</span>
+<h2 id="move-fixtures-actual-code-into-external-helpers">Move fixtures' actual code into external helpers<a class="headerlink" href="#move-fixtures-actual-code-into-external-helpers" title="Permanent link">¤</a></h2>
+<p>Let's illustrate with code.</p>
+<p>Initially, I had my Pytest fixture declared like this:</p>
+<div class="highlight"><pre><span></span><code>📁<span class="w"> </span>project/
+└──<span class="w"> </span>📁<span class="w"> </span>tests/
+<span class="w">    </span>└──<span class="w"> </span>📄<span class="w"> </span>conftest.py
 </code></pre></div>
-<p>Also, to give a special meaning to your documentation, each documentation line can be tagged, just like you would do in doxygen documentation:</p>
-<div class="highlight"><pre><span></span><code><span class="c1">## \brief A brief description.</span>
-<span class="c1">## \desc A long description.</span>
-<span class="c1">## You can write many lines in this tag.</span>
+<div class="highlight"><span class="filename">tests/conftest.py</span><pre><span></span><code><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">ChainMap</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Iterator</span>
+
+<span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">mkdocs.config.defaults</span> <span class="kn">import</span> <span class="n">MkDocsConfig</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;mkdocs_conf&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">fixture_mkdocs_conf</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">pytest</span><span class="o">.</span><span class="n">FixtureRequest</span><span class="p">,</span> <span class="n">tmp_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">MkDocsConfig</span><span class="p">]:</span>
+    <span class="n">conf</span> <span class="o">=</span> <span class="n">MkDocsConfig</span><span class="p">()</span>
+    <span class="k">while</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s2">&quot;_parent_request&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">_parent_request</span><span class="p">,</span> <span class="s2">&quot;_parent_request&quot;</span><span class="p">):</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">_parent_request</span>
+
+    <span class="n">conf_dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;site_name&quot;</span><span class="p">:</span> <span class="s2">&quot;foo&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;site_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.org/&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;site_dir&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">tmp_path</span><span class="p">),</span>
+        <span class="s2">&quot;plugins&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;mkdocstrings&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;default_handler&quot;</span><span class="p">:</span> <span class="s2">&quot;python&quot;</span><span class="p">}}],</span>
+        <span class="o">**</span><span class="nb">getattr</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s2">&quot;param&quot;</span><span class="p">,</span> <span class="p">{}),</span>
+    <span class="p">}</span>
+
+    <span class="n">mdx_configs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">ChainMap</span><span class="p">(</span><span class="o">*</span><span class="n">conf_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;markdown_extensions&quot;</span><span class="p">,</span> <span class="p">[])))</span>
+
+    <span class="n">conf</span><span class="o">.</span><span class="n">load_dict</span><span class="p">(</span><span class="n">conf_dict</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">conf</span><span class="o">.</span><span class="n">validate</span><span class="p">()</span> <span class="o">==</span> <span class="p">([],</span> <span class="p">[])</span>
+
+    <span class="n">conf</span><span class="p">[</span><span class="s2">&quot;mdx_configs&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mdx_configs</span>
+    <span class="n">conf</span><span class="p">[</span><span class="s2">&quot;markdown_extensions&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;toc&quot;</span><span class="p">)</span>  <span class="c1"># Guaranteed to be added by MkDocs.</span>
+
+    <span class="n">conf</span> <span class="o">=</span> <span class="n">conf</span><span class="p">[</span><span class="s2">&quot;plugins&quot;</span><span class="p">][</span><span class="s2">&quot;mkdocstrings&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">on_config</span><span class="p">(</span><span class="n">conf</span><span class="p">)</span>
+    <span class="n">conf</span> <span class="o">=</span> <span class="n">conf</span><span class="p">[</span><span class="s2">&quot;plugins&quot;</span><span class="p">][</span><span class="s2">&quot;autorefs&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">on_config</span><span class="p">(</span><span class="n">conf</span><span class="p">)</span>
+    <span class="k">yield</span> <span class="n">conf</span>
+    <span class="n">conf</span><span class="p">[</span><span class="s2">&quot;plugins&quot;</span><span class="p">][</span><span class="s2">&quot;mkdocstrings&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">on_post_build</span><span class="p">(</span><span class="n">conf</span><span class="p">)</span>
 </code></pre></div>
-<h2 id="using-shellman">Using shellman<a class="headerlink" href="#using-shellman" title="Permanent link">¤</a></h2>
-<p>After reading and loading all the documentation written in a file, shellman will then be able to output it on stdout (on in another file) in different formats, such as text, man page or markdown.</p>
-<div class="highlight"><pre><span></span><code>shellman<span class="w"> </span>my_script.sh<span class="w">  </span><span class="c1"># text output by default</span>
-man<span class="w"> </span>&lt;<span class="o">(</span>shellman<span class="w"> </span>--format<span class="w"> </span>man<span class="w"> </span>my_script.sh<span class="o">)</span>
-<span class="c1"># Available formats for -f, --format option: text, man, markdown</span>
+<p>The code is not very important. We just see here that the fixture is quite long. If I wanted to duplicate it and make it session-scoped (instead of function-scoped by default), I'd have to copy-paste all this code and the only thing that would change is the <code>tmp_path</code> dependency (function-scoped), which would become <code>tmp_path_factory</code> (session-scoped). That would be wasteful.</p>
+<p>Instead, I moved this code into a <code>tests/helpers.py</code> module:</p>
+<div class="highlight"><pre><span></span><code>📁<span class="w"> </span>project/
+└──<span class="w"> </span>📁<span class="w"> </span>tests/
+<span class="w">    </span>├──<span class="w"> </span>📄<span class="w"> </span>__init__.py
+<span class="w">    </span>├──<span class="w"> </span>📄<span class="w"> </span>conftest.py
+<span class="w">    </span>└──<span class="w"> </span>📄<span class="w"> </span>helpers.py
 </code></pre></div>
-<p>Shellman also has a <code>--check</code> option that will not output anything, but instead check for written documentation in a file. A simple <code>--check</code> option will return 0 or 1, but display no warnings. Add a <code>--warn</code> option to print warnings on stderr. It will help you fix your documentation, or even do some linting and continuous integration on your scripts' documentation.</p>
-<h2 id="an-example">An example<a class="headerlink" href="#an-example" title="Permanent link">¤</a></h2>
-<p>Here is an example of how I write documentation in my scripts now:</p>
-<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<div class="highlight"><span class="filename">tests/helpers.py</span><pre><span></span><code><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">ChainMap</span>
+<span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">contextmanager</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Iterator</span>
 
-<span class="c1">## \brief shell script debugger</span>
+<span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">mkdocs.config.defaults</span> <span class="kn">import</span> <span class="n">MkDocsConfig</span>
 
-<span class="c1">## \desc Run a script in path with the -x bash option (and more).</span>
-<span class="c1">## You should set the PS4 variable for better output.</span>
+<span class="nd">@contextmanager</span>
+<span class="k">def</span> <span class="nf">mkdocs_conf</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">pytest</span><span class="o">.</span><span class="n">FixtureRequest</span><span class="p">,</span> <span class="n">tmp_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">MkDocsConfig</span><span class="p">]:</span>
+    <span class="n">conf</span> <span class="o">=</span> <span class="n">MkDocsConfig</span><span class="p">()</span>
+    <span class="k">while</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s2">&quot;_parent_request&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">_parent_request</span><span class="p">,</span> <span class="s2">&quot;_parent_request&quot;</span><span class="p">):</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">_parent_request</span>
 
-<span class="c1">## \env PS4</span>
-<span class="c1">## Debugger prompt. This is the prefix that bash prepends</span>
-<span class="c1">## to the current instruction when using -x option.</span>
+    <span class="n">conf_dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;site_name&quot;</span><span class="p">:</span> <span class="s2">&quot;foo&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;site_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.org/&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;site_dir&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">tmp_path</span><span class="p">),</span>
+        <span class="s2">&quot;plugins&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;mkdocstrings&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;default_handler&quot;</span><span class="p">:</span> <span class="s2">&quot;python&quot;</span><span class="p">}}],</span>
+        <span class="o">**</span><span class="nb">getattr</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s2">&quot;param&quot;</span><span class="p">,</span> <span class="p">{}),</span>
+    <span class="p">}</span>
 
-main<span class="o">()</span><span class="w"> </span><span class="o">{</span>
-<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="k">in</span>
+    <span class="n">mdx_configs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">ChainMap</span><span class="p">(</span><span class="o">*</span><span class="n">conf_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;markdown_extensions&quot;</span><span class="p">,</span> <span class="p">[])))</span>
 
-<span class="w">    </span><span class="c1">## \option -t, --test</span>
-<span class="w">    </span><span class="c1">## Read the script and warn for encountered syntax errors.</span>
-<span class="w">    </span><span class="c1">## Do not actually run the script.</span>
-<span class="w">    </span>-t<span class="p">|</span>--test<span class="o">)</span><span class="w"> </span><span class="nv">FLAGS</span><span class="o">=</span>-n<span class="p">;</span><span class="w"> </span><span class="nb">shift</span><span class="w"> </span><span class="p">;;</span>
+    <span class="n">conf</span><span class="o">.</span><span class="n">load_dict</span><span class="p">(</span><span class="n">conf_dict</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">conf</span><span class="o">.</span><span class="n">validate</span><span class="p">()</span> <span class="o">==</span> <span class="p">([],</span> <span class="p">[])</span>
 
-<span class="w">    </span><span class="c1">## \option -v, --verbose</span>
-<span class="w">    </span><span class="c1">## Run the script with verbose option.</span>
-<span class="w">    </span>-v<span class="p">|</span>--verbose<span class="o">)</span><span class="w"> </span><span class="nv">FLAGS</span><span class="o">=</span>-xv<span class="p">;</span><span class="w"> </span><span class="nb">shift</span><span class="w"> </span><span class="p">;;</span>
+    <span class="n">conf</span><span class="p">[</span><span class="s2">&quot;mdx_configs&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mdx_configs</span>
+    <span class="n">conf</span><span class="p">[</span><span class="s2">&quot;markdown_extensions&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;toc&quot;</span><span class="p">)</span>  <span class="c1"># Guaranteed to be added by MkDocs.</span>
 
-<span class="w">    </span><span class="c1">## \option -n, --dry-run</span>
-<span class="w">    </span><span class="c1">## Options test and verbose combined. Validate the syntax</span>
-<span class="w">    </span><span class="c1">## and print the script to stdout.</span>
-<span class="w">    </span>-n<span class="p">|</span>--dry-run<span class="o">)</span><span class="w"> </span><span class="nv">FLAGS</span><span class="o">=</span>-xvn<span class="p">;</span><span class="w"> </span><span class="nb">shift</span><span class="w"> </span><span class="p">;;</span>
-
-<span class="w">    </span><span class="c1">## \option -h, --help</span>
-<span class="w">    </span><span class="c1">## Print this help and exit.</span>
-<span class="w">    </span>-h<span class="p">|</span>--help<span class="o">)</span><span class="w"> </span>shellman<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$0</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="p">;;</span><span class="w">  </span><span class="c1"># Here is the black magic!</span>
-
-<span class="w">    </span>*<span class="o">)</span><span class="w"> </span><span class="nv">FLAGS</span><span class="o">=</span>-x<span class="w"> </span><span class="p">;;</span>
-
-<span class="w">  </span><span class="k">esac</span>
-<span class="w">  </span><span class="nv">SCRIPT</span><span class="o">=</span><span class="nv">$1</span>
-<span class="w">  </span><span class="nb">shift</span>
-
-<span class="w">  </span>/bin/bash<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">FLAGS</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">SCRIPT</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span>
-<span class="o">}</span>
-
-<span class="c1">## \usage dbg [-tvn] SCRIPT</span>
-main<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span>
+    <span class="n">conf</span> <span class="o">=</span> <span class="n">conf</span><span class="p">[</span><span class="s2">&quot;plugins&quot;</span><span class="p">][</span><span class="s2">&quot;mkdocstrings&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">on_config</span><span class="p">(</span><span class="n">conf</span><span class="p">)</span>
+    <span class="n">conf</span> <span class="o">=</span> <span class="n">conf</span><span class="p">[</span><span class="s2">&quot;plugins&quot;</span><span class="p">][</span><span class="s2">&quot;autorefs&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">on_config</span><span class="p">(</span><span class="n">conf</span><span class="p">)</span>
+    <span class="k">yield</span> <span class="n">conf</span>
+    <span class="n">conf</span><span class="p">[</span><span class="s2">&quot;plugins&quot;</span><span class="p">][</span><span class="s2">&quot;mkdocstrings&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">on_post_build</span><span class="p">(</span><span class="n">conf</span><span class="p">)</span>
 </code></pre></div>
-<h2 id="how-it-looks">How it looks<a class="headerlink" href="#how-it-looks" title="Permanent link">¤</a></h2>
-<p>The different outputs would be like the following.</p>
-<h4 id="text">Text<a class="headerlink" href="#text" title="Permanent link">¤</a></h4>
-<div class="highlight"><pre><span></span><code>Usage: dbg [-tvn] SCRIPT
-
-Run a script in path with the -x bash option (and more).
-You should set the PS4 variable for better output.
-
-Options:
-  -t, --test
-    Read the script and warn for encountered syntax errors.
-    Do not actually run the script.
-
-  -v, --verbose
-    Run the script with verbose option.
-
-  -n, --dry-run
-    Options test and verbose combined. Validate the syntax
-    and print the script to stdout.
-
-  -h, --help
-    Prints this help and exit.
+<p>You'll notice that it's the exact same code, except it's now wrapped as a <code>@contextmanager</code> and the <code>fixture_</code> prefix is removed from its name. Why a context manager? We could let it be a generator, but that would mean we have to yield from it to make sure it tears down at the end:</p>
+<div class="highlight"><pre><span></span><code><span class="k">yield from</span> <span class="n">helpers</span><span class="o">.</span><span class="n">mkdocs_conf</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
 </code></pre></div>
-<h4 id="man">Man<a class="headerlink" href="#man" title="Permanent link">¤</a></h4>
-<p><img alt="man output" src="../../assets/man-output.png" /></p>
-<h4 id="markdown">Markdown<a class="headerlink" href="#markdown" title="Permanent link">¤</a></h4>
-<div class="highlight"><pre><span></span><code><span class="gs">**dbg**</span> - shell script debugger
-<span class="gh"># Usage</span>
-<span class="sb">`dbg [-tvn] SCRIPT`</span>  
-
-Run a script in path with the -x bash option (and more).
-You should set the PS4 variable for better output.
-
-<span class="gh"># Options</span>
-<span class="k">-</span><span class="w"> </span><span class="sb">`-t, --test`</span>:
-  Read the script and warn for encountered syntax errors.
-Do not actually run the script.
-<span class="k">-</span><span class="w"> </span><span class="sb">`-v, --verbose`</span>:
-  Run the script with verbose option.
-<span class="k">-</span><span class="w"> </span><span class="sb">`-n, --dry-run`</span>:
-  Options test and verbose combined. Validate the syntax
-and print the script to stdout.
-<span class="k">-</span><span class="w"> </span><span class="sb">`-h, --help`</span>:
-  Prints this help and exit.
-
-<span class="gh"># Environment variables</span>
-<span class="k">-</span><span class="w"> </span><span class="sb">`PS4`</span>:
-  Debugger prompt. This is the prefix that bash prepends to
-the current instruction when using -x option.
+<p>And we might not want to yield from it but rather just use it as argument to another function. The context manager allows us to do that:</p>
+<div class="highlight"><pre><span></span><code><span class="k">with</span> <span class="n">helpers</span><span class="o">.</span><span class="n">mkdocs_confg</span><span class="p">(</span><span class="o">...</span><span class="p">)</span> <span class="k">as</span> <span class="n">mkdocs_conf</span><span class="p">:</span>
+    <span class="k">yield</span> <span class="n">other_function</span><span class="p">(</span><span class="n">mkdocs_conf</span><span class="p">)</span>
 </code></pre></div>
-<p>... which would look like:</p>
-<p><img alt="markdown output" src="../../assets/markdown-output.png" /></p>
-<h2 id="more">More<a class="headerlink" href="#more" title="Permanent link">¤</a></h2>
-<p>Shellman supports more tags, in particular: function tags. See its <a href="https://github.com/pawamoy/shellman/wiki">documentation</a>.</p>
+<h2 id="use-these-helpers-in-fixtures">Use these helpers in fixtures<a class="headerlink" href="#use-these-helpers-in-fixtures" title="Permanent link">¤</a></h2>
+<p>Now let's rebuild our initial function-scoped fixture with this helper:</p>
+<div class="highlight"><span class="filename">tests/conftest.py</span><pre><span></span><code><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">ChainMap</span>
+<span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">contextmanager</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Iterator</span>
+
+<span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">mkdocs.config.defaults</span> <span class="kn">import</span> <span class="n">MkDocsConfig</span>
+
+<span class="c1"># The following import requires that you create a `tests/__init__.py` module.</span>
+<span class="kn">from</span> <span class="nn">tests</span> <span class="kn">import</span> <span class="n">helpers</span>
+
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;mkdocs_conf&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">fixture_mkdocs_conf</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">pytest</span><span class="o">.</span><span class="n">FixtureRequest</span><span class="p">,</span> <span class="n">tmp_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">MkDocsConfig</span><span class="p">]:</span>
+    <span class="k">with</span> <span class="n">helpers</span><span class="o">.</span><span class="n">mkdocs_conf</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">tmp_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">mkdocs_conf</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">mkdocs_conf</span>
+</code></pre></div>
+<p>Nice and short.</p>
+<h2 id="duplicate-fixtures-with-different-scopes">Duplicate fixtures with different scopes<a class="headerlink" href="#duplicate-fixtures-with-different-scopes" title="Permanent link">¤</a></h2>
+<p>It is now extremely easy to duplicate the fixture as session-scoped:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;session_mkdocs_conf&quot;</span><span class="p">,</span> <span class="n">scope</span><span class="o">=</span><span class="s2">&quot;session&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">fixture_session_mkdocs_conf</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">pytest</span><span class="o">.</span><span class="n">FixtureRequest</span><span class="p">,</span> <span class="n">tmp_path_factory</span><span class="p">:</span> <span class="n">pytest</span><span class="o">.</span><span class="n">TempPathFactory</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">MkDocsConfig</span><span class="p">]:</span>
+    <span class="k">with</span> <span class="n">helpers</span><span class="o">.</span><span class="n">mkdocs_conf</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">tmp_path_factory</span><span class="o">.</span><span class="n">mktemp</span><span class="p">(</span><span class="s2">&quot;project&quot;</span><span class="p">))</span> <span class="k">as</span> <span class="n">mkdocs_conf</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">mkdocs_conf</span>
+</code></pre></div>
+<p>We could imagine duplicating the fixture for each possible scope, which are function, class, module, package and session.</p>
+<p>Now it happens that I have other fixtures that depend on this <code>mkdocs_conf</code> fixture. They'll be just as easy to duplicate as session-scoped fixtures. Here is the complete code of my conftest module with both function and session-scoped fixtures. The code of the helpers is not important, so isn't shown here.</p>
+<div class="highlight"><span class="filename">tests/conftest.py</span><pre><span></span><code><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Iterator</span>
+
+<span class="kn">import</span> <span class="nn">pytest</span>
+
+<span class="kn">from</span> <span class="nn">tests</span> <span class="kn">import</span> <span class="n">helpers</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+    <span class="kn">from</span> <span class="nn">markdown.core</span> <span class="kn">import</span> <span class="n">Markdown</span>
+    <span class="kn">from</span> <span class="nn">mkdocs.config.defaults</span> <span class="kn">import</span> <span class="n">MkDocsConfig</span>
+    <span class="kn">from</span> <span class="nn">mkdocstrings.plugin</span> <span class="kn">import</span> <span class="n">MkdocstringsPlugin</span>
+
+    <span class="kn">from</span> <span class="nn">mkdocstrings_handlers.python.handler</span> <span class="kn">import</span> <span class="n">PythonHandler</span>
+
+
+<span class="c1"># --------------------------------------------</span>
+<span class="c1"># Function-scoped fixtures.</span>
+<span class="c1"># --------------------------------------------</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;mkdocs_conf&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">fixture_mkdocs_conf</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">pytest</span><span class="o">.</span><span class="n">FixtureRequest</span><span class="p">,</span> <span class="n">tmp_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">MkDocsConfig</span><span class="p">]:</span>
+    <span class="k">with</span> <span class="n">helpers</span><span class="o">.</span><span class="n">mkdocs_conf</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">tmp_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">mkdocs_conf</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">mkdocs_conf</span>
+
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;plugin&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">fixture_plugin</span><span class="p">(</span><span class="n">mkdocs_conf</span><span class="p">:</span> <span class="n">MkDocsConfig</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MkdocstringsPlugin</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">helpers</span><span class="o">.</span><span class="n">plugin</span><span class="p">(</span><span class="n">mkdocs_conf</span><span class="p">)</span>
+
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;ext_markdown&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">fixture_ext_markdown</span><span class="p">(</span><span class="n">mkdocs_conf</span><span class="p">:</span> <span class="n">MkDocsConfig</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Markdown</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">helpers</span><span class="o">.</span><span class="n">ext_markdown</span><span class="p">(</span><span class="n">mkdocs_conf</span><span class="p">)</span>
+
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;handler&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">fixture_handler</span><span class="p">(</span><span class="n">plugin</span><span class="p">:</span> <span class="n">MkdocstringsPlugin</span><span class="p">,</span> <span class="n">ext_markdown</span><span class="p">:</span> <span class="n">Markdown</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PythonHandler</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">helpers</span><span class="o">.</span><span class="n">handler</span><span class="p">(</span><span class="n">plugin</span><span class="p">,</span> <span class="n">ext_markdown</span><span class="p">)</span>
+
+
+<span class="c1"># --------------------------------------------</span>
+<span class="c1"># Session-scoped fixtures.</span>
+<span class="c1"># --------------------------------------------</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;session_mkdocs_conf&quot;</span><span class="p">,</span> <span class="n">scope</span><span class="o">=</span><span class="s2">&quot;session&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">fixture_session_mkdocs_conf</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">pytest</span><span class="o">.</span><span class="n">FixtureRequest</span><span class="p">,</span> <span class="n">tmp_path_factory</span><span class="p">:</span> <span class="n">pytest</span><span class="o">.</span><span class="n">TempPathFactory</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">MkDocsConfig</span><span class="p">]:</span>
+    <span class="k">with</span> <span class="n">helpers</span><span class="o">.</span><span class="n">mkdocs_conf</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">tmp_path_factory</span><span class="o">.</span><span class="n">mktemp</span><span class="p">(</span><span class="s2">&quot;project&quot;</span><span class="p">))</span> <span class="k">as</span> <span class="n">mkdocs_conf</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">mkdocs_conf</span>
+
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;session_plugin&quot;</span><span class="p">,</span> <span class="n">scope</span><span class="o">=</span><span class="s2">&quot;session&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">fixture_session_plugin</span><span class="p">(</span><span class="n">session_mkdocs_conf</span><span class="p">:</span> <span class="n">MkDocsConfig</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MkdocstringsPlugin</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">helpers</span><span class="o">.</span><span class="n">plugin</span><span class="p">(</span><span class="n">session_mkdocs_conf</span><span class="p">)</span>
+
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;session_ext_markdown&quot;</span><span class="p">,</span> <span class="n">scope</span><span class="o">=</span><span class="s2">&quot;session&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">fixture_session_ext_markdown</span><span class="p">(</span><span class="n">session_mkdocs_conf</span><span class="p">:</span> <span class="n">MkDocsConfig</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Markdown</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">helpers</span><span class="o">.</span><span class="n">ext_markdown</span><span class="p">(</span><span class="n">session_mkdocs_conf</span><span class="p">)</span>
+
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;session_handler&quot;</span><span class="p">,</span> <span class="n">scope</span><span class="o">=</span><span class="s2">&quot;session&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">fixture_session_handler</span><span class="p">(</span><span class="n">session_plugin</span><span class="p">:</span> <span class="n">MkdocstringsPlugin</span><span class="p">,</span> <span class="n">session_ext_markdown</span><span class="p">:</span> <span class="n">Markdown</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PythonHandler</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">helpers</span><span class="o">.</span><span class="n">handler</span><span class="p">(</span><span class="n">session_plugin</span><span class="p">,</span> <span class="n">session_ext_markdown</span><span class="p">)</span>
+</code></pre></div>
+<p>Now in my tests I can either use <code>handler</code> or <code>session_handler</code>, to pick the right scope depending on the test's needs and how many times it runs through parametrizations.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># This test customizes the MkDocs configuration,</span>
+<span class="c1"># and runs only 3 x 7 = 21 times,</span>
+<span class="c1"># so I use the function-scoped handler fixture.</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span>
+    <span class="s2">&quot;plugin&quot;</span><span class="p">,</span>
+    <span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;theme&quot;</span><span class="p">:</span> <span class="s2">&quot;mkdocs&quot;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">&quot;theme&quot;</span><span class="p">:</span> <span class="s2">&quot;readthedocs&quot;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">&quot;theme&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;material&quot;</span><span class="p">}},</span>
+    <span class="p">],</span>
+    <span class="n">indirect</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;plugin&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span>
+    <span class="s2">&quot;identifier&quot;</span><span class="p">,</span>
+    <span class="p">[</span>
+        <span class="s2">&quot;mkdocstrings.extension&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;mkdocstrings.inventory&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;mkdocstrings.loggers&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;mkdocstrings.plugin&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;mkdocstrings.handlers.base&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;mkdocstrings.handlers.rendering&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;mkdocstrings_handlers.python&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_render_themes_templates_python</span><span class="p">(</span><span class="n">identifier</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">handler</span><span class="p">:</span> <span class="n">PythonHandler</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">handler</span><span class="o">.</span><span class="n">collect</span><span class="p">(</span><span class="n">identifier</span><span class="p">,</span> <span class="p">{})</span>
+    <span class="n">handler</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">{})</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="o">...</span>
+
+<span class="c1"># This test runs about 400 times with different options,</span>
+<span class="c1"># and doesn&#39;t need any customization of the MkDocs configuration,</span>
+<span class="c1"># so I use the session-scoped handler fixture.</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;inherited_members&quot;</span><span class="p">,</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;inherited_members&quot;</span><span class="p">])</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;members&quot;</span><span class="p">,</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;members&quot;</span><span class="p">])</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;members_order&quot;</span><span class="p">,</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;members_order&quot;</span><span class="p">])</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;filters&quot;</span><span class="p">,</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;filters&quot;</span><span class="p">])</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;summary&quot;</span><span class="p">,</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;summary&quot;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">test_end_to_end_for_members</span><span class="p">(</span>
+    <span class="n">session_handler</span><span class="p">:</span> <span class="n">PythonHandler</span><span class="p">,</span>
+    <span class="n">inherited_members</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="nb">bool</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">members</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="nb">bool</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">members_order</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">filters</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">summary</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">final_options</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="nb">locals</span><span class="p">()}</span>
+    <span class="n">html</span> <span class="o">=</span> <span class="n">_render</span><span class="p">(</span><span class="n">session_handler</span><span class="p">,</span> <span class="n">final_options</span><span class="p">)</span>
+    <span class="n">snapshot_key</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">final_options</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span>
+    <span class="k">assert</span> <span class="n">outsource</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;.html&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">snapshots_members</span><span class="p">[</span><span class="n">snapshot_key</span><span class="p">]</span>
+</code></pre></div>
+<p>Do you have similar use-cases? How did you handle them? Maybe there's something obvious I missed about fixtures? Maybe there are Pytest plugins that make this easier?</p>
 
   <!-- Giscus -->
   <!-- https://squidfunk.github.io/mkdocs-material/setup/adding-a-comment-system/#giscus-integration -->
@@ -2713,7 +2694,7 @@ the current instruction when using -x option.
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../write-and-use-a-tox-plugin-from-inside-your-package/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Write and use a tox plugin from inside your package">
+          <a href="../../credits/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Credits">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
@@ -2723,20 +2704,20 @@ the current instruction when using -x option.
                 Previous
               </span>
               <div class="md-ellipsis">
-                Write and use a tox plugin from inside your package
+                Credits
               </div>
             </div>
           </a>
         
         
           
-          <a href="../django-dashboard-with-suit-and-highcharts/" class="md-footer__link md-footer__link--next" aria-label="Next: Django admin dashboard with Suit and Highcharts">
+          <a href="../tingling-sensation-witnessing-existence/" class="md-footer__link md-footer__link--next" aria-label="Next: The tingling sensation of witnessing your own existence">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Django admin dashboard with Suit and Highcharts
+                The tingling sensation of witnessing your own existence
               </div>
             </div>
             <div class="md-footer__button md-icon">
