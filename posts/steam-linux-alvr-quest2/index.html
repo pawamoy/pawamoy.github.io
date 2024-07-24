@@ -2631,6 +2631,11 @@
 <!--more-->
 
 <hr />
+<div class="admonition info">
+<p class="admonition-title">Update 2024-07-24</p>
+<p>
+Thanks to <a href="https://github.com/patrickpluto">@patrickpluto</a> who commented below, I was made aware that ALVR doesn't need to be compiled from sources and can instead be downloaded from <a href="https://github.com/alvr-org/ALVR/releases">GitHub releases</a>, or installed from AUR as <code>alvr-bin</code>. Also, ALVR now provides an official app on the Meta Quest Store, so SideQuest is not needed anymore!</p>
+</div>
 <h2 id="preparation">Preparation<a class="headerlink" href="#preparation" title="Permanent link">¤</a></h2>
 <ul>
 <li>I recommend doing this with a friend: you'll probably have to put the Quest 2 headset back and forth many times. It's easier if there's one person on the computer and another one wearing the headset. It's definitely doable alone though, just a bit more annoying.</li>
@@ -2656,12 +2661,22 @@ sudo<span class="w"> </span>ufw<span class="w"> </span><span class="nb">enable</
 <div class="highlight"><pre><span></span><code>yay<span class="w"> </span>-S<span class="w"> </span>adb
 </code></pre></div>
 <h2 id="install-a-rust-toolchain">Install a Rust toolchain<a class="headerlink" href="#install-a-rust-toolchain" title="Permanent link">¤</a></h2>
+<div class="admonition info">
+<p class="admonition-title">Update 2024-07-24</p>
+<p>
+ALVR doesn't need to be compiled from sources and can instead be downloaded from <a href="https://github.com/alvr-org/ALVR/releases">GitHub releases</a>, or installed from AUR as <code>alvr-bin</code>.</p>
+</div>
 <p>ALVR will be installed from sources, and it's written in Rust, so you'll need a Rust toolchain. Official guides recommend <code>rustup</code>:</p>
 <div class="highlight"><pre><span></span><code>yay<span class="w"> </span>-S<span class="w"> </span>rustup
 rustup<span class="w"> </span>update
 </code></pre></div>
 <p>Make sure to run <code>rustup update</code> if you already had <code>rustup</code> installed: compiling ALVR will require recent versions of <code>rustc</code>.</p>
 <h2 id="install-alvr">Install ALVR<a class="headerlink" href="#install-alvr" title="Permanent link">¤</a></h2>
+<div class="admonition info">
+<p class="admonition-title">Update 2024-07-24</p>
+<p>
+ALVR doesn't need to be compiled from sources and can instead be downloaded from <a href="https://github.com/alvr-org/ALVR/releases">GitHub releases</a>, or installed from AUR as <code>alvr-bin</code>.</p>
+</div>
 <p>Now you can install ALVR:</p>
 <div class="highlight"><pre><span></span><code>yay<span class="w"> </span>-S<span class="w"> </span>alvr
 </code></pre></div>
@@ -2693,6 +2708,11 @@ rustup<span class="w"> </span>update
 <p>Once SteamVR is running, you should see a small window and icons telling you that the headset is correctly detected:</p>
 <p><img alt="steamvr_connected" src="../../assets/steamvr_connected.png" /></p>
 <h2 id="install-sidequest">Install SideQuest<a class="headerlink" href="#install-sidequest" title="Permanent link">¤</a></h2>
+<div class="admonition info">
+<p class="admonition-title">Update 2024-07-24</p>
+<p>
+ALVR now provides an official app on the Meta Quest Store, so SideQuest is not needed anymore.</p>
+</div>
 <p>SideQuest will allow you to "sideload" (upload) files onto your Quest 2. We will use it to sideload the SideQuest app on the headset. Why isn't there a SideQuest app installable in the Meta Quest Store? I don't know. Probably because the devs didn't have time or capacity to do that yet, or because of policy reasons, like Meta not allowing it <img alt="🤷" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f937.svg" title=":shrug:" /></p>
 <ul>
 <li>Download the SideQuest "easy installer" here: <a href="https://sidequestvr.com/setup-howto">https://sidequestvr.com/setup-howto</a>.</li>
@@ -2708,6 +2728,11 @@ rustup<span class="w"> </span>update
 <p><img alt="sidequest_complete" src="../../assets/sidequest_complete.png" /></p>
 <p>Leave SideQuest opened on your compute, and head into the headset (pun intended).</p>
 <h2 id="install-alvr-app-in-headset">Install ALVR app in headset<a class="headerlink" href="#install-alvr-app-in-headset" title="Permanent link">¤</a></h2>
+<div class="admonition info">
+<p class="admonition-title">Update 2024-07-24</p>
+<p>
+ALVR now provides an official app on the Meta Quest Store, so SideQuest is not needed anymore.</p>
+</div>
 <p>In the headset, go to Applications, and filter with "unknown sources". You should see the SideQuest app. If you don't, go back to SideQuest on the computer and click on "Reinstall" or "Update". Do that until the app shows up in the headset.</p>
 <p>Once the SideQuest app shows up in your "unknown sources" applications, you can launch it, and close SideQuest on your computer.</p>
 <p>The SideQuest app will ask you to register your headset by going to <a href="https://sdq.st/link">https://sdq.st/link</a> and entering the code displayed in your headset. I think you will need to create an account for that. Once you entered the code, a popup in the headset will ask you to accept the connection. Accept it.</p>
