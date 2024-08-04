@@ -2562,7 +2562,6 @@
 <li><a href="#static-files-collecting-storing-and-serving">Static files: collecting, storing and serving</a></li>
 <li><a href="#resources">Resources</a></li>
 </ol>
-<p><a href="#__comments">Go to comments</a></p>
 <h2 id="overview-to-get-a-better-understanding-of-the-whole-thing">Overview: to get a better understanding of the whole thing<a class="headerlink" href="#overview-to-get-a-better-understanding-of-the-whole-thing" title="Permanent link">¤</a></h2>
 <p>So, let's start with some drawings in order to get a better idea of what we want to accomplish, and how everything will fit together.</p>
 <p>In this first, very simple image, you can see that we want three containers: one for NginX, one for Django + Gunicorn (they always go together), and one for our database. The NginX container communicate with the Django+Gunicorn one, which itself connects to the Postgres container. Pretty straight-forward, right?</p>

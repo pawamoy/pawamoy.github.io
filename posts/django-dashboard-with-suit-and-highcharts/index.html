@@ -2596,7 +2596,6 @@
 <li><a href="#step-3-highcharts">Step 3: Highcharts!</a></li>
 <li><a href="#more-customization">More customization</a></li>
 <li><a href="#django-suit-dashboard">The app I wrote using this</a></li>
-<li><a href="#__comments">Comments</a></li>
 </ul>
 <h2 id="step-1-set-up-the-files">Step 1: set up the files<a class="headerlink" href="#step-1-set-up-the-files" title="Permanent link">¤</a></h2>
 <p>First, create a new app within your Django project:</p>
@@ -2680,7 +2679,7 @@
 <span class="n">admin</span><span class="o">.</span><span class="n">autodiscover</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>EDIT:</strong> with Django 1.9.5, you will need one more line:\
-(See <a href="#comment-2643754439">Gustavo's comment</a> at the bottom.)</p>
+(See Gustavo's comment in the comments section.)</p>
 <div class="highlight"><pre><span></span><code><span class="n">admin</span><span class="o">.</span><span class="n">site</span> <span class="o">=</span> <span class="n">DashboardSite</span><span class="p">()</span>
 <span class="n">admin</span><span class="o">.</span><span class="n">sites</span><span class="o">.</span><span class="n">site</span> <span class="o">=</span> <span class="n">admin</span><span class="o">.</span><span class="n">site</span>
 <span class="n">admin</span><span class="o">.</span><span class="n">autodiscover</span><span class="p">()</span>
