@@ -343,6 +343,23 @@
   
 
       
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../backlog/" class="md-tabs__link">
+        
+  
+    
+  
+  Backlog
+
+      </a>
+    </li>
+  
+
+      
     </ul>
   </div>
 </nav>
@@ -2240,6 +2257,32 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backlog/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Backlog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -2304,6 +2347,19 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#splitting-projects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          splitting projects
+        </span>
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#benefits" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2322,6 +2378,32 @@
       
         <span class="md-typeset">
           Bad examples
+        </span>
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cappa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          Cappa
+        </span>
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#final-data-from-cli-env-config" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          final data from CLI, env, config
         </span>
       
     </span>
@@ -2389,6 +2471,15 @@ Toot on Mastodon, quote from docs "call to developers".</p>
 <li>(tyro) <a href="https://brentyi.github.io/tyro/examples/01_basics/01_functions/">https://brentyi.github.io/tyro/examples/01_basics/01_functions/</a> not good,
   hides actual CLI args</li>
 </ul>
+<h2 id="splitting-projects">splitting projects<a class="headerlink" href="#splitting-projects" title="Permanent link">¤</a></h2>
+<ul>
+<li><code>project-lib</code></li>
+<li><code>project-cli</code>, depends on lib</li>
+<li><code>project</code>, depends on cli + interactive deps (auto-completion, shell detection)</li>
+<li><code>project-gui</code>, depends on project</li>
+<li><code>project-tui</code>, depends on project</li>
+<li><code>project</code> declares following extras: <code>gui</code>, <code>tui</code>, <code>all</code></li>
+</ul>
 <h2 id="benefits">Benefits<a class="headerlink" href="#benefits" title="Permanent link">¤</a></h2>
 <ul>
 <li>providing a callable means it will work for every version of your project
@@ -2398,7 +2489,33 @@ Toot on Mastodon, quote from docs "call to developers".</p>
 <ul>
 <li>Twine adds logic to its <code>__main__.main</code> function which does not accept arguments.</li>
 <li>pyproject-build defines its main method in <code>__main__</code>.</li>
+<li>iterate on all duty tools to see which ones are painful to deal with (mypy? black?)</li>
+<li>safety, debugging the issue I had between v2 and v3</li>
 </ul>
+<h1 id="cappa">Cappa<a class="headerlink" href="#cappa" title="Permanent link">¤</a></h1>
+<ul>
+<li>declare the final state of data (dataclasses)</li>
+<li>
+<p>annotate how Cappa transforms command line args into it</p>
+</li>
+<li>
+<p>tempted for maximizing reusability: don't, it's rare that options keep same help/desc across different commands, or commands across CLIs</p>
+</li>
+<li>if you have to, you can use composition, by destructuring args, instead of using inheritance (better?)</li>
+<li>
+<p>in the end, your dataclasses are still for a CLI, not for programmatic usage</p>
+</li>
+<li>
+<p>global arguments: propagate=True</p>
+</li>
+<li>
+<p>setup: global dependency</p>
+</li>
+<li>
+<p>no subcommand default: each command <em>requires</em> the subcommand, otherwise why even provide it? and you'd need to propagate args downwards (<code>prog command --opt</code> -&gt; <code>prog command --opt subcommand</code> not working)</p>
+</li>
+</ul>
+<h1 id="final-data-from-cli-env-config">final data from CLI, env, config<a class="headerlink" href="#final-data-from-cli-env-config" title="Permanent link">¤</a></h1>
   
 <!-- Giscus -->
 <!-- https://squidfunk.github.io/mkdocs-material/setup/adding-a-comment-system/#giscus-integration -->

@@ -10,31 +10,29 @@
       
       
       
-        <link rel="canonical" href="https://pawamoy.github.io/posts/pass-makefile-args-as-typed-in-command-line/">
+        <link rel="canonical" href="https://pawamoy.github.io/backlog/">
       
       
-        <link rel="prev" href="../local-http-server-fake-files-testing-purposes/">
+        <link rel="prev" href="../insiders/">
       
-      
-        <link rel="next" href="../plugins-as-python-native-namespace-packages/">
       
       
         
       
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.27+insiders-4.53.11">
     
     
       
-        <title>Passing Makefile arguments to a command, as they are typed in the command line. - pawamoy's website</title>
+        <title>Backlog - pawamoy's website</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.c0d16a3a.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.c0d16a3a.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -53,15 +51,15 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/_markdown_exec_pyodide.css">
+      <link rel="stylesheet" href="../assets/_markdown_exec_pyodide.css">
     
-      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
     
-      <link rel="stylesheet" href="../../css/custom.css">
+      <link rel="stylesheet" href="../css/custom.css">
     
-      <link rel="stylesheet" href="../../css/insiders.css">
+      <link rel="stylesheet" href="../css/insiders.css">
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -86,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#experiments" class="md-skip">
+        <a href="#backlog-management" class="md-skip">
           Skip to content
         </a>
       
@@ -102,7 +100,7 @@
 
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="pawamoy&#39;s website" class="md-header__button md-logo" aria-label="pawamoy's website" data-md-component="logo">
+    <a href=".." title="pawamoy&#39;s website" class="md-header__button md-logo" aria-label="pawamoy's website" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4.41 3 3 4.41 5.69 7.1A7.924 7.924 0 0 0 4 12c0 1.85.63 3.55 1.69 4.9L3 19.59 4.41 21l2.69-2.69A7.924 7.924 0 0 0 12 20c1.85 0 3.55-.63 4.9-1.69L19.59 21 21 19.59l-2.69-2.69A7.924 7.924 0 0 0 20 12c0-1.85-.63-3.55-1.69-4.9L21 4.41 19.59 3 16.9 5.69A7.924 7.924 0 0 0 12 4c-1.85 0-3.55.63-4.9 1.69L4.41 3M12 6c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6 2.69-6 6-6Z"/></svg>
@@ -122,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Passing Makefile arguments to a command, as they are typed in the command line.
+              Backlog
             
           </span>
         </div>
@@ -235,7 +233,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../.." class="md-tabs__link">
+      <a href=".." class="md-tabs__link">
         
   
     
@@ -252,7 +250,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../about/" class="md-tabs__link">
+      <a href="../about/" class="md-tabs__link">
         
   
     
@@ -269,7 +267,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../credits/" class="md-tabs__link">
+      <a href="../credits/" class="md-tabs__link">
         
   
     
@@ -284,21 +282,17 @@
         
   
   
-    
-  
   
     
     
       
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../same-pytest-fixtures-with-different-scopes/" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../posts/same-pytest-fixtures-with-different-scopes/" class="md-tabs__link">
           
   
     
@@ -321,7 +315,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../showcase/" class="md-tabs__link">
+        <a href="../showcase/" class="md-tabs__link">
           
   
     
@@ -339,7 +333,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../insiders/" class="md-tabs__link">
+      <a href="../insiders/" class="md-tabs__link">
         
   
     
@@ -354,9 +348,11 @@
         
   
   
+    
   
-    <li class="md-tabs__item">
-      <a href="../../backlog/" class="md-tabs__link">
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
         
   
     
@@ -385,7 +381,9 @@
           
             
               
-              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
@@ -396,7 +394,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="pawamoy&#39;s website" class="md-nav__button md-logo" aria-label="pawamoy's website" data-md-component="logo">
+    <a href=".." title="pawamoy&#39;s website" class="md-nav__button md-logo" aria-label="pawamoy's website" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4.41 3 3 4.41 5.69 7.1A7.924 7.924 0 0 0 4 12c0 1.85.63 3.55 1.69 4.9L3 19.59 4.41 21l2.69-2.69A7.924 7.924 0 0 0 12 20c1.85 0 3.55-.63 4.9-1.69L19.59 21 21 19.59l-2.69-2.69A7.924 7.924 0 0 0 20 12c0-1.85-.63-3.55-1.69-4.9L21 4.41 19.59 3 16.9 5.69A7.924 7.924 0 0 0 12 4c-1.85 0-3.55.63-4.9 1.69L4.41 3M12 6c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6 2.69-6 6-6Z"/></svg>
@@ -426,7 +424,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href=".." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -452,7 +450,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../about/" class="md-nav__link">
+      <a href="../about/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -478,7 +476,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../credits/" class="md-nav__link">
+      <a href="../credits/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -501,10 +499,8 @@
       
   
   
-    
   
   
-  
     
     
       
@@ -527,22 +523,19 @@
     
     
       
-        
-        
-      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
             
   
   <span class="md-ellipsis">
@@ -559,7 +552,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
@@ -590,20 +583,17 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
         
           
-          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
             
   
   <span class="md-ellipsis">
@@ -638,7 +628,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../same-pytest-fixtures-with-different-scopes/" class="md-nav__link">
+      <a href="../posts/same-pytest-fixtures-with-different-scopes/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -665,7 +655,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tingling-sensation-witnessing-existence/" class="md-nav__link">
+      <a href="../posts/tingling-sensation-witnessing-existence/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -692,7 +682,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../steam-linux-alvr-quest2/" class="md-nav__link">
+      <a href="../posts/steam-linux-alvr-quest2/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -738,20 +728,17 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
         
           
-          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
             
   
   <span class="md-ellipsis">
@@ -786,7 +773,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../the-insiders-journey/" class="md-nav__link">
+      <a href="../posts/the-insiders-journey/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -813,7 +800,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../adding-links-to-formatted-and-syntax-highlighted-code/" class="md-nav__link">
+      <a href="../posts/adding-links-to-formatted-and-syntax-highlighted-code/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -861,20 +848,17 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
         
           
-          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
             
   
   <span class="md-ellipsis">
@@ -909,7 +893,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../somewhat-modern-python-development/" class="md-nav__link">
+      <a href="../posts/somewhat-modern-python-development/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -936,7 +920,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../testing-fastapi-ormar-alembic-apps/" class="md-nav__link">
+      <a href="../posts/testing-fastapi-ormar-alembic-apps/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -963,7 +947,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../add-alembic-migrations-to-existing-fastapi-ormar-project/" class="md-nav__link">
+      <a href="../posts/add-alembic-migrations-to-existing-fastapi-ormar-project/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -995,10 +979,8 @@
                 
   
   
-    
   
   
-  
     
     
       
@@ -1020,21 +1002,18 @@
     
       
       
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
         
           
-          
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" checked>
-        
-          
-          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
             
   
   <span class="md-ellipsis">
@@ -1051,7 +1030,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4_4">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1069,7 +1048,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../local-http-server-fake-files-testing-purposes/" class="md-nav__link">
+      <a href="../posts/local-http-server-fake-files-testing-purposes/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1093,34 +1072,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    
-  
-    Passing Makefile arguments to a command, as they are typed in the command line.
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../posts/pass-makefile-args-as-typed-in-command-line/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1135,89 +1090,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#experiments" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        <span class="md-typeset">
-          Experiments
-        </span>
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#sorcery" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        <span class="md-typeset">
-          Sorcery
-        </span>
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#recipe" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        <span class="md-typeset">
-          Recipe
-        </span>
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#side-effects" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        <span class="md-typeset">
-          Side-effects
-        </span>
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#addendum" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        <span class="md-typeset">
-          Addendum
-        </span>
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1230,7 +1102,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../plugins-as-python-native-namespace-packages/" class="md-nav__link">
+      <a href="../posts/plugins-as-python-native-namespace-packages/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1257,7 +1129,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../howto-edit-git-commit-contents/" class="md-nav__link">
+      <a href="../posts/howto-edit-git-commit-contents/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1284,7 +1156,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../migrate-disqus-comments-to-utterances-github/" class="md-nav__link">
+      <a href="../posts/migrate-disqus-comments-to-utterances-github/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1311,7 +1183,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../how-to-deal-with-jinja2-spacing/" class="md-nav__link">
+      <a href="../posts/how-to-deal-with-jinja2-spacing/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1338,7 +1210,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../unify-logging-for-a-gunicorn-uvicorn-app/" class="md-nav__link">
+      <a href="../posts/unify-logging-for-a-gunicorn-uvicorn-app/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1384,20 +1256,17 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
         
           
-          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
             
   
   <span class="md-ellipsis">
@@ -1432,7 +1301,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../save-pytest-logs-as-artifact-gitlab-ci/" class="md-nav__link">
+      <a href="../posts/save-pytest-logs-as-artifact-gitlab-ci/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1459,7 +1328,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../challenge-fill-space-one-line-90-degree-same-direction/" class="md-nav__link">
+      <a href="../posts/challenge-fill-space-one-line-90-degree-same-direction/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1507,20 +1376,17 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" >
         
           
-          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
             
   
   <span class="md-ellipsis">
@@ -1555,7 +1421,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../django-auth-server-for-shiny/" class="md-nav__link">
+      <a href="../posts/django-auth-server-for-shiny/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1582,7 +1448,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../dual-screens-setup-nvidia-bunsenlabs-debian-jessie/" class="md-nav__link">
+      <a href="../posts/dual-screens-setup-nvidia-bunsenlabs-debian-jessie/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1609,7 +1475,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../docker-compose-django-postgres-nginx/" class="md-nav__link">
+      <a href="../posts/docker-compose-django-postgres-nginx/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1653,20 +1519,17 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_7" >
         
           
-          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="0">
             
   
   <span class="md-ellipsis">
@@ -1701,7 +1564,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../python-static-code-analysis-tools/" class="md-nav__link">
+      <a href="../posts/python-static-code-analysis-tools/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1749,20 +1612,17 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_8" >
         
           
-          <label class="md-nav__link" for="__nav_4_8" id="__nav_4_8_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4_8" id="__nav_4_8_label" tabindex="0">
             
   
   <span class="md-ellipsis">
@@ -1797,7 +1657,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../write-and-use-a-tox-plugin-from-inside-your-package/" class="md-nav__link">
+      <a href="../posts/write-and-use-a-tox-plugin-from-inside-your-package/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1824,7 +1684,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../documentation-in-your-shell-scripts-using-shellman/" class="md-nav__link">
+      <a href="../posts/documentation-in-your-shell-scripts-using-shellman/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1851,7 +1711,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../django-dashboard-with-suit-and-highcharts/" class="md-nav__link">
+      <a href="../posts/django-dashboard-with-suit-and-highcharts/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1949,7 +1809,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../showcase/" class="md-nav__link">
+      <a href="../showcase/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2050,7 +1910,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../showcase/aria2p/" class="md-nav__link">
+      <a href="../showcase/aria2p/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2079,7 +1939,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../showcase/copier-pdm/" class="md-nav__link">
+      <a href="../showcase/copier-pdm/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2108,7 +1968,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../showcase/dependenpy/" class="md-nav__link">
+      <a href="../showcase/dependenpy/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2137,7 +1997,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../showcase/duty/" class="md-nav__link">
+      <a href="../showcase/duty/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2166,7 +2026,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../showcase/griffe/" class="md-nav__link">
+      <a href="../showcase/griffe/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2195,7 +2055,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../showcase/git-changelog/" class="md-nav__link">
+      <a href="../showcase/git-changelog/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2224,7 +2084,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../showcase/mkdocstrings/" class="md-nav__link">
+      <a href="../showcase/mkdocstrings/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2253,7 +2113,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../showcase/mvodb/" class="md-nav__link">
+      <a href="../showcase/mvodb/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2282,7 +2142,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../showcase/shell-history/" class="md-nav__link">
+      <a href="../showcase/shell-history/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2311,7 +2171,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../showcase/shelldemo/" class="md-nav__link">
+      <a href="../showcase/shelldemo/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2340,7 +2200,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../showcase/shellman/" class="md-nav__link">
+      <a href="../showcase/shellman/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2384,7 +2244,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../insiders/" class="md-nav__link">
+      <a href="../insiders/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2407,10 +2267,36 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../backlog/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    
+  
+    Backlog
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -2425,6 +2311,104 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#issue-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          Issue overview
+        </span>
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sponsorship-amount" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          Sponsorship amount
+        </span>
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boosts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          Boosts
+        </span>
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sorting-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          Sorting criteria
+        </span>
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#privacy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          Privacy
+        </span>
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reviewing-beneficiaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          Reviewing beneficiaries
+        </span>
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -2437,6 +2421,8 @@
             
             
               
+                
+              
               <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
@@ -2446,6 +2432,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -2454,11 +2442,11 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#experiments" class="md-nav__link">
+  <a href="#issue-overview" class="md-nav__link">
     <span class="md-ellipsis">
       
         <span class="md-typeset">
-          Experiments
+          Issue overview
         </span>
       
     </span>
@@ -2467,11 +2455,11 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#sorcery" class="md-nav__link">
+  <a href="#sponsorship-amount" class="md-nav__link">
     <span class="md-ellipsis">
       
         <span class="md-typeset">
-          Sorcery
+          Sponsorship amount
         </span>
       
     </span>
@@ -2480,11 +2468,11 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#recipe" class="md-nav__link">
+  <a href="#boosts" class="md-nav__link">
     <span class="md-ellipsis">
       
         <span class="md-typeset">
-          Recipe
+          Boosts
         </span>
       
     </span>
@@ -2493,11 +2481,11 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#side-effects" class="md-nav__link">
+  <a href="#sorting-criteria" class="md-nav__link">
     <span class="md-ellipsis">
       
         <span class="md-typeset">
-          Side-effects
+          Sorting criteria
         </span>
       
     </span>
@@ -2506,11 +2494,24 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#addendum" class="md-nav__link">
+  <a href="#privacy" class="md-nav__link">
     <span class="md-ellipsis">
       
         <span class="md-typeset">
-          Addendum
+          Privacy
+        </span>
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reviewing-beneficiaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          Reviewing beneficiaries
         </span>
       
     </span>
@@ -2531,138 +2532,115 @@
               
               <article class="md-content__inner md-typeset">
                 
-  <h1>Passing Makefile arguments to a command, as they are typed in the command line.</h1>
-  <p class="post-meta">
-    Published Oct 17, 2020
-    by Timothée Mazzucotelli
-  </p>
+                  
   
-  <p>In my Python projects, I use a combination of <a href="https://github.com/pawamoy/duty">Duty</a> (my task runner) and <code>make</code>.</p>
-<p>My <code>Makefile</code> declares the same tasks as the ones written in <code>duties.py</code>, but in a generic manner:</p>
-<div class="highlight"><pre><span></span><code><span class="nv">TASKS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>check<span class="w"> </span><span class="nb">test</span><span class="w"> </span>release
 
-<span class="nf">.PHONY</span><span class="o">:</span><span class="w"> </span><span class="k">$(</span><span class="nv">TASKS</span><span class="k">)</span>
-<span class="nf">$(TASKS)</span><span class="o">:</span>
-<span class="w">    </span>@poetry<span class="w"> </span>run<span class="w"> </span>duty<span class="w"> </span><span class="nv">$@</span>
-</code></pre></div>
-<p>So, instead of running <code>poetry run duty check</code>, I can run <code>make check</code>. Convenient, right?</p>
-<p>Except that some duties (tasks) accept arguments. For example:</p>
-<div class="highlight"><pre><span></span><code>poetry<span class="w"> </span>run<span class="w"> </span>duty<span class="w"> </span>release<span class="w"> </span><span class="nv">version</span><span class="o">=</span><span class="m">0</span>.1.2
-</code></pre></div>
-<p>So how do I allow the <code>make</code> equivalent?</p>
-<div class="highlight"><pre><span></span><code>make<span class="w"> </span>release<span class="w"> </span><span class="nv">version</span><span class="o">=</span><span class="m">0</span>.1.2
-</code></pre></div>
-<!--more-->
 
-<h2 id="experiments">Experiments<a class="headerlink" href="#experiments" title="Permanent link">¤</a></h2>
-<p>Do I write a specific rule in the Makefile for the <code>release</code> task?</p>
-<div class="highlight"><pre><span></span><code><span class="nv">TASKS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>check<span class="w"> </span><span class="nb">test</span><span class="w"> </span>release
 
-<span class="nf">.PHONY</span><span class="o">:</span><span class="w"> </span><span class="n">release</span>
-<span class="nf">release</span><span class="o">:</span>
-<span class="w">    </span>@poetry<span class="w"> </span>run<span class="w"> </span>duty<span class="w"> </span>release<span class="w"> </span><span class="nv">version</span><span class="o">=</span><span class="k">$(</span>version<span class="k">)</span>
-
-<span class="nf">.PHONY</span><span class="o">:</span><span class="w"> </span><span class="k">$(</span><span class="nv">TASKS</span><span class="k">)</span>
-<span class="nf">$(TASKS)</span><span class="o">:</span>
-<span class="w">    </span>@poetry<span class="w"> </span>run<span class="w"> </span>duty<span class="w"> </span><span class="nv">$@</span>
-</code></pre></div>
-<p>Meh. My Makefile rules are not generic anymore. Besides, what if the argument is optional? If I don't pass it when running <code>make</code>, the command will end up being <code>poetry run duty release version=</code>, which is just wrong.</p>
-<p>Instead, I'd like to find a generic way to insert the arguments in the command just as they are typed on the command line:</p>
-<div class="highlight"><pre><span></span><code>make<span class="w"> </span>release
-<span class="c1"># =&gt; poetry run duty release</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code>make<span class="w"> </span>release<span class="w"> </span><span class="nv">version</span><span class="o">=</span><span class="m">0</span>.1.2
-<span class="c1"># =&gt; poetry run duty release version=0.1.2</span>
-</code></pre></div>
-<p>Well, after a few hours playing with Makefiles features, I got a nice solution!</p>
-<h2 id="sorcery">Sorcery<a class="headerlink" href="#sorcery" title="Permanent link">¤</a></h2>
-<p>Let me sprinkle this dark magic right here:</p>
-<div class="highlight"><pre><span></span><code><span class="nv">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">$(</span>foreach<span class="w"> </span>a,<span class="k">$($(</span>subst<span class="w"> </span>-,_,<span class="nv">$1</span><span class="k">)</span>_args<span class="k">)</span>,<span class="k">$(if</span><span class="w"> </span><span class="k">$(</span>value<span class="w"> </span><span class="nv">$a</span><span class="k">)</span>,<span class="nv">$a</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nv">$a</span><span class="k">)</span><span class="s2">&quot;</span><span class="k">))</span>
-
-<span class="nv">check_args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>files
-<span class="nv">docs_serve_args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>host<span class="w"> </span>port
-<span class="nv">release_args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>version
-<span class="nv">test_args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>match
-
-<span class="nv">TASKS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>check<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>docs-serve<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>release<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span><span class="nb">test</span>
-
-<span class="nf">.PHONY</span><span class="o">:</span><span class="w"> </span><span class="k">$(</span><span class="nv">TASKS</span><span class="k">)</span>
-<span class="nf">$(TASKS)</span><span class="o">:</span>
-<span class="w">    </span>@poetry<span class="w"> </span>run<span class="w"> </span>duty<span class="w"> </span><span class="nv">$@</span><span class="w"> </span><span class="k">$(</span>call<span class="w"> </span>args,<span class="nv">$@</span><span class="k">)</span>
-</code></pre></div>
-<p>What happens here?!</p>
-<h2 id="recipe">Recipe<a class="headerlink" href="#recipe" title="Permanent link">¤</a></h2>
-<div class="highlight"><pre><span></span><code><span class="nv">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">$(</span>foreach<span class="w"> </span>a,<span class="k">$($(</span>subst<span class="w"> </span>-,_,<span class="nv">$1</span><span class="k">)</span>_args<span class="k">)</span>,<span class="k">$(if</span><span class="w"> </span><span class="k">$(</span>value<span class="w"> </span><span class="nv">$a</span><span class="k">)</span>,<span class="nv">$a</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nv">$a</span><span class="k">)</span><span class="s2">&quot;</span><span class="k">))</span>
-</code></pre></div>
-<p>The heart of the magic. We declare a function called <code>args</code>. We later call it with <code>$(call args,$@)</code>.</p>
-<p>It could be described like this:</p>
-<div class="highlight"><pre><span></span><code>args reference := first parameter
-replace - by _ in args reference
-append &quot;_args&quot; to args reference
-get argument names by dereferencing args reference
-for each argument name
-  get argument value by dereferencing argument name
-  if argument value is not empty
-    print &quot;argument name = argument value&quot;
-</code></pre></div>
-<p>This is why we declare our arguments like this:</p>
-<div class="highlight"><pre><span></span><code><span class="nv">check_args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>files
-<span class="nv">docs_serve_args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>host<span class="w"> </span>port
-<span class="nv">release_args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>version
-<span class="nv">test_args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>match
-</code></pre></div>
-<p>When running <code>make docs-serve host=0.0.0.0</code>, the <code>args</code> function will do the following:</p>
-<div class="highlight"><pre><span></span><code>args_ref := &quot;docs-serve&quot;
-args_ref becomes &quot;docs_serve&quot; (replace)
-args_ref becomes &quot;docs_serve_args&quot;
-args_names is value of &quot;docs_serve_args&quot; variable
-args_names therefore is &quot;host port&quot;
-arg &quot;host&quot;:
-  variable &quot;host&quot; is not empty
-  print &quot;host=0.0.0.0&quot;
-arg &quot;port&quot;:
-  variable &quot;port&quot; is empty
-  print nothing
-</code></pre></div>
-<p>So when calling <code>$(call args,$@)</code>, <code>$@</code> is replaced by the rule name, which is <code>docs-serve</code> in this example, and <code>host=0.0.0.0</code> is added to the command.</p>
-<p>We successfully re-built the arguments passed on the command line!</p>
-<h2 id="side-effects">Side-effects<a class="headerlink" href="#side-effects" title="Permanent link">¤</a></h2>
-<p>Arguments can be passed to <code>make</code> in no particular order. The following commands are all equivalent:</p>
-<div class="highlight"><pre><span></span><code>make<span class="w"> </span>hello<span class="w"> </span><span class="nv">world</span><span class="o">=</span>earth<span class="w"> </span>foo<span class="w"> </span><span class="nv">bar</span><span class="o">=</span>baz
-make<span class="w"> </span>hello<span class="w"> </span>foo<span class="w"> </span><span class="nv">bar</span><span class="o">=</span>baz<span class="w"> </span><span class="nv">world</span><span class="o">=</span>earth
-make<span class="w"> </span><span class="nv">bar</span><span class="o">=</span>baz<span class="w"> </span>hello<span class="w"> </span>foo<span class="w"> </span><span class="nv">world</span><span class="o">=</span>earth
-</code></pre></div>
-<p>It can be seen as an advantage but as an inconvenient as well, because you cannot have arguments with the same name for different commands. Or at least, you could not use these commands and arguments at the same time.</p>
-<div class="highlight"><pre><span></span><code><span class="nv">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">$(</span>foreach<span class="w"> </span>a,<span class="k">$($(</span>subst<span class="w"> </span>-,_,<span class="nv">$1</span><span class="k">)</span>_args<span class="k">)</span>,<span class="k">$(if</span><span class="w"> </span><span class="k">$(</span>value<span class="w"> </span><span class="nv">$a</span><span class="k">)</span>,<span class="nv">$a</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nv">$a</span><span class="k">)</span><span class="s2">&quot;</span><span class="k">))</span>
-
-<span class="nv">rule1_args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>version
-<span class="nv">rule2_args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>version<span class="w"> </span>name
-
-<span class="nv">TASKS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>rule1<span class="w"> </span>rule2
-
-<span class="nf">.PHONY</span><span class="o">:</span><span class="w"> </span><span class="k">$(</span><span class="nv">TASKS</span><span class="k">)</span>
-<span class="nf">$(TASKS)</span><span class="o">:</span>
-<span class="w">    </span>@poetry<span class="w"> </span>run<span class="w"> </span>duty<span class="w"> </span><span class="nv">$@</span><span class="w"> </span><span class="k">$(</span>call<span class="w"> </span>args,<span class="nv">$@</span><span class="k">)</span>
-</code></pre></div>
-<p>Here <code>rule1</code> and <code>rule2</code> both accept a <code>version</code> argument.</p>
-<div class="highlight"><pre><span></span><code>make<span class="w"> </span>rule1<span class="w"> </span><span class="nv">version</span><span class="o">=</span><span class="m">1</span><span class="w">  </span><span class="c1"># OK</span>
-
-make<span class="w"> </span>rule1<span class="w"> </span><span class="nv">version</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>rule2<span class="w">  </span><span class="c1"># not OK</span>
-<span class="c1"># it will result in &quot;poetry run duty rule1 version=1&quot;</span>
-<span class="c1"># then &quot;poetry run duty rule2 version=1&quot;!</span>
-
-make<span class="w"> </span>rule1<span class="w"> </span><span class="nv">version</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>rule2<span class="w"> </span><span class="nv">version</span><span class="o">=</span><span class="m">2</span><span class="w">  </span><span class="c1"># ???</span>
-<span class="c1"># I couldn&#39;t get the courage to try more of these dark arts</span>
-<span class="c1"># so I don&#39;t know what would happen here...</span>
-</code></pre></div>
-<h2 id="addendum">Addendum<a class="headerlink" href="#addendum" title="Permanent link">¤</a></h2>
-<p>Not a real addendum.</p>
-<p>Share your tricks!</p>
   
+    <a href="https://github.com/pawamoy/website/edit/master/docs/backlog.md" title="Edit this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4v-2m10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1 2.1 2.1Z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/pawamoy/website/raw/master/docs/backlog.md" title="View source of this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.15 8.15 0 0 1-1.23-2Z"/></svg>
+    </a>
+  
+
+
+<h1 id="backlog-management">Backlog management<a class="headerlink" href="#backlog-management" title="Permanent link">¤</a></h1>
+<p>This page describes how I manage my backlog of issues on GitHub. This information is useful for both regular users and sponsors, since you'll learn how to give more weight to the issues you're interested in.</p>
+<h2 id="issue-overview">Issue overview<a class="headerlink" href="#issue-overview" title="Permanent link">¤</a></h2>
+<p>I maintain many different projects on GitHub, each having its own issue tracker. GitHub provides an <a href="https://github.com/issues">/issues page</a> which lets you fetch all issues across your user account and your organization accounts, for example with the query <code>is:open is:issue user:pawamoy org:mkdocstrings</code>. It then shows all found issues with pagination of (I believe) 30 items per page, which is more than enough to start working on issues. You can sort by upvotes to prioritize the issues that the most users are interested in. The final query can look like this: <code>is:open is:issue user:pawamoy org:mkdocstrings sort:reactions-+1-desc is:public</code>.</p>
+<p>Unfortunately, there are a few limitations with this system.</p>
+<ul>
+<li>On GitHub you can upvote your own issues, giving you an unfair advantage over those who don't.</li>
+<li>Sponsors upvotes should have more weight according to their sponsorship amount (per month). This kind of sorting is not possible through GitHub webpages.</li>
+<li>Some kind of issues should always be prioritized over other kinds, for example bugs over features. Once again, you cannot sort based on labels on GitHub webpages.</li>
+</ul>
+<p>To overcome these limitations, I developed a tool that lets me fetch issues from GitHub, as well as sponsorship data from platforms I support (<a href="https://github.com/sponsors/">GitHub Sponsors</a> and <a href="https://polar.sh">Polar</a> currently), that I can then sort according to my own, tailored criteria. It works in the terminal and displays a table of issues.</p>
+<p><img alt="backlog" src="../assets/backlog.png" /></p>
+<p>The columns show:</p>
+<ul>
+<li>the index of the issue in the backlog</li>
+<li>the issue identifier (account/repository#number)</li>
+<li>the author of the issue</li>
+<li>the labels (as emojis)</li>
+<li>the sponsorship (or funding) amount (more on this below)</li>
+<li>the boost amount (more on this below)</li>
+<li>the number of upvotes</li>
+<li>the title of the issue</li>
+</ul>
+<h2 id="sponsorship-amount">Sponsorship amount<a class="headerlink" href="#sponsorship-amount" title="Permanent link">¤</a></h2>
+<p>The sponsorship amount (or funding amount) is the sum of all distinct sponsorships attached to the author and upvoters of the issue. Lets unpack this.</p>
+<p>On GitHub, you can sponsor using an organization account. Since it's not possible to add organizations as members of teams (my current way of giving access to private projects to sponsors), I ask organization sponsors to provide a list of usernames that should be granted access to private projects. These usernames are listed as members of this organization in my local configuration data.</p>
+<p>Since their organization is sponsoring me, they must benefit from the voting power matching the organization sponsorship amount. The sponsorship and the users are therefore "linked" together. That lets me know, for a given user, which sponsorships they benefit from. A single user could benefit from multiple sponsorships, as they could create one themselves, and be a member of several organization that created sponsorships.</p>
+<p>For a given issue, I therefore build the set of distinct sponsorships (literally using a Python <code>set</code>) from the issue author's linked sponsorships, and each of the issue upvoters' linked sponsorships. We give upvoters the same weight opportunity as the author, because a sponsor won't always be able to <em>create</em> the issues, and instead only be able to <em>upvote</em> them to show their interest.</p>
+<p><strong>Sponsors, use your voting power!</strong> <img alt="😄" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f604.svg" title=":smile:" /></p>
+<div class="admonition note">
+<p class="admonition-title">Organization members vs. users and their plus-one</p>
+<p>
+I have allowed some users sponsoring for $50 or more, <strong>using their own account</strong>, to provide additional usernames who are granted access to the private projects. While this seems only fair to me, please note that this has the disadvantage that these additional users cannot be listed as part of an organization, and therefore won't benefit from the same voting power as the sponsoring user. This limitation will be lifted in the future. See <a href="#reviewing-beneficiaries">Reviewing beneficiaries</a>.</p>
+</div>
+<h2 id="boosts">Boosts<a class="headerlink" href="#boosts" title="Permanent link">¤</a></h2>
+<p>In 2024, I introduced the opportunity for users to "boost" issues, by making pledges via <a href="https://polar.sh">Polar</a>. Pledges start at a minimum of $5, and the sum of pledges must rise up to $30 for an issue to be boosted. It means that issues can be boosted by single individuals pledging $30 or more, or by 6 individuals pledging each $5. I figured $30 was a good balance given the variability in issues' difficulty of resolution, and that $5 was low enough to be affordable, and high enough to not require dozens of participants.</p>
+<p>Boosted issues will be prioritized over non-boosted ones, but not over "funded" ones (issues created or upvoted by users benefitting from monthly sponsorships). If you already fund my projects through a monthly sponsorship of $50, you don't need to boost issues. The reason is that monthly sponsorships are much more reliable as income, and in a society where reliable income is extremely important, I want to encourage monthly sponsorships over one-time donations or payments. Boosts were initially setup because some organizations can only make one-time payments (for various reasons), and they still wanted to have the ability to accelerate resolution of issues in exchange for financial compensation. Who am I to say no to their dollars? <img alt="😄" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f604.svg" title=":smile:" /> More seriously, even if monthly sponsorships are preferred, one-time payments are still very much appreciated.</p>
+<p>The boost system is still in experimental phase and might be re-configured differently in the future. Your feedback is welcome!</p>
+<h2 id="sorting-criteria">Sorting criteria<a class="headerlink" href="#sorting-criteria" title="Permanent link">¤</a></h2>
+<p>As of writing, here is the list of criteria used to sort the backlog, applied in order:</p>
+<ol>
+<li><strong>Issues labeled as <code>bug</code> (🐞).</strong> Bugs are given the highest priority. I don't think I need to elaborate why.</li>
+<li><strong>Issues labeled as <code>unconfirmed</code> (❔).</strong> It's important to triage issues quickly to identify bugs and documentation issues.</li>
+<li><strong>Issues labeled as <code>docs</code> (📘).</strong> Incorrect documentation is worse than no documentation.</li>
+<li><strong>Issues with a minimum total sponsorship amount of 50 (💖).</strong> Issue priorization is a benefit of sponsorship tiers starting at $50 per month. Sponsors with lower tiers will have to combine their effort to reach 50 together. Both the author and the upvoters' sponsorships are taken into account, see <a href="#sponsorship-amount">Sponsorship amount</a>.</li>
+<li><strong>Issues with a minimum boost pledge of $30 (💲).</strong> The boost system, see <a href="#boosts">Boosts</a>.</li>
+<li><strong>Issues with a minimum of 2 upvotes (👍).</strong> Since one can upvote their own issue, we raise the bar to 2 upvotes.</li>
+<li><strong>Issues labeled as <code>insiders</code> (🔒).</strong> These issues are candidate for <a href="../insiders/">Insiders</a> features (✨=feature). Insiders is generally what gives incentive to users to sponsor me, so it's only natural that I prioritize these features. Non-insiders features come after Insiders ones.</li>
+<li><strong>Issues from the @mkdocstrings namespace.</strong> Most of my sponsors are mainly interested in my work within mkdocstrings and its ecosystem, so I prioritize these over issues within my own namespace (@pawamoy).</li>
+<li><strong>Oldest issues first.</strong> First in, first out. It's ticketing system after all.</li>
+</ol>
+<p>Although I generally follow this ordering, <strong>I reserve the right to diverge from it</strong>. This goes both ways. An issue with 0 funding and 0 upvotes could become top-priority if it will facilitate maintenance or prevent regressions. A bug I noticed could be skipped if nobody experiences it or if it happens in an old, unused project. A docs-related issue could be skipped if it's about adding (not fixing) non-critical information.</p>
+<h2 id="privacy">Privacy<a class="headerlink" href="#privacy" title="Permanent link">¤</a></h2>
+<p>Since sponsors on <a href="https://github.com/sponsors/">GitHub Sponsors</a> can create <strong>private</strong> sponsorships, there is a privacy concern with sharing the actual backlog, as it would indicate that users are sponsoring me, and for how much. <strong>It means that I cannot share the real backlog publicly.</strong> The backlog samples I share are always built <strong>using public data only</strong>, which means you shouldn't rely on them.</p>
+<h2 id="reviewing-beneficiaries">Reviewing beneficiaries<a class="headerlink" href="#reviewing-beneficiaries" title="Permanent link">¤</a></h2>
+<p>When an individual sponsors me, things are easy: if they selected a tier equal to or higher than $10 per month, they get access to Insiders. In any case, they get the voting power matching the tier they selected.</p>
+<p>When an organization sponsors me, things get a bit more complex. If they selected a tier equal to or higher than $10 per month, the organization members must get access to Insiders. <strong>But I cannot automate that.</strong></p>
+<p>First, because it's not possible to add organizations to other organizations or teams. Second, because users could easily "game the system": sponsor as an organization for $10, and invite all you friends as members so they enjoy it too. Even if I set limits, like one user per $10 ($50, 5 users), what if an organization has more users than its accepted limit? Should I sort them alphabetically? That seems rather arbitrary and not very safe: if a user changes its name, they could take the place of a fellow member, whose access would then be revoked. Third, because users are not always listed as organization members. And when they are, the information is not always public.</p>
+<p>So instead of fetching organization members automatically, organizations must provide a list of users that will get access to Insiders. I feed that list to my automated system, and it handles granting/revoking accesses. But... what about voting power? Shouldn't we give the voting power to <em>all</em> the members of an organization, not just the ones who get access to the private projects? The organization might even just grant access to a bot account. Yet the actual members should be able to vote with the weight of their organization sponsorship. Also, what happens if a user leaves an organization? Their access should be revoked, and their voting power reset. But surely, organizations won't remember to send me an email to let me know a user has left. How do I help myself tracking this? </p>
+<p>So I do fetch organization members automatically! But I only <em>aggregate</em> this data to the explicit lists of users sent by organizations, for two purposes:</p>
+<ol>
+<li>Verify organization members. If an organization asks me to grant access to a user, I grant them access, but I verify whether they're actually listed as organization member. With this information, I can periodically review whether they're still part of the organization or not. If not, I can reach out and ask if their Insiders access should be revoked.</li>
+<li>Give voting power to verified members.</li>
+</ol>
+<p>For now, my system only allows explicit lists of beneficiaries for organization accounts. That's the reason why beneficiaries of individual accounts cannot be granted voting power matching their linked sponsorship. I will lift this limitation in the future. The organization/individual distinction is just an artifact of GitHub's architecture, so it must not affect other sponsorship platforms.</p>
+<div class="admonition tip">
+<p class="admonition-title">List your organization members publicly, if possible.</p>
+<p>
+By having your organization members visible through GitHub's API, you facilitate my ability to review beneficiaries, and you enable automatic voting power matching your sponsorship amount for all your organization members.</p>
+</div>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+  
+
+
+
 <!-- Giscus -->
 <!-- https://squidfunk.github.io/mkdocs-material/setup/adding-a-comment-system/#giscus-integration -->
 
@@ -2720,7 +2698,7 @@ make<span class="w"> </span>rule1<span class="w"> </span><span class="nv">versio
         })
     </script>
 
-
+                
               </article>
             </div>
           
@@ -2740,10 +2718,12 @@ make<span class="w"> </span>rule1<span class="w"> </span><span class="nv">versio
   
     
       
+        
+      
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../local-http-server-fake-files-testing-purposes/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Local HTTP server sending fake files for testing purposes">
+          <a href="../insiders/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Insiders">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
@@ -2753,27 +2733,11 @@ make<span class="w"> </span>rule1<span class="w"> </span><span class="nv">versio
                 Previous
               </span>
               <div class="md-ellipsis">
-                Local HTTP server sending fake files for testing purposes
+                Insiders
               </div>
             </div>
           </a>
         
-        
-          
-          <a href="../plugins-as-python-native-namespace-packages/" class="md-footer__link md-footer__link--next" aria-label="Next: Python packages and plugins as namespace packages">
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              <div class="md-ellipsis">
-                Python packages and plugins as namespace packages
-              </div>
-            </div>
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
-            </div>
-          </a>
         
       </nav>
     
@@ -2850,12 +2814,12 @@ make<span class="w"> </span>rule1<span class="w"> </span><span class="nv">versio
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["announce.dismiss", "content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy", "content.tooltips", "navigation.footer", "navigation.indexes", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "search.highlight", "search.suggest", "toc.follow"], "search": "../../assets/javascripts/workers/search.1e90e0fb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["announce.dismiss", "content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy", "content.tooltips", "navigation.footer", "navigation.indexes", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "search.highlight", "search.suggest", "toc.follow"], "search": "../assets/javascripts/workers/search.1e90e0fb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.6e7f53b1.min.js"></script>
+      <script src="../assets/javascripts/bundle.6e7f53b1.min.js"></script>
       
-        <script src="../../assets/_markdown_exec_pyodide.js"></script>
+        <script src="../assets/_markdown_exec_pyodide.js"></script>
       
     
   </body>
