@@ -2354,19 +2354,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#boosts" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        <span class="md-typeset">
-          Boosts
-        </span>
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#sorting-criteria" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2455,19 +2442,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#boosts" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        <span class="md-typeset">
-          Boosts
-        </span>
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#sorting-criteria" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2547,7 +2521,6 @@
 <li>the author of the issue</li>
 <li>the labels (as emojis)</li>
 <li>the funding amount (more on this below, hidden here for privacy reasons)</li>
-<li>the boost amount (more on this below)</li>
 <li>the number of upvotes</li>
 <li>the title of the issue</li>
 </ul>
@@ -2562,13 +2535,6 @@
 <p>
 By having your organization members visible through GitHub's API, you enable automatic voting power matching your sponsorship amount for all your organization members.</p>
 </div>
-<h2 id="boosts">Boosts<a class="headerlink" href="#boosts" title="Permanent link">¤</a></h2>
-<p>In 2024, I introduced the opportunity for users to "boost" issues, by making pledges via <a href="https://polar.sh">Polar</a>. Pledges start at a minimum of $5, and the sum of pledges must rise up to $30 for an issue to be boosted. It means that issues can be boosted by single individuals/organizations pledging $30 or more, or by 6 individuals/organizations pledging each $5. I figured $30 was a good balance given the variability in issues' difficulty of resolution, and that $5 was low enough to be affordable, and high enough to not require dozens of participants.</p>
-<p><a class="md-button md-button--primary" href="https://polar.sh/pawamoy/issues?sort=most_funded&amp;badged=1">View all issues with pledges</a></p>
-<p>Boosted issues will be prioritized over non-boosted ones, but not over "funded" ones (issues created or upvoted by users benefitting from monthly sponsorships). If you already fund my projects through a monthly sponsorship of $50, you don't need to boost issues. The reason is that monthly sponsorships are much more reliable as income, and in a society where reliable, monthly income is extremely important, I want to encourage monthly sponsorships over one-time donations or payments. Boosts were initially setup because some organizations can only make one-time payments (for various reasons), and they still wanted to have the ability to accelerate resolution of issues in exchange for financial compensation. Who am I to say no to their dollars? <img alt="😄" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f604.svg" title=":smile:" /> More seriously, even if monthly sponsorships are preferred, one-time payments are still very much appreciated.</p>
-<p>Issues with an <code>insiders</code> label will still be released as <a href="../insiders/">Insiders</a> features first, whether they are boosted or not.</p>
-<p>We receive the pledges only once the issue is completed, and confirmed by you (within a period of 7 days).</p>
-<p>The boost system is still in experimental phase and might be re-configured differently in the future. Your feedback is welcome! You can send it at <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#105;&#110;&#115;&#105;&#100;&#101;&#114;&#115;&#64;&#112;&#97;&#119;&#97;&#109;&#111;&#121;&#46;&#102;&#114;">&#105;&#110;&#115;&#105;&#100;&#101;&#114;&#115;&#64;&#112;&#97;&#119;&#97;&#109;&#111;&#121;&#46;&#102;&#114;</a>.</p>
 <h2 id="sorting-criteria">Sorting criteria<a class="headerlink" href="#sorting-criteria" title="Permanent link">¤</a></h2>
 <p>As of writing, here is the list of criteria used to sort the backlog, applied in order:</p>
 <ol>
@@ -2576,10 +2542,9 @@ By having your organization members visible through GitHub's API, you enable aut
 <li><strong>Issues labeled as <code>bug</code> (🐞).</strong> Bugs are given the highest priority. I don't think I need to elaborate why.</li>
 <li><strong>Issues labeled as <code>unconfirmed</code> (❔).</strong> It's important to triage issues quickly to identify bugs and documentation issues.</li>
 <li><strong>Issues with a minimum total sponsorship amount of 50 (💖).</strong> Issue priorization is a benefit of sponsorship tiers starting at $50 per month. Sponsors with lower tiers will have to combine their effort to reach 50 together. Both the author and the upvoters' sponsorships are taken into account, see <a href="#sponsorship-amount">Sponsorship amount</a>.</li>
-<li><strong>Issues with a minimum boost pledge of $30 (💲).</strong> The boost system, see <a href="#boosts">Boosts</a>.</li>
 <li><strong>Issues labeled as <code>docs</code> (📘).</strong> Incorrect documentation is worse than no documentation.</li>
 <li><strong>Issues labeled as <code>refactor</code> (🔨).</strong> To reduce technical debt as early as possible.</li>
-<li><strong>Sponsored and pledged issues</strong> These issues are not prioritized over <code>docs</code> and <code>refactor</code>-labeled issues, but still get a small boost over other features.</li>
+<li><strong>Sponsored issues</strong> These issues are not prioritized over <code>docs</code> and <code>refactor</code>-labeled issues, but still get a small boost over other features.</li>
 <li><strong>Issues with a minimum of 2 upvotes (👍).</strong> Since one can upvote their own issue, we raise the bar to 2 upvotes.</li>
 <li><strong>Issues labeled as <code>insiders</code> (🔒).</strong> These issues are candidate for <a href="../insiders/">Insiders</a> features (✨=feature). Insiders is generally what gives incentive to users to sponsor me, so it's only natural that I prioritize these features. Non-insiders features come after Insiders ones.</li>
 <li><strong>Issues from the @mkdocstrings namespace.</strong> Most of my sponsors are mainly interested in my work within mkdocstrings and its ecosystem, so I prioritize these over issues within my own namespace (@pawamoy).</li>
