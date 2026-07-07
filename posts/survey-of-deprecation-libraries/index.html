@@ -1,0 +1,4016 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Findings, thoughts, tutorials, work. Pieces of my mind!">
+      
+      
+      
+        <link rel="canonical" href="https://pawamoy.github.io/posts/survey-of-deprecation-libraries/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>A survey of deprecation-related Python libraries - pawamoy's website</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_markdown_exec_pyodide.css">
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../../css/custom.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#what-are-deprecations-and-why-are-they-used" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="pawamoy&#39;s website" class="md-header__button md-logo" aria-label="pawamoy's website" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4.41 3 3 4.41 5.69 7.1A7.92 7.92 0 0 0 4 12c0 1.85.63 3.55 1.69 4.9L3 19.59 4.41 21l2.69-2.69A7.92 7.92 0 0 0 12 20c1.85 0 3.55-.63 4.9-1.69L19.59 21 21 19.59l-2.69-2.69A7.92 7.92 0 0 0 20 12c0-1.85-.63-3.55-1.69-4.9L21 4.41 19.59 3 16.9 5.69A7.92 7.92 0 0 0 12 4c-1.85 0-3.55.63-4.9 1.69zM12 6c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6 2.69-6 6-6"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            pawamoy's website
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              A survey of deprecation-related Python libraries
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="lime"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/pawamoy/website/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pawamoy/website
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../credits/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Credits
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../sunsetting-the-sponsorware-strategy/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Posts
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../showcase/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Showcase
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="pawamoy&#39;s website" class="md-nav__button md-logo" aria-label="pawamoy's website" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4.41 3 3 4.41 5.69 7.1A7.92 7.92 0 0 0 4 12c0 1.85.63 3.55 1.69 4.9L3 19.59 4.41 21l2.69-2.69A7.92 7.92 0 0 0 12 20c1.85 0 3.55-.63 4.9-1.69L19.59 21 21 19.59l-2.69-2.69A7.92 7.92 0 0 0 20 12c0-1.85-.63-3.55-1.69-4.9L21 4.41 19.59 3 16.9 5.69A7.92 7.92 0 0 0 12 4c-1.85 0-3.55.63-4.9 1.69zM12 6c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6 2.69-6 6-6"/></svg>
+
+    </a>
+    pawamoy's website
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/pawamoy/website/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pawamoy/website
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../credits/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Credits
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Posts
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Posts
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2025
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    2025
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sunsetting-the-sponsorware-strategy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sunsetting the Insiders program
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2024
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    2024
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../same-pytest-fixtures-with-different-scopes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Same Pytest fixtures with different scopes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tingling-sensation-witnessing-existence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The tingling sensation of witnessing your own existence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../steam-linux-alvr-quest2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Playing Steam VR games running on Linux in the Oculus Quest 2 through ALVR (wireless)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2023
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    2023
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../the-insiders-journey/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Insiders journey
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../adding-links-to-formatted-and-syntax-highlighted-code/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Adding links to a Black formatted, Pygments syntax highlighted Python code block
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2022
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    2022
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../somewhat-modern-python-development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Somewhat-modern Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../testing-fastapi-ormar-alembic-apps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing a FastAPI application using Ormar models and Alembic migrations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../add-alembic-migrations-to-existing-fastapi-ormar-project/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to add Alembic migrations to an existing FastAPI + Ormar project
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2020
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    2020
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../local-http-server-fake-files-testing-purposes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Local HTTP server sending fake files for testing purposes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pass-makefile-args-as-typed-in-command-line/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Passing Makefile arguments to a command, as they are typed in the command line.
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugins-as-python-native-namespace-packages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python packages and plugins as namespace packages
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto-edit-git-commit-contents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to edit the contents of a git commit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../migrate-disqus-comments-to-utterances-github/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Migrate Disqus comments to Utterances (in GitHub issues) with Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../how-to-deal-with-jinja2-spacing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to deal with spacing in Jinja2 templates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unify-logging-for-a-gunicorn-uvicorn-app/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unify Python logging for a Gunicorn/Uvicorn/FastAPI application
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2019
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    2019
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../save-pytest-logs-as-artifact-gitlab-ci/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Save the logs generated during a pytest run as a job artifact on GitLab/GitHub CI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../challenge-fill-space-one-line-90-degree-same-direction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Challenge: fill a 2D space with one continuous line doing 90° angle turns in the same direction (left/right)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2018
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    2018
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../django-auth-server-for-shiny/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Django application as an authentication / authorization server for Shiny
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dual-screens-setup-nvidia-bunsenlabs-debian-jessie/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to install NVidia drivers on BunsenLabs/Debian 8 to setup dual screens
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker-compose-django-postgres-nginx/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Compose with NginX, Django, Gunicorn and multiple Postgres databases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_8" id="__nav_4_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2017
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    2017
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../python-static-code-analysis-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python static code analysis tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_9" id="__nav_4_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2016
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    2016
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../write-and-use-a-tox-plugin-from-inside-your-package/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Write and use a tox plugin from inside your package
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../documentation-in-your-shell-scripts-using-shellman/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentation in your shell scripts using shellman
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../django-dashboard-with-suit-and-highcharts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Django admin dashboard with Suit and Highcharts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Showcase
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Showcase
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../showcase/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Showcase Grid
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../showcase/aria2p/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    <span class="md-typeset">
+      aria2p
+    </span>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../showcase/copier-pdm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    <span class="md-typeset">
+      copier-pdm
+    </span>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../showcase/dependenpy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    <span class="md-typeset">
+      dependenpy
+    </span>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../showcase/duty/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    <span class="md-typeset">
+      duty
+    </span>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../showcase/griffe/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    <span class="md-typeset">
+      griffe
+    </span>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../showcase/git-changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    <span class="md-typeset">
+      git-changelog
+    </span>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../showcase/mkdocstrings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    <span class="md-typeset">
+      mkdocstrings
+    </span>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../showcase/mvodb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    <span class="md-typeset">
+      mvodb
+    </span>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../showcase/shell-history/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    <span class="md-typeset">
+      shell-history
+    </span>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../showcase/shelldemo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    <span class="md-typeset">
+      shelldemo
+    </span>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../showcase/shellman/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    <span class="md-typeset">
+      shellman
+    </span>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-are-deprecations-and-why-are-they-used" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          What are deprecations, and why are they used
+        </span>
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-python-case" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          The Python case
+        </span>
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Python case">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#standard-library" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <span class="md-typeset">
+          Standard library
+        </span>
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+  <h1>A survey of deprecation-related Python libraries</h1>
+  <p class="post-meta">
+    Published Feb 15, 2026
+    by Timothée Mazzucotelli
+  </p>
+  
+  <p>In this post I try to explain what is a code deprecation, why we deprecate code, and how we do it. Then I survey existing Python libraries that make it easer to deprecate code, make a comparative table of their features, and then expand on what I think we could do better. This post will touch to static analysis, runtime warnings, type-checkers, editors, public APIs, code maintenance and how deprecations fit into all that.</p>
+<!--more-->
+
+<h2 id="what-are-deprecations-and-why-are-they-used">What are deprecations, and why are they used<a class="headerlink" href="#what-are-deprecations-and-why-are-they-used" title="Permanent link">¤</a></h2>
+<div class="admonition note">
+<p class="admonition-title">TL;DR</p>
+<p> Projects depend on libraries, libraries expose public APIs which eventually evolve in incompatible ways, authors create deprecation periods to inform users of upcoming incompatible changes. <a href="#">Skip to next section -&gt;</a></p>
+</div>
+<p>Library authors expose programming interfaces to their users. That is what we generally call APIs (Application Programming Interfaces). That is what lets one programmer make use of what another programmer created. The different parts of an API can have different visibility kinds: private, internal, public... In this post we will focus on the public part of APIs or, in short, public APIs.</p>
+<p>Each bit of a public API is exposed to its users with a specific intent by the library authors. Library users hook into these interfaces with specific expectations. Their understanding of the exposed interface might match the intent of the authors, or differ from it.</p>
+<p>To make sure they are on the same page, authors provide their users with documentation and contracts. Documentation can be provided in many different forms:</p>
+<ul>
+<li>comments in the source code</li>
+<li>standardized comments or strings that tools can parse for display in other places (editors, HTML documentation)</li>
+<li>hand-written documentation (erm) available in the sources or published on the web</li>
+</ul>
+<p>One form isn't better than the other: they complete each other.</p>
+<p>Contracts are generally provided through the programming language itself. Depending on the language, library authors can annotate their code to give more information to users and tools. For example, function parameters can be annotated with the types they expect, or accept, so that users know what values they can, or should pass, and for compilers or interpreters to optimize byte-code, emit compilation or runtime warnings and errors, etc.. Contracts are, in a way, yet another form of documentation.</p>
+<p>When the language itself is lacking in this regard, conventions emerge from ecosystems, in the form of popular third-party libraries, commonly accepted naming or architecture patterns, etc. Sometimes these conventions make their way back into the language, as new standards or features.</p>
+<p>Most library authors use versioning strategies (<a href="https://calver.org/">CalVer</a>, <a href="https://semver.org/">SemVer</a>) to be able to update their libraries while giving time to their users to catch up. Some users will upgrade quickly to the latest versions, while others will stay longer on older versions. One common expectation from library users is that public APIs should stay compatible (stable) between versions, meaning that they can continue using the library with the same interface, even when they upgrade to later versions.</p>
+<p>Obviously, with organic development, a library is guaranteed to break its interface from time to time, just to adapt to the ever-evolving ecosystem around it. To reduce the occurrences of the interface changing in incompatible ways, library authors often choose to maintain several variations of their interface at once, and this across several versions of their library. Such temporization lets authors pack several incompatible changes at once, in major version updates. These major updates are described as "breaking".</p>
+<p>Since maintenance of public API variations across many versions is costly (it slows down or even prevent development of new features, requires testing, documentation and user support), a common expectation from library authors is that their users must eventually upgrade (and the sooner the better) to newer versions, so that they (the authors) can get rid of old compatibility layers, maintaining their code base in good shape.</p>
+<p>To facilitate the migration to newer versions by users of the library, and to ensure their use of the library stays correct and up-to-date, library authors can opt into <strong>deprecating</strong> (finally!) specific parts of their public API. <strong>Deprecations</strong> are pending revisions of the contract provided to users. They are (they must be) accompanied by relevant documentation updates, too.</p>
+<p>Depending on the language or ecosystem, library authors have languages constructs, standards or third-party libraries at their disposal to mark parts of their public API as deprecated. These deprecated parts are later changed in incompatible ways, or simply removed. Authors can optionally inform their users of <em>when</em> this will happen (be it with a version number, a time estimation, a specific date, etc.).</p>
+<h2 id="the-python-case">The Python case<a class="headerlink" href="#the-python-case" title="Permanent link">¤</a></h2>
+<p>When developing Python libraries, authors have a few tools on hand to deprecate parts of their APIs. But before diving into a review of these tools, let us ask ourselves: what <em>are</em> these API parts? And what is a <em>good</em> deprecation in a Python library? What purpose should it serve, apart from informing direct users of upcoming breaking changes?</p>
+<p>Here is what I think. A good deprecation:</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> tells users about the deprecated use</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> tells users about the <em>new</em> use, if any</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> tells users when to expect the breaking change (or removal) to happen</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> tells users how to migrate</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> allows tooling to apply that migration automatically in user code bases</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> allows tooling to remove/update the deprecated code when ready</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> can be logged at runtime</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> can be displayed in editors</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> can be reported by linters or test runners</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> most essentially, can be easily surfaced back to the right person (more on that later)</li>
+</ul>
+<p>Now, what parts of an API should we be able to deprecate? This is really specific to each project and what they consider part of their public API, but if we had to try and list every possible thing, this would be:</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> symbol names</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> symbol locations (from where we import/access them)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> modules, functions, classes, methods, attributes, type aliases</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> function (method) parameters<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> their kind (positional-only, etc.)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> their position if relevant</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> their accepted type (more on that below)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> their default value, or the presence of a default value</li>
+</ul>
+</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> function returned values (their type)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> function/class type parameters? their names?</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> attribute values?</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> raised exceptions? their messages?</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> class bases?</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> any symbol's type?</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> any symbol's kind (e.g. class vs. function)?</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> emitted warnings? their messages?</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> emitted logs? their messages? their logger name?</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> can you think of anything else?</li>
+</ul>
+<p>Now let's see what existing Python tooling can do with each of these items.</p>
+<h3 id="standard-library">Standard library<a class="headerlink" href="#standard-library" title="Permanent link">¤</a></h3>
+<p><a href="https://docs.python.org/3/library/index.html">Python's standard library</a> provides a few things to help library authors deprecate code.</p>
+<p>The first one is the <a href="https://docs.python.org/3/library/warnings.html#module-warnings">warning system</a>. This system allows library authors to issue warnings during the execution of the code. These warnings are printed in the console. Users (developers and end-users) can filter these warnings, to only print the ones they are interested in, or turn them into actual errors that stop execution.</p>
+<p>The system provides a dozen warning "categories", in the form of classes, that library authors can subclass if they need to define new categories.</p>
+<p>These warnings can be about many things (it's really up to the library authors how to use them and what to warn about), but here we are interested in the following categories:</p>
+<ul>
+<li>
+<p><a href="https://docs.python.org/3/library/exceptions.html#DeprecationWarning"><code>DeprecationWarning</code></a>:</p>
+<blockquote>
+<p>Base category for warnings about deprecated features when those warnings are intended for other Python developers (ignored by default, unless triggered by code in <code>__main__</code>).</p>
+</blockquote>
+<p>The category we are most interested in. It is used to communicate to users of your code (and by users of your code, I mean developers, not end-users) that a specific part of your public API they are using is actually deprecated and will either change in an incompatible manner or be removed in the future.</p>
+<p>We will see how the target here, developers, relates to our earlier mention of "surfacing deprecations to the right person", and how the standard library's warning system lacks in this regard.</p>
+</li>
+<li>
+<p><a href="https://docs.python.org/3/library/exceptions.html#PendingDeprecationWarning"><code>PendingDeprecationWarning</code></a>:</p>
+<blockquote>
+<p>Base category for warnings about features that will be deprecated in the future (ignored by default).</p>
+</blockquote>
+<p>A more gentle warning, informing developers that the part of your public API they are using will become deprecated (but is not yet deprecated).</p>
+<details class="note">
+<summary>Nerd-snipe</summary>
+<p> I often wonder about the utility of this category: if you are able to deprecate a specific part of your public API, in the sense that it still works, but the API provides a newer/better interface (or not), then why the need for a <em>pending</em> deprecation warning? Can't you just wait for the deprecation to be implemented, and then issue a regular deprecation warning? Maybe it's about giving library authors the possibility to warn their users about their plans of deprecating something, before actually deprecating it, because deprecating it requires some work (implementation of a newer API, initial decoupling for easier removal later, etc.)? My own projects are maybe not popular enough to warrant the use of pending deprecation warnings!</p>
+<p>Searching on GitHub, I found more occurrences of code filtering them out than using them to warn. The few occurrences that did issue pending deprecation warnings showed that the replacement was already present (in this case why not issue a deprecation warning directly?) or stated that the code was deprecated (so, why pending?).</p>
+<p><a href="https://discuss.python.org/t/pendingdeprecationwarning-is-really-useful/1038/3">From Antoine Pitrou on discuss.python.org</a>:</p>
+<blockquote>
+<p>[As far as I can understand] it was useful when DeprecatingWarning was visible by default. But at some point it was decided that DeprecatingWarning would be hidden by default (as PendingDeprecationWarning already was), and now it’s not clear anymore why we have two separate categories.</p>
+</blockquote>
+<p>Other comments in this thread seem to imply this was useful for features in Python's standard library itself (and so maybe only designed for it).</p>
+<p>By the way the <a href="https://docs.python.org/3/library/exceptions.html#PendingDeprecationWarning">documentation</a> states:</p>
+<blockquote>
+<p>Base class for warnings about features which are obsolete and expected to be deprecated in the future, but are not deprecated at the moment.</p>
+</blockquote>
+<p>...which doesn't make sense for a french reader as myself since we translate "deprecated" with "obsolète", turning the sentence into:</p>
+<blockquote>
+<p>...features which are obsolete and expected to be obsolete in the future, but are not yet obsolete at the moment.</p>
+</blockquote>
+<p><a href="https://www.askdifference.com/deprecated-vs-obsolete/">Some definitions on the web say</a>:</p>
+<blockquote>
+<p>Deprecated involves discouraging use due to better alternatives or drawbacks, often remaining supported, while obsolete refers to being out of use, outdated, and unsupported.</p>
+</blockquote>
+<p>...so IMO the definition for the category got it reversed. Code is deprecated before it is obsolete, not the other way around.</p>
+</details>
+</li>
+<li>
+<p><a href="https://docs.python.org/3/library/exceptions.html#FutureWarning"><code>FutureWarning</code></a>:</p>
+<blockquote>
+<p>Base category for warnings about deprecated features when those warnings are intended for end users of applications that are written in Python.</p>
+</blockquote>
+<p>As clearly explained, this warning is intended for end-users of a program. For example, when a <em>field in a configuration file</em> is deprecated, the library author should issue a <code>FutureWarning</code> instead of a <code>DeprecationWarning</code>, since end-users should know about it, and only them (not the possible intermediate libraries that make use of the configuration file loading code).</p>
+</li>
+</ul>
+<p>We see that <code>DeprecationWarning</code> is hidden by default, because it's targetted at developers, and <code>FutureWarning</code> is shown by default, because it's targetted at end-users. Developers can of course configure their project to show deprecation warnings too, in order to fix them while it's still time (before any breaking change / removal).</p>
+<p>While this seems to cover all use-cases in theory, in practice the reality is more complex, and the hidden-by-default nature of deprecation warnings causes some friction in the Python ecosystem. I write about this in more details in the <a href="#surfacing">Surfacing</a> section.</p>
+<p>So, can we use the warning system to tick a few boxes in <a href="#the-python-case">our lists above</a>?</p>
+<p>For symbol names and locations, one can use another mechanism, the <code>__getattr__</code> module-level function:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">NewName</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="fm">__getattr__</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;OldName&quot;</span><span class="p">:</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;OldName was renamed NewName, please use the new name.&quot;</span><span class="p">,</span>
+            <span class="ne">DeprecationWarning</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">NewName</span>
+</code></pre></div>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> symbol names</li>
+</ul>
+<div class="highlight"><span class="filename">in &lt;code&gt;pkg/old_module.py&lt;/code&gt;</span><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="fm">__getattr__</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;Location&quot;</span><span class="p">:</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;pkg.old_module.Location was moved to pkg.new_module.Location, &quot;</span>
+            <span class="s2">&quot;please use the new location to import it.&quot;</span><span class="p">,</span>
+            <span class="ne">DeprecationWarning</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">pkg.new_module</span><span class="w"> </span><span class="kn">import</span> <span class="n">Location</span>
+        <span class="k">return</span> <span class="n">Location</span>
+</code></pre></div>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> symbol locations</li>
+</ul>
+<hr />
+<p>Modules can emit a warning at import time:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+    <span class="s2">&quot;Module pkg.module is deprecated, &quot;</span>
+    <span class="s2">&quot;import from pkg directly instead.&quot;</span><span class="p">,</span>
+    <span class="ne">DeprecationWarning</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> modules</li>
+</ul>
+<hr />
+<p>Classes can emit a warning at instantiation time, though that doesn't take into account class methods or static methods that don't also instantiate the class.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Old</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;Class Old is deprecated, &quot;</span>
+            <span class="s2">&quot;and will be removed in a future version.&quot;</span><span class="p">,</span>
+            <span class="ne">DeprecationWarning</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">m1</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="c1"># no warning when we call this method</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">m2</span><span class="p">():</span>
+        <span class="c1"># no warning when we call this method</span>
+</code></pre></div>
+<p>To palliate to this, we could rename the class and rely on a module-level <code>__getattr__</code> again, so that merely importing the class emits a warning:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">_Old</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="fm">__getattr__</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;Old&quot;</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;Class Old is deprecated, &quot;</span>
+            <span class="s2">&quot;and will be removed in a future version.&quot;</span><span class="p">,</span>
+            <span class="ne">DeprecationWarning</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">_Old</span>
+</code></pre></div>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> classes</li>
+</ul>
+<hr />
+<p>Functions, methods, and other things that eventually get called can emit a deprecation warning when they are called.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">old_function</span><span class="p">():</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+        <span class="s2">&quot;Function old_function is deprecated, &quot;</span>
+        <span class="s2">&quot;and will be removed in a future version.&quot;</span><span class="p">,</span>
+        <span class="ne">DeprecationWarning</span><span class="p">,</span>
+    <span class="p">)</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Thing</span><span class="p">:</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">old_property</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;Property Thing.old_property is deprecated, &quot;</span>
+            <span class="s2">&quot;and will be removed in a future version.&quot;</span><span class="p">,</span>
+            <span class="ne">DeprecationWarning</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_thing</span>
+</code></pre></div>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> functions, methods, properties</li>
+</ul>
+<hr />
+<p>Module-level attributes (variables, constants) can be renamed and re-accessed through <code>__getattr__</code> again:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+
+
+<span class="n">_old_variable</span> <span class="o">=</span> <span class="mi">0</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="fm">__getattr__</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;old_variable&quot;</span><span class="p">:</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;Attribute old_variable is deprecated, &quot;</span>
+            <span class="s2">&quot;and will be removed in a future version.&quot;</span><span class="p">,</span>
+            <span class="ne">DeprecationWarning</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">_old_variable</span>
+</code></pre></div>
+<p>Instance-level attributes can be hidden behind properties:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Thing</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_old_field</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">old_field</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;Attribute old_field is deprecated, &quot;</span>
+            <span class="s2">&quot;and will be removed in a future version.&quot;</span><span class="p">,</span>
+            <span class="ne">DeprecationWarning</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_old_field</span>
+</code></pre></div>
+<p>Class-level attributes are a bit more difficult to deprecate. We need to do it at the metaclass level:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">_ThingMetaclass</span><span class="p">(</span><span class="nb">type</span><span class="p">):</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">bar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;Attribute bar is deprecated, &quot;</span>
+            <span class="s2">&quot;and will be removed in a future version.&quot;</span><span class="p">,</span>
+            <span class="ne">DeprecationWarning</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bar</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Thing</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">_ThingMetaclass</span><span class="p">):</span>
+    <span class="n">_bar</span> <span class="o">=</span> <span class="mi">0</span>
+</code></pre></div>
+<p>When using <a href="https://docs.python.org/3/howto/descriptor.html">descriptors</a>, this becomes easier again:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">_Bar</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">objtype</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;Attribute bar is deprecated, &quot;</span>
+            <span class="s2">&quot;and will be removed in a future version.&quot;</span><span class="p">,</span>
+            <span class="ne">DeprecationWarning</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="mi">10</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Thing</span><span class="p">:</span>
+    <span class="n">bar</span> <span class="o">=</span> <span class="n">_Bar</span><span class="p">()</span>
+</code></pre></div>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> attributes</li>
+</ul>
+<hr />
+<p>Type aliases behave like any other attribute, so we got this covered.</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> type aliases</li>
+</ul>
+<hr />
+<p>Next we have function parameters. Some cases can be straight-forward, while some others can be very convoluted, but all of them can be handled.</p>
+<p>When the whole parameter is deprecated, one can use a sentinel to check if a value was passed.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+
+<span class="n">_sentinel</span> <span class="o">=</span> <span class="nb">object</span><span class="p">()</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">param</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">_sentinel</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">param</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">_sentinel</span><span class="p">:</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;Parameter `param` is deprecated &quot;</span>
+            <span class="s2">&quot;and will be removed in a future version.&quot;</span><span class="p">,</span>
+            <span class="ne">DeprecationWarning</span><span class="p">,</span>
+        <span class="p">)</span>
+</code></pre></div>
+<p>If the parameter already had a default value, one can still use it in place of the sentinel:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+
+<span class="n">_sentinel</span> <span class="o">=</span> <span class="nb">object</span><span class="p">()</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">param</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">_sentinel</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">param</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">_sentinel</span><span class="p">:</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;Parameter `param` is deprecated &quot;</span>
+            <span class="s2">&quot;and will be removed in a future version.&quot;</span><span class="p">,</span>
+            <span class="ne">DeprecationWarning</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">param</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># previous default value</span>
+</code></pre></div>
+<p>Things get a bit more complicated when the deprecated parameter is followed by other parameters without default values (as Python doesn't allow a parameter with a default value to be followed by a parameter without one). For these cases, it is always possible to swallow positional parameters with <code>*args</code> and keyword parameters with <code>**kwargs</code>. A few examples:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="positional-only" name="__tabbed_1" type="radio" /><input id="keyword-only" name="__tabbed_1" type="radio" /><input id="positional-or-keyword" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="positional-only">positional-only</label><label for="keyword-only">keyword-only</label><label for="positional-or-keyword">positional or keyword</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><span class="filename">before</span><pre><span></span><code><span class="c1"># your parameters are positional-only parameters</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">greet</span><span class="p">(</span><span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">/</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+
+<span class="n">greet</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;world&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">after</span><pre><span></span><code><span class="c1"># swallow prefix using a variadic positional parameter</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">greet</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">prefix</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="n">args</span>
+    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">prefix</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;greet() missing 1 required positional parameter: &#39;name&#39;&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">prefix</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;Parameter `prefix` is deprecated, &quot;</span>
+            <span class="s2">&quot;and will be removed in a future version.&quot;</span><span class="p">,</span>
+            <span class="ne">DeprecationWarning</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="ow">or</span> <span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+
+<span class="c1"># still working as expected</span>
+<span class="n">greet</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;world&quot;</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><span class="filename">before</span><pre><span></span><code><span class="c1"># your parameters are keyword-only parameters</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">greet</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+
+<span class="n">greet</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;world&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">after</span><pre><span></span><code><span class="c1"># swallow prefix using a variadic keyword parameter</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">greet</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">prefix</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;prefix&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">prefix</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;Parameter `prefix` is deprecated, &quot;</span>
+            <span class="s2">&quot;and will be removed in a future version.&quot;</span><span class="p">,</span>
+            <span class="ne">DeprecationWarning</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="ow">or</span> <span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+
+<span class="c1"># still working as expected</span>
+<span class="n">greet</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;world&quot;</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><span class="filename">before</span><pre><span></span><code><span class="c1"># your parameters are positional or keyword parameters</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">greet</span><span class="p">(</span><span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+
+<span class="n">greet</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;world&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">after</span><pre><span></span><code><span class="c1"># no other choice than to swallow both forms</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">greet</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">prefix</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="n">args</span>
+    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">prefix</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="s2">&quot;name&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+        <span class="n">prefix</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;prefix&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;greet() missing 1 required positional parameter: &#39;name&#39;&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">prefix</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;Parameter `prefix` is deprecated, &quot;</span>
+            <span class="s2">&quot;and will be removed in a future version.&quot;</span><span class="p">,</span>
+            <span class="ne">DeprecationWarning</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="ow">or</span> <span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+
+<span class="c1"># still working as expected</span>
+<span class="n">greet</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;world&quot;</span><span class="p">)</span>
+<span class="n">greet</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;world&quot;</span><span class="p">)</span>
+<span class="n">greet</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;world&quot;</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> parameters</li>
+</ul>
+<hr />
+<p>When transforming a parameter from positional-or-keyword to positional-only or keyword-only, one can use <code>*args</code> and <code>**kwargs</code> to allow both kinds during the deprecation period:</p>
+<div class="highlight"><span class="filename">before</span><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">param1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">/</span><span class="p">,</span> <span class="n">param2</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">param3</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="o">...</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">after</span><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">param1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">param3</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">args</span> <span class="ow">and</span> <span class="n">kwargs</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;function() got multiple values for argument &#39;param2&#39;&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">args</span><span class="p">:</span>
+        <span class="n">param2</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="c1"># deprecate positional use</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;Passing `param2` argument as positional is deprecated.&quot;</span><span class="p">,</span>
+            <span class="ne">DeprecationWarning</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">kwargs</span><span class="p">:</span>
+        <span class="n">param2</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;param2&quot;</span><span class="p">]</span>
+        <span class="c1"># or deprecate keyword use</span>
+        <span class="c1"># warnings.warn(</span>
+        <span class="c1">#     &quot;Passing `param2` argument as keyword is deprecated&quot;,</span>
+        <span class="c1">#     DeprecationWarning,</span>
+        <span class="c1"># )</span>
+    <span class="o">...</span>
+</code></pre></div>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> parameter kind</li>
+</ul>
+<hr />
+<p>The position of a positional parameter can be deprecated if we can rely on the parameter's type (or other metadata) to identify it amongst other positional parameters. Since other parameters can shift too, we must also be able to identify these. Even then, signatures quickly stop making sense.</p>
+<div class="highlight"><span class="filename">before</span><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">pos_x</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">pos_y</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">pos_a</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">/</span><span class="p">):</span>
+    <span class="o">...</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">after</span><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+
+
+<span class="c1"># moving pos_a before pos_x</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">pos_a</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">pos_x</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="nb">int</span><span class="p">,</span> <span class="n">pos_y</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span> <span class="o">/</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pos_a</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pos_x</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pos_y</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;Parameter `pos_a` was moved to the first parameter.&quot;</span><span class="p">,</span>
+            <span class="ne">DeprecationWarning</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="c1"># optionally type-check the rest, to avoid any invalid combination</span>
+    <span class="k">elif</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">pos_a</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pos_x</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pos_y</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;function() requires 3 parameters of types str, bool and int, in this order&quot;</span><span class="p">)</span>
+    <span class="o">...</span>
+</code></pre></div>
+<p>Signatures can be improved with <code>typing.overload</code> to specify the valid combination of parameters:</p>
+<div class="highlight"><span class="filename">after</span><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">overload</span>
+
+
+<span class="nd">@overload</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">pos_x</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">pos_y</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">pos_a</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">/</span><span class="p">):</span>
+    <span class="o">...</span>
+
+
+<span class="nd">@overload</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">pos_a</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pos_x</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">pos_y</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="o">/</span><span class="p">):</span>
+    <span class="o">...</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="c1"># variant implementation using a match statement</span>
+    <span class="k">match</span> <span class="n">args</span><span class="p">:</span>
+        <span class="k">case</span> <span class="p">(</span><span class="n">pos_x</span><span class="p">,</span> <span class="n">pos_y</span><span class="p">,</span> <span class="n">pos_a</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pos_x</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pos_y</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pos_a</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="o">...</span>
+        <span class="k">case</span> <span class="p">(</span><span class="n">pos_a</span><span class="p">,</span> <span class="n">pos_x</span><span class="p">,</span> <span class="n">pos_y</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pos_a</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pos_x</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pos_y</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="o">...</span>
+        <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;function() requires 3 parameters of types str, bool and int, in this order&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>I am not sure how well type checkers support positional-only parameters moving around. We will get into the type-checking topic a bit later in this post.</p>
+<p>As a general rule of thumb, my recommandation is to only make parameters positional-only when they are interchangeable with the other positional-only parameters. Another recommandation would be to use only one positional-or-keyword parameter, and make the rest keyword-only, early in the development of the library in order to minimize breaking changes later.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="o">/</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">z</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">show</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+    <span class="c1"># `a` and `b` are interchangeable</span>
+    <span class="c1"># passing `name` as positional is tolerated/encouraged</span>
+    <span class="c1"># the rest of the arguments must be passed as keyword arguments</span>
+    <span class="o">...</span>
+</code></pre></div>
+<p>We saw that deprecating the position of positional parameters is a bit contrived, but lets consider it possible.</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> parameter position</li>
+</ul>
+<hr />
+<p>If a parameter accepts a union of types as values, it is straight-forward to deprecate one these type with <code>isinstance</code> checks:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">param</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;Passing a string as `param` value is deprecated, &quot;</span>
+            <span class="s2">&quot;pass an integer directly instead.&quot;</span><span class="p">,</span>
+            <span class="ne">DeprecationWarning</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">param</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">param</span><span class="p">)</span>
+    <span class="o">...</span>
+</code></pre></div>
+<p>Similarly, if the accepted type changes to something else, we can accept both types temporarily and use an <code>isinstance</code> check again:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+
+
+<span class="c1"># old type</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">A</span><span class="p">:</span>
+    <span class="o">...</span>
+
+
+<span class="c1"># new type</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">B</span><span class="p">:</span>
+    <span class="o">...</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">param</span><span class="p">:</span> <span class="n">A</span> <span class="o">|</span> <span class="n">B</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="n">A</span><span class="p">):</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;Passing an instance of `A` as `param` value is deprecated, &quot;</span>
+            <span class="s2">&quot;pass an instance of `B` instead.&quot;</span><span class="p">,</span>
+            <span class="ne">DeprecationWarning</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="c1"># logic to transform param,</span>
+        <span class="c1"># unless both types are compatible</span>
+    <span class="o">...</span>
+</code></pre></div>
+<p>With <a href="https://typing.python.org/en/latest/spec/protocol.html#protocols">protocols</a> as accepted types, the <code>isinstance</code> check will only work with protocols decorated with the <a href=""><code>typing.runtime_checkable</code></a> decorator. Even then, only the presence of methods will be checked, not the types in their signatures. I wish Python's standard library, official tools like <a href="https://www.mypy-lang.org/">Mypy</a> or third-party tools like <code>ty</code> would provide utilities to type-check such things at runtime (<code>matches_protocol(value, protocol)</code>, <code>compatible(TypeA, TypeB)</code>, etc.)</p>
+<p>Lets consider the standard library provides basic support for deprecating parameter types.</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> parameter type</li>
+</ul>
+<hr />
+<p>Deprecating parameter default values is also possible, whether we want to remove them later or change them to something else. For this we can use sentinels again:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+
+<span class="n">_sentinel</span> <span class="o">=</span> <span class="nb">object</span><span class="p">()</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">param</span><span class="o">=</span><span class="n">_sentinel</span><span class="p">):</span>  <span class="c1"># previously =0</span>
+    <span class="k">if</span> <span class="n">param</span> <span class="ow">is</span> <span class="n">_sentinel</span><span class="p">:</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;Parameter `param` will become required &quot;</span>
+            <span class="s2">&quot;in a future version, please pass it explicitly.&quot;</span><span class="p">,</span>
+            <span class="ne">DeprecationWarning</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">param</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="o">...</span>
+</code></pre></div>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> parameter default</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+
+<span class="n">_sentinel</span> <span class="o">=</span> <span class="nb">object</span><span class="p">()</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">param</span><span class="o">=</span><span class="n">_sentinel</span><span class="p">):</span>  <span class="c1"># previously =0</span>
+    <span class="k">if</span> <span class="n">param</span> <span class="ow">is</span> <span class="n">_sentinel</span><span class="p">:</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;Parameter `param` default value will change &quot;</span>
+            <span class="s2">&quot;from 0 to 1 in a future version, &quot;</span>
+            <span class="s2">&quot;please pass 0 explicitly if you want to retain &quot;</span>
+            <span class="s2">&quot;the current behavior.&quot;</span><span class="p">,</span>
+            <span class="ne">DeprecationWarning</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">param</span> <span class="mi">0</span>
+    <span class="o">...</span>
+</code></pre></div>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> parameter default value</li>
+</ul>
+<hr />
+<p>Deprecating a function return type or value is not easy, if doable at all. To effectively deprecate it, the library authors would have to know <em>how</em> the return value is used. To know how it is used, they would have to somehow scan the surrounding code <em>within the user's code base</em>, which is definitely not trivial. Or they would have to wrap the returned value into a custom type of their own, where they would have control over attribute access, method execution, etc..</p>
+<p>For example, if the function initially returns an <code>int</code>, but the library authors want to deprecate that in order to return an instance of a more complex class, they could try and wrap integers into a custom class, and find the right place where to emit a deprecation warning, for example in the <code>__eq__</code> method.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">_DeprInt</span><span class="p">(</span><span class="nb">int</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;function() will start returning instances &quot;</span>
+            <span class="s2">&quot;of DifferentInt instead of int in a future version, &quot;</span>
+            <span class="s2">&quot;so you should stop comparing them directly with ==&quot;</span><span class="p">,</span>
+            <span class="ne">DeprecationWarning</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">function</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">_DeprInt</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div>
+<p>That is, assuming the <code>DifferentInt</code> class implements a different comparison method.</p>
+<p>But this would be very brittle: what if the user code uses <code>&gt;=</code> or any other operator? Library authors would have to re-implement all relevant methods (<code>__gt__</code>, etc.). What if the user only prints the returned value? Should the <code>__repr__</code> or <code>__str__</code> methods emit deprecation warnings? Mocking built-in classes is doable, but sometimes won't prevent breakages. For example there is no way of redefining what happens when the identity operator is used, so mocking/wrapping a boolean would fail when users of the library write <code>if result is True</code> or <code>if result is False</code>, since <code>result</code> will now never be <code>True</code> or <code>False</code>, but some mocked instance that only imitate their truthy/falsy value.</p>
+<p>In the end, it might be easier to emit a deprecation warning from the function that returns the value, even if this value eventually isn't used by the user. This would generate "false-positive" deprecation warnings, that even users who upgraded their code to the new use would have to filter out, but at least library authors would be sure that every user is aware of the deprecation.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">function</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+        <span class="s2">&quot;function() will start returning instances &quot;</span>
+        <span class="s2">&quot;of DifferentInt instead of int in a future version.&quot;</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="mi">0</span>
+</code></pre></div>
+<p>The other option, scanning the surrounding code, would need the help of type-checkers. We will see later how they come into play.</p>
+<p>Because how brittle solutions suggested above look, I'm gonna leave the "function returned value/type" as unchecked.</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> function returned value/type</li>
+</ul>
+<hr />
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> function/class type parameters? their names?</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> attribute values?</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> raised exceptions? their messages?</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> class bases?</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> any symbol's type?</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> any symbol's kind (e.g. class vs. function)?</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> emitted warnings? their messages?</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> emitted logs? their messages? their logger name?</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> can you think of anything else?</li>
+</ul>
+<hr />
+<hr />
+<hr />
+<hr />
+<hr />
+<hr />
+<hr />
+<hr />
+<hr />
+<hr />
+<hr />
+<ul>
+<li>deprecating a parameter value: seems trivial (just need to match param to <code>*args</code>, **kwargs` in wrapper)</li>
+<li>deprecating parameter type: less trivial. For example how do you deprecate integers in values of <code>dict[str, str | int]</code>? Best way I can see is annotating the type directly: <code>dict[str, str | Annotate[int, Deprecated("message")]]</code>. Can be unwrapped by Griffe/mkdocstrings-python, as well as stylized as deprecated (<code>deprecated</code> CSS class resulting in strike-through, probably).</li>
+</ul>
+<p>What can we deprecate? Things that, when changed, might break downstream code. What are these things?</p>
+<ul>
+<li>raised exceptions</li>
+<li>base classes (isinstance)</li>
+<li>parameters (position, kind) and their values (default, accepted types)</li>
+<li>object names and locations</li>
+<li>object kinds (method -&gt; property)</li>
+</ul>
+<p>Deprecated use that can be detected at runtime:</p>
+<ul>
+<li>all parameter-related stuff ("easy" to inspect params and values in function body)</li>
+<li>object names and locations (module-level <code>__getattr__</code>)</li>
+<li>difficult: object kinds (must mock both kinds somehow, not always possible, works partially only)</li>
+<li><code>isinstance(thing, DeprecatedBaseClass)</code> thanks to <code>__instancecheck__</code></li>
+<li><code>issubclass(Thing, DeprecatedBaseClass)</code> thanks to <code>__subclasscheck__</code></li>
+</ul>
+<p>Deprecated use that cannot be detected at runtime and needs static analysis:</p>
+<ul>
+<li><code>except DeprecatedException</code></li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">overload</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">deprecated</span><span class="p">(</span>
+    <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">base_class</span><span class="p">:</span> <span class="nb">type</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">kind</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">moved</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">parameter</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">param_type</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">type</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">param_default</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">param_kind</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">param_name</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">return_type</span><span class="p">:</span> <span class="nb">type</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">raising</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">type</span><span class="p">,</span> <span class="nb">type</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">returning</span><span class="p">:</span> <span class="nb">object</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">callable</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">decorator</span><span class="p">(</span><span class="n">obj</span><span class="p">:</span> <span class="nb">callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">callable</span><span class="p">:</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">obj</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">wrapper</span>
+
+    <span class="k">return</span> <span class="n">decorator</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Getting</span><span class="p">:</span>
+    <span class="o">...</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Catching</span><span class="p">:</span>
+    <span class="o">...</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Passing</span><span class="p">:</span>
+    <span class="o">...</span>
+
+
+<span class="c1"># Deprecating a class.</span>
+<span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;Use B instead.&quot;</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">A</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+
+<span class="c1"># NOTE: I&#39;m inclined not to support this, and communicate that base classes are not part of the public API.</span>
+<span class="c1"># Deprecating a base class.</span>
+<span class="c1"># This implements `__instancecheck__` and `__subclasscheck__` to allow `issubclass` and `isinstance` to work.</span>
+<span class="nd">@deprecated</span><span class="p">(</span><span class="n">base_class</span><span class="o">=</span><span class="n">A</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Class A will be removed from the base classes of B.&quot;</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">B</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+
+<span class="c1"># Deprecating a function.</span>
+<span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;Use g instead.&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">f1</span><span class="p">():</span>
+    <span class="k">pass</span>
+
+
+<span class="c1"># Deprecating a parameter.</span>
+<span class="c1"># This wraps the function to check if the parameter was passed (using a sentinel).</span>
+<span class="nd">@deprecated</span><span class="p">(</span><span class="n">parameter</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Parameter `x` is deprecated.&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">f2</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;hey&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">x</span>
+
+<span class="nd">@deprecate</span><span class="p">(</span><span class="n">Passing</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">),</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Parameter `x` is deprecated.&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">f2</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;hey&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">x</span>
+
+<span class="c1"># Deprecating a parameter type.</span>
+<span class="nd">@overload</span>
+<span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;Passing integers to `x` is deprecated.&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">f3</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span> <span class="o">...</span>
+
+
+<span class="nd">@overload</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">f3</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span> <span class="o">...</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">f3</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">return</span> <span class="mi">0</span>
+
+
+<span class="c1"># Deprecating a parameter type (alternative).</span>
+<span class="c1"># This wraps the function to check the argument type.</span>
+<span class="nd">@deprecated</span><span class="p">(</span><span class="n">param_type</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Passing integers to `x` is deprecated.&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">f4</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">return</span> <span class="mi">0</span>
+
+
+<span class="nd">@deprecate</span><span class="p">(</span><span class="n">Passing</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">types</span><span class="o">=</span><span class="p">(</span><span class="nb">int</span><span class="p">,)),</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Passing integers to `x` is deprecated.&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">f4</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">return</span> <span class="mi">0</span>
+
+
+<span class="c1"># Deprecating a parameter default.</span>
+<span class="c1"># This wraps the function to check if a value was passed (using a sentinel).</span>
+<span class="nd">@deprecated</span><span class="p">(</span><span class="n">param_default</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Default value of `x` will be removed in the future.&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">f5</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;hey&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">x</span>
+
+
+<span class="nd">@deprecate</span><span class="p">(</span><span class="n">NotPassing</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">),</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Default value of `x` will be removed in the future.&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">f5</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;hey&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">x</span>
+
+
+<span class="c1"># Deprecating a parameter kind.</span>
+<span class="c1"># This wraps the function to check if the parameter was passed as a positional or keyword argument.</span>
+<span class="nd">@deprecated</span><span class="p">(</span><span class="n">param_kind</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;positional&quot;</span><span class="p">),</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Passing `x` as a positional argument is deprecated.&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">f6a</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">x</span>
+
+
+<span class="nd">@deprecated</span><span class="p">(</span><span class="n">param_kind</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;keyword&quot;</span><span class="p">),</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Passing `x` as a keyword argument is deprecated.&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">f6b</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">x</span>
+
+
+<span class="nd">@deprecate</span><span class="p">(</span><span class="n">Passing</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;positional&quot;</span><span class="p">),</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Passing `x` as a positional argument is deprecated.&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">f6a</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">x</span>
+
+
+<span class="nd">@deprecate</span><span class="p">(</span><span class="n">Passing</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;keyword&quot;</span><span class="p">),</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Passing `x` as a keyword argument is deprecated.&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">f6b</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">x</span>
+
+<span class="c1"># Deprecating a parameter name.</span>
+<span class="c1"># This wraps the function to check which name was used (using sentinels).</span>
+<span class="nd">@deprecated</span><span class="p">(</span><span class="n">param_name</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">),</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Parameter `x` was renamed `y`.&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">f7</span><span class="p">(</span><span class="n">y</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">y</span>
+
+
+<span class="nd">@deprecated</span><span class="p">(</span><span class="n">Passing</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">in_favor_of</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">),</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Parameter `x` was renamed `y`.&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">f7</span><span class="p">(</span><span class="n">y</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">y</span>
+
+<span class="c1"># Deprecating a return type.</span>
+<span class="c1"># This wraps the function to check the return type.</span>
+<span class="nd">@deprecated</span><span class="p">(</span>
+    <span class="n">return_type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+    <span class="n">message</span><span class="o">=</span><span class="s2">&quot;This function will return an integer instead of a string in the future.&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">f8</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">return</span> <span class="s2">&quot;0&quot;</span>
+
+
+<span class="nd">@deprecate</span><span class="p">(</span><span class="n">Getting</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">in_favor_of</span><span class="o">=</span><span class="nb">int</span><span class="p">),</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;This function will return an integer instead of a string in the future.&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">f8</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">return</span> <span class="s2">&quot;0&quot;</span>
+
+<span class="c1"># Deprecating a raised exception.</span>
+<span class="c1"># This wraps the function to catch the deprecated exception and raise a new custom one inheriting from both.</span>
+<span class="c1"># Still misses an `__exceptcheck__` method.</span>
+<span class="nd">@deprecated</span><span class="p">(</span><span class="n">raising</span><span class="o">=</span><span class="p">(</span><span class="ne">RuntimeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">),</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Catching RuntimeError is deprecated in favor of ValueError.&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">f9</span><span class="p">():</span>
+    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;hey&quot;</span><span class="p">)</span>
+
+
+<span class="nd">@deprecate</span><span class="p">(</span><span class="n">Catching</span><span class="p">(</span><span class="ne">RuntimeError</span><span class="p">,</span> <span class="n">in_favor_of</span><span class="o">=</span><span class="ne">ValueError</span><span class="p">),</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Catching RuntimeError is deprecated in favor of ValueError.&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">f9</span><span class="p">():</span>
+    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;hey&quot;</span><span class="p">)</span>
+
+<span class="c1"># Deprecating a return value in favor of newly raised exception.</span>
+<span class="c1"># This wraps the function to catch the return value.</span>
+<span class="nd">@deprecated</span><span class="p">(</span><span class="n">returning</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">raising</span><span class="o">=</span><span class="ne">ValueError</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;This function will start raising ValueError instead of returning None.&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">f10</span><span class="p">():</span>
+    <span class="k">return</span> <span class="kc">None</span>
+
+
+<span class="nd">@deprecate</span><span class="p">(</span><span class="n">Getting</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">in_favor_of</span><span class="o">=</span><span class="n">Catching</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">)),</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;This function will start raising ValueError instead of returning None.&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">f10</span><span class="p">():</span>
+    <span class="k">return</span> <span class="kc">None</span>
+
+
+<span class="nd">@deprecate</span><span class="p">(</span><span class="n">Getting</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">in_favor_of</span><span class="o">=</span><span class="n">Catching</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">)),</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;This function will start raising ValueError instead of returning None.&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">f10</span><span class="p">():</span>
+    <span class="k">return</span> <span class="kc">None</span>
+
+<span class="c1"># Deprecating an object name or location.</span>
+<span class="c1"># This wraps the function to (import and) return `to` when `moved` is accessed.</span>
+<span class="nd">@deprecated</span><span class="p">(</span><span class="n">moved</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;g9&quot;</span><span class="p">,</span> <span class="s2">&quot;f9&quot;</span><span class="p">),</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Function g9 was moved to f9.&quot;</span><span class="p">)</span>
+<span class="nd">@deprecated</span><span class="p">(</span><span class="n">moved</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;g10&quot;</span><span class="p">,</span> <span class="s2">&quot;package.module.f10&quot;</span><span class="p">),</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Function g9 was moved to f9.&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="fm">__getattr__</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;module &#39;</span><span class="si">{</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&#39; has no attribute &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+
+<span class="c1"># Deprecating an object kind.</span>
+<span class="c1"># This wraps the result in a container that can be called again.</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">C</span><span class="p">:</span>
+    <span class="nd">@deprecated</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Method `m` is deprecated.&quot;</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">m</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+<span class="c1"># method -&gt; property?</span>
+<span class="c1"># property -&gt; method?</span>
+</code></pre></div>
+<p>Aspects:</p>
+<ul>
+<li>goal: annotate code for static analysis, and emit deprecation warnings at runtime</li>
+<li>secondary goal: make it easy to deprecate code and support both old and new ways of using it</li>
+<li>general: keep the old code and support the new one, or update to the new code but support the old one</li>
+<li>return types: return the old type, document both types (-&gt;) (hack type checkers)</li>
+<li>raised exceptions: raise the old exception, document new exception</li>
+</ul>
+<p>Deprecation libraries:</p>
+<table>
+<thead>
+<tr>
+<th>Library</th>
+<th>Function</th>
+<th>Class</th>
+<th>Method</th>
+<th>Property</th>
+<th>Attribute</th>
+<th>Parameter</th>
+<th>Return value</th>
+<th>Raised exception</th>
+<th>Object</th>
+<th>Location</th>
+<th>Kind</th>
+<th>Message</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://pypi.org/project/deprecationlib/">https://pypi.org/project/deprecationlib/</a></td>
+<td>x</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://pypi.org/project/deprecat/">https://pypi.org/project/deprecat/</a></td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td></td>
+<td></td>
+<td>x</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://pypi.org/project/Deprecated/">https://pypi.org/project/Deprecated/</a></td>
+<td>x</td>
+<td></td>
+<td>x</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://pypi.org/project/zope.deprecation/">https://pypi.org/project/zope.deprecation/</a></td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://pypi.org/project/Dandelyon/">https://pypi.org/project/Dandelyon/</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://pypi.org/project/pdeprecator/">https://pypi.org/project/pdeprecator/</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://pypi.org/project/libdeprecation/">https://pypi.org/project/libdeprecation/</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://pypi.org/project/deprecate/">https://pypi.org/project/deprecate/</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://pypi.org/project/deprecation/">https://pypi.org/project/deprecation/</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://pypi.org/project/deprecation-alias/">https://pypi.org/project/deprecation-alias/</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://pypi.org/project/regret/">https://pypi.org/project/regret/</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://pypi.org/project/deprecator/">https://pypi.org/project/deprecator/</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://pypi.org/project/pvandyken-deprecated/">https://pypi.org/project/pvandyken-deprecated/</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://pypi.org/project/Python-Deprecated/">https://pypi.org/project/Python-Deprecated/</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://pypi.org/project/rosey-deprecated/">https://pypi.org/project/rosey-deprecated/</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://narwhals-dev.github.io/narwhals/backcompat/">https://narwhals-dev.github.io/narwhals/backcompat/</a></p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">inspect</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">contextlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">contextmanager</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">wraps</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">packaging.version</span><span class="w"> </span><span class="kn">import</span> <span class="n">Version</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">vectice.__version__</span><span class="w"> </span><span class="kn">import</span> <span class="n">__version__</span>
+
+<span class="n">CURRENT_VERSION</span> <span class="o">=</span> <span class="n">Version</span><span class="p">(</span><span class="n">Version</span><span class="p">(</span><span class="n">__version__</span><span class="p">)</span><span class="o">.</span><span class="n">base_version</span><span class="p">)</span>
+<span class="n">_WARN_DEPR_REMOVAL</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;VECTICE_WARN_DEPR_REMOVAL&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;1&quot;</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">DeprecationError</span><span class="p">(</span><span class="ne">BaseException</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;An exception raised when a deprecated object is used.&quot;&quot;&quot;</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_exceeds</span><span class="p">(</span><span class="n">at</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">datetime</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">at</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="n">Version</span><span class="p">(</span><span class="n">at</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">CURRENT_VERSION</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">at</span><span class="p">,</span> <span class="n">datetime</span><span class="p">)</span> <span class="ow">and</span> <span class="n">at</span> <span class="o">&lt;=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">():</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="kc">False</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_deprecated_use</span><span class="p">(</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">parameter</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">default</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">args</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">,</span>
+    <span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+    <span class="n">param_names</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="c1"># no parameter was specified for deprecation</span>
+    <span class="k">if</span> <span class="n">parameter</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="c1"># checking presence/absence of parameter in given arguments</span>
+    <span class="k">if</span> <span class="n">default</span><span class="p">:</span>
+        <span class="c1"># parameter must be present</span>
+        <span class="k">if</span> <span class="n">parameter</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">param_names</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">parameter</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># parameter must be absent</span>
+        <span class="k">if</span> <span class="n">parameter</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">param_names</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">parameter</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">True</span>
+    <span class="c1"># no deprecated use detected</span>
+    <span class="k">return</span> <span class="kc">False</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">deprecate</span><span class="p">(</span>
+    <span class="n">reason</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">parameter</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">default</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">warn_at</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">datetime</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">fail_at</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">datetime</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">remove_at</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">datetime</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Callable</span><span class="p">],</span> <span class="n">Callable</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Deprecate a function. Internal-use only.</span>
+
+<span class="sd">    This decorator can be used to deprecate a function or class method, or a parameter of this function/method.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        reason: The reason why the function/method is deprecated. Useful information</span>
+<span class="sd">            can be provided to the users, such as what to use instead of the deprecated function.</span>
+<span class="sd">            Placeholders can be used in the reason string: `{name}`, `{parameter}`, `{warn_at}`, `{fail_at}` and `{remove_at}`:</span>
+<span class="sd">            they will be replaced by their actual values, `name` being the name of the function.</span>
+<span class="sd">        parameter: The name of the parameter to deprecate. If none,</span>
+<span class="sd">            the whole function is deprecated.</span>
+<span class="sd">        default: Whether to deprecate the default value of the given parameter (`True`),</span>
+<span class="sd">            or the use of the parameter itself (`False`, default).</span>
+<span class="sd">        warn_at: Version or date at which to start emitting a deprecation warning to the user.</span>
+<span class="sd">            The user will see a deprecation warning when executing the function.</span>
+<span class="sd">        fail_at: Version or date at which to start raising a deprecation error.</span>
+<span class="sd">        remove_at: Internal-use only. Version or date at which to remove the deprecated code</span>
+<span class="sd">            from the code base. It will start emitting a deprecation warning to the developers.</span>
+<span class="sd">            The test suite will fail as long as the deprecated code is not removed.</span>
+
+<span class="sd">    The `warn_at`, `fail_at` and `remove_at` values can be strings or instances of `datetime.datetime`.</span>
+<span class="sd">    Strings are parsed as PEP 440 versions, see https://peps.python.org/pep-0440/.</span>
+
+<span class="sd">    Although you don&#39;t have to always provide the three `warn_at`, `fail_at` and `remove_at` parameters,</span>
+<span class="sd">    it is recommended to provide all three, to ensure the full life-cycle management of the deprecated function.</span>
+
+<span class="sd">    IMPORTANT: Deprecation warnings are not enabled by default in Python,</span>
+<span class="sd">    so users might need to enable them with `python -Walways`.</span>
+<span class="sd">    More information on warnings control: https://docs.python.org/3/library/warnings.html.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        # deprecating a function</span>
+
+<span class="sd">        # --------------------------------------</span>
+<span class="sd">        # vectice code in vectice/module.py</span>
+<span class="sd">        from vectice.utils.deprecation import deprecate</span>
+
+<span class="sd">        @deprecate(</span>
+<span class="sd">            warn_at=&quot;2.1&quot;,</span>
+<span class="sd">            fail_at=&quot;3.0&quot;,</span>
+<span class="sd">            remove_at=&quot;4.0&quot;,</span>
+<span class="sd">            reason=&quot;Function {name} is deprecated since version {warn_at}. &quot;</span>
+<span class="sd">            &quot;Starting at version {fail_at}, it raises / will raise an exception. &quot;</span>
+<span class="sd">            &quot;It will be removed at version {remove_at}. &quot;</span>
+<span class="sd">            &quot;Please use &#39;other_function&#39; instead.&quot;,</span>
+<span class="sd">        )</span>
+<span class="sd">        def my_deprecated_function(): ...</span>
+<span class="sd">        # tests suite fails if version is &gt;= 4.0</span>
+
+
+<span class="sd">        # --------------------------------------</span>
+<span class="sd">        # user code</span>
+<span class="sd">        from vectice.module import my_deprecated_function</span>
+
+<span class="sd">        my_deprecated_function()</span>
+<span class="sd">        # exception raised if version is &gt;= 3.0</span>
+<span class="sd">        # warning emitted if version is &gt;= 2.1</span>
+<span class="sd">        # nothing happens if version is &lt; 2.1</span>
+<span class="sd">        ```</span>
+
+<span class="sd">        ```python</span>
+<span class="sd">        # deprecating a class method</span>
+<span class="sd">        from vectice.utils.deprecation import deprecate</span>
+
+
+<span class="sd">        class MyClass:</span>
+<span class="sd">            @deprecate(warn_at=&quot;1&quot;, fail_at=&quot;2&quot;, remove_at=&quot;3&quot;, reason=&quot;This method is deprecated.&quot;)</span>
+<span class="sd">            def my_deprecated_method(self): ...</span>
+<span class="sd">        ```</span>
+
+<span class="sd">        ```python</span>
+<span class="sd">        # deprecating a module attribute</span>
+<span class="sd">        from vectice.utils.deprecation import deprecate</span>
+
+<span class="sd">        @deprecate(warn_at=&quot;1&quot;, fail_at=&quot;2&quot;, remove_at=&quot;3&quot;, reason=&quot;This attribute is deprecated.&quot;)</span>
+<span class="sd">        def _get_my_deprecated_attribute():</span>
+<span class="sd">            return &quot;value&#39;</span>
+
+<span class="sd">        def __getattr__(name):</span>
+<span class="sd">            if name == &quot;my_deprecated_attribute&quot;:</span>
+<span class="sd">                return _get_my_deprecated_attribute()</span>
+<span class="sd">            raise AttributeError(f&quot;module {__name__!r} has no attribute {name!r}&quot;)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">        ```python</span>
+<span class="sd">        # deprecating a class attribute</span>
+<span class="sd">        from vectice.utils.deprecation import deprecate</span>
+
+
+<span class="sd">        class MyClass:</span>
+<span class="sd">            _my_deprecated_attribute = &quot;...&quot;</span>
+
+<span class="sd">            @deprecate(warn_at=&quot;1&quot;, fail_at=&quot;2&quot;, remove_at=&quot;3&quot;, reason=&quot;This attribute is deprecated.&quot;)</span>
+<span class="sd">            def my_deprecated_attribute(self):</span>
+<span class="sd">                return self._my_deprecated_attribute</span>
+<span class="sd">        ```</span>
+
+<span class="sd">        ```python</span>
+<span class="sd">        # deprecating a function parameter</span>
+<span class="sd">        from vectice.utils.deprecation import deprecate</span>
+
+
+<span class="sd">        @deprecate(</span>
+<span class="sd">            parameter=&quot;my_deprecated_parameter&quot;,</span>
+<span class="sd">            warn_at=&quot;1&quot;,</span>
+<span class="sd">            fail_at=&quot;2&quot;,</span>
+<span class="sd">            remove_at=&quot;3&quot;,</span>
+<span class="sd">            reason=&quot;This parameter is deprecated.&quot;,</span>
+<span class="sd">        )</span>
+<span class="sd">        def my_function(my_deprecated_parameter=None): ...</span>
+<span class="sd">        ```</span>
+
+<span class="sd">        ```python</span>
+<span class="sd">        # deprecating a parameter default value</span>
+<span class="sd">        from vectice.utils.deprecation import deprecate</span>
+
+
+<span class="sd">        @deprecate(</span>
+<span class="sd">            parameter=&quot;my_parameter&quot;,</span>
+<span class="sd">            default=True,</span>
+<span class="sd">            warn_at=&quot;1&quot;,</span>
+<span class="sd">            fail_at=&quot;2&quot;,</span>
+<span class="sd">            remove_at=&quot;3&quot;,</span>
+<span class="sd">            reason=&quot;This default value is deprecated.&quot;,</span>
+<span class="sd">        )</span>
+<span class="sd">        def my_function(my_parameter=&quot;my_deprecated_default_value&quot;): ...</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        This function returns the actual decorator that must be called again</span>
+<span class="sd">            with the function to decorate as argument.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+        <span class="n">formatted_reason</span> <span class="o">=</span> <span class="n">reason</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+            <span class="n">warn_at</span><span class="o">=</span><span class="n">warn_at</span><span class="p">,</span>
+            <span class="n">fail_at</span><span class="o">=</span><span class="n">fail_at</span><span class="p">,</span>
+            <span class="n">remove_at</span><span class="o">=</span><span class="n">remove_at</span><span class="p">,</span>
+            <span class="n">parameter</span><span class="o">=</span><span class="n">parameter</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">_WARN_DEPR_REMOVAL</span> <span class="ow">and</span> <span class="n">_exceeds</span><span class="p">(</span><span class="n">remove_at</span><span class="p">):</span>
+            <span class="n">at</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;v</span><span class="si">{</span><span class="n">remove_at</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">remove_at</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">remove_at</span>
+            <span class="n">param</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">parameter</span><span class="si">}</span><span class="s2">)&quot;</span> <span class="o">+</span> <span class="p">(</span><span class="s2">&quot; (default value)&quot;</span> <span class="k">if</span> <span class="n">default</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">))</span> <span class="k">if</span> <span class="n">parameter</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Reminder: </span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="vm">__module__</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="vm">__qualname__</span><span class="si">}{</span><span class="n">param</span><span class="si">}</span><span class="s2"> has reached its End-Of-Life, &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;planned at </span><span class="si">{</span><span class="n">at</span><span class="si">}</span><span class="s2"> - you should remove it from the code base. &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;Deprecation reason: </span><span class="si">{</span><span class="n">formatted_reason</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                <span class="ne">DeprecationWarning</span><span class="p">,</span>
+                <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="c1"># we make sure the parameter exists and is not required,</span>
+        <span class="c1"># and we don&#39;t guard behind _WARN_DEPR_REMOVAL</span>
+        <span class="c1"># so that we never fail to detect such an error,</span>
+        <span class="c1"># to protect users from getting an exception themselves</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="n">func</span><span class="p">)</span><span class="o">.</span><span class="n">parameters</span>
+        <span class="k">if</span> <span class="n">parameter</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">parameter</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">DeprecationError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Cannot deprecate parameter &#39;</span><span class="si">{</span><span class="n">parameter</span><span class="si">}</span><span class="s2">&#39; in callable </span><span class="si">{</span><span class="n">func</span><span class="si">}</span><span class="s2">: no such parameter&quot;</span>
+                <span class="p">)</span>
+            <span class="k">if</span> <span class="n">params</span><span class="p">[</span><span class="n">parameter</span><span class="p">]</span><span class="o">.</span><span class="n">default</span> <span class="ow">is</span> <span class="n">inspect</span><span class="o">.</span><span class="n">_empty</span><span class="p">:</span>  <span class="c1"># pyright: ignore[reportPrivateUsage]</span>
+                <span class="n">default_value</span> <span class="o">=</span> <span class="s2">&quot;default value &quot;</span> <span class="k">if</span> <span class="n">default</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+                <span class="k">raise</span> <span class="n">DeprecationError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Cannot deprecate parameter &#39;</span><span class="si">{</span><span class="n">parameter</span><span class="si">}</span><span class="s2">&#39; </span><span class="si">{</span><span class="n">default_value</span><span class="si">}</span><span class="s2">in callable </span><span class="si">{</span><span class="n">func</span><span class="si">}</span><span class="s2">: parameter is required&quot;</span>
+                <span class="p">)</span>
+
+        <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">_deprecated_use</span><span class="p">(</span>
+                <span class="n">parameter</span><span class="o">=</span><span class="n">parameter</span><span class="p">,</span>
+                <span class="n">default</span><span class="o">=</span><span class="n">default</span><span class="p">,</span>
+                <span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">,</span>
+                <span class="n">kwargs</span><span class="o">=</span><span class="n">kwargs</span><span class="p">,</span>
+                <span class="n">param_names</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">params</span><span class="p">),</span>
+            <span class="p">):</span>
+                <span class="k">if</span> <span class="n">_exceeds</span><span class="p">(</span><span class="n">fail_at</span><span class="p">):</span>
+                    <span class="k">raise</span> <span class="n">DeprecationError</span><span class="p">(</span><span class="n">formatted_reason</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">_exceeds</span><span class="p">(</span><span class="n">warn_at</span><span class="p">):</span>
+                    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">formatted_reason</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">wrapper</span>
+
+    <span class="k">return</span> <span class="n">decorator</span>
+</code></pre></div>
+  
+<!-- Giscus -->
+<!-- https://squidfunk.github.io/mkdocs-material/setup/adding-a-comment-system/#giscus-integration -->
+
+    <h2 id="__comments">Comments</h2>
+    <script src="https://giscus.app/client.js"
+        data-repo="pawamoy/pawamoy.github.io"
+        data-repo-id="MDEwOlJlcG9zaXRvcnk1NTYxNzIxNA=="
+        data-category="General"
+        data-category-id="DIC_kwDOA1Cmvs4CPVxB"
+        data-mapping="pathname"
+        data-strict="1"
+        data-reactions-enabled="0"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+    </script>
+
+    <!-- Synchronize Giscus theme with palette -->
+    <script>
+        var giscus = document.querySelector("script[src*=giscus]")
+
+    // Set palette on initial load
+    var palette = __md_get("__palette")
+    if (palette && typeof palette.color === "object") {
+        var theme = palette.color.scheme === "slate"
+            ? "transparent_dark"
+            : "light"
+
+        // Instruct Giscus to set theme
+        giscus.setAttribute("data-theme", theme) 
+    }
+
+    // Register event handlers after documented loaded
+    document.addEventListener("DOMContentLoaded", function() {
+        var ref = document.querySelector("[data-md-component=palette]")
+        ref.addEventListener("change", function() {
+            var palette = __md_get("__palette")
+            if (palette && typeof palette.color === "object") {
+                var theme = palette.color.scheme === "slate"
+                    ? "transparent_dark"
+                    : "light"
+
+                // Instruct Giscus to change theme
+                var frame = document.querySelector(".giscus-frame")
+                frame.contentWindow.postMessage(
+                    { giscus: { setConfig: { theme } } },
+                    "https://giscus.app"
+                )
+            }
+        })
+        })
+    </script>
+
+
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/pawamoy" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+      
+    
+    
+    
+      
+      
+    
+    <a href="https://fosstodon.org/@pawamoy" target="_blank" rel="noopener me" title="fosstodon.org" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M433 179.1c0-97.2-63.7-125.7-63.7-125.7-62.5-28.7-228.6-28.4-290.5 0 0 0-63.7 28.5-63.7 125.7 0 115.7-6.6 259.4 105.6 289.1 40.5 10.7 75.3 13 103.3 11.4 50.8-2.8 79.3-18.1 79.3-18.1l-1.7-36.9s-36.3 11.4-77.1 10.1c-40.4-1.4-83-4.4-89.6-54-.6-4.6-.9-9.3-.9-13.9 85.6 20.9 158.7 9.1 178.7 6.7 56.1-6.7 105-41.3 111.2-72.9 9.8-49.8 9-121.5 9-121.5zm-75.1 125.2h-46.6V190.1c0-49.7-64-51.6-64 6.9v62.5H201V197c0-58.5-64-56.6-64-6.9v114.2H90.3c0-122.1-5.2-147.9 18.4-175 25.9-28.9 79.8-30.8 103.8 6.1l11.6 19.5 11.6-19.5c24.1-37.1 78.1-34.8 103.8-6.1 23.7 27.3 18.4 53 18.4 175"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/pawamoy" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M459.4 151.7c.3 4.5.3 9.1.3 13.6 0 138.7-105.6 298.6-298.6 298.6-59.5 0-114.7-17.2-161.1-47.1 8.4 1 16.6 1.3 25.3 1.3 49.1 0 94.2-16.6 130.3-44.8-46.1-1-84.8-31.2-98.1-72.8 6.5 1 13 1.6 19.8 1.6 9.4 0 18.8-1.3 27.6-3.6-48.1-9.7-84.1-52-84.1-103v-1.3c14 7.8 30.2 12.7 47.4 13.3-28.3-18.8-46.8-51-46.8-87.4 0-19.5 5.2-37.4 14.3-53C87.4 130.8 165 172.4 252.1 176.9c-1.6-7.8-2.6-15.9-2.6-24C249.5 95.1 296.3 48 354.4 48c30.2 0 57.5 12.7 76.7 33.1 23.7-4.5 46.5-13.3 66.6-25.3-7.8 24.4-24.4 44.8-46.1 57.8 21.1-2.3 41.6-8.1 60.4-16.2-14.3 20.8-32.2 39.3-52.6 54.3"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://linkedin.com/in/timothée-mazzucotelli-0321607b/" target="_blank" rel="noopener" title="linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["announce.dismiss", "content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy", "content.tooltips", "navigation.footer", "navigation.indexes", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "search.highlight", "search.suggest", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../assets/_markdown_exec_pyodide.js"></script>
+      
+    
+  </body>
+</html>
